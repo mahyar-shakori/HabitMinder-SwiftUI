@@ -1,0 +1,57 @@
+/* 
+  Localizable.strings
+  HabitMinder SwiftUI
+
+  Created by Mahyar on 31/03/2025.
+  
+*/
+
+"introFirstTitleLabel" = "Healthy Habit";
+"introFirstDescriptionLabel" = "It is estimated that it takes 21 days for people to form a new habit. Introduce a healthy habit in your life with the 21 days app.";
+"introSecondTitleLabel" = "Bad Habit";
+"introSecondDescriptionLabel" = "Don't forget to take care of your body. You can change a bad habit by replacing it with a good habit, you can do it with this 21 Days app.";
+"skipButton" = "Skip";
+"nextButton" = "Next";
+"hiDialogLabel" = "Hi, What should we call you?";
+"userNameTextFieldPplaceholder" = "Enter your name";
+"continueButton" = "Continue";
+"errorLabel" = "Come on! You can tell us your name :)";
+"welcomeLabel" = "Welcome, ";
+"guestLabel" = "Welcome, Guest";
+"defaultQuote" = "Everything is possible, given time!";
+"myHabitsTitleLabel" = "My Habits";
+"futureHabitsTitleLabel" = "Future Habits";
+"doneButton" = "Done";
+"habitTextFieldPlaceholder" = "Habit title";
+"saveButton" = "Save";
+"emptyViewLabel" = "No habit is added yet! Click the menu button to add a habit.";
+"dropDownAddNewHabit" = "Add New Habit";
+"dropDownFutureHabitShow-Hide" = "Future Habit Show-Hide";
+"dropDownEditHabitList" = "Edit Habit List";
+"dropDownQuoteOff" = "Quote Off";
+"dropDownRename" = "Rename";
+"addHabitTitleLabel" = "Add Habit";
+"cancelButton" = "Cancel";
+"reminderLabel" = "Reminder";
+"dateLabel" = "Pick a time";
+"addReminderButton" = "Click to Add Reminder";
+"editHabitTitleLabel" = "Edit Habit";
+"missHabitToastLabel" = "Your habit started again!";
+"missHabitButton" = "Missed it! Start Again";
+"okButton" = "OK";
+"yesButton" = "Yes";
+"noButton" = "No";
+"networkAlertTitle" = "Network Error";
+"deleteHabitAlertTitle" = "Delete Habit";
+"deleteHabitAlertMessage" = "Are you sure you want to delete ";
+"habitListEmptyAlertTitle" = "Oops, the habit list is empty.";
+"notificationMessage" = "You're trying to improve your lifestyle!, don't forget ";
+"dateTextFieldEmptyTitle" = "First, Please pick a date";
+"deleteReminderAlertTitle" = "Delete Reminder";
+"deleteReminderAlertMessage" = "Are you sure you want to delete this reminder:";
+"HabitCellDaysLeftLabel" = " days left";
+"notificationAlertTitle" = "Enable Notifications";
+"notificationAlertMessage" = "To use this feature you must enable notifications in settings";
+"notificationAlertButton" = "Settings";
+"qustionMark" = "?";
+
