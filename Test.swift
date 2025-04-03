@@ -4,10 +4,12 @@
 
 
 // MARK: - Future Tasks
-
+// DI, test
+// Clean old extension, Model
+// Review features group codes for clean code, and separation, weak, lazy, final, weak self, oreientaion, light/dark, ...
 
 
 // MARK: - Tasks
 
-// review code for clean code, and seperatation
-// add some class such as userDefaults, ....
+
+// MARK: - Questions

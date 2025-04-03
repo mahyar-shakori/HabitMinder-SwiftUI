@@ -1,0 +1,41 @@
+/* 
+  Localizable.strings
+  HabitMinder SwiftUI
+
+  Created by Mahyar on 31/03/2025.
+  
+*/
+
+"introFirstTitle" = "Healthy Habit";
+"introFirstDescription" = "It is estimated that it takes 21 days for people to form a new habit. Introduce a healthy habit in your life with the 21 days app.";
+"introSecondTitle" = "Bad Habit";
+"introSecondDescription" = "Don't forget to take care of your body. You can change a bad habit by replacing it with a good habit, you can do it with this 21 Days app.";
+"skipButton" = "Skip";
+"nextButton" = "Next";
+"hiDialog" = "Hi, What should we call you?";
+"userNamePlaceholder" = "Enter your name";
+"continueButton" = "Continue";
+"error" = "Come on! You can tell us your name :)";
+"welcome" = "Welcome, ";
+"guest" = "Welcome, Guest";
+"defaultQuote" = "Everything is possible, given time!";
+"homeTitle" = "My Habits";
+"doneButton" = "Done";
+"emptyView" = "No habit is added yet! Click the menu button to add a habit.";
+"addHabitTitle" = "Add Habit";
+"habitPlaceholder" = "Habit title";
+"saveButton" = "Save";
+"cancelButton" = "Cancel";
+"okButton" = "OK";
+"yesButton" = "Yes";
+"noButton" = "No";
+"qustionMark" = "?";
+"networkAlertTitle" = "Network Error";
+"defaultError" = "Unknown error occurred.";
+"habitListEmptyAlertTitle" = "Oops, the habit list is empty.";
+"deleteHabitAlertTitle" = "Delete Habit";
+"deleteHabitAlertMessage" = "Are you sure you want to delete ";
+"dropDownAddNewHabit" = "Add New Habit";
+"dropDownEditHabitList" = "Edit Habit List";
+"dropDownRename" = "Rename";
+"HabitCellDaysLeft" = " days left";
