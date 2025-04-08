@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SetNameView: View {
-    @StateObject private var setNameViewModel = SetNameViewModel()
+    @StateObject var setNameViewModel: SetNameViewModel
     @EnvironmentObject var coordinator: Coordinator
     @FocusState private var isFocused: Bool
     
@@ -57,7 +57,7 @@ private extension SetNameView {
             .padding()
             .background(
                 Capsule()
-                    .stroke(setNameViewModel.borderColor, lineWidth: setNameViewModel.borderSize)
+                    .stroke(setNameViewModel.userNameBorderColor, lineWidth: setNameViewModel.userNameBorderSize)
             )
             .padding(.horizontal, 32)
             .padding(.top, 16)
@@ -94,12 +94,12 @@ private extension SetNameView {
         .frame(maxWidth: .infinity)
         .foregroundColor(.white)
         .padding(16)
-        .background(Capsule().fill(setNameViewModel.buttonColor))
+        .background(Capsule().fill(setNameViewModel.continueButtonColor))
         .padding(.horizontal, 32)
         .padding(.bottom, 32)
     }
 }
 
 #Preview {
-    SetNameView()
+    SetNameView(setNameViewModel: SetNameViewModel())
 }

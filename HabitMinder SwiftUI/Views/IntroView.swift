@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct IntroView: View {
-    @StateObject private var introViewModel = IntroViewModel()
+    @StateObject var introViewModel: IntroViewModel
     @EnvironmentObject var coordinator: Coordinator
     
     var body: some View {
@@ -52,7 +52,9 @@ struct IntroView: View {
         ZStack {
             Image(introViewModel.pageControlDot)
             HStack {
-                introViewModel.isSkipHidden ? nil : skipButton
+                if !introViewModel.isSkipHidden {
+                    skipButton
+                }
                 
                 Spacer()
                 
@@ -86,5 +88,5 @@ struct IntroView: View {
 }
 
 #Preview {
-    IntroView()
+    IntroView(introViewModel: IntroViewModel())
 }

@@ -1,13 +1,13 @@
 //
-//  UIImage+CircularIcon.swift
-//  HabitMinder 21 Days
+//  Image+CircularIcon.swift
+//  HabitMinder SwiftUI
 //
-//  Created by Mahyar on 2/28/24.
+//  Created by Mahyar on 07/04/2025.
 //
 
-import UIKit
+import SwiftUI
 
-extension UIImage {
+extension Image {
     static func circularIcon(diameter: CGFloat, iconName: String, circleColor: UIColor, iconColor: UIColor) -> UIImage {
         let size = CGSize(width: diameter, height: diameter)
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)

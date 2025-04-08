@@ -5,11 +5,15 @@
 
 // MARK: - Future Tasks
 // DI, test
-// Clean old extension, Model
-// Review features group codes for clean code, and separation, weak, lazy, final, weak self, oreientaion, light/dark, ...
+// Coordinator
 
 
 // MARK: - Tasks
+
+// home and add habit and db
+// weak self, lazy, final, weak
+// Circular
+// , add HabitView present modaly
 
 
 // MARK: - Questions

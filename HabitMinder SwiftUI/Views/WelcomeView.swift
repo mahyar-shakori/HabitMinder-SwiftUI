@@ -8,36 +8,38 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    @StateObject private var welcomeViewModel = WelcomeViewModel()
+    @StateObject var welcomeViewModel: WelcomeViewModel
     @EnvironmentObject var coordinator: Coordinator
     
-    @State private var showAlert = false
-    @State private var quote: String = ""
-    
     var body: some View {
+        content
+            .navigationBarBackButtonHidden(true)
+            .onAppear(perform: setupViewModel)
+            .alert(LocalizedStrings.Alert.Network.title, isPresented: $welcomeViewModel.showAlert) {
+                Button(LocalizedStrings.Shared.okButton, role: .cancel) {
+                    coordinator.push(.home(quote: ""))
+                }
+            } message: {
+                Text(welcomeViewModel.errorMessage ?? LocalizedStrings.Alert.Network.defaultError)
+            }
+    }
+    
+    private var content: some View {
         VStack {
+            Spacer()
+            
             welcomeImage
             welcomeText
             progressView
-        }
-        .navigationBarBackButtonHidden(true)
-        .onAppear(perform: setupViewModel)
-        .onChange(of: welcomeViewModel.errorMessage) {
-            showAlert = welcomeViewModel.errorMessage != nil
-        }
-        .alert(LocalizedStrings.Alert.Network.title, isPresented: $showAlert) {
-            Button(LocalizedStrings.Shared.okButton, role: .cancel) {
-                coordinator.push(.home(quote: ""))
-            }
-        } message: {
-            Text(welcomeViewModel.errorMessage ?? LocalizedStrings.Alert.Network.defaultError)
+            
+            Spacer()
         }
     }
     
     private func setupViewModel() {
         welcomeViewModel.setQuoteDelegate(coordinator)
         welcomeViewModel.loadUserName()
-        welcomeViewModel.fetchQuote()
+        welcomeViewModel.fetchData()
     }
     
     private var welcomeImage: some View {
@@ -48,7 +50,7 @@ struct WelcomeView: View {
     }
     
     private var welcomeText: some View {
-        Text(welcomeViewModel.name)
+        Text(welcomeViewModel.userName)
             .font(.AppFont.rooneySansBold.size(23))
             .padding(.top, 64)
     }
@@ -62,6 +64,6 @@ struct WelcomeView: View {
 }
 
 #Preview {
-    WelcomeView()
+    WelcomeView(welcomeViewModel: WelcomeViewModel())
         .environmentObject(Coordinator())
 }

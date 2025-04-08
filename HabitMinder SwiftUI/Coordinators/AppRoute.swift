@@ -12,4 +12,5 @@ enum AppRoute: Hashable {
     case setName
     case welcome
     case home(quote: String)
+    case addHabit
 }

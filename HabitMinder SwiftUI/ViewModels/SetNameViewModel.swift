@@ -8,20 +8,20 @@
 import SwiftUI
 
 final class SetNameViewModel: ObservableObject {
-    @Published var userName: String = "" {
+    @Published var userName = "" {
         didSet {
             updateValidationState()
         }
     }
-    @Published var borderColor: Color = .accent
-    @Published var borderSize = 1.0
+    @Published var userNameBorderColor: Color = .accent
+    @Published var userNameBorderSize = 1.0
     @Published var errorText = ""
-    @Published var buttonColor: Color = .appSecondary
+    @Published var continueButtonColor: Color = .appSecondary
     
     func validateAndContinue(onSuccess: () -> Void) {
         let trimmedName = userName.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        guard trimmedName.isNotEmpty else {
+        guard !trimmedName.isEmpty else {
             applyErrorState()
             return
         }
@@ -35,19 +35,19 @@ final class SetNameViewModel: ObservableObject {
         let trimmedName = userName.trimmingCharacters(in: .whitespacesAndNewlines)
         let isValid = trimmedName.count > 1
         
-        buttonColor = isValid ? .accent : .secondary
+        continueButtonColor = isValid ? .accent : .secondary
     }
     
     private func applyErrorState() {
-        borderColor = .red
-        borderSize = 2
+        userNameBorderColor = .red
+        userNameBorderSize = 2
         errorText = LocalizedStrings.SetNamePage.error
-        buttonColor = .appSecondary
+        continueButtonColor = .appSecondary
     }
     
     private func resetErrorState() {
-        borderColor = .accent
-        borderSize = 1
+        userNameBorderColor = .accent
+        userNameBorderSize = 1
         errorText = ""
     }
     

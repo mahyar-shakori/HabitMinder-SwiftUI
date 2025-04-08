@@ -67,9 +67,9 @@ struct LocalizedStrings {
 
     struct Cell {
         struct DropDown {
-            static let addNewHabitOption = NSLocalizedString("dropDownAddNewHabit", comment: "Dropdown option to add a new habit")
-            static let editHabitListOption = NSLocalizedString("dropDownEditHabitList", comment: "Dropdown option to edit habit list")
-            static let renameOption = NSLocalizedString("dropDownRename", comment: "Dropdown option to rename user name")
+            static let addNewHabit = NSLocalizedString("dropDownAddNewHabit", comment: "Dropdown option to add a new habit")
+            static let editHabitList = NSLocalizedString("dropDownEditHabitList", comment: "Dropdown option to edit habit list")
+            static let rename = NSLocalizedString("dropDownRename", comment: "Dropdown option to rename user name")
         }
         
         struct Habit {

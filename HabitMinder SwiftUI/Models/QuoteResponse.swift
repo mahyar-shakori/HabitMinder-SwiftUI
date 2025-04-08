@@ -1,8 +1,8 @@
 //
 //  QuoteResponse.swift
-//  HabitMinder 21 Days
+//  HabitMinder SwiftUI
 //
-//  Created by Mahyar on 1/7/24.
+//  Created by Mahyar on 03/04/2025.
 //
 
 import Foundation

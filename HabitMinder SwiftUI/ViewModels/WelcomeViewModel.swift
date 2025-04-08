@@ -9,9 +9,11 @@ import Foundation
 
 @MainActor
 final class WelcomeViewModel: ObservableObject {
-    @Published var name = ""
+    @Published var userName = ""
+    @Published var showAlert = false
     @Published var errorMessage: String?
     @Published var isFetchSuccessful = false
+    @Published var quote: String = ""
     
     private let networkAPI: NetworkAPIProtocol
     private let userDefaultsStorage: UserDefaultsStorage<UserDefaultKeys, String>
@@ -31,18 +33,25 @@ final class WelcomeViewModel: ObservableObject {
         self.quoteDelegate = delegate
     }
     
-    func loadUserName() {
-        let storedName = userDefaultsStorage.fetch()
-        name = formattedWelcomeName(from: storedName)
+    private func handleError() {
+        if errorMessage != nil {
+            showAlert = true
+        }
     }
     
-    func fetchQuote() {
+    func loadUserName() {
+        let storedName = userDefaultsStorage.fetch()
+        userName = formattedWelcomeName(from: storedName)
+    }
+    
+    func fetchData() {
         Task {
             do {
                 let quotes = try await fetchQuotes()
                 handleQuoteSuccess(quotes)
             } catch {
                 handleQuoteFailure(error)
+                handleError()
             }
         }
     }
