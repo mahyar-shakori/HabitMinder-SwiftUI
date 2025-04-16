@@ -1,5 +1,5 @@
 //
-//  NavigationCoordinator.swift
+//  Coordinator.swift
 //  HabitMinder SwiftUI
 //
 //  Created by Mahyar on 01/04/2025.

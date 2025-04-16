@@ -52,7 +52,7 @@ struct IntroView: View {
         ZStack {
             Image(introViewModel.pageControlDot)
             HStack {
-                if !introViewModel.isSkipHidden {
+                if introViewModel.isSkipHidden.not {
                     skipButton
                 }
                 

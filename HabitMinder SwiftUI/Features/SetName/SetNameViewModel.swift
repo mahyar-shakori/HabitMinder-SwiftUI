@@ -21,7 +21,7 @@ final class SetNameViewModel: ObservableObject {
     func validateAndContinue(onSuccess: () -> Void) {
         let trimmedName = userName.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        guard !trimmedName.isEmpty else {
+        guard trimmedName.isNotEmpty else {
             applyErrorState()
             return
         }

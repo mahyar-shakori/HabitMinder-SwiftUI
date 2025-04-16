@@ -14,52 +14,39 @@ struct AddHabitView: View {
 
     var body: some View {
         VStack {
-            headerStack
+            topViews
             addHabitTextField
         
             Spacer()
         }
-            .navigationBarBackButtonHidden(true)
-            .dismissKeyboard(focus: $isFocused)
+        .dismissKeyboard(focus: $isFocused)
     }
-    
-    private var cancelButton: some View {
-        Button(LocalizedStrings.Shared.cancelButton) {
-            coordinator.pop()
-        }
-            .font(.AppFont.rooneySansRegular.size(16))
-            .tint(Color.accentColor)
-    }
-    
+
     private var titleText: some View {
         Text(LocalizedStrings.AddHabitPage.title)
-            .font(.AppFont.rooneySansBold.size(17))
+            .font(.AppFont.rooneySansBold.size(28))
     }
     
     private var saveButton: some View {
         Button(LocalizedStrings.Shared.saveButton) {
             addHabitViewModel.save()
             NotificationCenter.default.post(name: .habitAdded, object: nil)
-
             coordinator.pop()
         }
-            .font(.AppFont.rooneySansBold.size(16))
-            .tint(addHabitViewModel.saveButtonColor)
+            .font(.AppFont.rooneySansBold.size(20))
+            .tint(.primary)
             .disabled(!addHabitViewModel.isSaveButtonEnabled)
+            .disabled(addHabitViewModel.isSaveButtonEnabled.not)
     }
     
-    private var headerStack: some View {
+    private var topViews: some View {
         HStack {
-            cancelButton
-            
-            Spacer()
             titleText
             Spacer()
-            
             saveButton
         }
-        .padding(.horizontal, 32)
-        .padding(.top, 40)
+        .padding(.horizontal, 24)
+        .padding(.top, 32)
     }
     
     private var addHabitTextField: some View {
@@ -68,7 +55,7 @@ struct AddHabitView: View {
             .background(Color(.systemGray6))
             .cornerRadius(12)
             .padding(.horizontal, 16)
-            .padding(.top, 48)
+            .padding(.top, 32)
             .focused($isFocused)
             .submitLabel(.done)
     }

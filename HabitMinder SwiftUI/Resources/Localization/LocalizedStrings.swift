@@ -35,6 +35,7 @@ struct LocalizedStrings {
         static let title = NSLocalizedString("homeTitle", comment: "Title for home screen")
         static let doneButton = NSLocalizedString("doneButton", comment: "Button title for done")
         static let emptyView = NSLocalizedString("emptyView", comment: "Message for empty habit view")
+        static let watchEmptyView = NSLocalizedString("watchEmptyView", comment: "Message for empty habit view in watch app")
     }
     
     struct AddHabitPage {
@@ -51,8 +52,6 @@ struct LocalizedStrings {
     }
     
     struct Alert {
-        static let QustionMark = NSLocalizedString("qustionMark", comment: "Qustion mark")
-
         struct Network {
             static let title = NSLocalizedString("networkAlertTitle", comment: "Title for network error alert")
             static let defaultError = NSLocalizedString("defaultError", comment: "Default error message for Unknown network error")
@@ -62,6 +61,8 @@ struct LocalizedStrings {
             static let listEmptyTitle = NSLocalizedString("habitListEmptyAlertTitle", comment: "Title for empty habit list alert")
             static let deleteTitle = NSLocalizedString("deleteHabitAlertTitle", comment: "Title for delete habit alert")
             static let deleteMessage = NSLocalizedString("deleteHabitAlertMessage", comment: "Message for delete habit alert")
+            static let editTitle = NSLocalizedString("editHabitAlertTitle", comment: "Title for edit habit alert")
+            static let editMessage = NSLocalizedString("editHabitAlertMessage", comment: "Message for edit habit alert")
         }
     }
 

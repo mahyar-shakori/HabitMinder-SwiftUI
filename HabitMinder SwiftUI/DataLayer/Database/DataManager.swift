@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import OSLog
 
 final class DataManager<T: PersistentModel & IdentifiableModel> {
     private let context: ModelContext
@@ -20,7 +21,7 @@ final class DataManager<T: PersistentModel & IdentifiableModel> {
             let descriptor = FetchDescriptor<T>()
             return try context.fetch(descriptor)
         } catch {
-            print("❌ Failed to fetch \(T.self): \(error)")
+            Logger.data.error("Failed to fetch \(String(describing: T.self)): \(error.localizedDescription)")
             return []
         }
     }
@@ -32,7 +33,7 @@ final class DataManager<T: PersistentModel & IdentifiableModel> {
             )
             return try context.fetch(descriptor).first
         } catch {
-            print("❌ Failed to fetch \(T.self) with ID: \(error)")
+            Logger.data.error("Failed to fetch \(String(describing: T.self)) with ID \(id.uuidString): \(error.localizedDescription)")
             return nil
         }
     }
@@ -42,7 +43,7 @@ final class DataManager<T: PersistentModel & IdentifiableModel> {
         do {
             try context.save()
         } catch {
-            print("❌ Failed to save \(T.self): \(error)")
+            Logger.data.error("Failed to save \(String(describing: T.self)): \(error.localizedDescription)")
         }
     }
 
@@ -55,7 +56,7 @@ final class DataManager<T: PersistentModel & IdentifiableModel> {
             results.forEach { context.delete($0) }
             try context.save()
         } catch {
-            print("❌ Failed to delete \(T.self): \(error)")
+            Logger.data.error("Failed to delete \(String(describing: T.self)): \(error.localizedDescription)")
         }
     }
 
@@ -65,22 +66,13 @@ final class DataManager<T: PersistentModel & IdentifiableModel> {
                 predicate: #Predicate<T> { $0.id == id }
             )
             guard let item = try context.fetch(descriptor).first else {
-                print("⚠️ No item with id \(id) found.")
+                Logger.data.warning("No item with id \(id.uuidString, privacy: .private) found for update.")
                 return
             }
-
             updateBlock(item)
             try context.save()
-
         } catch {
-            print("❌ Failed to update \(T.self): \(error)")
+            Logger.data.error("Failed to update \(String(describing: T.self)): \(error.localizedDescription)")
         }
     }
-}
-
-
-extension Habit: IdentifiableModel {}
-
-protocol IdentifiableModel {
-    var id: UUID { get }
 }

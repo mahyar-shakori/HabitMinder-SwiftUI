@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @StateObject var homeViewModel: HomeViewModel
     @EnvironmentObject var coordinator: Coordinator
-   
+    
     var body: some View {
         content
             .navigationBarBackButtonHidden(true)
@@ -26,29 +26,26 @@ struct HomeView: View {
             ) { _ in
                 homeViewModel.fetchHabits()
             }
-            .alert("Are you sure you want to delete this habit?",
+            .alert(LocalizedStrings.Alert.Habit.deleteTitle,
                    isPresented: $homeViewModel.showDeleteAlert) {
-                Button("Delete", role: .destructive) {
+                Button(LocalizedStrings.Shared.okButton, role: .destructive) {
                     homeViewModel.performDelete()
                 }
-                Button("Cancel", role: .cancel) {
-                    homeViewModel.itemToDelete = nil
+                Button(LocalizedStrings.Shared.cancelButton, role: .cancel) {
                     homeViewModel.showDeleteAlert = false
                 }
+            } message: {
+                Text(LocalizedStrings.Alert.Habit.deleteMessage)
             }
-                   .alert("Do you want to edit this habit?",
-                          isPresented: $homeViewModel.showEditAlert) {
-                       Button("Edit") {
-                           homeViewModel.performEdit()
-                       }
-                       Button("Cancel", role: .cancel) { }
-                   }
-        
-                          .alert("Do you want to edit this habit?",
-                                 isPresented: $homeViewModel.showListEmptyAlert) {
-                
-                              Button("Cancel", role: .cancel) { }
-                          }
+            .alert(LocalizedStrings.Alert.Habit.editTitle,
+                   isPresented: $homeViewModel.showEditAlert) {
+                Button(LocalizedStrings.Shared.okButton) {
+                    homeViewModel.performEdit()
+                }
+                Button(LocalizedStrings.Shared.cancelButton, role: .cancel) { }
+            } message: {
+                Text(LocalizedStrings.Alert.Habit.deleteMessage)
+            }
     }
     
     private var content: some View {
@@ -80,8 +77,8 @@ struct HomeView: View {
         Button(LocalizedStrings.HomePage.doneButton) {
             homeViewModel.isEditingList = false
         }
+        .font(.AppFont.rooneySansBold.size(20))
         .tint(.primary)
-        .font(.AppFont.rooneySansRegular.size(17))
     }
     
     private var topViews: some View {
@@ -94,8 +91,8 @@ struct HomeView: View {
                 dropDownButton
             }
         }
-        .padding(.top, 40)
-        .padding(.horizontal, 32)
+        .padding(.top, 32)
+        .padding(.horizontal, 24)
     }
     
     private var quoteText: some View {
@@ -110,7 +107,6 @@ struct HomeView: View {
         Group {
             if homeViewModel.listItems.isEmpty {
                 Spacer()
-                
                 CustomEmptyView(
                     image: Image(.emptyView),
                     text: LocalizedStrings.HomePage.emptyView
@@ -129,19 +125,6 @@ struct HomeView: View {
         .presentationDetents([.height(CGFloat(60 * homeViewModel.dropDownItems.count))])
         .presentationCornerRadius(20)
         .presentationDragIndicator(.visible)
-    }
-    
-    private var habitEmptyView: some View {
-        Group {
-            if homeViewModel.listItems.isEmpty {
-                CustomEmptyView(
-                    image: Image(.emptyView),
-                    text: LocalizedStrings.HomePage.emptyView
-                )
-            } else {
-                EmptyView()
-            }
-        }
     }
     
     private var habitList: some View {
@@ -168,7 +151,7 @@ struct HomeView: View {
         } label: {
             Image(uiImage: Image.circularIcon(
                 diameter: 50,
-                iconName: SystemIcon.trash,
+                iconName: Image.trashIcon,
                 circleColor: .red,
                 iconColor: .white
             ))
@@ -182,7 +165,7 @@ struct HomeView: View {
         } label: {
             Image(uiImage: Image.circularIcon(
                 diameter: 50,
-                iconName: SystemIcon.pencil,
+                iconName: Image.pencilIcon,
                 circleColor: .blue,
                 iconColor: .white
             ))
@@ -207,7 +190,7 @@ struct HomeView: View {
 
 #Preview {
     @Previewable @Environment(\.modelContext) var context
-
+    
     HomeView(homeViewModel: HomeViewModel(quote: "Test Quote", habitManager: DataManager<Habit>(context: context)))
         .environmentObject(Coordinator())
 }

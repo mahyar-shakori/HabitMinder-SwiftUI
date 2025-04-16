@@ -13,28 +13,23 @@ final class AddHabitViewModel: ObservableObject {
             updateValidationState()
         }
     }
-    @Published var saveButtonColor: Color = .secondary
     @Published var isSaveButtonEnabled: Bool = false
     
-    
     private let habitManager: DataManager<Habit>
-
-    init(habitManager: DataManager<Habit>) {
-            self.habitManager = habitManager
-        }
     
+    init(habitManager: DataManager<Habit>) {
+        self.habitManager = habitManager
+    }
     
     private func updateValidationState() {
         let trimmedName = habitTitle.trimmingCharacters(in: .whitespacesAndNewlines)
         let isValid = trimmedName.count > 1
         
         isSaveButtonEnabled = isValid
-        saveButtonColor = isValid ? .accent : .secondary
     }
     
     func save() {
-            let newHabit = Habit(title: habitTitle)
+        let newHabit = Habit(title: habitTitle)
         habitManager.save(newHabit)
-
-        }
+    }
 }
