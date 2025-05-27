@@ -6,7 +6,6 @@
 //
 
 import WatchConnectivity
-import OSLog
 
 final class WatchSessionManager: NSObject, WCSessionDelegate {
     static let shared = WatchSessionManager()
@@ -27,12 +26,14 @@ final class WatchSessionManager: NSObject, WCSessionDelegate {
     
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
         guard let habits = applicationContext["habits"] as? [[String: Any]] else {
-            Logger.watch.warning("No habits found in received context.")
+            AppLogger.watch.warning("No habits found in received context.")
             return
         }
         let parsedHabits: [HabitData] = habits.compactMap { dict in
             guard let title = dict["title"] as? String,
-                  let daysLeft = dict["daysLeft"] as? Int else { return nil }
+                  let daysLeft = dict["daysLeft"] as? Int else {
+                return nil
+            }
             return HabitData(title: title, daysLeft: daysLeft)
         }
         DispatchQueue.main.async {
@@ -42,7 +43,7 @@ final class WatchSessionManager: NSObject, WCSessionDelegate {
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         if let error = error {
-            Logger.watch.error("Session activation error: \(error.localizedDescription)")
+            AppLogger.watch.error("Session activation error: \(error.localizedDescription)")
         }
     }
 }

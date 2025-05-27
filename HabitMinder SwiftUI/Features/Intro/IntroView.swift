@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct IntroView: View {
-    @StateObject var introViewModel: IntroViewModel
-    @EnvironmentObject var coordinator: Coordinator
+    @StateObject private var introViewModel: IntroViewModel
+    @EnvironmentObject private var coordinator: IntroViewCoordinator
+    
+    init(introViewModel: IntroViewModel) {
+        _introViewModel = StateObject(wrappedValue: introViewModel)
+    }
     
     var body: some View {
         VStack(spacing: 8) {
@@ -27,14 +31,14 @@ struct IntroView: View {
     }
     
     private var image: some View {
-        Image(introViewModel.currentImage)
+        Image(introViewModel.pageState.image)
             .resizable()
             .scaledToFit()
             .padding(.horizontal, 16)
     }
     
     private var titleText: some View {
-        Text(introViewModel.currentTitleText)
+        Text(introViewModel.pageState.titleText)
             .font(.AppFont.rooneySansBold.size(24))
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 16)
@@ -42,7 +46,7 @@ struct IntroView: View {
     }
     
     private var descriptionText: some View {
-        Text(introViewModel.currentDescriptionText)
+        Text(introViewModel.pageState.descriptionText)
             .font(.AppFont.rooneySansRegular.size(18))
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 16)
@@ -50,14 +54,12 @@ struct IntroView: View {
     
     private var bottomControls: some View {
         ZStack {
-            Image(introViewModel.pageControlDot)
+            pageControl
             HStack {
-                if introViewModel.isSkipHidden.not {
+                if introViewModel.pageState.isSkipHidden.not {
                     skipButton
                 }
-                
                 Spacer()
-                
                 nextButton
             }
         }
@@ -67,7 +69,7 @@ struct IntroView: View {
     
     private var skipButton: some View {
         Button(LocalizedStrings.IntroPage.skipButton) {
-            coordinator.push(.setName)
+            coordinator.goToSetName()
         }
         .font(.AppFont.rooneySansRegular.size(16))
         .tint(.accent)
@@ -77,13 +79,29 @@ struct IntroView: View {
     
     private var nextButton: some View {
         Button(LocalizedStrings.IntroPage.nextButton) {
-            introViewModel.currentState == .first ? introViewModel.nextState() : coordinator.push(.setName)
+            introViewModel.currentState == .first ? introViewModel.nextState() : coordinator.goToSetName(presentationStyle: .fullScreenCover)
         }
         .font(.AppFont.rooneySansRegular.size(18))
         .foregroundColor(.white)
         .padding(8)
         .padding(.horizontal, 8)
         .background(Capsule().fill(.accent))
+    }
+    
+    private var pageControl: some View {
+        HStack(spacing: 10) {
+            Capsule()
+                .fill(.accent)
+                .frame(width: introViewModel.currentState == .second ? 70 : 40, height: 10)
+                .animation(.easeInOut(duration: 0.3), value: introViewModel.currentState)
+            
+            if introViewModel.currentState == .first {
+                Capsule()
+                    .fill(.appSecondary)
+                    .frame(width: 20, height: 10)
+                    .transition(.opacity)
+            }
+        }
     }
 }
 

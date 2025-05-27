@@ -5,7 +5,7 @@
 //  Created by Mahyar on 04/04/2025.
 //
 
-import SwiftUI
+import Foundation
 
 final class HomeViewModel: ObservableObject {
     @Published var isDropDownPresented = false
@@ -18,28 +18,28 @@ final class HomeViewModel: ObservableObject {
     
     private(set) var itemToDelete: UUID?
     private(set) var itemToEdit: UUID?
-    private let habitManager: DataManager<Habit>
+    private let habitManager: DataManager<HabitModel>
     let quote: String
     
     let dropDownItems = [
         DropDownItem(
             title: LocalizedStrings.Cell.DropDown.addNewHabit,
-            image: Image(.addNewHabit),
+            imageName: .addNewHabit,
             target: .addHabit
         ),
         DropDownItem(
             title: LocalizedStrings.Cell.DropDown.editHabitList,
-            image: Image(.editHabitList),
+            imageName: .editHabitList,
             target: .editHabitList
         ),
         DropDownItem(
             title: LocalizedStrings.Cell.DropDown.rename,
-            image: Image(.rename),
+            imageName: .rename,
             target: .rename
         )
     ]
     
-    init(quote: String, habitManager: DataManager<Habit>) {
+    init(quote: String, habitManager: DataManager<HabitModel>) {
         self.quote = quote
         self.habitManager = habitManager
         fetchHabits()
@@ -53,18 +53,23 @@ final class HomeViewModel: ObservableObject {
         isDropDownPresented = false
     }
     
+    // back tread
     func fetchHabits() {
         let habits = habitManager.fetchAll()
         listItems = habits.map(mapToHabitItem)
         sendHabitsToWatch()
     }
     
-    private func mapToHabitItem(_ habit: Habit) -> HabitItem {
+    
+    // in 2 func yeki beshan
+    // struct beshe
+    // tuple memory issue dare
+    private func mapToHabitItem(_ habit: HabitModel) -> HabitItem {
         let (daysLeft, progress) = calculateProgress(for: habit)
         return HabitItem(id: habit.id, title: habit.title, daysLeft: daysLeft, progress: progress)
     }
     
-    private func calculateProgress(for habit: Habit) -> (daysLeft: Int, progress: Double) {
+    private func calculateProgress(for habit: HabitModel) -> (daysLeft: Int, progress: Double) {
         let daysLeft = habit.createdAt.habitDaysCountSinceCreation(for: habit.id)
         let progress = Double(22 - daysLeft) / 22.0
         return (daysLeft, progress)
@@ -91,6 +96,9 @@ final class HomeViewModel: ObservableObject {
         itemToDelete = id
         showDeleteAlert = true
     }
+    
+    // send habit to watch mutable state
+    // syncronize konin vaghti ye operation anjam mishe vaysta un tamum she bad baadi shuru kon
     
     func performDelete() {
         guard let id = itemToDelete else {
@@ -127,6 +135,8 @@ final class HomeViewModel: ObservableObject {
         showEditAlert = false
     }
     
+    
+    // reactive chain a depende b bash masalan be jaye inke bgi a call she b call she
     private func sendHabitsToWatch() {
         let habitsToSend = listItems.map { $0.toWatchHabit }
         WatchConnectivityService.shared.sendHabits(habitsToSend)

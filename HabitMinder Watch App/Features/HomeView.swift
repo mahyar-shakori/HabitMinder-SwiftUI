@@ -9,14 +9,14 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject var homeViewModel = HomeViewModel()
-
+    
     var body: some View {
         NavigationStack {
             habitSection
                 .navigationTitle(LocalizedStrings.HomePage.title)
-            .onAppear {
-                WatchSessionManager.shared.configure(with: homeViewModel)
-            }
+                .onAppear {
+                    WatchSessionManager.shared.configure(with: homeViewModel)
+                }
         }
     }
     
@@ -32,16 +32,21 @@ struct HomeView: View {
             .padding(.vertical, 8)
         }
     }
-    
+   
+    @ViewBuilder
     private var habitSection: some View {
-        Group {
-            if homeViewModel.habits.isEmpty {
-                Spacer()
-                Text(LocalizedStrings.HomePage.watchEmptyView)
-                Spacer()
-            } else {
-                habitList
-            }
+        if homeViewModel.habits.isEmpty {
+            emptyStateView
+        } else {
+            habitList
+        }
+    }
+    
+    private var emptyStateView: some View {
+        VStack {
+            Spacer()
+            Text(LocalizedStrings.HomePage.watchEmptyView)
+            Spacer()
         }
     }
 }

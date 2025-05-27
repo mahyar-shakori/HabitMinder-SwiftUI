@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddHabitView: View {
     @StateObject var addHabitViewModel: AddHabitViewModel
-    @EnvironmentObject var coordinator: Coordinator
+    @EnvironmentObject var coordinator: AddHabitViewCoordinator
     @FocusState private var isFocused: Bool
 
     var body: some View {
@@ -30,12 +30,11 @@ struct AddHabitView: View {
     private var saveButton: some View {
         Button(LocalizedStrings.Shared.saveButton) {
             addHabitViewModel.save()
-            NotificationCenter.default.post(name: .habitAdded, object: nil)
-            coordinator.pop()
+            NotificationCenter.default.post(name: AppNotification.Habit.added, object: nil)
+            coordinator.goBack()
         }
             .font(.AppFont.rooneySansBold.size(20))
             .tint(.primary)
-            .disabled(!addHabitViewModel.isSaveButtonEnabled)
             .disabled(addHabitViewModel.isSaveButtonEnabled.not)
     }
     
@@ -64,6 +63,5 @@ struct AddHabitView: View {
 #Preview {
     @Previewable @Environment(\.modelContext) var context
 
-    AddHabitView(addHabitViewModel: AddHabitViewModel(habitManager: DataManager<Habit>(context: context)))
-        .environmentObject(Coordinator())
+    AddHabitView(addHabitViewModel: AddHabitViewModel(habitManager: DataManager<HabitModel>(context: context)))
 }

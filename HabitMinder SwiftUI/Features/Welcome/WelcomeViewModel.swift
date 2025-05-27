@@ -7,20 +7,15 @@
 
 import Foundation
 
-@MainActor
 final class WelcomeViewModel: ObservableObject {
-    @Published var userName = ""
-    @Published var showAlert = false
-    @Published var errorMessage: String?
-    @Published var isFetchSuccessful = false
-    @Published var quote: String = ""
+    @Published private(set) var uiState = WelcomeUIState()
     
-    private let networkAPI: NetworkAPIProtocol
+    private let networkAPI: DataFetcher
     private let userDefaultsStorage: UserDefaultsStorage<UserDefaultKeys, String>
     private weak var quoteDelegate: QuoteUpdatable?
     
     init(
-        networkAPI: NetworkAPIProtocol = NetworkAPI(),
+    networkAPI: DataFetcher = NetworkAPI(configuration: .init(timeoutInterval: 3)),
         userDefaultsStorage: UserDefaultsStorage<UserDefaultKeys, String> = UserDefaultsStorage(key: .userName),
         quoteDelegate: QuoteUpdatable? = nil
     ) {
@@ -33,55 +28,42 @@ final class WelcomeViewModel: ObservableObject {
         self.quoteDelegate = delegate
     }
     
-    private func handleError() {
-        if errorMessage != nil {
-            showAlert = true
-        }
-    }
-    
     func loadUserName() {
         let storedName = userDefaultsStorage.fetch()
-        userName = formattedWelcomeName(from: storedName)
+        uiState.userName = formattedWelcomeName(from: storedName)
     }
-    
-    func fetchData() {
-        Task {
-            do {
-                let quotes = try await fetchQuotes()
-                handleQuoteSuccess(quotes)
-            } catch {
-                handleQuoteFailure(error)
-                handleError()
-            }
+   
+    @MainActor
+    func fetchData() async {
+        do {
+            let quotes = try await fetchQuotes()
+            handleQuoteSuccess(quotes)
+        } catch {
+            handleQuoteFailure(error)
         }
     }
     
     private func fetchQuotes() async throws -> [QuoteResponse] {
-        try await networkAPI.fetchData(
-            from: AuthEndpoint.getQuote,
-            decodeType: [QuoteResponse].self
-        )
+        try await networkAPI.fetchData(from: AuthEndpoint.getQuote)
     }
     
     private func handleQuoteSuccess(_ quotes: [QuoteResponse]) {
         let quote = quotes.first?.quote ?? ""
-        let trimmedQuote = quote.count > 100
-        ? LocalizedStrings.WelcomePage.defaultQuote
-        : quote
+        let trimmedQuote = quote.count > 100 ? LocalizedStrings.WelcomePage.defaultQuote : quote
         
         quoteDelegate?.updateQuote(trimmedQuote)
-        isFetchSuccessful = true
+        
+        uiState.quote = trimmedQuote
+        uiState.isFetchSuccessful = true
+        uiState.errorMessage = nil
     }
     
     private func handleQuoteFailure(_ error: Error) {
-        self.errorMessage = error.localizedDescription
+        uiState.errorMessage = error.localizedDescription
     }
-    
+
     private func formattedWelcomeName(from userName: String?) -> String {
-        if let userName = userName {
-            return LocalizedStrings.WelcomePage.welcome + userName
-        } else {
-            return LocalizedStrings.WelcomePage.guest
-        }
+        userName.map { LocalizedStrings.WelcomePage.welcome + $0 }
+            ?? LocalizedStrings.WelcomePage.guest
     }
 }

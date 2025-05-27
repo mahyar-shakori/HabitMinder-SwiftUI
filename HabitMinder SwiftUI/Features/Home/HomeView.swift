@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject var homeViewModel: HomeViewModel
-    @EnvironmentObject var coordinator: Coordinator
+    @EnvironmentObject private var coordinator: HomeViewCoordinator
     
     var body: some View {
         content
@@ -21,7 +21,7 @@ struct HomeView: View {
                 handleNavigation(homeViewModel.navigationTarget)
             }
             .onReceive(
-                NotificationCenter.default.publisher(for: .habitAdded)
+                NotificationCenter.default.publisher(for: AppNotification.Habit.added)
                     .merge(with: NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification))
             ) { _ in
                 homeViewModel.fetchHabits()
@@ -85,14 +85,19 @@ struct HomeView: View {
         HStack {
             titleText
             Spacer()
-            if homeViewModel.isEditingList {
-                doneButton
-            } else {
-                dropDownButton
-            }
+            editingControl
         }
         .padding(.top, 32)
         .padding(.horizontal, 24)
+    }
+    
+    @ViewBuilder
+    private var editingControl: some View {
+        if homeViewModel.isEditingList {
+            doneButton
+        } else {
+            dropDownButton
+        }
     }
     
     private var quoteText: some View {
@@ -104,17 +109,22 @@ struct HomeView: View {
     }
     
     private var habitSection: some View {
-        Group {
-            if homeViewModel.listItems.isEmpty {
+        habitContentView
+    }
+
+    @ViewBuilder
+    private var habitContentView: some View {
+        if homeViewModel.listItems.isEmpty {
+            VStack {
                 Spacer()
                 CustomEmptyView(
                     image: Image(.emptyView),
                     text: LocalizedStrings.HomePage.emptyView
                 )
                 Spacer()
-            } else {
-                habitList
             }
+        } else {
+            habitList
         }
     }
     
@@ -151,7 +161,7 @@ struct HomeView: View {
         } label: {
             Image(uiImage: Image.circularIcon(
                 diameter: 50,
-                iconName: Image.trashIcon,
+                iconName: AppIconName.trash,
                 circleColor: .red,
                 iconColor: .white
             ))
@@ -165,7 +175,7 @@ struct HomeView: View {
         } label: {
             Image(uiImage: Image.circularIcon(
                 diameter: 50,
-                iconName: Image.pencilIcon,
+                iconName: AppIconName.pencil,
                 circleColor: .blue,
                 iconColor: .white
             ))
@@ -174,15 +184,18 @@ struct HomeView: View {
     }
     
     private func handleNavigation(_ target: HomeNavigationTarget?) {
-        guard let target = target else { return }
-        
+        guard let target = target else {
+            return
+        }
         switch target {
         case .addHabit:
-            coordinator.push(.addHabit)
+            coordinator.goToAddHabit()
         case .editHabitList:
             homeViewModel.handleEditHabitList()
         case .rename:
-            coordinator.push(.setName)
+            let loginStorage = UserDefaultsStorage<UserDefaultKeys, Bool>(key: UserDefaultKeys.isLogin)
+            loginStorage.save(value: false)
+            coordinator.goToSetName()
         }
         homeViewModel.navigationTarget = nil
     }
@@ -191,6 +204,12 @@ struct HomeView: View {
 #Preview {
     @Previewable @Environment(\.modelContext) var context
     
-    HomeView(homeViewModel: HomeViewModel(quote: "Test Quote", habitManager: DataManager<Habit>(context: context)))
-        .environmentObject(Coordinator())
+    HomeView(
+        homeViewModel: HomeViewModel(
+            quote: "Test Quote",
+            habitManager: DataManager<HabitModel>(
+                context: context
+            )
+        )
+    )
 }

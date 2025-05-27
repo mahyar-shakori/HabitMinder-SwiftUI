@@ -6,17 +6,13 @@
 //
 
 import SwiftUI
-import SwiftData
 
 @main
 struct HabitMinderApp: App {
-    @StateObject private var coordinator = Coordinator()
-    
     var body: some Scene {
         WindowGroup {
             RootView()
-                .environmentObject(coordinator)
-                .modelContainer(for: Habit.self)
+                .modelContainer(for: HabitModel.self)
         }
     }
 }

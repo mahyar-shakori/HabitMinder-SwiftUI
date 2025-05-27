@@ -5,19 +5,17 @@
 //  Created by Mahyar on 08/04/2025.
 //
 
-import SwiftUI
+import Foundation
 
 final class AddHabitViewModel: ObservableObject {
-    @Published var habitTitle = "" {
-        didSet {
-            updateValidationState()
-        }
+    @Published var habitTitle: String = "" {
+        didSet { updateValidationState() }
     }
     @Published var isSaveButtonEnabled: Bool = false
     
-    private let habitManager: DataManager<Habit>
+    private let habitManager: DataManager<HabitModel>
     
-    init(habitManager: DataManager<Habit>) {
+    init(habitManager: DataManager<HabitModel>) {
         self.habitManager = habitManager
     }
     
@@ -29,7 +27,7 @@ final class AddHabitViewModel: ObservableObject {
     }
     
     func save() {
-        let newHabit = Habit(title: habitTitle)
+        let newHabit = HabitModel(title: habitTitle)
         habitManager.save(newHabit)
     }
 }

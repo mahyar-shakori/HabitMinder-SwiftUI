@@ -8,40 +8,39 @@
 import SwiftUI
 
 struct SetNameView: View {
-    @StateObject var setNameViewModel: SetNameViewModel
-    @EnvironmentObject var coordinator: Coordinator
+    @StateObject private var setNameViewModel: SetNameViewModel
+    @EnvironmentObject private var coordinator: SetNameViewCoordinator
     @FocusState private var isFocused: Bool
     
+    init(setNameViewModel: SetNameViewModel) {
+        _setNameViewModel = StateObject(wrappedValue: setNameViewModel)
+    }
+   
     var body: some View {
         VStack {
             Spacer()
             
-            headerImage()
-            hiText()
-            userNameTextField()
-            errorText()
+            headerImage
+            hiText
+            userNameTextField
+            errorText
             
             Spacer()
             
-            continueButton()
+            continueButton
         }
         .dismissKeyboard(focus: $isFocused)
         .navigationBarBackButtonHidden(true)
     }
-}
-
-private extension SetNameView {
     
-    @ViewBuilder
-    func headerImage() -> some View {
+    private var headerImage: some View {
         Image(.setName)
             .resizable()
             .scaledToFit()
             .padding(.horizontal, 16)
     }
     
-    @ViewBuilder
-    func hiText() -> some View {
+    private var hiText: some View {
         Text(LocalizedStrings.SetNamePage.hiDialog)
             .font(.AppFont.rooneySansBold.size(21))
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -49,15 +48,14 @@ private extension SetNameView {
             .padding(.top, 64)
     }
     
-    @ViewBuilder
-    func userNameTextField() -> some View {
+    private var userNameTextField: some View {
         TextField(LocalizedStrings.SetNamePage.userNamePlaceholder, text: $setNameViewModel.userName)
             .font(.AppFont.rooneySansRegular.size(16))
             .textContentType(.givenName)
             .padding()
             .background(
                 Capsule()
-                    .stroke(setNameViewModel.userNameBorderColor, lineWidth: setNameViewModel.userNameBorderSize)
+                    .stroke(borderColor, lineWidth: borderWidth)
             )
             .padding(.horizontal, 32)
             .padding(.top, 16)
@@ -65,38 +63,41 @@ private extension SetNameView {
             .submitLabel(.done)
     }
     
-    @ViewBuilder
-    func errorText() -> some View {
-        Group {
-            if setNameViewModel.errorText.isEmpty {
-                Text(" ")
-            } else {
-                Text(setNameViewModel.errorText)
-                    .transition(.opacity)
-            }
-        }
-        .font(.AppFont.rooneySansRegular.size(16))
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .foregroundColor(.red)
-        .padding(.horizontal, 32)
-        .padding(.top, 8)
-        .animation(.easeInOut, value: setNameViewModel.errorText)
+    private var errorText: some View {
+        Text(setNameViewModel.uiState.errorText.isEmpty ? " " : setNameViewModel.uiState.errorText)
+            .font(.AppFont.rooneySansRegular.size(16))
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .foregroundColor(.red)
+            .padding(.horizontal, 32)
+            .padding(.top, 8)
+            .animation(.easeInOut, value: setNameViewModel.uiState.errorText)
     }
     
-    @ViewBuilder
-    func continueButton() -> some View {
+    private var continueButton: some View {
         Button(LocalizedStrings.SetNamePage.continueButton) {
             setNameViewModel.validateAndContinue {
-                coordinator.push(.welcome)
+                coordinator.goToWelcome()
             }
         }
         .font(.AppFont.rooneySansBold.size(20))
         .frame(maxWidth: .infinity)
         .foregroundColor(.white)
         .padding(16)
-        .background(Capsule().fill(setNameViewModel.continueButtonColor))
+        .background(
+            Capsule().fill(setNameViewModel.uiState.isValid ? Color.accent : Color.secondary)
+        )
         .padding(.horizontal, 32)
         .padding(.bottom, 32)
+    }
+}
+
+private extension SetNameView {
+    var borderColor: Color {
+        setNameViewModel.uiState.borderState == .error ? .red : .accent
+    }
+    
+    var borderWidth: CGFloat {
+        setNameViewModel.uiState.borderState == .error ? 2 : 1
     }
 }
 
