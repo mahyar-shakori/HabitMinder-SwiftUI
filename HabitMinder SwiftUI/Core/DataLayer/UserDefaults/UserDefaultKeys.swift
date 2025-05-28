@@ -8,7 +8,7 @@
 import Foundation
 
 enum UserDefaultKeys: String, StorageKeyProtocol {
+    case language = "userDefaultsStorage_Language"
     case userName = "userDefaultsStorage_UserName"
-    case isQuoteOff = "userDefaultsStorage_IsQuoteOff"
     case isLogin = "userDefaultsStorage_IsLogin"
 }

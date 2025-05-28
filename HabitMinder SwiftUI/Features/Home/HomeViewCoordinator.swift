@@ -15,6 +15,10 @@ final class HomeViewCoordinator: ObservableObject {
         navigate(.home(.addHabit), presentationStyle)
     }
     
+    func goToFutureHabit(presentationStyle: PresentationStyle = .push) {
+        navigate(.home(.futureHabit), presentationStyle)
+    }
+    
     func goToSetName(presentationStyle: PresentationStyle = .push) {
         navigate(.intro(.setName), presentationStyle)
     }

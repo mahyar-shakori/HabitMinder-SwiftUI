@@ -1,0 +1,45 @@
+/*
+  Localizable.strings
+  HabitMinder SwiftUI
+
+  Created by Mahyar on 28/05/2025.
+  
+*/
+
+"SetLanguageTitle" = "Selecteer je taal";
+"introFirstTitle" = "Gezonde gewoonte";
+"introFirstDescription" = "Er wordt geschat dat het 21 dagen duurt voordat mensen een nieuwe gewoonte vormen. Introduceer een gezonde gewoonte in je leven met de 21 dagen-app.";
+"introSecondTitle" = "Slechte gewoonte";
+"introSecondDescription" = "Vergeet niet voor je lichaam te zorgen. Je kunt een slechte gewoonte veranderen door deze te vervangen door een goede. Dat kun je doen met deze 21 dagen-app.";
+"skipButton" = "Overslaan";
+"nextButton" = "Volgende";
+"hiDialog" = "Hoi, hoe mogen we je noemen?";
+"userNamePlaceholder" = "Vul je naam in";
+"continueButton" = "Doorgaan";
+"error" = "Kom op! Je kunt ons je naam wel vertellen :)";
+"welcome" = "Welkom, ";
+"guest" = "Welkom, gast";
+"defaultQuote" = "Alles is mogelijk, met genoeg tijd!";
+"homeTitle" = "Mijn gewoontes";
+"doneButton" = "Klaar";
+"emptyView" = "Er is nog geen gewoonte toegevoegd! Klik op de menuknop om een gewoonte toe te voegen.";
+"watchEmptyView" = "Er is nog geen gewoonte toegevoegd!";
+"addHabitTitle" = "Gewoonte toevoegen";
+"habitPlaceholder" = "Titel van de gewoonte";
+"saveButton" = "Opslaan";
+"futureHabitsTitleLabel" = "Toekomstige gewoontes";
+"cancelButton" = "Annuleren";
+"okButton" = "OK";
+"yesButton" = "Ja";
+"noButton" = "Nee";
+"networkAlertTitle" = "Netwerkfout";
+"defaultError" = "Onbekende fout opgetreden.";
+"deleteHabitAlertTitle" = "Gewoonte verwijderen";
+"deleteHabitAlertMessage" = "Weet je zeker dat je deze gewoonte wilt verwijderen?";
+"editHabitAlertTitle" = "Gewoonte bewerken";
+"editHabitAlertMessage" = "Weet je zeker dat je deze gewoonte opnieuw wilt starten?";
+"dropDownAddNewHabit" = "Nieuwe gewoonte toevoegen";
+"dropDownFutureHabitShow-Hide" = "Toekomstige gewoonte tonen/verbergen";
+"dropDownEditHabitList" = "Gewoontelijst bewerken";
+"dropDownRename" = "Hernoemen";
+"HabitCellDaysLeft" = " dagen resterend";

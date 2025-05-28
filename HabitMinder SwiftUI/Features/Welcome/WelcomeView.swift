@@ -23,14 +23,12 @@ struct WelcomeView: View {
             .onChange(of: welcomeViewModel.uiState.errorMessage) {
                 showAlert = welcomeViewModel.uiState.errorMessage != nil
             }
-            .alert(isPresented: $showAlert) {
-                Alert(
-                    title: Text(LocalizedStrings.Alert.Network.title),
-                    message:Text(welcomeViewModel.uiState.errorMessage ?? LocalizedStrings.Alert.Network.defaultError),
-                    dismissButton: .default(Text(LocalizedStrings.Shared.okButton), action: {
-                        coordinator.goToHome(quote: "")
-                    })
-                )
+            .alert(LocalizedStrings.Alert.Network.title, isPresented: $showAlert) {
+                Button(LocalizedStrings.Shared.okButton) {
+                    coordinator.goToHome(quote: "")
+                }
+            } message: {
+                Text(welcomeViewModel.uiState.errorMessage ?? LocalizedStrings.Alert.Network.defaultError)
             }
     }
     
@@ -76,5 +74,10 @@ struct WelcomeView: View {
 }
 
 #Preview {
-    WelcomeView(welcomeViewModel: WelcomeViewModel())
+    let mockNavigate: (AppRoute, PresentationStyle) -> Void = { route, style in
+        print("Preview navigation to \(route) with style \(style)")
+    }
+    
+    return WelcomeView(welcomeViewModel: WelcomeViewModel())
+        .environmentObject(WelcomeViewCoordinator(navigate: mockNavigate))
 }

@@ -74,17 +74,19 @@ struct SetNameView: View {
     }
     
     private var continueButton: some View {
-        Button(LocalizedStrings.SetNamePage.continueButton) {
+        Button(action: {
             setNameViewModel.validateAndContinue {
                 coordinator.goToWelcome()
             }
+        }) {
+            Text(LocalizedStrings.SetNamePage.continueButton)
+                .font(.AppFont.rooneySansBold.size(20))
+                .foregroundColor(.white)
         }
-        .font(.AppFont.rooneySansBold.size(20))
         .frame(maxWidth: .infinity)
-        .foregroundColor(.white)
         .padding(16)
         .background(
-            Capsule().fill(setNameViewModel.uiState.isValid ? Color.accent : Color.secondary)
+            Capsule().fill(setNameViewModel.uiState.isValid ? Color.appPrimary : Color.secondary)
         )
         .padding(.horizontal, 32)
         .padding(.bottom, 32)
@@ -93,7 +95,7 @@ struct SetNameView: View {
 
 private extension SetNameView {
     var borderColor: Color {
-        setNameViewModel.uiState.borderState == .error ? .red : .accent
+        setNameViewModel.uiState.borderState == .error ? .red : .appPrimary
     }
     
     var borderWidth: CGFloat {

@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject var homeViewModel: HomeViewModel
+    @StateObject private var homeViewModel: HomeViewModel
     @EnvironmentObject private var coordinator: HomeViewCoordinator
+    @State private var showDeleteAlert = false
+    @State private var showEditAlert = false
+    
+    init(homeViewModel: HomeViewModel) {
+        _homeViewModel = StateObject(wrappedValue: homeViewModel)
+    }
     
     var body: some View {
         content
@@ -17,8 +23,14 @@ struct HomeView: View {
             .sheet(isPresented: $homeViewModel.isDropDownPresented) {
                 dropDownSheet
             }
-            .onChange(of: homeViewModel.navigationTarget) {
-                handleNavigation(homeViewModel.navigationTarget)
+            .onChange(of: homeViewModel.uiState.navigationTarget) {
+                handleNavigation(homeViewModel.uiState.navigationTarget)
+            }
+            .onChange(of: homeViewModel.uiState.itemToDelete) { _, id in
+                showDeleteAlert = (id != nil)
+            }
+            .onChange(of: homeViewModel.uiState.itemToEdit) { _, id in
+                showEditAlert = (id != nil)
             }
             .onReceive(
                 NotificationCenter.default.publisher(for: AppNotification.Habit.added)
@@ -27,24 +39,26 @@ struct HomeView: View {
                 homeViewModel.fetchHabits()
             }
             .alert(LocalizedStrings.Alert.Habit.deleteTitle,
-                   isPresented: $homeViewModel.showDeleteAlert) {
+                   isPresented: $showDeleteAlert) {
                 Button(LocalizedStrings.Shared.okButton, role: .destructive) {
                     homeViewModel.performDelete()
                 }
                 Button(LocalizedStrings.Shared.cancelButton, role: .cancel) {
-                    homeViewModel.showDeleteAlert = false
+                    homeViewModel.cancelDelete()
                 }
             } message: {
                 Text(LocalizedStrings.Alert.Habit.deleteMessage)
             }
             .alert(LocalizedStrings.Alert.Habit.editTitle,
-                   isPresented: $homeViewModel.showEditAlert) {
-                Button(LocalizedStrings.Shared.okButton) {
+                   isPresented: $showEditAlert) {
+                Button(LocalizedStrings.Shared.okButton, role: .destructive) {
                     homeViewModel.performEdit()
                 }
-                Button(LocalizedStrings.Shared.cancelButton, role: .cancel) { }
+                Button(LocalizedStrings.Shared.cancelButton, role: .cancel) {
+                    homeViewModel.cancelEdit()
+                }
             } message: {
-                Text(LocalizedStrings.Alert.Habit.deleteMessage)
+                Text(LocalizedStrings.Alert.Habit.editMessage)
             }
     }
     
@@ -66,7 +80,7 @@ struct HomeView: View {
     
     private var dropDownButton: some View {
         Button(action: {
-            homeViewModel.isDropDownPresented = true
+            homeViewModel.startDropDownPresenting()
         }) {
             Image(.dropDownButton)
                 .tint(.primary)
@@ -74,11 +88,13 @@ struct HomeView: View {
     }
     
     private var doneButton: some View {
-        Button(LocalizedStrings.HomePage.doneButton) {
-            homeViewModel.isEditingList = false
+        Button(action: {
+            homeViewModel.stopEditingList()
+        }) {
+            Text(LocalizedStrings.HomePage.doneButton)
+                .font(.AppFont.rooneySansBold.size(20))
+                .tint(.primary)
         }
-        .font(.AppFont.rooneySansBold.size(20))
-        .tint(.primary)
     }
     
     private var topViews: some View {
@@ -93,7 +109,7 @@ struct HomeView: View {
     
     @ViewBuilder
     private var editingControl: some View {
-        if homeViewModel.isEditingList {
+        if homeViewModel.uiState.isEditingList {
             doneButton
         } else {
             dropDownButton
@@ -114,7 +130,7 @@ struct HomeView: View {
 
     @ViewBuilder
     private var habitContentView: some View {
-        if homeViewModel.listItems.isEmpty {
+        if homeViewModel.uiState.listItems.isEmpty {
             VStack {
                 Spacer()
                 CustomEmptyView(
@@ -129,20 +145,21 @@ struct HomeView: View {
     }
     
     private var dropDownSheet: some View {
-        DropDownSheetView(items: homeViewModel.dropDownItems) { selectedIndex in
+        let items = homeViewModel.dropDownItems
+        
+        return DropDownSheetView(items: items) { selectedIndex in
             homeViewModel.handleDropDownSelection(index: selectedIndex)
         }
-        .presentationDetents([.height(CGFloat(60 * homeViewModel.dropDownItems.count))])
+        .presentationDetents([.height(CGFloat(60 * items.count))])
         .presentationCornerRadius(20)
         .presentationDragIndicator(.visible)
     }
     
     private var habitList: some View {
         List {
-            ForEach(homeViewModel.listItems) { item in
+            ForEach(homeViewModel.uiState.listItems) { item in
                 HabitListRowView(item: item)
                     .listRowSeparator(.hidden)
-                    .listRowBackground(Color.clear)
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         deleteSwipeButton(for: item.id)
                         editSwipeButton(for: item.id)
@@ -151,7 +168,7 @@ struct HomeView: View {
             .onMove(perform: homeViewModel.moveItem)
         }
         .listStyle(.plain)
-        .environment(\.editMode, .constant(homeViewModel.isEditingList ? .active : .inactive))
+        .environment(\.editMode, .constant(homeViewModel.uiState.isEditingList ? .active : .inactive))
         .refreshable { await homeViewModel.refresh() }
     }
     
@@ -190,14 +207,18 @@ struct HomeView: View {
         switch target {
         case .addHabit:
             coordinator.goToAddHabit()
+        case .futureHabit:
+            coordinator.goToFutureHabit()
         case .editHabitList:
-            homeViewModel.handleEditHabitList()
+            if homeViewModel.uiState.listItems.isNotEmpty {
+                homeViewModel.handleEditHabitList()
+            }
         case .rename:
             let loginStorage = UserDefaultsStorage<UserDefaultKeys, Bool>(key: UserDefaultKeys.isLogin)
             loginStorage.save(value: false)
             coordinator.goToSetName()
         }
-        homeViewModel.navigationTarget = nil
+        homeViewModel.setNavigationTargetEmpty()
     }
 }
 

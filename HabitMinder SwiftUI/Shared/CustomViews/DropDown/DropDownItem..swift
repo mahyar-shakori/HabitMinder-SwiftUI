@@ -12,4 +12,5 @@ struct DropDownItem: Identifiable {
     let title: String
     let imageName: DropDownIcon?
     let target: HomeNavigationTarget
+    let isEnabled: Bool
 }

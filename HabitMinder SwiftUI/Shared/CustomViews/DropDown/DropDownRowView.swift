@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DropDownRowView: View {
     let item: DropDownItem
+    let isEnabled: Bool
     
     var body: some View {
         HStack(spacing: 16) {
@@ -28,6 +29,7 @@ struct DropDownRowView: View {
                     .scaledToFit()
                     .frame(width: 28, height: 28)
                     .padding(.leading, 16)
+                    .opacity(isEnabled ? 1.0 : 0.4)
             }
         }
     }
@@ -35,6 +37,6 @@ struct DropDownRowView: View {
     private var text: some View {
         Text(item.title)
             .font(.AppFont.rooneySansRegular.size(17))
-            .foregroundColor(.primary)
+            .foregroundColor(isEnabled ? .primary : .gray)
     }
 }

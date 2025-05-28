@@ -11,7 +11,7 @@ final class AddHabitViewModel: ObservableObject {
     @Published var habitTitle: String = "" {
         didSet { updateValidationState() }
     }
-    @Published var isSaveButtonEnabled: Bool = false
+    @Published private(set) var isSaveButtonEnabled: Bool = false
     
     private let habitManager: DataManager<HabitModel>
     

@@ -7,6 +7,7 @@
 
 enum HomeNavigationTarget {
     case addHabit
+    case futureHabit
     case editHabitList
     case rename
 }

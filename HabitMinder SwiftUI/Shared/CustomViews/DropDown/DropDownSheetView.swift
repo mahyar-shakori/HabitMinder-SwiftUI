@@ -15,14 +15,16 @@ struct DropDownSheetView: View {
         VStack(spacing: 0) {
             ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
                 Button {
-                    onSelect(index)
+                    if item.isEnabled {
+                        onSelect(index)
+                    }
                 } label: {
-                    DropDownRowView(item: item)
+                    DropDownRowView(item: item, isEnabled: item.isEnabled)
                 }
-                if index != items.count - 1 {
-                    Divider()
-                        .padding(.leading, 16)
-                }
+                .disabled(item.isEnabled.not)
+                
+                Divider()
+                    .padding(.leading, 16)
             }
         }
     }

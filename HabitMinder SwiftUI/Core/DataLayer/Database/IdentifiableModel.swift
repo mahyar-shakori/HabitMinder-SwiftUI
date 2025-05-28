@@ -12,3 +12,4 @@ protocol IdentifiableModel {
 }
 
 extension HabitModel: IdentifiableModel {}
+extension FutureHabitModel: IdentifiableModel {}

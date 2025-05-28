@@ -28,6 +28,12 @@ struct HomeRouter {
                     habitManager: DataManager<HabitModel>(context: modelContext)
                 )
             ).environmentObject(viewCoordinator)
+        case .futureHabit:
+            FutureHabitView(
+                futureHabitViewModel: FutureHabitViewModel(
+                    habitManager: DataManager<FutureHabitModel>(context: modelContext)
+                )
+            )
         }
     }
 }

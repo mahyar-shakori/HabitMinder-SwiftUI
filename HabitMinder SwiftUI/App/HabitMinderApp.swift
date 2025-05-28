@@ -12,7 +12,7 @@ struct HabitMinderApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
-                .modelContainer(for: HabitModel.self)
+                .modelContainer(for: [HabitModel.self, FutureHabitModel.self])
         }
     }
 }

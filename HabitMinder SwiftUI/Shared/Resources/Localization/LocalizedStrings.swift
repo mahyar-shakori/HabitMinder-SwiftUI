@@ -9,72 +9,80 @@ import Foundation
 
 struct LocalizedStrings {
     
+    struct setLanguagePage {
+        static var title: String { "SetLanguageTitle".localized }
+    }
+    
     struct IntroPage {
-        static let firstTitle = NSLocalizedString("introFirstTitle", comment: "Title for the first introduction screen")
-        static let firstDescription = NSLocalizedString("introFirstDescription", comment: "Description for the first introduction screen")
-        static let secondTitle = NSLocalizedString("introSecondTitle", comment: "Title for the second introduction screen")
-        static let secondDescription = NSLocalizedString("introSecondDescription", comment: "Description for the second introduction screen")
-        static let skipButton = NSLocalizedString("skipButton", comment: "Button title for skip")
-        static let nextButton = NSLocalizedString("nextButton", comment: "Button title for next")
+        static var firstTitle: String { "introFirstTitle".localized }
+        static var firstDescription: String { "introFirstDescription".localized }
+        static var secondTitle: String { "introSecondTitle".localized }
+        static var secondDescription: String { "introSecondDescription".localized }
+        static var skipButton: String { "skipButton".localized }
+        static var nextButton: String { "nextButton".localized }
     }
     
     struct SetNamePage {
-        static let hiDialog = NSLocalizedString("hiDialog", comment: "Greeting dialog")
-        static let userNamePlaceholder = NSLocalizedString("userNamePlaceholder", comment: "Placeholder for username text field")
-        static let continueButton = NSLocalizedString("continueButton", comment: "Button title for continue")
-        static let error = NSLocalizedString("error", comment: "Error message when name is not entered")
+        static var hiDialog: String { "hiDialog".localized }
+        static var userNamePlaceholder: String { "userNamePlaceholder".localized }
+        static var continueButton: String { "continueButton".localized }
+        static var error: String { "error".localized }
     }
     
     struct WelcomePage {
-        static let welcome = NSLocalizedString("welcome", comment: "Welcome message")
-        static let guest = NSLocalizedString("guest", comment: "Guest message")
-        static let defaultQuote = NSLocalizedString("defaultQuote", comment: "Default quote used when the response exceeds 100 characters")
+        static var welcome: String { "welcome".localized }
+        static var guest: String { "guest".localized }
+        static var defaultQuote: String { "defaultQuote".localized }
     }
     
     struct HomePage {
-        static let title = NSLocalizedString("homeTitle", comment: "Title for home screen")
-        static let doneButton = NSLocalizedString("doneButton", comment: "Button title for done")
-        static let emptyView = NSLocalizedString("emptyView", comment: "Message for empty habit view")
-        static let watchEmptyView = NSLocalizedString("watchEmptyView", comment: "Message for empty habit view in watch app")
+        static var title: String { "homeTitle".localized }
+        static var doneButton: String { "doneButton".localized }
+        static var emptyView: String { "emptyView".localized }
+        static var watchEmptyView: String { "watchEmptyView".localized }
+    }
+    
+    struct FutureHabitsPage {
+        static var title: String { "futureHabitsTitleLabel".localized }
     }
     
     struct AddHabitPage {
-        static let title = NSLocalizedString("addHabitTitle", comment: "Title for add habit screen")
-        static let habitPlaceholder = NSLocalizedString("habitPlaceholder", comment: "Placeholder for habit text field")
+        static var title: String { "addHabitTitle".localized }
     }
     
     struct Shared {
-        static let saveButton = NSLocalizedString("saveButton", comment: "Button title for save")
-        static let cancelButton = NSLocalizedString("cancelButton", comment: "Button title for cancel")
-        static let okButton = NSLocalizedString("okButton", comment: "Button title for ok")
-        static let yesButton = NSLocalizedString("yesButton", comment: "Button title for yes")
-        static let noButton = NSLocalizedString("noButton", comment: "Button title for no")
+        static var habitPlaceholder: String { "habitPlaceholder".localized }
+        static var saveButton: String { "saveButton".localized }
+        static var cancelButton: String { "cancelButton".localized }
+        static var okButton: String { "okButton".localized }
+        static var yesButton: String { "yesButton".localized }
+        static var noButton: String { "noButton".localized }
     }
     
     struct Alert {
         struct Network {
-            static let title = NSLocalizedString("networkAlertTitle", comment: "Title for network error alert")
-            static let defaultError = NSLocalizedString("defaultError", comment: "Default error message for Unknown network error")
+            static var title: String { "networkAlertTitle".localized }
+            static var defaultError: String { "defaultError".localized }
         }
         
         struct Habit {
-            static let listEmptyTitle = NSLocalizedString("habitListEmptyAlertTitle", comment: "Title for empty habit list alert")
-            static let deleteTitle = NSLocalizedString("deleteHabitAlertTitle", comment: "Title for delete habit alert")
-            static let deleteMessage = NSLocalizedString("deleteHabitAlertMessage", comment: "Message for delete habit alert")
-            static let editTitle = NSLocalizedString("editHabitAlertTitle", comment: "Title for edit habit alert")
-            static let editMessage = NSLocalizedString("editHabitAlertMessage", comment: "Message for edit habit alert")
+            static var deleteTitle: String { "deleteHabitAlertTitle".localized }
+            static var deleteMessage: String { "deleteHabitAlertMessage".localized }
+            static var editTitle: String { "editHabitAlertTitle".localized }
+            static var editMessage: String { "editHabitAlertMessage".localized }
         }
     }
 
     struct Cell {
         struct DropDown {
-            static let addNewHabit = NSLocalizedString("dropDownAddNewHabit", comment: "Dropdown option to add a new habit")
-            static let editHabitList = NSLocalizedString("dropDownEditHabitList", comment: "Dropdown option to edit habit list")
-            static let rename = NSLocalizedString("dropDownRename", comment: "Dropdown option to rename user name")
+            static var addNewHabit: String { "dropDownAddNewHabit".localized }
+            static var futureHabitShowHide: String { "dropDownFutureHabitShow-Hide".localized }
+            static var editHabitList: String { "dropDownEditHabitList".localized }
+            static var rename: String { "dropDownRename".localized }
         }
         
         struct Habit {
-            static let daysLeft = NSLocalizedString("HabitCellDaysLeft", comment: "Remaining left days")
+            static var daysLeft: String { "HabitCellDaysLeft".localized }
         }
     }
 }

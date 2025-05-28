@@ -6,6 +6,7 @@
   
 */
 
+"SetLanguageTitle" = "Select your language";
 "introFirstTitle" = "Healthy Habit";
 "introFirstDescription" = "It is estimated that it takes 21 days for people to form a new habit. Introduce a healthy habit in your life with the 21 days app.";
 "introSecondTitle" = "Bad Habit";
@@ -26,18 +27,19 @@
 "addHabitTitle" = "Add Habit";
 "habitPlaceholder" = "Habit title";
 "saveButton" = "Save";
+"futureHabitsTitleLabel" = "Future Habits";"futureHabitsTitleLabel" = "Future Habits";
 "cancelButton" = "Cancel";
 "okButton" = "OK";
 "yesButton" = "Yes";
 "noButton" = "No";
 "networkAlertTitle" = "Network Error";
 "defaultError" = "Unknown error occurred.";
-"habitListEmptyAlertTitle" = "Oops, the habit list is empty.";
 "deleteHabitAlertTitle" = "Delete Habit";
 "deleteHabitAlertMessage" = "Are you sure you want to delete this habit?";
 "editHabitAlertTitle" = "Edit Habit";
 "editHabitAlertMessage" = "Are you sure you want to start this habit over?";
 "dropDownAddNewHabit" = "Add New Habit";
+"dropDownFutureHabitShow-Hide" = "Future Habit Show-Hide";
 "dropDownEditHabitList" = "Edit Habit List";
 "dropDownRename" = "Rename";
 "HabitCellDaysLeft" = " days left";

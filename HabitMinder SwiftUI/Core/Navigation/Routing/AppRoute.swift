@@ -13,6 +13,7 @@ enum AppRoute: Hashable {
 }
 
 enum IntroRoute: Hashable {
+    case setLanguage
     case intro
     case setName
     case welcome
@@ -21,4 +22,5 @@ enum IntroRoute: Hashable {
 enum HomeRoute: Hashable {
     case home(quote: String)
     case addHabit
+    case futureHabit
 }

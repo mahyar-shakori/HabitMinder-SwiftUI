@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct AddHabitView: View {
-    @StateObject var addHabitViewModel: AddHabitViewModel
-    @EnvironmentObject var coordinator: AddHabitViewCoordinator
+    @StateObject private var addHabitViewModel: AddHabitViewModel
+    @EnvironmentObject private var coordinator: AddHabitViewCoordinator
     @FocusState private var isFocused: Bool
+    
+    init(addHabitViewModel: AddHabitViewModel) {
+        _addHabitViewModel = StateObject(wrappedValue: addHabitViewModel)
+    }
 
     var body: some View {
         VStack {
@@ -28,14 +32,16 @@ struct AddHabitView: View {
     }
     
     private var saveButton: some View {
-        Button(LocalizedStrings.Shared.saveButton) {
+        Button {
             addHabitViewModel.save()
             NotificationCenter.default.post(name: AppNotification.Habit.added, object: nil)
             coordinator.goBack()
+        } label: {
+            Text(LocalizedStrings.Shared.saveButton)
+                .font(.AppFont.rooneySansBold.size(20))
+                .tint(.primary)
         }
-            .font(.AppFont.rooneySansBold.size(20))
-            .tint(.primary)
-            .disabled(addHabitViewModel.isSaveButtonEnabled.not)
+        .disabled(addHabitViewModel.isSaveButtonEnabled.not)
     }
     
     private var topViews: some View {
@@ -49,12 +55,13 @@ struct AddHabitView: View {
     }
     
     private var addHabitTextField: some View {
-        TextField(LocalizedStrings.AddHabitPage.habitPlaceholder, text: $addHabitViewModel.habitTitle)
+        TextField(LocalizedStrings.Shared.habitPlaceholder, text: $addHabitViewModel.habitTitle)
+            .font(.AppFont.rooneySansRegular.size(16))
             .padding()
             .background(Color(.systemGray6))
             .cornerRadius(12)
             .padding(.horizontal, 16)
-            .padding(.top, 32)
+            .padding(.top, 16)
             .focused($isFocused)
             .submitLabel(.done)
     }

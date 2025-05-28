@@ -39,7 +39,7 @@ final class MainCoordinator: BaseCoordinator {
 
     func start() {
         let loginStorage = UserDefaultsStorage<UserDefaultKeys, Bool>(key: .isLogin)
-        let initialRoute: AppRoute = loginStorage.fetch() == true ? .intro(.welcome) : .intro(.intro)
+        let initialRoute: AppRoute = loginStorage.fetch() == true ? .intro(.welcome) : .intro(.setLanguage)
         path = [NavigationItem(route: initialRoute, style: .push)]
     }
 

@@ -68,30 +68,33 @@ struct IntroView: View {
     }
     
     private var skipButton: some View {
-        Button(LocalizedStrings.IntroPage.skipButton) {
+        Button(action: {
             coordinator.goToSetName()
+        }) {
+            Text(LocalizedStrings.IntroPage.skipButton)
+                .font(.AppFont.rooneySansRegular.size(16))
+                .tint(.appPrimary)
         }
-        .font(.AppFont.rooneySansRegular.size(16))
-        .tint(.accent)
         .padding(.horizontal, 8)
-        
     }
     
     private var nextButton: some View {
-        Button(LocalizedStrings.IntroPage.nextButton) {
+        Button {
             introViewModel.currentState == .first ? introViewModel.nextState() : coordinator.goToSetName(presentationStyle: .fullScreenCover)
+        } label: {
+          Text(LocalizedStrings.IntroPage.nextButton)
+                .font(.AppFont.rooneySansRegular.size(18))
+                .foregroundColor(.white)
         }
-        .font(.AppFont.rooneySansRegular.size(18))
-        .foregroundColor(.white)
         .padding(8)
         .padding(.horizontal, 8)
-        .background(Capsule().fill(.accent))
+        .background(Capsule().fill(.appPrimary))
     }
     
     private var pageControl: some View {
         HStack(spacing: 10) {
             Capsule()
-                .fill(.accent)
+                .fill(.appPrimary)
                 .frame(width: introViewModel.currentState == .second ? 70 : 40, height: 10)
                 .animation(.easeInOut(duration: 0.3), value: introViewModel.currentState)
             
