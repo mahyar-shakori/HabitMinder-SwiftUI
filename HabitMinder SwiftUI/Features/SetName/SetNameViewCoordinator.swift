@@ -9,7 +9,10 @@ import Foundation
 
 final class SetNameViewCoordinator: ObservableObject {
     let navigate: (AppRoute, PresentationStyle) -> Void
-    init(navigate: @escaping (AppRoute, PresentationStyle) -> Void) { self.navigate = navigate }
+    
+    init(navigate: @escaping (AppRoute, PresentationStyle) -> Void) {
+        self.navigate = navigate
+    }
 
     func goToWelcome(presentationStyle: PresentationStyle = .push) {
         navigate(.intro(.welcome), presentationStyle)

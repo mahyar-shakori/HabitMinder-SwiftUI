@@ -23,3 +23,7 @@ struct ProgressCircleView: View {
         .frame(width: 35, height: 35)
     }
 }
+
+#Preview {
+    ProgressCircleView(progress: 0.2)
+}

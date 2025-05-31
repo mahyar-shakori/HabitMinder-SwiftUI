@@ -9,7 +9,10 @@ import Foundation
 
 final class SetLanguageViewCoordinator: ObservableObject {
     let navigate: (AppRoute, PresentationStyle) -> Void
-    init(navigate: @escaping (AppRoute, PresentationStyle) -> Void) { self.navigate = navigate }
+    
+    init(navigate: @escaping (AppRoute, PresentationStyle) -> Void) {
+        self.navigate = navigate
+    }
 
     func goToIntro(presentationStyle: PresentationStyle = .push) {
         navigate(.intro(.intro), presentationStyle)

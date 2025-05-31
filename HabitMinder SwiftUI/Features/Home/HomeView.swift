@@ -70,6 +70,7 @@ struct HomeView: View {
             
             Spacer()
         }
+        .background(.appGray)
     }
     
     private var titleText: some View {
@@ -79,18 +80,18 @@ struct HomeView: View {
     }
     
     private var dropDownButton: some View {
-        Button(action: {
+        Button {
             homeViewModel.startDropDownPresenting()
-        }) {
+        } label: {
             Image(.dropDownButton)
                 .tint(.primary)
         }
     }
     
     private var doneButton: some View {
-        Button(action: {
+        Button {
             homeViewModel.stopEditingList()
-        }) {
+        } label: {
             Text(LocalizedStrings.HomePage.doneButton)
                 .font(.AppFont.rooneySansBold.size(20))
                 .tint(.primary)
@@ -166,6 +167,7 @@ struct HomeView: View {
                     }
             }
             .onMove(perform: homeViewModel.moveItem)
+            .listRowBackground(Color.clear)
         }
         .listStyle(.plain)
         .environment(\.editMode, .constant(homeViewModel.uiState.isEditingList ? .active : .inactive))
@@ -213,10 +215,12 @@ struct HomeView: View {
             if homeViewModel.uiState.listItems.isNotEmpty {
                 homeViewModel.handleEditHabitList()
             }
-        case .rename:
+        case .setting:
+            coordinator.goToSetting()
+        case .logout:
             let loginStorage = UserDefaultsStorage<UserDefaultKeys, Bool>(key: UserDefaultKeys.isLogin)
             loginStorage.save(value: false)
-            coordinator.goToSetName()
+            coordinator.goToSetLanguage()
         }
         homeViewModel.setNavigationTargetEmpty()
     }

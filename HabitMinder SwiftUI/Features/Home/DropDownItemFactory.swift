@@ -17,7 +17,7 @@ enum DropDownItemFactory {
                 isEnabled: true
             ),
             DropDownItem(
-                title: LocalizedStrings.Cell.DropDown.futureHabitShowHide,
+                title: LocalizedStrings.Cell.DropDown.futureHabit,
                 imageName: .futureHabit,
                 target: .futureHabit,
                 isEnabled: true
@@ -29,9 +29,15 @@ enum DropDownItemFactory {
                 isEnabled: uiState.listItems.isNotEmpty
             ),
             DropDownItem(
-                title: LocalizedStrings.Cell.DropDown.rename,
+                title: LocalizedStrings.Cell.DropDown.setting,
+                imageName: .editHabitList,
+                target: .setting,
+                isEnabled: true
+            ),
+            DropDownItem(
+                title: LocalizedStrings.Cell.DropDown.logout,
                 imageName: .rename,
-                target: .rename,
+                target: .logout,
                 isEnabled: true
             )
         ]

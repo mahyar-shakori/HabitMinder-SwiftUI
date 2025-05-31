@@ -13,9 +13,7 @@ struct IntroRouter {
         switch route {
         case .setLanguage:
             let viewCoordinator = SetLanguageViewCoordinator(navigate: coordinator.navigate)
-            SetLanguageView()
-                .environmentObject(viewCoordinator)
-                .environmentObject(LanguageManager.shared)
+            SetLanguageView().environmentObject(viewCoordinator)
         case .intro:
             let viewCoordinator = IntroViewCoordinator(navigate: coordinator.navigate)
             IntroView(introViewModel: IntroViewModel()).environmentObject(viewCoordinator)

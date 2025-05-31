@@ -23,4 +23,5 @@ enum HomeRoute: Hashable {
     case home(quote: String)
     case addHabit
     case futureHabit
+    case settingPage
 }

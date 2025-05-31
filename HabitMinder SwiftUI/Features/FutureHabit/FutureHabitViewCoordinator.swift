@@ -1,13 +1,13 @@
 //
-//  AddHabitViewCoordinator.swift
+//  FutureHabitViewCoordinator.swift
 //  HabitMinder SwiftUI
 //
-//  Created by Mahyar on 26/05/2025.
+//  Created by Mahyar on 31/05/2025.
 //
 
 import Foundation
 
-final class AddHabitViewCoordinator: ObservableObject {
+final class FutureHabitViewCoordinator: ObservableObject {
     let dismiss: () -> Void
     
     init(dismiss: @escaping () -> Void) {
@@ -15,5 +15,6 @@ final class AddHabitViewCoordinator: ObservableObject {
     }
     
     func goBack() {
-        dismiss() }
+        dismiss()
+    }
 }

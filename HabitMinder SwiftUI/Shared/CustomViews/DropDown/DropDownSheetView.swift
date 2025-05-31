@@ -29,3 +29,23 @@ struct DropDownSheetView: View {
         }
     }
 }
+
+#Preview {
+    DropDownSheetView(
+        items: [
+            DropDownItem(
+                title: "Add Habit",
+                imageName: .addNewHabit,
+                target: .addHabit,
+                isEnabled: true
+            ),
+            DropDownItem(
+                title: "Future Habit",
+                imageName: .futureHabit,
+                target: .futureHabit,
+                isEnabled: false
+            )
+        ],
+        onSelect: { _ in }
+    )
+}

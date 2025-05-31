@@ -29,6 +29,7 @@ struct SetNameView: View {
             
             continueButton
         }
+        .background(.appGray)
         .dismissKeyboard(focus: $isFocused)
         .navigationBarBackButtonHidden(true)
     }
@@ -74,11 +75,11 @@ struct SetNameView: View {
     }
     
     private var continueButton: some View {
-        Button(action: {
+        Button {
             setNameViewModel.validateAndContinue {
                 coordinator.goToWelcome()
             }
-        }) {
+        } label: {
             Text(LocalizedStrings.SetNamePage.continueButton)
                 .font(.AppFont.rooneySansBold.size(20))
                 .foregroundColor(.white)

@@ -40,3 +40,15 @@ struct DropDownRowView: View {
             .foregroundColor(isEnabled ? .primary : .gray)
     }
 }
+
+#Preview {
+    DropDownRowView(
+        item: DropDownItem(
+            title: "Add Habit",
+            imageName: .addNewHabit,
+            target: .addHabit,
+            isEnabled: true
+        ),
+        isEnabled: true
+    )
+}

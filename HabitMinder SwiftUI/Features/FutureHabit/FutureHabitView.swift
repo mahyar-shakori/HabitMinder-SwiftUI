@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FutureHabitView: View {
     @StateObject private var futureHabitViewModel: FutureHabitViewModel
+    @EnvironmentObject private var coordinator: FutureHabitViewCoordinator
     @FocusState private var isFocused: Bool
     @State private var showDeleteAlert = false
     
@@ -19,6 +20,19 @@ struct FutureHabitView: View {
     var body: some View {
         content
             .dismissKeyboard(focus: $isFocused)
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        coordinator.goBack()
+                    } label: {
+                        HStack {
+                            Image(systemName:                         AppIconName.chevronLeft)
+                            Text(LocalizedStrings.Shared.backButton)
+                        }
+                    }
+                }
+            }
             .onAppear {
                 futureHabitViewModel.fetchHabits()
             }
@@ -46,10 +60,12 @@ struct FutureHabitView: View {
             
             Spacer()
         }
+        .background(.appGray)
+        .dismissKeyboard(focus: $isFocused)
     }
     
     private var titleText: some View {
-        Text(LocalizedStrings.AddHabitPage.title)
+        Text(LocalizedStrings.FutureHabitsPage.title)
             .font(.AppFont.rooneySansBold.size(28))
     }
     
@@ -82,6 +98,7 @@ struct FutureHabitView: View {
                         deleteSwipeButton(for: item.id)
                     }
             }
+            .listRowBackground(Color.clear)
         }
         .listStyle(.plain)
     }
@@ -90,7 +107,7 @@ struct FutureHabitView: View {
         TextField(LocalizedStrings.Shared.habitPlaceholder, text: $futureHabitViewModel.habitTitle)
             .font(.AppFont.rooneySansRegular.size(16))
             .padding()
-            .background(Color(.systemGray6))
+            .background(.appWhite)
             .cornerRadius(12)
             .padding(.horizontal, 16)
             .padding(.top, 16)

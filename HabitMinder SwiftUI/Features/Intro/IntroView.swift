@@ -27,6 +27,7 @@ struct IntroView: View {
             
             bottomControls
         }
+        .background(.appGray)
         .navigationBarBackButtonHidden(true)
     }
     
@@ -68,9 +69,9 @@ struct IntroView: View {
     }
     
     private var skipButton: some View {
-        Button(action: {
+        Button {
             coordinator.goToSetName()
-        }) {
+        } label: {
             Text(LocalizedStrings.IntroPage.skipButton)
                 .font(.AppFont.rooneySansRegular.size(16))
                 .tint(.appPrimary)
@@ -80,7 +81,7 @@ struct IntroView: View {
     
     private var nextButton: some View {
         Button {
-            introViewModel.currentState == .first ? introViewModel.nextState() : coordinator.goToSetName(presentationStyle: .fullScreenCover)
+            introViewModel.currentState == .first ? introViewModel.nextState() : coordinator.goToSetName()
         } label: {
           Text(LocalizedStrings.IntroPage.nextButton)
                 .font(.AppFont.rooneySansRegular.size(18))

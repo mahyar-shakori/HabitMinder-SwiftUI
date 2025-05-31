@@ -9,7 +9,10 @@ import Foundation
 
 final class HomeViewCoordinator: ObservableObject {
     let navigate: (AppRoute, PresentationStyle) -> Void
-    init(navigate: @escaping (AppRoute, PresentationStyle) -> Void) { self.navigate = navigate }
+    
+    init(navigate: @escaping (AppRoute, PresentationStyle) -> Void) {
+        self.navigate = navigate
+    }
 
     func goToAddHabit(presentationStyle: PresentationStyle = .push) {
         navigate(.home(.addHabit), presentationStyle)
@@ -19,7 +22,11 @@ final class HomeViewCoordinator: ObservableObject {
         navigate(.home(.futureHabit), presentationStyle)
     }
     
-    func goToSetName(presentationStyle: PresentationStyle = .push) {
-        navigate(.intro(.setName), presentationStyle)
+    func goToSetting(presentationStyle: PresentationStyle = .push) {
+        navigate(.home(.settingPage), presentationStyle)
+    }
+    
+    func goToSetLanguage(presentationStyle: PresentationStyle = .push) {
+        navigate(.intro(.setLanguage), presentationStyle)
     }
 }

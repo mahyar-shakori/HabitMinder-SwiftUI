@@ -33,14 +33,19 @@ struct WelcomeView: View {
     }
     
     private var content: some View {
-        VStack {
-            Spacer()
+        ZStack {
+            Color.appGray
+                .ignoresSafeArea()
             
-            welcomeImage
-            welcomeText
-            progressView
-            
-            Spacer()
+            VStack {
+                Spacer()
+                
+                welcomeImage
+                welcomeText
+                progressView
+                
+                Spacer()
+            }
         }
     }
     
@@ -74,10 +79,8 @@ struct WelcomeView: View {
 }
 
 #Preview {
-    let mockNavigate: (AppRoute, PresentationStyle) -> Void = { route, style in
-        print("Preview navigation to \(route) with style \(style)")
-    }
-    
+    let mockNavigate: (AppRoute, PresentationStyle) -> Void = { _, _ in }
+
     return WelcomeView(welcomeViewModel: WelcomeViewModel())
         .environmentObject(WelcomeViewCoordinator(navigate: mockNavigate))
 }

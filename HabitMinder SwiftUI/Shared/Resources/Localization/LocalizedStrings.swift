@@ -50,6 +50,19 @@ struct LocalizedStrings {
         static var title: String { "addHabitTitle".localized }
     }
     
+    struct SettingPage {
+        static var title: String { "settingTitle".localized }
+        static var userName: String { "userName".localized }
+        static var Language: String { "Language".localized }
+        static var appColor: String { "appColor".localized }
+        static var setColor: String { "setColor".localized }
+        static var selectLanguage: String { "selectLanguage".localized }
+        static var chooseColor: String { "chooseColor".localized }
+        static var pickColor: String { "pickColor".localized }
+        static var editUserName: String { "editUserName".localized }
+        static var enterNewUserName: String { "enterNewUserName".localized }
+    }
+   
     struct Shared {
         static var habitPlaceholder: String { "habitPlaceholder".localized }
         static var saveButton: String { "saveButton".localized }
@@ -57,6 +70,7 @@ struct LocalizedStrings {
         static var okButton: String { "okButton".localized }
         static var yesButton: String { "yesButton".localized }
         static var noButton: String { "noButton".localized }
+        static var backButton: String { "backButton".localized }
     }
     
     struct Alert {
@@ -76,11 +90,12 @@ struct LocalizedStrings {
     struct Cell {
         struct DropDown {
             static var addNewHabit: String { "dropDownAddNewHabit".localized }
-            static var futureHabitShowHide: String { "dropDownFutureHabitShow-Hide".localized }
+            static var futureHabit: String { "dropDownFutureHabit".localized }
             static var editHabitList: String { "dropDownEditHabitList".localized }
-            static var rename: String { "dropDownRename".localized }
+            static var setting: String { "dropDownSetting".localized }
+            static var logout: String { "dropDownLogout".localized }
         }
-        
+    
         struct Habit {
             static var daysLeft: String { "HabitCellDaysLeft".localized }
         }

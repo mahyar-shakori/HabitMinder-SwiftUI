@@ -23,7 +23,17 @@ struct HabitListRowView: View {
                 .font(.AppFont.rooneySansRegular.size(14))
         }
         .padding(20)
-        .background(Color(.systemGray6))
+        .background(.appWhite)
         .cornerRadius(20)
     }
+}
+
+#Preview {
+    let id = UUID()
+    HabitListRowView(item: HabitItem(
+        id: id,
+        title: "Drink Water",
+        daysLeft: 5,
+        progress: 0.7
+    ))
 }

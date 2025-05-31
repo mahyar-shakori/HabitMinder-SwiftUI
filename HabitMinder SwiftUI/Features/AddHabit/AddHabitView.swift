@@ -17,13 +17,31 @@ struct AddHabitView: View {
     }
 
     var body: some View {
+        contet
+            .background(.appGray)
+            .dismissKeyboard(focus: $isFocused)
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        coordinator.goBack()
+                    } label: {
+                        HStack {
+                            Image(systemName:                         AppIconName.chevronLeft)
+                            Text(LocalizedStrings.Shared.backButton)
+                        }
+                    }
+                }
+            }
+    }
+    
+    private var contet: some View {
         VStack {
             topViews
             addHabitTextField
         
             Spacer()
         }
-        .dismissKeyboard(focus: $isFocused)
     }
 
     private var titleText: some View {
@@ -37,9 +55,9 @@ struct AddHabitView: View {
             NotificationCenter.default.post(name: AppNotification.Habit.added, object: nil)
             coordinator.goBack()
         } label: {
-            Text(LocalizedStrings.Shared.saveButton)
-                .font(.AppFont.rooneySansBold.size(20))
-                .tint(.primary)
+                Text(LocalizedStrings.Shared.saveButton)
+                    .font(.AppFont.rooneySansBold.size(20))
+                    .tint(.primary)
         }
         .disabled(addHabitViewModel.isSaveButtonEnabled.not)
     }
@@ -58,7 +76,7 @@ struct AddHabitView: View {
         TextField(LocalizedStrings.Shared.habitPlaceholder, text: $addHabitViewModel.habitTitle)
             .font(.AppFont.rooneySansRegular.size(16))
             .padding()
-            .background(Color(.systemGray6))
+            .background(.appWhite)
             .cornerRadius(12)
             .padding(.horizontal, 16)
             .padding(.top, 16)

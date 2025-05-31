@@ -9,7 +9,7 @@ import Foundation
 
 enum DropDownIcon: String {
     case addNewHabit = "AddNewHabit"
-    case futureHabit = "FutureHabitShow-Hide"
+    case futureHabit = "FutureHabit"
     case editHabitList = "EditHabitList"
     case rename = "Rename"
 }

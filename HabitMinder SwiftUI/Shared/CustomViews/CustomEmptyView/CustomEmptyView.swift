@@ -26,3 +26,9 @@ struct CustomEmptyView: View {
         .padding()
     }
 }
+
+#Preview {
+    CustomEmptyView(
+        image: Image(.emptyView),
+        text: "Test")
+}

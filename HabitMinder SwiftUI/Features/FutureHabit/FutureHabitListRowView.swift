@@ -23,3 +23,14 @@ struct FutureHabitListRowView: View {
         .padding(8)
     }
 }
+
+#Preview {
+    let id = UUID()
+    let date = Date()
+    FutureHabitListRowView(item: FutureHabitItem(
+        id: id,
+        title: "Drink Water",
+        dateCreate: date,
+    ))
+}
+

@@ -29,11 +29,18 @@ struct HomeRouter {
                 )
             ).environmentObject(viewCoordinator)
         case .futureHabit:
+            let viewCoordinator = FutureHabitViewCoordinator(dismiss: coordinator.pop)
             FutureHabitView(
                 futureHabitViewModel: FutureHabitViewModel(
                     habitManager: DataManager<FutureHabitModel>(context: modelContext)
                 )
-            )
+            ).environmentObject(viewCoordinator)
+        case .settingPage:
+            let viewCoordinator = SettingViewCoordinator(dismiss: coordinator.pop)
+            SettingView(settingViewModel: SettingViewModel())
+                .environmentObject(LanguageManager.shared)
+                .environmentObject(ThemeManager.shared)
+                .environmentObject(viewCoordinator)
         }
     }
 }

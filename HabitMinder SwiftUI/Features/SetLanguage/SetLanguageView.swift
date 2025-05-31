@@ -8,15 +8,26 @@
 import SwiftUI
 
 struct SetLanguageView: View {
-    @EnvironmentObject var languageManager: LanguageManager
-    @EnvironmentObject var coordinator: SetLanguageViewCoordinator
+    @StateObject private var viewModel: SetLanguageViewModel
+    @EnvironmentObject private var coordinator: SetLanguageViewCoordinator
+    
+    init(viewModel: SetLanguageViewModel = SetLanguageViewModel(
+        languageManager: LanguageManager.shared,
+    )) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
     
     var body: some View {
         VStack(spacing: 24) {
+            Spacer()
+            
             titleText
             selectedLanguageButton
+            
+            Spacer()
         }
         .padding()
+        .background(.appGray)
         .navigationBarBackButtonHidden()
     }
     
@@ -27,18 +38,16 @@ struct SetLanguageView: View {
     
     private var selectedLanguageButton: some View {
         ForEach(AppLanguage.allCases) { language in
-            Button(action: {
-                languageManager.selectedLanguage = language
+            Button {
+                viewModel.selectLanguage(language)
                 coordinator.goToIntro()
-            }) {
+            } label: {
                 Text(language.displayName)
                     .font(.AppFont.rooneySansBold.size(16))
                     .tint(.white)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(
-                        Capsule()
-                            .fill(.appPrimary))
+                    .background(Capsule().fill(.appPrimary))
                     .padding(.horizontal, 32)
             }
         }

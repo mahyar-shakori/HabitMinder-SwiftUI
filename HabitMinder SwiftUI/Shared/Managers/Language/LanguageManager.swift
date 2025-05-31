@@ -13,7 +13,7 @@ final class LanguageManager: ObservableObject {
 
     @Published var selectedLanguage: AppLanguage {
         didSet {
-            languageStorage.save(value: selectedLanguage.rawValue)
+            languageStorage.save(value: selectedLanguage.displayName)
         }
     }
 
