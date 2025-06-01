@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct ProgressCircleView: View {
+    @EnvironmentObject var themeManager: ThemeManager
+    
     let progress: Double
     
     var body: some View {
         ZStack {
             Circle()
-                .stroke(.appSecondary, lineWidth: 7)
+                .stroke(themeManager.appSecondary, lineWidth: 7)
             
             Circle()
                 .trim(from: 0, to: progress)
-                .stroke(.appPrimary, style: StrokeStyle(lineWidth: 7, lineCap: .round))
+                .stroke(themeManager.appPrimary, style: StrokeStyle(lineWidth: 7, lineCap: .round))
                 .rotationEffect(.degrees(-90))
         }
         .frame(width: 35, height: 35)

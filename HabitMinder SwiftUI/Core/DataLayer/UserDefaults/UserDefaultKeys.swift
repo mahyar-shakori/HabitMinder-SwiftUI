@@ -11,4 +11,5 @@ enum UserDefaultKeys: String, StorageKeyProtocol {
     case language = "userDefaultsStorage_Language"
     case userName = "userDefaultsStorage_UserName"
     case isLogin = "userDefaultsStorage_IsLogin"
+    case appPrimaryColor = "userDefaultsStorage_AppPrimaryColor"
 }

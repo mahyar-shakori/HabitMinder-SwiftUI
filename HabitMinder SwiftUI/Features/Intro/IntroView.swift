@@ -74,7 +74,7 @@ struct IntroView: View {
         } label: {
             Text(LocalizedStrings.IntroPage.skipButton)
                 .font(.AppFont.rooneySansRegular.size(16))
-                .tint(.appPrimary)
+                .tint(ThemeManager.shared.appPrimary)
         }
         .padding(.horizontal, 8)
     }
@@ -89,19 +89,21 @@ struct IntroView: View {
         }
         .padding(8)
         .padding(.horizontal, 8)
-        .background(Capsule().fill(.appPrimary))
+        .background(
+            Capsule().fill(ThemeManager.shared.appPrimary)
+        )
     }
     
     private var pageControl: some View {
         HStack(spacing: 10) {
             Capsule()
-                .fill(.appPrimary)
+                .fill(ThemeManager.shared.appPrimary)
                 .frame(width: introViewModel.currentState == .second ? 70 : 40, height: 10)
                 .animation(.easeInOut(duration: 0.3), value: introViewModel.currentState)
             
             if introViewModel.currentState == .first {
                 Capsule()
-                    .fill(.appSecondary)
+                    .fill(ThemeManager.shared.appSecondary)
                     .frame(width: 20, height: 10)
                     .transition(.opacity)
             }

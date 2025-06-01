@@ -47,7 +47,9 @@ struct SetLanguageView: View {
                     .tint(.white)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Capsule().fill(.appPrimary))
+                    .background(
+                        Capsule().fill(ThemeManager.shared.appPrimary)
+                    )
                     .padding(.horizontal, 32)
             }
         }

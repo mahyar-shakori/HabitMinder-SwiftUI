@@ -9,6 +9,10 @@ import SwiftUI
 
 final class ThemeManager: ObservableObject {
     @Published var appPrimary: Color = .appPrimary
+    
+    var appSecondary: Color {
+        appPrimary.opacity(0.4)
+    }
 
     static let shared = ThemeManager()
 

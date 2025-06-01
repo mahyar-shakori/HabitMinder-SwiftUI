@@ -73,7 +73,7 @@ struct WelcomeView: View {
     private var progressView: some View {
         ProgressView()
             .scaleEffect(1.5)
-            .tint(.secondary)
+            .tint(ThemeManager.shared.appPrimary)
             .padding(.top, 32)
     }
 }

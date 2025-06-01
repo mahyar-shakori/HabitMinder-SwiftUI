@@ -87,7 +87,7 @@ struct SetNameView: View {
         .frame(maxWidth: .infinity)
         .padding(16)
         .background(
-            Capsule().fill(setNameViewModel.uiState.isValid ? Color.appPrimary : Color.secondary)
+            Capsule().fill(setNameViewModel.uiState.isValid ? ThemeManager.shared.appPrimary : ThemeManager.shared.appSecondary)
         )
         .padding(.horizontal, 32)
         .padding(.bottom, 32)
@@ -96,7 +96,7 @@ struct SetNameView: View {
 
 private extension SetNameView {
     var borderColor: Color {
-        setNameViewModel.uiState.borderState == .error ? .red : .appPrimary
+        setNameViewModel.uiState.borderState == .error ? .red : ThemeManager.shared.appPrimary
     }
     
     var borderWidth: CGFloat {
