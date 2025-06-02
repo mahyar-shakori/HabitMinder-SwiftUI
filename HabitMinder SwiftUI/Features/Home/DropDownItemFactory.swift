@@ -30,13 +30,13 @@ enum DropDownItemFactory {
             ),
             DropDownItem(
                 title: LocalizedStrings.Cell.DropDown.setting,
-                imageName: .editHabitList,
+                imageName: .setting,
                 target: .setting,
                 isEnabled: true
             ),
             DropDownItem(
                 title: LocalizedStrings.Cell.DropDown.logout,
-                imageName: .rename,
+                imageName: .logout,
                 target: .logout,
                 isEnabled: true
             )

@@ -12,15 +12,17 @@ final class HomeViewModel: ObservableObject {
     @Published var isDropDownPresented = false
 
     private let habitManager: DataManager<HabitModel>
+    private let futureHabitManager: DataManager<FutureHabitModel>
     let quote: String
    
     var dropDownItems: [DropDownItem] {
             DropDownItemFactory.makeItems(for: uiState)
         }
     
-    init(quote: String, habitManager: DataManager<HabitModel>) {
+    init(quote: String, habitManager: DataManager<HabitModel>, futureHabitManager: DataManager<FutureHabitModel>) {
         self.quote = quote
         self.habitManager = habitManager
+        self.futureHabitManager = futureHabitManager
         fetchHabits()
     }
    
@@ -98,6 +100,14 @@ final class HomeViewModel: ObservableObject {
         uiState.itemToEdit = nil
     }
     
+    func performLogout() {
+        let loginStorage = UserDefaultsStorage<UserDefaultKeys, Bool>(key: .isLogin)
+        loginStorage.save(value: false)
+        
+        habitManager.deleteAll()
+        futureHabitManager.deleteAll()
+    }
+   
     func stopEditingList() {
         uiState.isEditingList = false
     }

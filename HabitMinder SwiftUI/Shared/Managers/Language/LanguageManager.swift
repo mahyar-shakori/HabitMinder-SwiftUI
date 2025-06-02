@@ -9,7 +9,7 @@ import Foundation
 
 final class LanguageManager: ObservableObject {
     static let shared = LanguageManager()
-    let languageStorage = UserDefaultsStorage<UserDefaultKeys, String>(key: UserDefaultKeys.language)
+    let languageStorage = UserDefaultsStorage<UserDefaultKeys, String>(key: .language)
 
     @Published var selectedLanguage: AppLanguage {
         didSet {

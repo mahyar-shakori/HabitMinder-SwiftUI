@@ -44,7 +44,9 @@
 "noButton" = "Nee";
 "backButton" = "Terug";
 "networkAlertTitle" = "Netwerkfout";
-"defaultError" = "Onbekende fout opgetreden.";
+"networkAlertDefaultError" = "Onbekende fout opgetreden.";
+"logoutAlertTitle" = "Uitloggen";
+"logoutAlertMessage" = "Weet je zeker dat je wilt uitloggen? Al je gegevens worden permanent verwijderd.";
 "deleteHabitAlertTitle" = "Gewoonte verwijderen";
 "deleteHabitAlertMessage" = "Weet je zeker dat je deze gewoonte wilt verwijderen?";
 "editHabitAlertTitle" = "Gewoonte bewerken";

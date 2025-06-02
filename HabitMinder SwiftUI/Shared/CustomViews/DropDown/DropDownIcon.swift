@@ -11,5 +11,6 @@ enum DropDownIcon: String {
     case addNewHabit = "AddNewHabit"
     case futureHabit = "FutureHabit"
     case editHabitList = "EditHabitList"
-    case rename = "Rename"
+    case setting = "Setting"
+    case logout = "Logout"
 }

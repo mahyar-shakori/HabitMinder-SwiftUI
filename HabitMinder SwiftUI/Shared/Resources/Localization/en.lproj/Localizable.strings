@@ -44,7 +44,9 @@
 "noButton" = "No";
 "backButton" = "Back";
 "networkAlertTitle" = "Network Error";
-"defaultError" = "Unknown error occurred.";
+"networkAlertDefaultError" = "Unknown error occurred.";
+"logoutAlertTitle" = "Log Out";
+"logoutAlertMessage" = "Are you sure you want to log out? All your data will be permanently deleted.";
 "deleteHabitAlertTitle" = "Delete Habit";
 "deleteHabitAlertMessage" = "Are you sure you want to delete this habit?";
 "editHabitAlertTitle" = "Edit Habit";
@@ -53,5 +55,5 @@
 "dropDownFutureHabit" = "Future Habit";
 "dropDownEditHabitList" = "Edit Habit List";
 "dropDownSetting" = "Settings";
-"dropDownLogout" = "Logout";
+"dropDownLogout" = "Log Out";
 "HabitCellDaysLeft" = " days left";

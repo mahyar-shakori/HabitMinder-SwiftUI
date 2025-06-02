@@ -28,7 +28,7 @@ struct WelcomeView: View {
                     coordinator.goToHome(quote: "")
                 }
             } message: {
-                Text(welcomeViewModel.uiState.errorMessage ?? LocalizedStrings.Alert.Network.defaultError)
+                Text(welcomeViewModel.uiState.errorMessage ?? LocalizedStrings.Alert.Network.networkAlertDefaultError)
             }
     }
     

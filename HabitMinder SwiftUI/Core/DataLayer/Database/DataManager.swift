@@ -58,6 +58,17 @@ final class DataManager<T: PersistentModel & IdentifiableModel> {
             AppLogger.data.error("Failed to delete \(String(describing: T.self)): \(error.localizedDescription)")
         }
     }
+    
+    func deleteAll() {
+        do {
+            let descriptor = FetchDescriptor<T>()
+            let allItems = try context.fetch(descriptor)
+            allItems.forEach { context.delete($0) }
+            try context.save()
+        } catch {
+            AppLogger.data.error("Failed to delete all \(String(describing: T.self)) records: \(error.localizedDescription)")
+        }
+    }
 
     func update(_ updateBlock: (T) -> Void, forID id: UUID) {
         do {

@@ -12,6 +12,7 @@ struct HomeView: View {
     @EnvironmentObject private var coordinator: HomeViewCoordinator
     @State private var showDeleteAlert = false
     @State private var showEditAlert = false
+    @State private var showLogoutAlert = false
     
     init(homeViewModel: HomeViewModel) {
         _homeViewModel = StateObject(wrappedValue: homeViewModel)
@@ -40,7 +41,7 @@ struct HomeView: View {
             }
             .alert(LocalizedStrings.Alert.Habit.deleteTitle,
                    isPresented: $showDeleteAlert) {
-                Button(LocalizedStrings.Shared.okButton, role: .destructive) {
+                Button(LocalizedStrings.Shared.yesButton, role: .destructive) {
                     homeViewModel.performDelete()
                 }
                 Button(LocalizedStrings.Shared.cancelButton, role: .cancel) {
@@ -51,7 +52,7 @@ struct HomeView: View {
             }
             .alert(LocalizedStrings.Alert.Habit.editTitle,
                    isPresented: $showEditAlert) {
-                Button(LocalizedStrings.Shared.okButton, role: .destructive) {
+                Button(LocalizedStrings.Shared.yesButton, role: .destructive) {
                     homeViewModel.performEdit()
                 }
                 Button(LocalizedStrings.Shared.cancelButton, role: .cancel) {
@@ -59,6 +60,17 @@ struct HomeView: View {
                 }
             } message: {
                 Text(LocalizedStrings.Alert.Habit.editMessage)
+            }
+            .alert(LocalizedStrings.Alert.Logout.title,
+                   isPresented: $showLogoutAlert) {
+                Button(LocalizedStrings.Shared.yesButton, role: .destructive) {
+                    homeViewModel.performLogout()
+                    coordinator.goToSetLanguage()
+                }
+                Button(LocalizedStrings.Shared.cancelButton, role: .cancel) {
+                }
+            } message: {
+                Text(LocalizedStrings.Alert.Logout.message)
             }
     }
     
@@ -218,9 +230,7 @@ struct HomeView: View {
         case .setting:
             coordinator.goToSetting()
         case .logout:
-            let loginStorage = UserDefaultsStorage<UserDefaultKeys, Bool>(key: UserDefaultKeys.isLogin)
-            loginStorage.save(value: false)
-            coordinator.goToSetLanguage()
+            showLogoutAlert = true
         }
         homeViewModel.setNavigationTargetEmpty()
     }
@@ -233,6 +243,8 @@ struct HomeView: View {
         homeViewModel: HomeViewModel(
             quote: "Test Quote",
             habitManager: DataManager<HabitModel>(
+                context: context
+            ), futureHabitManager: DataManager<FutureHabitModel>(
                 context: context
             )
         )

@@ -76,7 +76,7 @@ struct LocalizedStrings {
     struct Alert {
         struct Network {
             static var title: String { "networkAlertTitle".localized }
-            static var defaultError: String { "defaultError".localized }
+            static var networkAlertDefaultError: String { "defaultError".localized }
         }
         
         struct Habit {
@@ -84,6 +84,11 @@ struct LocalizedStrings {
             static var deleteMessage: String { "deleteHabitAlertMessage".localized }
             static var editTitle: String { "editHabitAlertTitle".localized }
             static var editMessage: String { "editHabitAlertMessage".localized }
+        }
+        
+        struct Logout {
+            static var title: String { "logoutAlertTitle".localized }
+            static var message: String { "logoutAlertMessage".localized }
         }
     }
 

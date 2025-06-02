@@ -40,8 +40,8 @@ final class SetNameViewModel: ObservableObject {
     }
     
     private func saveUserName() {
-        let userNameStorage = UserDefaultsStorage<UserDefaultKeys, String>(key: UserDefaultKeys.userName)
-        let loginStorage = UserDefaultsStorage<UserDefaultKeys, Bool>(key: UserDefaultKeys.isLogin)
+        let userNameStorage = UserDefaultsStorage<UserDefaultKeys, String>(key: .userName)
+        let loginStorage = UserDefaultsStorage<UserDefaultKeys, Bool>(key: .isLogin)
         userNameStorage.save(value: userName)
         loginStorage.save(value: true)
     }

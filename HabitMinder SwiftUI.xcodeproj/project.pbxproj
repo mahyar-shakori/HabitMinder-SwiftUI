@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E439A532DEDD28900A171B6 /* Color+RGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E439A522DEDD28900A171B6 /* Color+RGBA.swift */; };
 		3E495E552DE71CAB0051188A /* HomeUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E495E542DE71CAA0051188A /* HomeUIState.swift */; };
 		3E495E592DE722280051188A /* DropDownItemFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E495E582DE722270051188A /* DropDownItemFactory.swift */; };
 		3E495E5B2DE729040051188A /* HabitProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E495E5A2DE729040051188A /* HabitProgress.swift */; };
@@ -150,6 +151,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3E439A522DEDD28900A171B6 /* Color+RGBA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+RGBA.swift"; sourceTree = "<group>"; };
 		3E495E542DE71CAA0051188A /* HomeUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUIState.swift; sourceTree = "<group>"; };
 		3E495E582DE722270051188A /* DropDownItemFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownItemFactory.swift; sourceTree = "<group>"; };
 		3E495E5A2DE729040051188A /* HabitProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitProgress.swift; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 				3EEFE3132DAFB20C00F5B0FF /* Font+AppFont.swift */,
 				3EEFE3142DAFB20C00F5B0FF /* View+DismissKeyboard.swift */,
 				3EEFE3152DAFB20C00F5B0FF /* Image+CircularIcon.swift */,
+				3E439A522DEDD28900A171B6 /* Color+RGBA.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -850,6 +853,7 @@
 				3EEFE32A2DAFB20C00F5B0FF /* UserDefaultsStorage.swift in Sources */,
 				3E495E592DE722280051188A /* DropDownItemFactory.swift in Sources */,
 				3E8DF9F32DE4CB700021E1EF /* NavigationItem.swift in Sources */,
+				3E439A532DEDD28900A171B6 /* Color+RGBA.swift in Sources */,
 				3EEFE32B2DAFB20C00F5B0FF /* StorageKeyProtocol.swift in Sources */,
 				3EEFE32C2DAFB20C00F5B0FF /* SetNameView.swift in Sources */,
 				3EEFE32D2DAFB20C00F5B0FF /* HTTPContentType.swift in Sources */,

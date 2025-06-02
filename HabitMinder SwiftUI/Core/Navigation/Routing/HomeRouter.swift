@@ -17,7 +17,7 @@ struct HomeRouter {
             HomeView(
                 homeViewModel: HomeViewModel(
                     quote: quote,
-                    habitManager: DataManager<HabitModel>(context: modelContext)
+                    habitManager: DataManager<HabitModel>(context: modelContext), futureHabitManager: DataManager<FutureHabitModel>(context: modelContext)
                 )
             )
             .environmentObject(viewCoordinator)

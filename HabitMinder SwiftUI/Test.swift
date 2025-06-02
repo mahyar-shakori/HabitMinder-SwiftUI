@@ -4,15 +4,13 @@
 
 
 // MARK: - Future Tasks
-// Notification, Edit Page
+// Notification
 
 // MARK: - Tasks
 // init
 // Chaine app
 // CustomView
-// logout complete
-
-// app run again color
+// Edit Page
 
 
 // MARK: - Questions
