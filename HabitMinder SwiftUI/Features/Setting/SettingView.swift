@@ -21,26 +21,6 @@ struct SettingView: View {
     }
     
     var body: some View {
-        content
-            .onAppear() {
-                settingViewModel.load()
-            }
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        coordinator.goBack()
-                    } label: {
-                        HStack {
-                            Image(systemName:                         AppIconName.chevronLeft)
-                            Text(LocalizedStrings.Shared.backButton)
-                        }
-                    }
-                }
-            }
-    }
- 
-    private var content: some View {
         VStack {
             titleText
             
@@ -52,8 +32,11 @@ struct SettingView: View {
             .scrollIndicators(.hidden)
         }
         .background(.appGray)
+        .onAppear() {
+            settingViewModel.load()
+        }
     }
-    
+ 
     private var titleText: some View {
         Text(LocalizedStrings.SettingPage.title)
             .font(.AppFont.rooneySansBold.size(28))

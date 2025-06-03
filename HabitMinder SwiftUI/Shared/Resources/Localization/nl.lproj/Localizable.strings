@@ -37,6 +37,7 @@
 "selectLanguage" = "Taal selecteren";
 "chooseColor" = "Kies kleur";
 "pickColor" = "Kies een kleur";
+"defaultColor" = "Standaardkleur";
 "editUserName" = "Naam bewerken";
 "enterNewUserName" = "Voer een nieuwe naam in";
 "habitPlaceholder" = "Titel van de gewoonte";

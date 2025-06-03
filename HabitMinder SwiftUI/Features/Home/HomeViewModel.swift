@@ -16,8 +16,8 @@ final class HomeViewModel: ObservableObject {
     let quote: String
    
     var dropDownItems: [DropDownItem] {
-            DropDownItemFactory.makeItems(for: uiState)
-        }
+        DropDownItemFactory.makeItems(for: uiState)
+    }
     
     init(quote: String, habitManager: DataManager<HabitModel>, futureHabitManager: DataManager<FutureHabitModel>) {
         self.quote = quote
@@ -33,12 +33,23 @@ final class HomeViewModel: ObservableObject {
         uiState.navigationTarget = dropDownItems[index].target
         isDropDownPresented = false
     }
-    
+ 
     func fetchHabits() {
-        let habits = habitManager.fetchAll()
+        let habits = habitManager.fetchAll().sorted(by: { $0.sortOrder < $1.sortOrder })
         uiState.listItems = habits.map(mapToHabitItem)
     }
     
+    func moveItem(from source: IndexSet, to destination: Int) {
+        uiState.listItems.move(fromOffsets: source, toOffset: destination)
+        
+        for (index, item) in uiState.listItems.enumerated() {
+            if let habit = habitManager.fetch(byID: item.id) {
+                habit.sortOrder = index
+                habitManager.save(habit)
+            }
+        }
+    }
+  
     private func mapToHabitItem(_ habit: HabitModel) -> HabitItem {
         let progress = calculateHabitProgress(for: habit)
         return HabitItem(id: habit.id, title: habit.title, daysLeft: progress.daysLeft, progress: progress.progress)
@@ -55,11 +66,7 @@ final class HomeViewModel: ObservableObject {
             uiState.isEditingList.toggle()
         }
     }
-    
-    func moveItem(from source: IndexSet, to destination: Int) {
-        uiState.listItems.move(fromOffsets: source, toOffset: destination)
-    }
-    
+
     @MainActor
     func refresh() async {
         try? await Task.sleep(nanoseconds: 1_000_000_000)

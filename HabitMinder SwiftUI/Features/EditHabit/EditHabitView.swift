@@ -18,25 +18,6 @@ struct EditHabitView: View {
     }
     
     var body: some View {
-        content
-            .background(.appGray)
-            .dismissKeyboard(focus: $isFocused)
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        coordinator.goBack()
-                    } label: {
-                        HStack {
-                            Image(systemName: AppIconName.chevronLeft)
-                            Text(LocalizedStrings.Shared.backButton)
-                        }
-                    }
-                }
-            }
-    }
-    
-    private var content: some View {
         VStack {
             topViews
             addHabitTextField
@@ -49,6 +30,9 @@ struct EditHabitView: View {
             
             missHabitButton
         }
+        .background(.appGray)
+        .dismissKeyboard(focus: $isFocused)
+            
     }
     
     private var titleText: some View {

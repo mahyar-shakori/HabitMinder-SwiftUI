@@ -37,6 +37,7 @@
 "selectLanguage" = "Select Language";
 "chooseColor" = "Choose Color";
 "pickColor" = "Pick a color";
+"defaultColor" = "Default Color";
 "editUserName" = "Edit Name";
 "enterNewUserName" = "Enter new name";
 "habitPlaceholder" = "Habit title";

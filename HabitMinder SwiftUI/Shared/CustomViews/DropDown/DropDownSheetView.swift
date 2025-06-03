@@ -7,24 +7,53 @@
 
 import SwiftUI
 
+//struct DropDownSheetView: View {
+//    let items: [DropDownItem]
+//    let onSelect: (Int) -> Void
+//    
+//    var body: some View {
+//        VStack(spacing: 0) {
+//            ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
+//                Button {
+//                    if item.isEnabled {
+//                        onSelect(index)
+//                    }
+//                } label: {
+//                    DropDownRowView(item: item, isEnabled: item.isEnabled)
+//                }
+//                .disabled(item.isEnabled.not)
+//                
+//                Divider()
+//                    .padding(.leading, 16)
+//            }
+//        }
+//    }
+//}
+
 struct DropDownSheetView: View {
     let items: [DropDownItem]
     let onSelect: (Int) -> Void
-    
+
     var body: some View {
         VStack(spacing: 0) {
             ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
+                
                 Button {
                     if item.isEnabled {
                         onSelect(index)
                     }
                 } label: {
-                    DropDownRowView(item: item, isEnabled: item.isEnabled)
+                    VStack(spacing: 0) {
+                        DropDownRowView(item: item, isEnabled: item.isEnabled)
+
+                        if index < items.count - 1 {
+                            Divider()
+                                .padding(.leading, 16)
+                        }
+                    }
+                    .contentShape(Rectangle())
                 }
-                .disabled(item.isEnabled.not)
-                
-                Divider()
-                    .padding(.leading, 16)
+                .disabled(!item.isEnabled)
             }
         }
     }

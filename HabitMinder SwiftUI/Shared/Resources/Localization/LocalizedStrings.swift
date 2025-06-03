@@ -65,6 +65,7 @@ struct LocalizedStrings {
         static var selectLanguage: String { "selectLanguage".localized }
         static var chooseColor: String { "chooseColor".localized }
         static var pickColor: String { "pickColor".localized }
+        static var defaultColor: String { "defaultColor".localized }
         static var editUserName: String { "editUserName".localized }
         static var enterNewUserName: String { "enterNewUserName".localized }
     }

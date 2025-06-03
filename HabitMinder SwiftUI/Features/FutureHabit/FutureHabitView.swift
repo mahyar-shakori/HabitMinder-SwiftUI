@@ -19,20 +19,8 @@ struct FutureHabitView: View {
     
     var body: some View {
         content
+            .background(.appGray)
             .dismissKeyboard(focus: $isFocused)
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        coordinator.goBack()
-                    } label: {
-                        HStack {
-                            Image(systemName:                         AppIconName.chevronLeft)
-                            Text(LocalizedStrings.Shared.backButton)
-                        }
-                    }
-                }
-            }
             .onAppear {
                 futureHabitViewModel.fetchHabits()
             }
@@ -60,8 +48,6 @@ struct FutureHabitView: View {
             
             Spacer()
         }
-        .background(.appGray)
-        .dismissKeyboard(focus: $isFocused)
     }
     
     private var titleText: some View {

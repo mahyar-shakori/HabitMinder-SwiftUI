@@ -145,11 +145,12 @@ struct HomeView: View {
     
     private var dropDownSheet: some View {
         let items = homeViewModel.dropDownItems
+        let rowHeight: CGFloat = 65
         
         return DropDownSheetView(items: items) { selectedIndex in
             homeViewModel.handleDropDownSelection(index: selectedIndex)
         }
-        .presentationDetents([.height(CGFloat(60 * items.count))])
+        .presentationDetents([.height(rowHeight * CGFloat(items.count))])
         .presentationCornerRadius(20)
         .presentationDragIndicator(.visible)
     }

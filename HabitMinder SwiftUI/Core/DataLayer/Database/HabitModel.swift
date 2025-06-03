@@ -13,10 +13,12 @@ final class HabitModel {
     @Attribute(.unique) var id: UUID
     var title: String
     var createdAt: Date
-
-    init(title: String, createdAt: Date = .now) {
-        self.id = UUID()
+    var sortOrder: Int
+    
+    init(id: UUID = .init(), title: String, createdAt: Date = .now, sortOrder: Int = 0) {
+        self.id = id
         self.title = title
         self.createdAt = createdAt
+        self.sortOrder = sortOrder
     }
 }

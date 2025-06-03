@@ -14,8 +14,8 @@ final class FutureHabitModel {
     var title: String
     var createdAt: Date
 
-    init(title: String, createdAt: Date = .now) {
-        self.id = UUID()
+    init(id: UUID = .init(), title: String, createdAt: Date = .now) {
+        self.id = id
         self.title = title
         self.createdAt = createdAt
     }

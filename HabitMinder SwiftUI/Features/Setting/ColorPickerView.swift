@@ -47,8 +47,8 @@ struct ColorPickerView: View {
         ZStack {
             Color.appGray
                 .ignoresSafeArea()
-            
-            VStack {
+
+            VStack(spacing: 16) {
                 ColorPicker(selection: $selectedColor, supportsOpacity: false) {
                     Text(LocalizedStrings.SettingPage.pickColor)
                         .font(.AppFont.rooneySansRegular.size(18))
@@ -58,6 +58,19 @@ struct ColorPickerView: View {
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color.appWhite)
                 )
+
+                Button(action: {
+                    let defaultColor = Color.appPrimary
+                    selectedColor = defaultColor
+                    themeManager.appPrimary = defaultColor
+                }) {
+                    Text("Default Color")
+                        .font(.AppFont.rooneySansRegular.size(16))
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(RoundedRectangle(cornerRadius: 12).fill(Color.appWhite))
+                }
+
                 Spacer()
             }
             .padding()
