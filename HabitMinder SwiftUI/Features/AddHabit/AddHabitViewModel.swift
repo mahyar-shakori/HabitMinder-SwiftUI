@@ -8,10 +8,10 @@
 import Foundation
 
 final class AddHabitViewModel: ObservableObject {
-    @Published var habitTitle: String = "" {
+    @Published var habitTitle = "" {
         didSet { updateValidationState() }
     }
-    @Published private(set) var isSaveButtonEnabled: Bool = false
+    @Published private(set) var isSaveButtonEnabled = false
     
     private let habitManager: DataManager<HabitModel>
     
@@ -29,5 +29,9 @@ final class AddHabitViewModel: ObservableObject {
     func save() {
         let newHabit = HabitModel(title: habitTitle)
         habitManager.save(newHabit)
+    }
+    
+    func postHabitAddedNotification() {
+        NotificationCenter.default.post(name: AppNotification.Habit.added, object: nil)
     }
 }

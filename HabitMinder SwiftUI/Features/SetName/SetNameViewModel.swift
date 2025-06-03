@@ -8,7 +8,7 @@
 import Foundation
 
 final class SetNameViewModel: ObservableObject {
-    @Published var userName: String = "" {
+    @Published var userName = "" {
         didSet { updateValidationState() }
     }
     @Published private(set) var uiState = SetNameUIState()

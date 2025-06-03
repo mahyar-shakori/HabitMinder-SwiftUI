@@ -10,7 +10,6 @@ import Foundation
 struct HomeUIState {
     var isEditingList = false
     var itemToDelete: UUID?
-    var itemToEdit: UUID?
     var navigationTarget: HomeNavigationTarget?
     
     var listItems: [HabitItem] = [] {

@@ -22,7 +22,7 @@ struct HomeRouter {
             )
             .environmentObject(viewCoordinator)
             .environmentObject(ThemeManager.shared)
-
+            
         case .addHabit:
             let viewCoordinator = AddHabitViewCoordinator(dismiss: coordinator.pop)
             AddHabitView(
@@ -30,6 +30,13 @@ struct HomeRouter {
                     habitManager: DataManager<HabitModel>(context: modelContext)
                 )
             ).environmentObject(viewCoordinator)
+        case .editHabit(let habit):
+            let viewCoordinator = EditHabitViewCoordinator(dismiss: coordinator.pop)
+            EditHabitView(
+                editHabitViewModel: EditHabitViewModel(habit: habit,
+                dataManager: DataManager<HabitModel>(context: modelContext))
+            )
+            .environmentObject(viewCoordinator)
         case .futureHabit:
             let viewCoordinator = FutureHabitViewCoordinator(dismiss: coordinator.pop)
             FutureHabitView(

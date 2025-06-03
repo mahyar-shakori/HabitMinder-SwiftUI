@@ -18,6 +18,10 @@ final class HomeViewCoordinator: ObservableObject {
         navigate(.home(.addHabit), presentationStyle)
     }
     
+    func goToEditHabit(habit: HabitModel, presentationStyle: PresentationStyle = .push) {
+        navigate(.home(.editHabit(habit: habit)), presentationStyle)
+    }
+   
     func goToFutureHabit(presentationStyle: PresentationStyle = .push) {
         navigate(.home(.futureHabit), presentationStyle)
     }

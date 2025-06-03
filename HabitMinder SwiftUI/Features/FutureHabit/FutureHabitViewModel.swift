@@ -8,7 +8,7 @@
 import Foundation
 
 final class FutureHabitViewModel: ObservableObject {
-    @Published var habitTitle: String = "" {
+    @Published var habitTitle = "" {
         didSet { updateValidationState() }
     }
     @Published private(set) var uiState = FutureHabitUIState()

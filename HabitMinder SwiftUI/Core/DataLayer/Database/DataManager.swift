@@ -10,33 +10,39 @@ import SwiftData
 
 final class DataManager<T: PersistentModel & IdentifiableModel> {
     private let context: ModelContext
-
+    
     init(context: ModelContext) {
         self.context = context
     }
-
+    
+    private func makeFetchAllDescriptor() -> FetchDescriptor<T> {
+        return FetchDescriptor<T>()
+    }
+    
+    private func makeFetchDescriptor(forID id: UUID) -> FetchDescriptor<T> {
+        return FetchDescriptor<T>(
+            predicate: #Predicate<T> { $0.id == id }
+        )
+    }
+    
     func fetchAll() -> [T] {
         do {
-            let descriptor = FetchDescriptor<T>()
-            return try context.fetch(descriptor)
+            return try context.fetch(makeFetchAllDescriptor())
         } catch {
             AppLogger.data.error("Failed to fetch \(String(describing: T.self)): \(error.localizedDescription)")
             return []
         }
     }
-
+    
     func fetch(byID id: UUID) -> T? {
         do {
-            let descriptor = FetchDescriptor<T>(
-                predicate: #Predicate<T> { $0.id == id }
-            )
-            return try context.fetch(descriptor).first
+            return try context.fetch(makeFetchDescriptor(forID: id)).first
         } catch {
             AppLogger.data.error("Failed to fetch \(String(describing: T.self)) with ID \(id.uuidString): \(error.localizedDescription)")
             return nil
         }
     }
-
+    
     func save(_ item: T) {
         context.insert(item)
         do {
@@ -45,13 +51,10 @@ final class DataManager<T: PersistentModel & IdentifiableModel> {
             AppLogger.data.error("Failed to save \(String(describing: T.self)): \(error.localizedDescription)")
         }
     }
-
+    
     func delete(byID id: UUID) {
         do {
-            let descriptor = FetchDescriptor<T>(
-                predicate: #Predicate<T> { $0.id == id }
-            )
-            let results = try context.fetch(descriptor)
+            let results = try context.fetch(makeFetchDescriptor(forID: id))
             results.forEach { context.delete($0) }
             try context.save()
         } catch {
@@ -61,21 +64,17 @@ final class DataManager<T: PersistentModel & IdentifiableModel> {
     
     func deleteAll() {
         do {
-            let descriptor = FetchDescriptor<T>()
-            let allItems = try context.fetch(descriptor)
+            let allItems = try context.fetch(makeFetchAllDescriptor())
             allItems.forEach { context.delete($0) }
             try context.save()
         } catch {
             AppLogger.data.error("Failed to delete all \(String(describing: T.self)) records: \(error.localizedDescription)")
         }
     }
-
+    
     func update(_ updateBlock: (T) -> Void, forID id: UUID) {
         do {
-            let descriptor = FetchDescriptor<T>(
-                predicate: #Predicate<T> { $0.id == id }
-            )
-            guard let item = try context.fetch(descriptor).first else {
+            guard let item = try context.fetch(makeFetchDescriptor(forID: id)).first else {
                 AppLogger.data.warning("No item with id \(id.uuidString, privacy: .private) found for update.")
                 return
             }

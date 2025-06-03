@@ -42,12 +42,18 @@ struct LocalizedStrings {
         static var watchEmptyView: String { "watchEmptyView".localized }
     }
     
-    struct FutureHabitsPage {
-        static var title: String { "futureHabitsTitleLabel".localized }
-    }
-    
     struct AddHabitPage {
         static var title: String { "addHabitTitle".localized }
+    }
+    
+    struct EditHabitPage {
+        static var title: String { "editHabitTitle".localized }
+        static var missHabitToast: String { "missHabitToast".localized }
+        static var missHabitButton: String { "missHabitButton".localized }
+    }
+    
+    struct FutureHabitsPage {
+        static var title: String { "futureHabitsTitleLabel".localized }
     }
     
     struct SettingPage {

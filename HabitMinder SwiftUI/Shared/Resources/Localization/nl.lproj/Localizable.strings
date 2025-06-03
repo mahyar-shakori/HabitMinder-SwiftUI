@@ -25,6 +25,9 @@
 "emptyView" = "Er is nog geen gewoonte toegevoegd! Klik op de menuknop om een gewoonte toe te voegen.";
 "watchEmptyView" = "Er is nog geen gewoonte toegevoegd!";
 "addHabitTitle" = "Gewoonte toevoegen";
+"editHabitTitle" = "Gewoonte bewerken";
+"missHabitToast" = "Je gewoonte is opnieuw gestart!";
+"missHabitButton" = "Gemist! Opnieuw beginnen";
 "futureHabitsTitleLabel" = "Toekomstige gewoontes";
 "settingTitle" = "Instellingen";
 "userName" = "Naam";

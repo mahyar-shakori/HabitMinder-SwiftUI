@@ -55,6 +55,10 @@
 		3EA986472DEB67530004B71B /* PresentationStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA986462DEB67520004B71B /* PresentationStyle.swift */; };
 		3EA9864B2DEB74870004B71B /* FutureHabitViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9864A2DEB74860004B71B /* FutureHabitViewCoordinator.swift */; };
 		3EA9864F2DEB74D10004B71B /* SettingViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9864E2DEB74D00004B71B /* SettingViewCoordinator.swift */; };
+		3EBDA8592DEEE631007D99F9 /* EditHabitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBDA8582DEEE62D007D99F9 /* EditHabitViewModel.swift */; };
+		3EBDA85B2DEEE63A007D99F9 /* EditHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBDA85A2DEEE63A007D99F9 /* EditHabitView.swift */; };
+		3EBDA85F2DEEF271007D99F9 /* EditHabitViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBDA85E2DEEF267007D99F9 /* EditHabitViewCoordinator.swift */; };
+		3EBDA8622DEF2194007D99F9 /* DispatchQueue+Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBDA8602DEF2194007D99F9 /* DispatchQueue+Delay.swift */; };
 		3EE9241A2DB392AF0086B3F2 /* IntroUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE924192DB392AA0086B3F2 /* IntroUIState.swift */; };
 		3EE9241C2DB3A37A0086B3F2 /* SetNameUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE9241B2DB3A3750086B3F2 /* SetNameUIState.swift */; };
 		3EE9241E2DB3AC6A0086B3F2 /* WelcomeUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE9241D2DB3AC690086B3F2 /* WelcomeUIState.swift */; };
@@ -193,6 +197,10 @@
 		3EA986462DEB67520004B71B /* PresentationStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationStyle.swift; sourceTree = "<group>"; };
 		3EA9864A2DEB74860004B71B /* FutureHabitViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureHabitViewCoordinator.swift; sourceTree = "<group>"; };
 		3EA9864E2DEB74D00004B71B /* SettingViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewCoordinator.swift; sourceTree = "<group>"; };
+		3EBDA8582DEEE62D007D99F9 /* EditHabitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHabitViewModel.swift; sourceTree = "<group>"; };
+		3EBDA85A2DEEE63A007D99F9 /* EditHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHabitView.swift; sourceTree = "<group>"; };
+		3EBDA85E2DEEF267007D99F9 /* EditHabitViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHabitViewCoordinator.swift; sourceTree = "<group>"; };
+		3EBDA8602DEF2194007D99F9 /* DispatchQueue+Delay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Delay.swift"; sourceTree = "<group>"; };
 		3EE924192DB392AA0086B3F2 /* IntroUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroUIState.swift; sourceTree = "<group>"; };
 		3EE9241B2DB3A3750086B3F2 /* SetNameUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNameUIState.swift; sourceTree = "<group>"; };
 		3EE9241D2DB3AC690086B3F2 /* WelcomeUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeUIState.swift; sourceTree = "<group>"; };
@@ -364,6 +372,7 @@
 				3EEFE3172DAFB20C00F5B0FF /* Date+DayCounter.swift */,
 				3EEFE3182DAFB20C00F5B0FF /* Types+Helpers.swift */,
 				3E495E8E2DE7806D0051188A /* String+Localization.swift */,
+				3EBDA8602DEF2194007D99F9 /* DispatchQueue+Delay.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -462,6 +471,16 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		3EBDA8572DEEE619007D99F9 /* EditHabit */ = {
+			isa = PBXGroup;
+			children = (
+				3EBDA85A2DEEE63A007D99F9 /* EditHabitView.swift */,
+				3EBDA8582DEEE62D007D99F9 /* EditHabitViewModel.swift */,
+				3EBDA85E2DEEF267007D99F9 /* EditHabitViewCoordinator.swift */,
+			);
+			path = EditHabit;
+			sourceTree = "<group>";
+		};
 		3EEFE2DB2DAFB20C00F5B0FF /* Intro */ = {
 			isa = PBXGroup;
 			children = (
@@ -535,6 +554,7 @@
 				3EEFE2E22DAFB20C00F5B0FF /* Welcome */,
 				3EEFE2EC2DAFB20C00F5B0FF /* Home */,
 				3EEFE2E62DAFB20C00F5B0FF /* AddHabit */,
+				3EBDA8572DEEE619007D99F9 /* EditHabit */,
 				3E495E5E2DE745460051188A /* FutureHabit */,
 				3E81A9982DE8629B00DCDC79 /* Setting */,
 			);
@@ -847,6 +867,7 @@
 				3E495E6C2DE74EDF0051188A /* FutureHabitModel.swift in Sources */,
 				3EE9241A2DB392AF0086B3F2 /* IntroUIState.swift in Sources */,
 				3EE9241E2DB3AC6A0086B3F2 /* WelcomeUIState.swift in Sources */,
+				3EBDA8622DEF2194007D99F9 /* DispatchQueue+Delay.swift in Sources */,
 				3EEFE3282DAFB20C00F5B0FF /* HabitData.swift in Sources */,
 				3E8DFA0A2DE4CDCB0021E1EF /* RootView.swift in Sources */,
 				3EEFE3292DAFB20C00F5B0FF /* WelcomeViewModel.swift in Sources */,
@@ -863,6 +884,7 @@
 				3EEFE3752DAFB25B00F5B0FF /* IntroImage.swift in Sources */,
 				3EEFE3312DAFB20C00F5B0FF /* HomeNavigationTarget.swift in Sources */,
 				3EE924222DB3B1FC0086B3F2 /* BorderState.swift in Sources */,
+				3EBDA85B2DEEE63A007D99F9 /* EditHabitView.swift in Sources */,
 				3E8DF9FF2DE4CCF30021E1EF /* IntroViewCoordinator.swift in Sources */,
 				3EEFE3332DAFB20C00F5B0FF /* SetNameViewModel.swift in Sources */,
 				3EEFE3342DAFB20C00F5B0FF /* UserDefaultsProtocol.swift in Sources */,
@@ -891,6 +913,7 @@
 				3EEFE3432DAFB20C00F5B0FF /* AddHabitViewModel.swift in Sources */,
 				3E8DFA052DE4CD5A0021E1EF /* HomeViewCoordinator.swift in Sources */,
 				3EEFE3442DAFB20C00F5B0FF /* IntroViewModel.swift in Sources */,
+				3EBDA8592DEEE631007D99F9 /* EditHabitViewModel.swift in Sources */,
 				3E8DF9FB2DE4CC780021E1EF /* IntroRouter.swift in Sources */,
 				3E495E6A2DE74C850051188A /* FutureHabitUIState.swift in Sources */,
 				3E81A9A82DE8AF4000DCDC79 /* UserNameEditorView.swift in Sources */,
@@ -907,6 +930,7 @@
 				3EEFE34B2DAFB20C00F5B0FF /* View+DismissKeyboard.swift in Sources */,
 				3EEFE34D2DAFB20C00F5B0FF /* Endpoint.swift in Sources */,
 				3EEFE34E2DAFB20C00F5B0FF /* WatchConnectivityDelegate.swift in Sources */,
+				3EBDA85F2DEEF271007D99F9 /* EditHabitViewCoordinator.swift in Sources */,
 				3EEFE3502DAFB20C00F5B0FF /* AppLogger.swift in Sources */,
 				3E495E9A2DE7834A0051188A /* AppLanguage.swift in Sources */,
 				3E8DFA072DE4CD7E0021E1EF /* AddHabitViewCoordinator.swift in Sources */,

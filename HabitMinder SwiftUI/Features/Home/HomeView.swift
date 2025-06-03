@@ -11,7 +11,6 @@ struct HomeView: View {
     @StateObject private var homeViewModel: HomeViewModel
     @EnvironmentObject private var coordinator: HomeViewCoordinator
     @State private var showDeleteAlert = false
-    @State private var showEditAlert = false
     @State private var showLogoutAlert = false
     
     init(homeViewModel: HomeViewModel) {
@@ -30,11 +29,9 @@ struct HomeView: View {
             .onChange(of: homeViewModel.uiState.itemToDelete) { _, id in
                 showDeleteAlert = (id != nil)
             }
-            .onChange(of: homeViewModel.uiState.itemToEdit) { _, id in
-                showEditAlert = (id != nil)
-            }
             .onReceive(
                 NotificationCenter.default.publisher(for: AppNotification.Habit.added)
+                    .merge(with: NotificationCenter.default.publisher(for: AppNotification.Habit.edited))
                     .merge(with: NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification))
             ) { _ in
                 homeViewModel.fetchHabits()
@@ -49,17 +46,6 @@ struct HomeView: View {
                 }
             } message: {
                 Text(LocalizedStrings.Alert.Habit.deleteMessage)
-            }
-            .alert(LocalizedStrings.Alert.Habit.editTitle,
-                   isPresented: $showEditAlert) {
-                Button(LocalizedStrings.Shared.yesButton, role: .destructive) {
-                    homeViewModel.performEdit()
-                }
-                Button(LocalizedStrings.Shared.cancelButton, role: .cancel) {
-                    homeViewModel.cancelEdit()
-                }
-            } message: {
-                Text(LocalizedStrings.Alert.Habit.editMessage)
             }
             .alert(LocalizedStrings.Alert.Logout.title,
                    isPresented: $showLogoutAlert) {
@@ -202,7 +188,10 @@ struct HomeView: View {
     
     private func editSwipeButton(for id: UUID) -> some View {
         Button {
-            homeViewModel.confirmEdit(id: id)
+            guard let habit = homeViewModel.confirmEdit(id: id) else {
+                return
+            }
+            coordinator.goToEditHabit(habit: habit)
         } label: {
             Image(uiImage: Image.circularIcon(
                 diameter: 50,

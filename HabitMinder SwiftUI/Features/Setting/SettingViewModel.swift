@@ -8,7 +8,7 @@
 import Foundation
 
 final class SettingViewModel: ObservableObject {
-    @Published var userName: String = ""
+    @Published var userName = ""
    
     func load() {
         let userNameStorage = UserDefaultsStorage<UserDefaultKeys, String>(key: .userName)        

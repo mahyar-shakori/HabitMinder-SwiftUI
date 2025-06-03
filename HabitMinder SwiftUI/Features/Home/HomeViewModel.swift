@@ -82,22 +82,9 @@ final class HomeViewModel: ObservableObject {
     func cancelDelete() {
         uiState.itemToDelete = nil
     }
-    
-    func confirmEdit(id: UUID) {
-        uiState.itemToEdit = id
-    }
-    
-    func performEdit() {
-        guard let id = uiState.itemToEdit else {
-            return
-        }
-        habitManager.update({ $0.createdAt = Date() }, forID: id)
-        fetchHabits()
-        cancelEdit()
-    }
-    
-    func cancelEdit() {
-        uiState.itemToEdit = nil
+  
+    func confirmEdit(id: UUID) -> HabitModel? {
+        return habitManager.fetch(byID: id)
     }
     
     func performLogout() {

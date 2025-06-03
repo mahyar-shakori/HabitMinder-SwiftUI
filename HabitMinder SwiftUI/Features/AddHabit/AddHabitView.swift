@@ -17,7 +17,7 @@ struct AddHabitView: View {
     }
 
     var body: some View {
-        contet
+        content
             .background(.appGray)
             .dismissKeyboard(focus: $isFocused)
             .navigationBarBackButtonHidden(true)
@@ -35,7 +35,7 @@ struct AddHabitView: View {
             }
     }
     
-    private var contet: some View {
+    private var content: some View {
         VStack {
             topViews
             addHabitTextField
@@ -52,7 +52,7 @@ struct AddHabitView: View {
     private var saveButton: some View {
         Button {
             addHabitViewModel.save()
-            NotificationCenter.default.post(name: AppNotification.Habit.added, object: nil)
+            addHabitViewModel.postHabitAddedNotification()
             coordinator.goBack()
         } label: {
                 Text(LocalizedStrings.Shared.saveButton)

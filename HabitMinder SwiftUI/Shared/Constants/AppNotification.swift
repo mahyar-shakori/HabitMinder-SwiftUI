@@ -10,5 +10,6 @@ import Foundation
 struct AppNotification {
     struct Habit {
         static let added = Notification.Name("habitAdded")
+        static let edited = Notification.Name("habitEdited")
     }
 }
