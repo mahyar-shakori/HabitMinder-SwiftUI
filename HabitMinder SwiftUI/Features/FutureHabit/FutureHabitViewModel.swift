@@ -8,33 +8,49 @@
 import Foundation
 
 final class FutureHabitViewModel: ObservableObject {
-    @Published var habitTitle = "" {
-        didSet { updateValidationState() }
-    }
     @Published private(set) var uiState = FutureHabitUIState()
     
     private let habitManager: DataManager<FutureHabitModel>
+    private let coordinator: FutureHabitCoordinator
     
-    init(habitManager: DataManager<FutureHabitModel>) {
+    private var trimmedHabitTitle: String {
+        uiState.habitTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    
+    init(
+        habitManager: DataManager<FutureHabitModel>,
+        coordinator: FutureHabitCoordinator
+    ) {
         self.habitManager = habitManager
+        self.coordinator = coordinator
+        fetchHabits()
+    }
+    
+    func setHabitTitle(_ newValue: String) {
+        uiState.habitTitle = newValue
+        updateValidationState()
     }
     
     func fetchHabits() {
         let models = habitManager.fetchAll()
-        uiState.listItems = models.map { FutureHabitItem(id: $0.id, title: $0.title, dateCreate: $0.createdAt) }
+        uiState.listItems = models.map {
+            FutureHabitItem(
+                id: $0.id,
+                title: $0.title,
+                dateCreate: $0.createdAt
+            )
+        }
     }
     
     private func updateValidationState() {
-        let trimmedName = habitTitle.trimmingCharacters(in: .whitespacesAndNewlines)
-        let isValid = trimmedName.count > 1
-        
+        let isValid = trimmedHabitTitle.count > 0
         uiState.isSaveButtonEnabled = isValid
     }
     
     func save() {
-        let newHabit = FutureHabitModel(title: habitTitle)
+        let newHabit = FutureHabitModel(title: uiState.habitTitle)
         habitManager.save(newHabit)
-        habitTitle = ""
+        uiState.habitTitle = ""
         fetchHabits()
     }
     
@@ -53,5 +69,9 @@ final class FutureHabitViewModel: ObservableObject {
     
     func cancelDelete() {
         uiState.itemToDelete = nil
+    }
+    
+    func dismiss() {
+        coordinator.goBack()
     }
 }

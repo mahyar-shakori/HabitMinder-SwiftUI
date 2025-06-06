@@ -18,14 +18,12 @@ enum IntroViewState {
                 image: IntroImage.HealthyHabit.rawValue,
                 titleText: LocalizedStrings.IntroPage.firstTitle,
                 descriptionText: LocalizedStrings.IntroPage.firstDescription,
-                isSkipHidden: false
             )
         case .second:
             return IntroUIState(
                 image: IntroImage.BadHabit.rawValue,
                 titleText: LocalizedStrings.IntroPage.secondTitle,
                 descriptionText: LocalizedStrings.IntroPage.secondDescription,
-                isSkipHidden: true
             )
         }
     }

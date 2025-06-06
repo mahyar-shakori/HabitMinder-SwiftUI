@@ -14,9 +14,15 @@ final class WatchConnectivityDelegate: NSObject, WCSessionDelegate {
         self.queued = habits
     }
 
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+    func session(
+        _ session: WCSession,
+        activationDidCompleteWith activationState: WCSessionActivationState,
+        error: Error?
+    ) {
         if let error = error {
+#if DEBUG
             AppLogger.watch.error("Activation error: \(error.localizedDescription)")
+#endif
         }
 
         if activationState == .activated, let habits = queued {
@@ -24,17 +30,23 @@ final class WatchConnectivityDelegate: NSObject, WCSessionDelegate {
                 try session.updateApplicationContext(["habits": habits])
                 queued = nil
             } catch {
+#if DEBUG
                 AppLogger.watch.error("Failed to send queued habits: \(error.localizedDescription)")
+#endif
             }
         }
     }
 
     func sessionDidBecomeInactive(_ session: WCSession) {
+#if DEBUG
         AppLogger.watch.info("Session inactive.")
+#endif
     }
 
     func sessionDidDeactivate(_ session: WCSession) {
+#if DEBUG
         AppLogger.watch.warning("Session deactivated.")
+#endif
         WCSession.default.activate()
     }
 }

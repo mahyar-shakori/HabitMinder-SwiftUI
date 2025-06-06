@@ -8,54 +8,60 @@
 import SwiftUI
 
 struct SetLanguageView: View {
-    @StateObject private var viewModel: SetLanguageViewModel
-    @EnvironmentObject private var coordinator: SetLanguageViewCoordinator
+    @ObservedObject private var setLanguageViewModel: SetLanguageViewModel
     
-    init(viewModel: SetLanguageViewModel = SetLanguageViewModel(
-        languageManager: LanguageManager.shared,
-    )) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+    init(setLanguageViewModel: SetLanguageViewModel) {
+        self.setLanguageViewModel = setLanguageViewModel
     }
-    
+
     var body: some View {
-        VStack(spacing: 24) {
-            Spacer()
+        ZStack {
+            Color(.appGray)
+                .ignoresSafeArea()
             
-            titleText
-            selectedLanguageButton
-            
-            Spacer()
+            VStack() {
+                Spacer()
+                
+                titleText
+                selectedLanguageButton
+                
+                Spacer()
+            }
         }
-        .padding()
-        .background(.appGray)
         .navigationBarBackButtonHidden()
     }
     
     private var titleText: some View {
         Text(LocalizedStrings.setLanguagePage.title)
             .font(.AppFont.rooneySansBold.size(20))
+            .padding(.bottom, 32)
     }
     
     private var selectedLanguageButton: some View {
         ForEach(AppLanguage.allCases) { language in
             Button {
-                viewModel.selectLanguage(language)
-                coordinator.goToIntro()
+                setLanguageViewModel.selectLanguage(language)
+                setLanguageViewModel.goToIntroPage()
             } label: {
-                Text(language.displayName)
-                    .font(.AppFont.rooneySansBold.size(16))
-                    .tint(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(
-                        Capsule().fill(ThemeManager.shared.appPrimary)
-                    )
-                    .padding(.horizontal, 32)
+                VStack {
+                    Image(language.displayImage)
+                    
+                    Text(language.displayName)
+                        .font(.AppFont.rooneySansBold.size(16))
+                        .tint(.primary)
+                }
+                .padding()
             }
         }
     }
 }
 
 #Preview {
-    SetLanguageView()
+    let fakeCoordinator = SetLanguageCoordinator(navigate: { _, _ in
+    })
+    let viewModel = SetLanguageViewModel(
+        coordinator: fakeCoordinator,
+        languageManager: LanguageManager.shared
+    )
+    SetLanguageView(setLanguageViewModel: viewModel)
 }

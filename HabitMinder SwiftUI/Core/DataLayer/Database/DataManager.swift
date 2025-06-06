@@ -29,7 +29,9 @@ final class DataManager<T: PersistentModel & IdentifiableModel> {
         do {
             return try context.fetch(makeFetchAllDescriptor())
         } catch {
+#if DEBUG
             AppLogger.data.error("Failed to fetch \(String(describing: T.self)): \(error.localizedDescription)")
+#endif
             return []
         }
     }
@@ -38,7 +40,9 @@ final class DataManager<T: PersistentModel & IdentifiableModel> {
         do {
             return try context.fetch(makeFetchDescriptor(forID: id)).first
         } catch {
+#if DEBUG
             AppLogger.data.error("Failed to fetch \(String(describing: T.self)) with ID \(id.uuidString): \(error.localizedDescription)")
+#endif
             return nil
         }
     }
@@ -48,7 +52,9 @@ final class DataManager<T: PersistentModel & IdentifiableModel> {
         do {
             try context.save()
         } catch {
+#if DEBUG
             AppLogger.data.error("Failed to save \(String(describing: T.self)): \(error.localizedDescription)")
+#endif
         }
     }
     
@@ -58,7 +64,9 @@ final class DataManager<T: PersistentModel & IdentifiableModel> {
             results.forEach { context.delete($0) }
             try context.save()
         } catch {
+#if DEBUG
             AppLogger.data.error("Failed to delete \(String(describing: T.self)): \(error.localizedDescription)")
+#endif
         }
     }
     
@@ -68,20 +76,29 @@ final class DataManager<T: PersistentModel & IdentifiableModel> {
             allItems.forEach { context.delete($0) }
             try context.save()
         } catch {
+#if DEBUG
             AppLogger.data.error("Failed to delete all \(String(describing: T.self)) records: \(error.localizedDescription)")
+#endif
         }
     }
     
-    func update(_ updateBlock: (T) -> Void, forID id: UUID) {
+    func update(
+        _ updateBlock: (T) -> Void,
+        forID id: UUID
+    ) {
         do {
             guard let item = try context.fetch(makeFetchDescriptor(forID: id)).first else {
+#if DEBUG
                 AppLogger.data.warning("No item with id \(id.uuidString, privacy: .private) found for update.")
+#endif
                 return
             }
             updateBlock(item)
             try context.save()
         } catch {
+#if DEBUG
             AppLogger.data.error("Failed to update \(String(describing: T.self)): \(error.localizedDescription)")
+#endif
         }
     }
 }

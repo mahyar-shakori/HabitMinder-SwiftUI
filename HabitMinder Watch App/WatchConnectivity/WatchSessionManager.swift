@@ -9,7 +9,7 @@ import WatchConnectivity
 
 final class WatchSessionManager: NSObject, WCSessionDelegate {
     static let shared = WatchSessionManager()
-    var viewModel: HomeViewModel?
+    private var homeViewModel: HomeViewModel?
     
     private override init() {
         super.init()
@@ -20,13 +20,18 @@ final class WatchSessionManager: NSObject, WCSessionDelegate {
         }
     }
     
-    func configure(with viewModel: HomeViewModel) {
-        self.viewModel = viewModel
+    func configure(with homeViewModel: HomeViewModel) {
+        self.homeViewModel = homeViewModel
     }
     
-    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
+    func session(
+        _ session: WCSession,
+        didReceiveApplicationContext applicationContext: [String : Any]
+    ) {
         guard let habits = applicationContext["habits"] as? [[String: Any]] else {
+#if DEBUG
             AppLogger.watch.warning("No habits found in received context.")
+#endif
             return
         }
         let parsedHabits: [HabitData] = habits.compactMap { dict in
@@ -37,13 +42,19 @@ final class WatchSessionManager: NSObject, WCSessionDelegate {
             return HabitData(title: title, daysLeft: daysLeft)
         }
         DispatchQueue.main.async {
-            self.viewModel?.updateHabits(parsedHabits)
+            self.homeViewModel?.updateHabits(parsedHabits)
         }
     }
     
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+    func session(
+        _ session: WCSession,
+        activationDidCompleteWith activationState: WCSessionActivationState,
+        error: Error?
+    ) {
         if let error = error {
+#if DEBUG
             AppLogger.watch.error("Session activation error: \(error.localizedDescription)")
+#endif
         }
     }
 }

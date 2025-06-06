@@ -15,7 +15,12 @@ final class HabitModel {
     var createdAt: Date
     var sortOrder: Int
     
-    init(id: UUID = .init(), title: String, createdAt: Date = .now, sortOrder: Int = 0) {
+    init(
+        id: UUID = .init(),
+        title: String,
+        createdAt: Date = .now,
+        sortOrder: Int = 0
+    ) {
         self.id = id
         self.title = title
         self.createdAt = createdAt

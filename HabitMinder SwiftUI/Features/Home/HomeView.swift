@@ -8,26 +8,29 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject private var homeViewModel: HomeViewModel
-    @EnvironmentObject private var coordinator: HomeViewCoordinator
+    @ObservedObject private var homeViewModel: HomeViewModel
     @State private var showDeleteAlert = false
     @State private var showLogoutAlert = false
+    @State private var isDropDownPresented = false
     
     init(homeViewModel: HomeViewModel) {
-        _homeViewModel = StateObject(wrappedValue: homeViewModel)
+        self.homeViewModel = homeViewModel
     }
     
     var body: some View {
         content
             .navigationBarBackButtonHidden(true)
-            .sheet(isPresented: $homeViewModel.isDropDownPresented) {
+            .sheet(isPresented: $isDropDownPresented) {
                 dropDownSheet
             }
-            .onChange(of: homeViewModel.uiState.navigationTarget) {
-                handleNavigation(homeViewModel.uiState.navigationTarget)
+            .onChange(of: homeViewModel.uiState.navigationTarget) {_, newTarget in
+                homeViewModel.handleNavigation(newTarget)
             }
             .onChange(of: homeViewModel.uiState.itemToDelete) { _, id in
                 showDeleteAlert = (id != nil)
+            }
+            .onChange(of: homeViewModel.uiState.performLogoutAlert) { _, newValue in
+                showLogoutAlert = newValue
             }
             .onReceive(
                 NotificationCenter.default.publisher(for: AppNotification.Habit.added)
@@ -51,9 +54,10 @@ struct HomeView: View {
                    isPresented: $showLogoutAlert) {
                 Button(LocalizedStrings.Shared.yesButton, role: .destructive) {
                     homeViewModel.performLogout()
-                    coordinator.goToSetLanguage()
+                    homeViewModel.resetLogoutAlert()
                 }
                 Button(LocalizedStrings.Shared.cancelButton, role: .cancel) {
+                    homeViewModel.resetLogoutAlert()
                 }
             } message: {
                 Text(LocalizedStrings.Alert.Logout.message)
@@ -65,7 +69,6 @@ struct HomeView: View {
             topViews
             quoteText
             habitSection
-            
             Spacer()
         }
         .background(.appGray)
@@ -79,7 +82,7 @@ struct HomeView: View {
     
     private var dropDownButton: some View {
         Button {
-            homeViewModel.startDropDownPresenting()
+            isDropDownPresented = true
         } label: {
             Image(.dropDownButton)
                 .tint(.primary)
@@ -126,7 +129,7 @@ struct HomeView: View {
     private var habitSection: some View {
         habitContentView
     }
-
+    
     @ViewBuilder
     private var habitContentView: some View {
         if homeViewModel.uiState.listItems.isEmpty {
@@ -141,18 +144,6 @@ struct HomeView: View {
         } else {
             habitList
         }
-    }
-    
-    private var dropDownSheet: some View {
-        let items = homeViewModel.dropDownItems
-        let rowHeight: CGFloat = 65
-        
-        return DropDownSheetView(items: items) { selectedIndex in
-            homeViewModel.handleDropDownSelection(index: selectedIndex)
-        }
-        .presentationDetents([.height(rowHeight * CGFloat(items.count))])
-        .presentationCornerRadius(20)
-        .presentationDragIndicator(.visible)
     }
     
     private var habitList: some View {
@@ -170,7 +161,9 @@ struct HomeView: View {
         }
         .listStyle(.plain)
         .environment(\.editMode, .constant(homeViewModel.uiState.isEditingList ? .active : .inactive))
-        .refreshable { await homeViewModel.refresh() }
+        .refreshable {
+            await homeViewModel.refresh()
+        }
     }
     
     private func deleteSwipeButton(for id: UUID) -> some View {
@@ -192,7 +185,7 @@ struct HomeView: View {
             guard let habit = homeViewModel.confirmEdit(id: id) else {
                 return
             }
-            coordinator.goToEditHabit(habit: habit)
+            homeViewModel.coordinator.goToEditHabit(habit: habit)
         } label: {
             Image(uiImage: Image.circularIcon(
                 diameter: 50,
@@ -204,39 +197,30 @@ struct HomeView: View {
         .tint(.clear)
     }
     
-    private func handleNavigation(_ target: HomeNavigationTarget?) {
-        guard let target = target else {
-            return
+    private var dropDownSheet: some View {
+        let items = homeViewModel.uiState.dropDownItems
+        let rowHeight: CGFloat = 65
+        
+        return DropDownSheetView(items: items) { selectedIndex in
+            homeViewModel.handleDropDownSelection(index: selectedIndex)
+            isDropDownPresented = false
         }
-        switch target {
-        case .addHabit:
-            coordinator.goToAddHabit()
-        case .futureHabit:
-            coordinator.goToFutureHabit()
-        case .editHabitList:
-            if homeViewModel.uiState.listItems.isNotEmpty {
-                homeViewModel.handleEditHabitList()
-            }
-        case .setting:
-            coordinator.goToSetting()
-        case .logout:
-            showLogoutAlert = true
-        }
-        homeViewModel.setNavigationTargetEmpty()
+        .presentationDetents([.height(rowHeight * CGFloat(items.count))])
+        .presentationCornerRadius(20)
+        .presentationDragIndicator(.visible)
     }
 }
 
 #Preview {
     @Previewable @Environment(\.modelContext) var context
     
-    HomeView(
-        homeViewModel: HomeViewModel(
-            quote: "Test Quote",
-            habitManager: DataManager<HabitModel>(
-                context: context
-            ), futureHabitManager: DataManager<FutureHabitModel>(
-                context: context
-            )
-        )
+    let fakeCoordinator = HomeCoordinator(navigate: { _, _ in
+    })
+    let viewModel = HomeViewModel(
+        quote: "Test Quote",
+        habitManager: DataManager<HabitModel>(context: context),
+        futureHabitManager: DataManager<FutureHabitModel>(context: context),
+        coordinator: fakeCoordinator
     )
+    HomeView(homeViewModel: viewModel)
 }

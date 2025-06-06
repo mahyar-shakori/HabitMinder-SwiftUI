@@ -57,7 +57,7 @@
 "editHabitAlertMessage" = "Are you sure you want to start this habit over?";
 "dropDownAddNewHabit" = "Add New Habit";
 "dropDownFutureHabit" = "Future Habit";
-"dropDownEditHabitList" = "Edit Habit List";
+"dropDownEditHabitList" = "Reorder Habits";
 "dropDownSetting" = "Settings";
 "dropDownLogout" = "Log Out";
 "HabitCellDaysLeft" = " days left";

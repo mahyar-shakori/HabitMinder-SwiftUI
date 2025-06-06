@@ -24,7 +24,7 @@
 		3E495E932DE782120051188A /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E495E8E2DE7806D0051188A /* String+Localization.swift */; };
 		3E495E942DE782190051188A /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E495E8C2DE77D4E0051188A /* LanguageManager.swift */; };
 		3E495E9A2DE7834A0051188A /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E495E982DE7834A0051188A /* AppLanguage.swift */; };
-		3E495E9C2DE7837F0051188A /* SetLanguageViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E495E9B2DE7837E0051188A /* SetLanguageViewCoordinator.swift */; };
+		3E495E9C2DE7837F0051188A /* SetLanguageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E495E9B2DE7837E0051188A /* SetLanguageCoordinator.swift */; };
 		3E495E9E2DE783FD0051188A /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E495E982DE7834A0051188A /* AppLanguage.swift */; };
 		3E495E9F2DE78ABA0051188A /* UserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE3012DAFB20C00F5B0FF /* UserDefaultsStorage.swift */; };
 		3E495EA02DE78ACB0051188A /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE3002DAFB20C00F5B0FF /* UserDefaultKeys.swift */; };
@@ -43,21 +43,21 @@
 		3E8DF9F52DE4CC2A0021E1EF /* AppRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8DF9F42DE4CC280021E1EF /* AppRoute.swift */; };
 		3E8DF9FB2DE4CC780021E1EF /* IntroRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8DF9FA2DE4CC730021E1EF /* IntroRouter.swift */; };
 		3E8DF9FD2DE4CCBF0021E1EF /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8DF9FC2DE4CCB60021E1EF /* HomeRouter.swift */; };
-		3E8DF9FF2DE4CCF30021E1EF /* IntroViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8DF9FE2DE4CCED0021E1EF /* IntroViewCoordinator.swift */; };
-		3E8DFA012DE4CD1A0021E1EF /* SetNameViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8DFA002DE4CD100021E1EF /* SetNameViewCoordinator.swift */; };
-		3E8DFA032DE4CD3D0021E1EF /* WelcomeViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8DFA022DE4CD370021E1EF /* WelcomeViewCoordinator.swift */; };
-		3E8DFA052DE4CD5A0021E1EF /* HomeViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8DFA042DE4CD530021E1EF /* HomeViewCoordinator.swift */; };
-		3E8DFA072DE4CD7E0021E1EF /* AddHabitViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8DFA062DE4CD790021E1EF /* AddHabitViewCoordinator.swift */; };
+		3E8DF9FF2DE4CCF30021E1EF /* IntroCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8DF9FE2DE4CCED0021E1EF /* IntroCoordinator.swift */; };
+		3E8DFA012DE4CD1A0021E1EF /* SetNameCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8DFA002DE4CD100021E1EF /* SetNameCoordinator.swift */; };
+		3E8DFA032DE4CD3D0021E1EF /* WelcomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8DFA022DE4CD370021E1EF /* WelcomeCoordinator.swift */; };
+		3E8DFA052DE4CD5A0021E1EF /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8DFA042DE4CD530021E1EF /* HomeCoordinator.swift */; };
+		3E8DFA072DE4CD7E0021E1EF /* AddHabitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8DFA062DE4CD790021E1EF /* AddHabitCoordinator.swift */; };
 		3E8DFA0A2DE4CDCB0021E1EF /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8DFA092DE4CDC50021E1EF /* RootView.swift */; };
 		3E8DFA332DE5B7890021E1EF /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8DFA322DE5B7880021E1EF /* DataFetcher.swift */; };
 		3EA6CAC32D9AA13900718909 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EA6CAC22D9AA13900718909 /* Preview Assets.xcassets */; };
 		3EA9863E2DEB5CD60004B71B /* SetLanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9863D2DEB5CD20004B71B /* SetLanguageViewModel.swift */; };
 		3EA986472DEB67530004B71B /* PresentationStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA986462DEB67520004B71B /* PresentationStyle.swift */; };
-		3EA9864B2DEB74870004B71B /* FutureHabitViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9864A2DEB74860004B71B /* FutureHabitViewCoordinator.swift */; };
-		3EA9864F2DEB74D10004B71B /* SettingViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9864E2DEB74D00004B71B /* SettingViewCoordinator.swift */; };
+		3EA9864B2DEB74870004B71B /* FutureHabitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9864A2DEB74860004B71B /* FutureHabitCoordinator.swift */; };
+		3EA9864F2DEB74D10004B71B /* SettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9864E2DEB74D00004B71B /* SettingCoordinator.swift */; };
 		3EBDA8592DEEE631007D99F9 /* EditHabitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBDA8582DEEE62D007D99F9 /* EditHabitViewModel.swift */; };
 		3EBDA85B2DEEE63A007D99F9 /* EditHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBDA85A2DEEE63A007D99F9 /* EditHabitView.swift */; };
-		3EBDA85F2DEEF271007D99F9 /* EditHabitViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBDA85E2DEEF267007D99F9 /* EditHabitViewCoordinator.swift */; };
+		3EBDA85F2DEEF271007D99F9 /* EditHabitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBDA85E2DEEF267007D99F9 /* EditHabitCoordinator.swift */; };
 		3EBDA8622DEF2194007D99F9 /* DispatchQueue+Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBDA8602DEF2194007D99F9 /* DispatchQueue+Delay.swift */; };
 		3EE9241A2DB392AF0086B3F2 /* IntroUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE924192DB392AA0086B3F2 /* IntroUIState.swift */; };
 		3EE9241C2DB3A37A0086B3F2 /* SetNameUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE9241B2DB3A3750086B3F2 /* SetNameUIState.swift */; };
@@ -84,9 +84,7 @@
 		3EEFE3392DAFB20C00F5B0FF /* HabitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE2D62DAFB20C00F5B0FF /* HabitModel.swift */; };
 		3EEFE33A2DAFB20C00F5B0FF /* AddHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE2E42DAFB20C00F5B0FF /* AddHabitView.swift */; };
 		3EEFE33B2DAFB20C00F5B0FF /* DropDownItem..swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE3062DAFB20C00F5B0FF /* DropDownItem..swift */; };
-		3EEFE33C2DAFB20C00F5B0FF /* QuoteUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE2E12DAFB20C00F5B0FF /* QuoteUpdatable.swift */; };
 		3EEFE33D2DAFB20C00F5B0FF /* AppIconName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE3122DAFB20C00F5B0FF /* AppIconName.swift */; };
-		3EEFE33E2DAFB20C00F5B0FF /* WelcomeViewCoordinator+QuoteUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE2F12DAFB20C00F5B0FF /* WelcomeViewCoordinator+QuoteUpdatable.swift */; };
 		3EEFE33F2DAFB20C00F5B0FF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE2E72DAFB20C00F5B0FF /* HomeView.swift */; };
 		3EEFE3402DAFB20C00F5B0FF /* HabitItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE2EA2DAFB20C00F5B0FF /* HabitItem.swift */; };
 		3EEFE3412DAFB20C00F5B0FF /* ProgressCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE30A2DAFB20C00F5B0FF /* ProgressCircleView.swift */; };
@@ -128,6 +126,8 @@
 		3EEFE3982DAFB31700F5B0FF /* HabitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE3102DAFB20C00F5B0FF /* HabitData.swift */; };
 		3EEFE39A2DAFB34500F5B0FF /* AppLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE3192DAFB20C00F5B0FF /* AppLogger.swift */; };
 		3EEFE39B2DAFB49000F5B0FF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3EEFE3672DAFB25B00F5B0FF /* Localizable.strings */; };
+		3EF4991A2DF331B5001A31FE /* AddHabitUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF499192DF331AE001A31FE /* AddHabitUIState.swift */; };
+		3EF4991C2DF334F5001A31FE /* EditHabitUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF4991B2DF334EE001A31FE /* EditHabitUIState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -170,7 +170,7 @@
 		3E495E8C2DE77D4E0051188A /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		3E495E8E2DE7806D0051188A /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
 		3E495E982DE7834A0051188A /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
-		3E495E9B2DE7837E0051188A /* SetLanguageViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLanguageViewCoordinator.swift; sourceTree = "<group>"; };
+		3E495E9B2DE7837E0051188A /* SetLanguageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLanguageCoordinator.swift; sourceTree = "<group>"; };
 		3E81A99B2DE862C500DCDC79 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		3E81A99F2DE862D200DCDC79 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		3E81A9A12DE8A22A00DCDC79 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
@@ -185,21 +185,21 @@
 		3E8DF9F42DE4CC280021E1EF /* AppRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRoute.swift; sourceTree = "<group>"; };
 		3E8DF9FA2DE4CC730021E1EF /* IntroRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroRouter.swift; sourceTree = "<group>"; };
 		3E8DF9FC2DE4CCB60021E1EF /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
-		3E8DF9FE2DE4CCED0021E1EF /* IntroViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewCoordinator.swift; sourceTree = "<group>"; };
-		3E8DFA002DE4CD100021E1EF /* SetNameViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNameViewCoordinator.swift; sourceTree = "<group>"; };
-		3E8DFA022DE4CD370021E1EF /* WelcomeViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewCoordinator.swift; sourceTree = "<group>"; };
-		3E8DFA042DE4CD530021E1EF /* HomeViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCoordinator.swift; sourceTree = "<group>"; };
-		3E8DFA062DE4CD790021E1EF /* AddHabitViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitViewCoordinator.swift; sourceTree = "<group>"; };
+		3E8DF9FE2DE4CCED0021E1EF /* IntroCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroCoordinator.swift; sourceTree = "<group>"; };
+		3E8DFA002DE4CD100021E1EF /* SetNameCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNameCoordinator.swift; sourceTree = "<group>"; };
+		3E8DFA022DE4CD370021E1EF /* WelcomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeCoordinator.swift; sourceTree = "<group>"; };
+		3E8DFA042DE4CD530021E1EF /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		3E8DFA062DE4CD790021E1EF /* AddHabitCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitCoordinator.swift; sourceTree = "<group>"; };
 		3E8DFA092DE4CDC50021E1EF /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		3E8DFA322DE5B7880021E1EF /* DataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetcher.swift; sourceTree = "<group>"; };
 		3EA6CAC22D9AA13900718909 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3EA9863D2DEB5CD20004B71B /* SetLanguageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLanguageViewModel.swift; sourceTree = "<group>"; };
 		3EA986462DEB67520004B71B /* PresentationStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationStyle.swift; sourceTree = "<group>"; };
-		3EA9864A2DEB74860004B71B /* FutureHabitViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureHabitViewCoordinator.swift; sourceTree = "<group>"; };
-		3EA9864E2DEB74D00004B71B /* SettingViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewCoordinator.swift; sourceTree = "<group>"; };
+		3EA9864A2DEB74860004B71B /* FutureHabitCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureHabitCoordinator.swift; sourceTree = "<group>"; };
+		3EA9864E2DEB74D00004B71B /* SettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinator.swift; sourceTree = "<group>"; };
 		3EBDA8582DEEE62D007D99F9 /* EditHabitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHabitViewModel.swift; sourceTree = "<group>"; };
 		3EBDA85A2DEEE63A007D99F9 /* EditHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHabitView.swift; sourceTree = "<group>"; };
-		3EBDA85E2DEEF267007D99F9 /* EditHabitViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHabitViewCoordinator.swift; sourceTree = "<group>"; };
+		3EBDA85E2DEEF267007D99F9 /* EditHabitCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHabitCoordinator.swift; sourceTree = "<group>"; };
 		3EBDA8602DEF2194007D99F9 /* DispatchQueue+Delay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Delay.swift"; sourceTree = "<group>"; };
 		3EE924192DB392AA0086B3F2 /* IntroUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroUIState.swift; sourceTree = "<group>"; };
 		3EE9241B2DB3A3750086B3F2 /* SetNameUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNameUIState.swift; sourceTree = "<group>"; };
@@ -216,7 +216,6 @@
 		3EEFE2DD2DAFB20C00F5B0FF /* SetNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNameViewModel.swift; sourceTree = "<group>"; };
 		3EEFE2DF2DAFB20C00F5B0FF /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		3EEFE2E02DAFB20C00F5B0FF /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
-		3EEFE2E12DAFB20C00F5B0FF /* QuoteUpdatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteUpdatable.swift; sourceTree = "<group>"; };
 		3EEFE2E42DAFB20C00F5B0FF /* AddHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitView.swift; sourceTree = "<group>"; };
 		3EEFE2E52DAFB20C00F5B0FF /* AddHabitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitViewModel.swift; sourceTree = "<group>"; };
 		3EEFE2E72DAFB20C00F5B0FF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -224,7 +223,6 @@
 		3EEFE2E92DAFB20C00F5B0FF /* HabitListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitListRowView.swift; sourceTree = "<group>"; };
 		3EEFE2EA2DAFB20C00F5B0FF /* HabitItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitItem.swift; sourceTree = "<group>"; };
 		3EEFE2EB2DAFB20C00F5B0FF /* HomeNavigationTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationTarget.swift; sourceTree = "<group>"; };
-		3EEFE2F12DAFB20C00F5B0FF /* WelcomeViewCoordinator+QuoteUpdatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WelcomeViewCoordinator+QuoteUpdatable.swift"; sourceTree = "<group>"; };
 		3EEFE2F32DAFB20C00F5B0FF /* AuthEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthEndpoint.swift; sourceTree = "<group>"; };
 		3EEFE2F42DAFB20C00F5B0FF /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		3EEFE2F52DAFB20C00F5B0FF /* HTTPContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPContentType.swift; sourceTree = "<group>"; };
@@ -267,6 +265,8 @@
 		3EEFE38D2DAFB2E800F5B0FF /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		3EEFE38F2DAFB2E800F5B0FF /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
 		3EEFE3912DAFB2E800F5B0FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3EF499192DF331AE001A31FE /* AddHabitUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitUIState.swift; sourceTree = "<group>"; };
+		3EF4991B2DF334EE001A31FE /* EditHabitUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHabitUIState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,7 +306,7 @@
 			children = (
 				3E495E612DE745900051188A /* FutureHabitView.swift */,
 				3E495E632DE7466D0051188A /* FutureHabitViewModel.swift */,
-				3EA9864A2DEB74860004B71B /* FutureHabitViewCoordinator.swift */,
+				3EA9864A2DEB74860004B71B /* FutureHabitCoordinator.swift */,
 				3E495E692DE74C850051188A /* FutureHabitUIState.swift */,
 				3E495E652DE74B8E0051188A /* FutureHabitListRowView.swift */,
 				3E495E672DE74BA50051188A /* FutureHabitItem.swift */,
@@ -319,7 +319,7 @@
 			children = (
 				3E495E872DE777170051188A /* SetLanguageView.swift */,
 				3EA9863D2DEB5CD20004B71B /* SetLanguageViewModel.swift */,
-				3E495E9B2DE7837E0051188A /* SetLanguageViewCoordinator.swift */,
+				3E495E9B2DE7837E0051188A /* SetLanguageCoordinator.swift */,
 			);
 			path = SetLanguage;
 			sourceTree = "<group>";
@@ -329,7 +329,7 @@
 			children = (
 				3E81A99B2DE862C500DCDC79 /* SettingView.swift */,
 				3E81A99F2DE862D200DCDC79 /* SettingViewModel.swift */,
-				3EA9864E2DEB74D00004B71B /* SettingViewCoordinator.swift */,
+				3EA9864E2DEB74D00004B71B /* SettingCoordinator.swift */,
 				3E81A9A72DE8AF4000DCDC79 /* UserNameEditorView.swift */,
 				3E81A9A52DE8A25600DCDC79 /* LanguagePickerView.swift */,
 				3E81A9A32DE8A23F00DCDC79 /* ColorPickerView.swift */,
@@ -476,7 +476,8 @@
 			children = (
 				3EBDA85A2DEEE63A007D99F9 /* EditHabitView.swift */,
 				3EBDA8582DEEE62D007D99F9 /* EditHabitViewModel.swift */,
-				3EBDA85E2DEEF267007D99F9 /* EditHabitViewCoordinator.swift */,
+				3EBDA85E2DEEF267007D99F9 /* EditHabitCoordinator.swift */,
+				3EF4991B2DF334EE001A31FE /* EditHabitUIState.swift */,
 			);
 			path = EditHabit;
 			sourceTree = "<group>";
@@ -486,7 +487,7 @@
 			children = (
 				3EEFE2D82DAFB20C00F5B0FF /* IntroView.swift */,
 				3EEFE2D92DAFB20C00F5B0FF /* IntroViewModel.swift */,
-				3E8DF9FE2DE4CCED0021E1EF /* IntroViewCoordinator.swift */,
+				3E8DF9FE2DE4CCED0021E1EF /* IntroCoordinator.swift */,
 				3EEFE2DA2DAFB20C00F5B0FF /* IntroViewState.swift */,
 				3EE924192DB392AA0086B3F2 /* IntroUIState.swift */,
 				3EEFE3652DAFB25B00F5B0FF /* IntroImage.swift */,
@@ -499,7 +500,7 @@
 			children = (
 				3EEFE2DC2DAFB20C00F5B0FF /* SetNameView.swift */,
 				3EEFE2DD2DAFB20C00F5B0FF /* SetNameViewModel.swift */,
-				3E8DFA002DE4CD100021E1EF /* SetNameViewCoordinator.swift */,
+				3E8DFA002DE4CD100021E1EF /* SetNameCoordinator.swift */,
 				3EE9241B2DB3A3750086B3F2 /* SetNameUIState.swift */,
 				3EE924212DB3B1FB0086B3F2 /* BorderState.swift */,
 			);
@@ -511,10 +512,8 @@
 			children = (
 				3EEFE2DF2DAFB20C00F5B0FF /* WelcomeView.swift */,
 				3EEFE2E02DAFB20C00F5B0FF /* WelcomeViewModel.swift */,
-				3E8DFA022DE4CD370021E1EF /* WelcomeViewCoordinator.swift */,
-				3EEFE2F12DAFB20C00F5B0FF /* WelcomeViewCoordinator+QuoteUpdatable.swift */,
+				3E8DFA022DE4CD370021E1EF /* WelcomeCoordinator.swift */,
 				3EE9241D2DB3AC690086B3F2 /* WelcomeUIState.swift */,
-				3EEFE2E12DAFB20C00F5B0FF /* QuoteUpdatable.swift */,
 			);
 			path = Welcome;
 			sourceTree = "<group>";
@@ -524,7 +523,8 @@
 			children = (
 				3EEFE2E42DAFB20C00F5B0FF /* AddHabitView.swift */,
 				3EEFE2E52DAFB20C00F5B0FF /* AddHabitViewModel.swift */,
-				3E8DFA062DE4CD790021E1EF /* AddHabitViewCoordinator.swift */,
+				3E8DFA062DE4CD790021E1EF /* AddHabitCoordinator.swift */,
+				3EF499192DF331AE001A31FE /* AddHabitUIState.swift */,
 			);
 			path = AddHabit;
 			sourceTree = "<group>";
@@ -534,7 +534,7 @@
 			children = (
 				3EEFE2E72DAFB20C00F5B0FF /* HomeView.swift */,
 				3EEFE2E82DAFB20C00F5B0FF /* HomeViewModel.swift */,
-				3E8DFA042DE4CD530021E1EF /* HomeViewCoordinator.swift */,
+				3E8DFA042DE4CD530021E1EF /* HomeCoordinator.swift */,
 				3E495E542DE71CAA0051188A /* HomeUIState.swift */,
 				3E495E582DE722270051188A /* DropDownItemFactory.swift */,
 				3EEFE2EB2DAFB20C00F5B0FF /* HomeNavigationTarget.swift */,
@@ -885,24 +885,23 @@
 				3EEFE3312DAFB20C00F5B0FF /* HomeNavigationTarget.swift in Sources */,
 				3EE924222DB3B1FC0086B3F2 /* BorderState.swift in Sources */,
 				3EBDA85B2DEEE63A007D99F9 /* EditHabitView.swift in Sources */,
-				3E8DF9FF2DE4CCF30021E1EF /* IntroViewCoordinator.swift in Sources */,
+				3E8DF9FF2DE4CCF30021E1EF /* IntroCoordinator.swift in Sources */,
 				3EEFE3332DAFB20C00F5B0FF /* SetNameViewModel.swift in Sources */,
 				3EEFE3342DAFB20C00F5B0FF /* UserDefaultsProtocol.swift in Sources */,
 				3EEFE3352DAFB20C00F5B0FF /* HTTPMethod.swift in Sources */,
 				3EEFE3362DAFB20C00F5B0FF /* DropDownSheetView.swift in Sources */,
 				3EEFE3372DAFB20C00F5B0FF /* IntroViewState.swift in Sources */,
-				3E495E9C2DE7837F0051188A /* SetLanguageViewCoordinator.swift in Sources */,
+				3E495E9C2DE7837F0051188A /* SetLanguageCoordinator.swift in Sources */,
 				3EEFE3382DAFB20C00F5B0FF /* WatchConnectivityService.swift in Sources */,
 				3E8DF9F52DE4CC2A0021E1EF /* AppRoute.swift in Sources */,
-				3EA9864F2DEB74D10004B71B /* SettingViewCoordinator.swift in Sources */,
+				3EA9864F2DEB74D10004B71B /* SettingCoordinator.swift in Sources */,
 				3E495E882DE777170051188A /* SetLanguageView.swift in Sources */,
 				3EEFE3392DAFB20C00F5B0FF /* HabitModel.swift in Sources */,
 				3EEFE33A2DAFB20C00F5B0FF /* AddHabitView.swift in Sources */,
 				3EEFE33B2DAFB20C00F5B0FF /* DropDownItem..swift in Sources */,
-				3EEFE33C2DAFB20C00F5B0FF /* QuoteUpdatable.swift in Sources */,
 				3EEFE33D2DAFB20C00F5B0FF /* AppIconName.swift in Sources */,
 				3E495E622DE745900051188A /* FutureHabitView.swift in Sources */,
-				3EEFE33E2DAFB20C00F5B0FF /* WelcomeViewCoordinator+QuoteUpdatable.swift in Sources */,
+				3EF4991A2DF331B5001A31FE /* AddHabitUIState.swift in Sources */,
 				3EEFE33F2DAFB20C00F5B0FF /* HomeView.swift in Sources */,
 				3EEFE3402DAFB20C00F5B0FF /* HabitItem.swift in Sources */,
 				3E81A9A42DE8A24000DCDC79 /* ColorPickerView.swift in Sources */,
@@ -911,29 +910,30 @@
 				3EE9241C2DB3A37A0086B3F2 /* SetNameUIState.swift in Sources */,
 				3E8DFA332DE5B7890021E1EF /* DataFetcher.swift in Sources */,
 				3EEFE3432DAFB20C00F5B0FF /* AddHabitViewModel.swift in Sources */,
-				3E8DFA052DE4CD5A0021E1EF /* HomeViewCoordinator.swift in Sources */,
+				3E8DFA052DE4CD5A0021E1EF /* HomeCoordinator.swift in Sources */,
 				3EEFE3442DAFB20C00F5B0FF /* IntroViewModel.swift in Sources */,
 				3EBDA8592DEEE631007D99F9 /* EditHabitViewModel.swift in Sources */,
 				3E8DF9FB2DE4CC780021E1EF /* IntroRouter.swift in Sources */,
 				3E495E6A2DE74C850051188A /* FutureHabitUIState.swift in Sources */,
 				3E81A9A82DE8AF4000DCDC79 /* UserNameEditorView.swift in Sources */,
 				3EEFE3452DAFB20C00F5B0FF /* DropDownRowView.swift in Sources */,
-				3E8DFA032DE4CD3D0021E1EF /* WelcomeViewCoordinator.swift in Sources */,
+				3E8DFA032DE4CD3D0021E1EF /* WelcomeCoordinator.swift in Sources */,
 				3EEFE3462DAFB20C00F5B0FF /* CustomEmptyView.swift in Sources */,
 				3EEFE3482DAFB20C00F5B0FF /* AuthEndpoint.swift in Sources */,
 				3E8DF9E92DE4BB640021E1EF /* DropDownIcon.swift in Sources */,
 				3EEFE3492DAFB20C00F5B0FF /* UserDefaultKeys.swift in Sources */,
-				3EA9864B2DEB74870004B71B /* FutureHabitViewCoordinator.swift in Sources */,
+				3EA9864B2DEB74870004B71B /* FutureHabitCoordinator.swift in Sources */,
 				3EEFE34A2DAFB20C00F5B0FF /* Font+AppFont.swift in Sources */,
 				3E495E642DE746700051188A /* FutureHabitViewModel.swift in Sources */,
 				3E495E5B2DE729040051188A /* HabitProgress.swift in Sources */,
+				3EF4991C2DF334F5001A31FE /* EditHabitUIState.swift in Sources */,
 				3EEFE34B2DAFB20C00F5B0FF /* View+DismissKeyboard.swift in Sources */,
 				3EEFE34D2DAFB20C00F5B0FF /* Endpoint.swift in Sources */,
 				3EEFE34E2DAFB20C00F5B0FF /* WatchConnectivityDelegate.swift in Sources */,
-				3EBDA85F2DEEF271007D99F9 /* EditHabitViewCoordinator.swift in Sources */,
+				3EBDA85F2DEEF271007D99F9 /* EditHabitCoordinator.swift in Sources */,
 				3EEFE3502DAFB20C00F5B0FF /* AppLogger.swift in Sources */,
 				3E495E9A2DE7834A0051188A /* AppLanguage.swift in Sources */,
-				3E8DFA072DE4CD7E0021E1EF /* AddHabitViewCoordinator.swift in Sources */,
+				3E8DFA072DE4CD7E0021E1EF /* AddHabitCoordinator.swift in Sources */,
 				3E495E8F2DE7807A0051188A /* String+Localization.swift in Sources */,
 				3E495E682DE74BA50051188A /* FutureHabitItem.swift in Sources */,
 				3E8DF9EF2DE4CAAC0021E1EF /* MainCoordinator.swift in Sources */,
@@ -953,7 +953,7 @@
 				3EEFE3592DAFB20C00F5B0FF /* QuoteResponse.swift in Sources */,
 				3EEFE35A2DAFB20C00F5B0FF /* IntroView.swift in Sources */,
 				3EEFE35B2DAFB20C00F5B0FF /* HomeViewModel.swift in Sources */,
-				3E8DFA012DE4CD1A0021E1EF /* SetNameViewCoordinator.swift in Sources */,
+				3E8DFA012DE4CD1A0021E1EF /* SetNameCoordinator.swift in Sources */,
 				3EEFE2D42DAFB1F000F5B0FF /* HabitMinderApp.swift in Sources */,
 				3EEFE2D22DAFB1E600F5B0FF /* Test.swift in Sources */,
 				3EA986472DEB67530004B71B /* PresentationStyle.swift in Sources */,

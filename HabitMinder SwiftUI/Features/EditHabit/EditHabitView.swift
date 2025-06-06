@@ -8,20 +8,19 @@
 import SwiftUI
 
 struct EditHabitView: View {
-    @StateObject private var editHabitViewModel: EditHabitViewModel
-    @EnvironmentObject private var coordinator: EditHabitViewCoordinator
+    @ObservedObject private var editHabitViewModel: EditHabitViewModel
     @FocusState private var isFocused: Bool
+    @State private var tempHabitTitle = ""
     @State private var showToast = false
     
     init(editHabitViewModel: EditHabitViewModel) {
-        _editHabitViewModel = StateObject(wrappedValue: editHabitViewModel)
+        self.editHabitViewModel = editHabitViewModel
     }
     
     var body: some View {
         VStack {
             topViews
             addHabitTextField
-            
             Spacer()
             
             if showToast {
@@ -32,7 +31,6 @@ struct EditHabitView: View {
         }
         .background(.appGray)
         .dismissKeyboard(focus: $isFocused)
-            
     }
     
     private var titleText: some View {
@@ -42,23 +40,19 @@ struct EditHabitView: View {
     
     private var saveButton: some View {
         Button {
-            editHabitViewModel.save()
-            editHabitViewModel.postHabitEditedNotification()
-            coordinator.goBack()
+            editHabitViewModel.saveAndDismiss()
         } label: {
             Text(LocalizedStrings.Shared.saveButton)
                 .font(.AppFont.rooneySansBold.size(20))
                 .tint(.primary)
         }
-        .disabled(editHabitViewModel.isSaveButtonEnabled.not)
+        .disabled(editHabitViewModel.uiState.isSaveButtonEnabled.not)
     }
     
     private var topViews: some View {
         HStack {
             titleText
-            
             Spacer()
-            
             saveButton
         }
         .padding(.horizontal, 24)
@@ -66,15 +60,21 @@ struct EditHabitView: View {
     }
     
     private var addHabitTextField: some View {
-        TextField(LocalizedStrings.Shared.habitPlaceholder, text: $editHabitViewModel.habitTitle)
-            .font(.AppFont.rooneySansRegular.size(16))
-            .padding()
-            .background(.appWhite)
-            .cornerRadius(12)
-            .padding(.horizontal, 16)
-            .padding(.top, 16)
-            .focused($isFocused)
-            .submitLabel(.done)
+        TextField(
+            LocalizedStrings.Shared.habitPlaceholder,
+            text: $tempHabitTitle
+        )
+        .font(.AppFont.rooneySansRegular.size(16))
+        .padding()
+        .background(.appWhite)
+        .cornerRadius(12)
+        .padding(.horizontal, 16)
+        .padding(.top, 16)
+        .focused($isFocused)
+        .submitLabel(.done)
+        .onChange(of: tempHabitTitle) { _, newValue in
+            editHabitViewModel.setHabitTitle(newValue)
+        }
     }
     
     private var toastLabel: some View {
@@ -83,8 +83,8 @@ struct EditHabitView: View {
             .foregroundColor(.white)
             .padding(.vertical, 8)
             .padding(.horizontal, 16)
-            .background(Color.black.opacity(0.8))
-            .cornerRadius(8)
+            .background(.black.opacity(0.8))
+            .cornerRadius(12)
             .transition(.opacity.combined(with: .scale))
             .padding(.bottom, 100)
     }
@@ -93,7 +93,6 @@ struct EditHabitView: View {
         Button {
             withAnimation {
                 editHabitViewModel.missHabit()
-                editHabitViewModel.postHabitEditedNotification()
                 showToast = true
             }
             DispatchQueue.delay(2) {
@@ -120,5 +119,13 @@ struct EditHabitView: View {
 #Preview {
     @Previewable @Environment(\.modelContext) var context
     
-    EditHabitView(editHabitViewModel: EditHabitViewModel(habit: HabitModel(title: "Read book"), dataManager: DataManager<HabitModel>(context: context)))
+    let sampleHabit = HabitModel(title: "Read book")
+    let fakeCoordinator = EditHabitCoordinator(dismiss: {
+    })
+    let viewModel = EditHabitViewModel(
+        dataManager: DataManager<HabitModel>(context: context),
+        coordinator: fakeCoordinator,
+        habit: sampleHabit
+    )
+    EditHabitView(editHabitViewModel: viewModel)
 }

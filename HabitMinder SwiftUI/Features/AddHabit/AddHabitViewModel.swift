@@ -8,30 +8,37 @@
 import Foundation
 
 final class AddHabitViewModel: ObservableObject {
-    @Published var habitTitle = "" {
-        didSet { updateValidationState() }
-    }
-    @Published private(set) var isSaveButtonEnabled = false
-    
+    @Published private(set) var uiState = AddHabitUIState()
+
     private let habitManager: DataManager<HabitModel>
+    private let coordinator: AddHabitCoordinator
     
-    init(habitManager: DataManager<HabitModel>) {
+    private var trimmedHabitTitle: String {
+        uiState.habitTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    
+    init(
+        habitManager: DataManager<HabitModel>,
+        coordinator: AddHabitCoordinator
+    ) {
         self.habitManager = habitManager
+        self.coordinator = coordinator
+    }
+    
+    func setHabitTitle(_ newValue: String) {
+        uiState.habitTitle = newValue
+        updateValidationState()
     }
     
     private func updateValidationState() {
-        let trimmedName = habitTitle.trimmingCharacters(in: .whitespacesAndNewlines)
-        let isValid = trimmedName.count > 1
-        
-        isSaveButtonEnabled = isValid
+        let isValid = trimmedHabitTitle.count > 0
+        uiState.isSaveButtonEnabled = isValid
     }
     
-    func save() {
-        let newHabit = HabitModel(title: habitTitle)
+    func saveAndDismiss() {
+        let newHabit = HabitModel(title: uiState.habitTitle)
         habitManager.save(newHabit)
-    }
-    
-    func postHabitAddedNotification() {
         NotificationCenter.default.post(name: AppNotification.Habit.added, object: nil)
+        coordinator.goBack()
     }
 }

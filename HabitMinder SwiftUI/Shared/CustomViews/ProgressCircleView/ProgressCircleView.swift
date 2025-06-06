@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct ProgressCircleView: View {
-    @EnvironmentObject var themeManager: ThemeManager
+    @EnvironmentObject private var themeManager: ThemeManager
     
-    let progress: Double
+    private let progress: Double
+    
+    init (progress: Double) {
+        self.progress = progress
+    }
     
     var body: some View {
         ZStack {
@@ -27,5 +31,7 @@ struct ProgressCircleView: View {
 }
 
 #Preview {
-    ProgressCircleView(progress: 0.2)
+    let progress = 0.2
+    ProgressCircleView(progress: progress)
+        .environmentObject(ThemeManager.shared)
 }

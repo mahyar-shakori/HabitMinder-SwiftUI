@@ -11,5 +11,4 @@ struct IntroUIState {
     let image: String
     let titleText: String
     let descriptionText: String
-    let isSkipHidden: Bool
 }

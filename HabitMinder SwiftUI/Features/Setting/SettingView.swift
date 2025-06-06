@@ -8,16 +8,15 @@
 import SwiftUI
 
 struct SettingView: View {
-    @StateObject private var settingViewModel: SettingViewModel
+    @ObservedObject private var settingViewModel: SettingViewModel
     @EnvironmentObject private var languageManager: LanguageManager
     @EnvironmentObject private var themeManager: ThemeManager
-    @EnvironmentObject private var coordinator: SettingViewCoordinator
     @State private var isShowingLanguagePicker = false
     @State private var isShowingColorPicker = false
     @State private var isEditingUserName = false
     
     init(settingViewModel: SettingViewModel) {
-        _settingViewModel = StateObject(wrappedValue: settingViewModel)
+        self.settingViewModel = settingViewModel
     }
     
     var body: some View {
@@ -26,7 +25,6 @@ struct SettingView: View {
             
             ScrollView {
                 settingCustomize
-                
                 Spacer()
             }
             .scrollIndicators(.hidden)
@@ -36,7 +34,7 @@ struct SettingView: View {
             settingViewModel.load()
         }
     }
- 
+    
     private var titleText: some View {
         Text(LocalizedStrings.SettingPage.title)
             .font(.AppFont.rooneySansBold.size(28))
@@ -47,7 +45,6 @@ struct SettingView: View {
     
     private var settingCustomize: some View {
         VStack(alignment: .leading, spacing: 24) {
-            
             userNameSection
             languageSection
             colorSection
@@ -65,24 +62,6 @@ struct SettingView: View {
         }
     }
     
-    private var languageSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(LocalizedStrings.SettingPage.Language)
-                .font(.AppFont.rooneySansRegular.size(18))
-                .foregroundColor(.gray)
-            languagePickerField
-        }
-    }
-    
-    private var colorSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(LocalizedStrings.SettingPage.appColor)
-                .font(.AppFont.rooneySansRegular.size(18))
-                .foregroundColor(.gray)
-            colorPickerField
-        }
-    }
-    
     private var userNameField: some View {
         Button {
             isEditingUserName = true
@@ -96,8 +75,10 @@ struct SettingView: View {
         }
         .buttonStyle(PlainButtonStyle())
         .sheet(isPresented: $isEditingUserName) {
-            UserNameEditorView(isPresented: $isEditingUserName,
-                               currentName: settingViewModel.userName)
+            UserNameEditorView(
+                isPresented: $isEditingUserName,
+                currentName: settingViewModel.userName
+            )
             .environmentObject(settingViewModel)
         }
     }
@@ -114,13 +95,22 @@ struct SettingView: View {
         }
     }
     
+    
+    private var languageSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(LocalizedStrings.SettingPage.Language)
+                .font(.AppFont.rooneySansRegular.size(18))
+                .foregroundColor(.gray)
+            languagePickerField
+        }
+    }
+    
     private var languagePickerField: some View {
         Button {
             isShowingLanguagePicker = true
         } label: {
             languagePickerButtonContent
                 .padding(12)
-                .contentShape(Rectangle())
                 .background(
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color.appWhite)
@@ -144,13 +134,21 @@ struct SettingView: View {
         }
     }
     
+    private var colorSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(LocalizedStrings.SettingPage.appColor)
+                .font(.AppFont.rooneySansRegular.size(18))
+                .foregroundColor(.gray)
+            colorPickerField
+        }
+    }
+    
     private var colorPickerField: some View {
         Button {
             isShowingColorPicker = true
         } label: {
             colorPickerButtonContent
                 .padding(12)
-                .contentShape(Rectangle())
                 .background(
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color.appWhite)
@@ -180,7 +178,10 @@ struct SettingView: View {
 }
 
 #Preview {
-    SettingView(settingViewModel: SettingViewModel())
+    let fakeCoordinator = SettingCoordinator(dismiss: {
+    })
+    let viewModel = SettingViewModel(coordinator: fakeCoordinator)
+    SettingView(settingViewModel: viewModel)
         .environmentObject(ThemeManager.shared)
         .environmentObject(LanguageManager.shared)
 }

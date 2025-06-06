@@ -8,26 +8,24 @@
 import SwiftUI
 
 struct AddHabitView: View {
-    @StateObject private var addHabitViewModel: AddHabitViewModel
-    @EnvironmentObject private var coordinator: AddHabitViewCoordinator
+    @ObservedObject private var addHabitViewModel: AddHabitViewModel
     @FocusState private var isFocused: Bool
+    @State private var tempHabitTitle = ""
     
     init(addHabitViewModel: AddHabitViewModel) {
-        _addHabitViewModel = StateObject(wrappedValue: addHabitViewModel)
+        self.addHabitViewModel = addHabitViewModel
     }
-
+    
     var body: some View {
         VStack {
             topViews
             addHabitTextField
-        
             Spacer()
         }
         .background(.appGray)
         .dismissKeyboard(focus: $isFocused)
-            
     }
-
+    
     private var titleText: some View {
         Text(LocalizedStrings.AddHabitPage.title)
             .font(.AppFont.rooneySansBold.size(28))
@@ -35,15 +33,13 @@ struct AddHabitView: View {
     
     private var saveButton: some View {
         Button {
-            addHabitViewModel.save()
-            addHabitViewModel.postHabitAddedNotification()
-            coordinator.goBack()
+            addHabitViewModel.saveAndDismiss()
         } label: {
-                Text(LocalizedStrings.Shared.saveButton)
-                    .font(.AppFont.rooneySansBold.size(20))
-                    .tint(.primary)
+            Text(LocalizedStrings.Shared.saveButton)
+                .font(.AppFont.rooneySansBold.size(20))
+                .tint(.primary)
         }
-        .disabled(addHabitViewModel.isSaveButtonEnabled.not)
+        .disabled(addHabitViewModel.uiState.isSaveButtonEnabled.not)
     }
     
     private var topViews: some View {
@@ -57,20 +53,32 @@ struct AddHabitView: View {
     }
     
     private var addHabitTextField: some View {
-        TextField(LocalizedStrings.Shared.habitPlaceholder, text: $addHabitViewModel.habitTitle)
-            .font(.AppFont.rooneySansRegular.size(16))
-            .padding()
-            .background(.appWhite)
-            .cornerRadius(12)
-            .padding(.horizontal, 16)
-            .padding(.top, 16)
-            .focused($isFocused)
-            .submitLabel(.done)
+        TextField(
+            LocalizedStrings.Shared.habitPlaceholder,
+            text: $tempHabitTitle
+        )
+        .font(.AppFont.rooneySansRegular.size(16))
+        .padding()
+        .background(.appWhite)
+        .cornerRadius(12)
+        .padding(.horizontal, 16)
+        .padding(.top, 16)
+        .focused($isFocused)
+        .submitLabel(.done)
+        .onChange(of: tempHabitTitle) { _, newValue in
+            addHabitViewModel.setHabitTitle(newValue)
+        }
     }
 }
 
 #Preview {
     @Previewable @Environment(\.modelContext) var context
-
-    AddHabitView(addHabitViewModel: AddHabitViewModel(habitManager: DataManager<HabitModel>(context: context)))
+    
+    let fakeCoordinator = AddHabitCoordinator(dismiss: {
+    })
+    let viewModel = AddHabitViewModel(
+        habitManager: DataManager<HabitModel>(context: context),
+        coordinator: fakeCoordinator
+    )
+    AddHabitView(addHabitViewModel: viewModel)
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject var homeViewModel = HomeViewModel()
+    @StateObject private var homeViewModel = HomeViewModel()
     
     var body: some View {
         NavigationStack {
@@ -24,7 +24,9 @@ struct HomeView: View {
         List(homeViewModel.habits, id: \.self) { habit in
             HStack {
                 Text(habit.title)
+                
                 Spacer()
+                
                 Text("\(habit.daysLeft)" + LocalizedStrings.Cell.Habit.daysLeft)
                     .font(.footnote)
                     .foregroundColor(.gray)

@@ -8,24 +8,23 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    @StateObject private var welcomeViewModel: WelcomeViewModel
-    @EnvironmentObject private var coordinator: WelcomeViewCoordinator
+    @ObservedObject private var welcomeViewModel: WelcomeViewModel
     @State private var showAlert = false
     
     init(welcomeViewModel: WelcomeViewModel) {
-        _welcomeViewModel = StateObject(wrappedValue: welcomeViewModel)
+        self.welcomeViewModel = welcomeViewModel
     }
-   
+    
     var body: some View {
         content
             .navigationBarBackButtonHidden(true)
             .onAppear(perform: setupViewModel)
-            .onChange(of: welcomeViewModel.uiState.errorMessage) {
-                showAlert = welcomeViewModel.uiState.errorMessage != nil
+            .onChange(of: welcomeViewModel.uiState.errorMessage) { _, newError in
+                showAlert = (newError != nil)
             }
             .alert(LocalizedStrings.Alert.Network.title, isPresented: $showAlert) {
                 Button(LocalizedStrings.Shared.okButton) {
-                    coordinator.goToHome(quote: "")
+                    welcomeViewModel.goToHomePage()
                 }
             } message: {
                 Text(welcomeViewModel.uiState.errorMessage ?? LocalizedStrings.Alert.Network.networkAlertDefaultError)
@@ -39,18 +38,15 @@ struct WelcomeView: View {
             
             VStack {
                 Spacer()
-                
                 welcomeImage
                 welcomeText
                 progressView
-                
                 Spacer()
             }
         }
     }
     
     private func setupViewModel() {
-        welcomeViewModel.setQuoteDelegate(coordinator)
         welcomeViewModel.loadUserName()
         Task {
             await welcomeViewModel.fetchData()
@@ -79,8 +75,10 @@ struct WelcomeView: View {
 }
 
 #Preview {
-    let mockNavigate: (AppRoute, PresentationStyle) -> Void = { _, _ in }
-
-    return WelcomeView(welcomeViewModel: WelcomeViewModel())
-        .environmentObject(WelcomeViewCoordinator(navigate: mockNavigate))
+    let fakeCoordinator = WelcomeCoordinator(navigate: { _, _ in
+    })
+    let viewModel = WelcomeViewModel(
+        coordinator: fakeCoordinator
+    )
+    WelcomeView(welcomeViewModel: viewModel)
 }

@@ -12,27 +12,23 @@ final class WelcomeViewModel: ObservableObject {
     
     private let networkAPI: DataFetcher
     private let userDefaultsStorage: UserDefaultsStorage<UserDefaultKeys, String>
-    private weak var quoteDelegate: QuoteUpdatable?
-    
+    private let coordinator: WelcomeCoordinator
+
     init(
-    networkAPI: DataFetcher = NetworkAPI(configuration: .init(timeoutInterval: 3)),
-        userDefaultsStorage: UserDefaultsStorage<UserDefaultKeys, String> = UserDefaultsStorage(key: .userName),
-        quoteDelegate: QuoteUpdatable? = nil
+        coordinator: WelcomeCoordinator,
+        networkAPI: DataFetcher = NetworkAPI(configuration: .init(timeoutInterval: 3)),
+        userDefaultsStorage: UserDefaultsStorage<UserDefaultKeys, String> = UserDefaultsStorage(key: .userName)
     ) {
+        self.coordinator = coordinator
         self.networkAPI = networkAPI
         self.userDefaultsStorage = userDefaultsStorage
-        self.quoteDelegate = quoteDelegate
     }
-    
-    func setQuoteDelegate(_ delegate: QuoteUpdatable) {
-        self.quoteDelegate = delegate
-    }
-    
+  
     func loadUserName() {
         let storedName = userDefaultsStorage.fetch()
         uiState.userName = formattedWelcomeName(from: storedName)
     }
-   
+  
     @MainActor
     func fetchData() async {
         do {
@@ -48,10 +44,12 @@ final class WelcomeViewModel: ObservableObject {
     }
     
     private func handleQuoteSuccess(_ quotes: [QuoteResponse]) {
-        let quote = quotes.first?.quote ?? ""
-        let trimmedQuote = quote.count > 100 ? LocalizedStrings.WelcomePage.defaultQuote : quote
+        let rawQuote = quotes.first?.quote ?? ""
+        let trimmedQuote = rawQuote.count > 100
+        ? LocalizedStrings.WelcomePage.defaultQuote
+        : rawQuote
         
-        quoteDelegate?.updateQuote(trimmedQuote)
+        coordinator.goToHome(trimmedQuote)
         
         uiState.quote = trimmedQuote
         uiState.isFetchSuccessful = true
@@ -61,9 +59,13 @@ final class WelcomeViewModel: ObservableObject {
     private func handleQuoteFailure(_ error: Error) {
         uiState.errorMessage = error.localizedDescription
     }
-
+    
+    func goToHomePage() {
+        coordinator.goToHome("")
+    }
+    
     private func formattedWelcomeName(from userName: String?) -> String {
         userName.map { LocalizedStrings.WelcomePage.welcome + $0 }
-            ?? LocalizedStrings.WelcomePage.guest
+        ?? LocalizedStrings.WelcomePage.guest
     }
 }

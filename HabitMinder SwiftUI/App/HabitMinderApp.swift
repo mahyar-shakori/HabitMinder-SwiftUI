@@ -13,6 +13,8 @@ struct HabitMinderApp: App {
         WindowGroup {
             RootView()
                 .modelContainer(for: [HabitModel.self, FutureHabitModel.self])
+                .environmentObject(LanguageManager.shared)
+                .environmentObject(ThemeManager.shared)
         }
     }
 }

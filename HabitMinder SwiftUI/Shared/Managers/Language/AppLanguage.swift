@@ -19,4 +19,11 @@ enum AppLanguage: String, CaseIterable, Identifiable {
         case .nl: return "Nederlands"
         }
     }
+    
+    var displayImage: String {
+        switch self {
+        case .en: return "EnglishFlag"
+        case .nl: return "NederlandsFlag"
+        }
+    }
 }

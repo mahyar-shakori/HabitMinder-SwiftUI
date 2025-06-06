@@ -8,25 +8,36 @@
 import Foundation
 
 final class SetNameViewModel: ObservableObject {
-    @Published var userName = "" {
-        didSet { updateValidationState() }
-    }
     @Published private(set) var uiState = SetNameUIState()
     
-    func validateAndContinue(onSuccess: () -> Void) {
-        let trimmedName = userName.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard trimmedName.isNotEmpty else {
-            applyErrorState()
-            return
-        }
-        saveUserName()
-        onSuccess()
+    private let coordinator: SetNameCoordinator
+    
+    private var trimmedUserName: String {
+        uiState.userName.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    
+    init(coordinator: SetNameCoordinator) {
+        self.coordinator = coordinator
+    }
+    
+    func setUserName(_ newValue: String) {
+        uiState.userName = newValue
+        updateValidationState()
     }
     
     private func updateValidationState() {
         resetErrorState()
-        let trimmedName = userName.trimmingCharacters(in: .whitespacesAndNewlines)
-        uiState.isValid = trimmedName.count > 1
+        uiState.isValid = trimmedUserName.count > 0
+    }
+    
+    func validateAndContinue(onSuccess: () -> Void) {
+        updateValidationState()
+        guard uiState.isValid else {
+            applyErrorState()
+            return
+        }
+        saveUserName(trimmedUserName)
+        onSuccess()
     }
     
     private func applyErrorState() {
@@ -39,10 +50,14 @@ final class SetNameViewModel: ObservableObject {
         uiState.errorText = ""
     }
     
-    private func saveUserName() {
+    private func saveUserName(_ name: String) {
         let userNameStorage = UserDefaultsStorage<UserDefaultKeys, String>(key: .userName)
         let loginStorage = UserDefaultsStorage<UserDefaultKeys, Bool>(key: .isLogin)
-        userNameStorage.save(value: userName)
+        userNameStorage.save(value: name)
         loginStorage.save(value: true)
+    }
+    
+    func goToWelcomePage() {
+        coordinator.goToWelcome()
     }
 }

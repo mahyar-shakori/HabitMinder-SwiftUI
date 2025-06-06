@@ -27,10 +27,10 @@ struct FutureHabitListRowView: View {
 #Preview {
     let id = UUID()
     let date = Date()
-    FutureHabitListRowView(item: FutureHabitItem(
+    let item = FutureHabitItem(
         id: id,
         title: "Drink Water",
-        dateCreate: date,
-    ))
+        dateCreate: date
+    )
+    FutureHabitListRowView(item: item)
 }
-

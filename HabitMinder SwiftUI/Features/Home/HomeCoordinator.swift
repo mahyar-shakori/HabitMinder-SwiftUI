@@ -1,5 +1,5 @@
 //
-//  HomeViewCoordinator.swift
+//  HomeCoordinator.swift
 //  HabitMinder SwiftUI
 //
 //  Created by Mahyar on 26/05/2025.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-final class HomeViewCoordinator: ObservableObject {
-    let navigate: (AppRoute, PresentationStyle) -> Void
+final class HomeCoordinator: ObservableObject {
+    private let navigate: (AppRoute, PresentationStyle) -> Void
     
     init(navigate: @escaping (AppRoute, PresentationStyle) -> Void) {
         self.navigate = navigate
@@ -18,7 +18,10 @@ final class HomeViewCoordinator: ObservableObject {
         navigate(.home(.addHabit), presentationStyle)
     }
     
-    func goToEditHabit(habit: HabitModel, presentationStyle: PresentationStyle = .push) {
+    func goToEditHabit(
+        habit: HabitModel,
+        presentationStyle: PresentationStyle = .push
+    ) {
         navigate(.home(.editHabit(habit: habit)), presentationStyle)
     }
    

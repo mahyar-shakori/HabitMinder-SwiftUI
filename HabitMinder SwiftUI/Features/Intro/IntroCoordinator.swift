@@ -1,5 +1,5 @@
 //
-//  IntroViewCoordinator.swift
+//  IntroCoordinator.swift
 //  HabitMinder SwiftUI
 //
 //  Created by Mahyar on 26/05/2025.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-final class IntroViewCoordinator: ObservableObject {
-    let navigate: (AppRoute, PresentationStyle) -> Void
+final class IntroCoordinator: ObservableObject {
+    private let navigate: (AppRoute, PresentationStyle) -> Void
     
     init(navigate: @escaping (AppRoute, PresentationStyle) -> Void) {
         self.navigate = navigate

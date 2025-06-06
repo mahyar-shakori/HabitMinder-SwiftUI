@@ -8,7 +8,14 @@
 import Foundation
 
 extension DispatchQueue {
-    static func delay(_ seconds: TimeInterval, on queue: DispatchQueue = .main, completion: @escaping () -> Void) {
-        queue.asyncAfter(deadline: .now() + seconds, execute: completion)
+    static func delay(
+        _ seconds: TimeInterval,
+        on queue: DispatchQueue = .main,
+        completion: @escaping () -> Void
+    ) {
+        queue.asyncAfter(
+                deadline: .now() + seconds,
+                execute: completion
+            )
     }
 }

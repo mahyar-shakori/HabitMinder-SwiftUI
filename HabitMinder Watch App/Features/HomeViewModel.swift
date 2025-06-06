@@ -8,7 +8,7 @@
 import Foundation
 
 final class HomeViewModel: ObservableObject {
-    @Published var habits: [HabitData] = []
+    @Published private(set) var habits: [HabitData] = []
 
     func updateHabits(_ newHabits: [HabitData]) {
         self.habits = newHabits

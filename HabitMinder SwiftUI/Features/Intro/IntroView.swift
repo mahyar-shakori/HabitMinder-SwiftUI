@@ -8,23 +8,19 @@
 import SwiftUI
 
 struct IntroView: View {
-    @StateObject private var introViewModel: IntroViewModel
-    @EnvironmentObject private var coordinator: IntroViewCoordinator
+    @ObservedObject private var introViewModel: IntroViewModel
     
     init(introViewModel: IntroViewModel) {
-        _introViewModel = StateObject(wrappedValue: introViewModel)
+        self.introViewModel = introViewModel
     }
     
     var body: some View {
         VStack(spacing: 8) {
             Spacer()
-            
             image
             titleText
             descriptionText
-            
             Spacer()
-            
             bottomControls
         }
         .background(.appGray)
@@ -57,9 +53,11 @@ struct IntroView: View {
         ZStack {
             pageControl
             HStack {
-                if introViewModel.pageState.isSkipHidden.not {
+                
+                if introViewModel.currentState == .first {
                     skipButton
                 }
+                
                 Spacer()
                 nextButton
             }
@@ -70,7 +68,7 @@ struct IntroView: View {
     
     private var skipButton: some View {
         Button {
-            coordinator.goToSetName()
+            introViewModel.goToSetNamePage()
         } label: {
             Text(LocalizedStrings.IntroPage.skipButton)
                 .font(.AppFont.rooneySansRegular.size(16))
@@ -81,7 +79,7 @@ struct IntroView: View {
     
     private var nextButton: some View {
         Button {
-            introViewModel.currentState == .first ? introViewModel.nextState() : coordinator.goToSetName()
+            introViewModel.nextState()
         } label: {
           Text(LocalizedStrings.IntroPage.nextButton)
                 .font(.AppFont.rooneySansRegular.size(18))
@@ -112,5 +110,10 @@ struct IntroView: View {
 }
 
 #Preview {
-    IntroView(introViewModel: IntroViewModel())
+    let fakeCoordinator = IntroCoordinator(navigate: { _, _ in
+    })
+    let viewModel = IntroViewModel(
+        coordinator: fakeCoordinator
+    )
+    IntroView(introViewModel: viewModel)
 }

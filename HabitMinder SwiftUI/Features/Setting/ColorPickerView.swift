@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ColorPickerView: View {
-    @EnvironmentObject var themeManager: ThemeManager
-    @Binding var isPresented: Bool
+    @EnvironmentObject private var themeManager: ThemeManager
+    @Binding private var isPresented: Bool
     @State private var selectedColor: Color
     
     init(isPresented: Binding<Bool>) {
@@ -103,7 +103,7 @@ struct ColorPickerView: View {
 }
 
 #Preview {
-    ColorPickerView(isPresented: .constant(false))
+    let isPresented = Binding<Bool>.constant(false)
+    ColorPickerView(isPresented: isPresented)
         .environmentObject(ThemeManager.shared)
-    
 }

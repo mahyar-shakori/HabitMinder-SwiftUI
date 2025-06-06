@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct FutureHabitView: View {
-    @StateObject private var futureHabitViewModel: FutureHabitViewModel
-    @EnvironmentObject private var coordinator: FutureHabitViewCoordinator
+    @ObservedObject private var futureHabitViewModel: FutureHabitViewModel
     @FocusState private var isFocused: Bool
+    @State private var tempHabitTitle = ""
     @State private var showDeleteAlert = false
     
     init(futureHabitViewModel: FutureHabitViewModel) {
-        _futureHabitViewModel = StateObject(wrappedValue: futureHabitViewModel)
+        self.futureHabitViewModel = futureHabitViewModel
     }
     
     var body: some View {
@@ -45,7 +45,6 @@ struct FutureHabitView: View {
             topViews
             addHabitTextField
             habitList
-            
             Spacer()
         }
     }
@@ -90,16 +89,22 @@ struct FutureHabitView: View {
     }
     
     private var addHabitTextField: some View {
-        TextField(LocalizedStrings.Shared.habitPlaceholder, text: $futureHabitViewModel.habitTitle)
-            .font(.AppFont.rooneySansRegular.size(16))
-            .padding()
-            .background(.appWhite)
-            .cornerRadius(12)
-            .padding(.horizontal, 16)
-            .padding(.top, 16)
-            .padding(.bottom, 8)
-            .focused($isFocused)
-            .submitLabel(.done)
+        TextField(
+            LocalizedStrings.Shared.habitPlaceholder,
+            text: $tempHabitTitle
+        )
+        .font(.AppFont.rooneySansRegular.size(16))
+        .padding()
+        .background(.appWhite)
+        .cornerRadius(12)
+        .padding(.horizontal, 16)
+        .padding(.top, 16)
+        .padding(.bottom, 8)
+        .focused($isFocused)
+        .submitLabel(.done)
+        .onChange(of: tempHabitTitle) { _, newValue in
+            futureHabitViewModel.setHabitTitle(newValue)
+        }
     }
     
     private func deleteSwipeButton(for id: UUID) -> some View {
@@ -120,5 +125,11 @@ struct FutureHabitView: View {
 #Preview {
     @Previewable @Environment(\.modelContext) var context
     
-    FutureHabitView(futureHabitViewModel: FutureHabitViewModel(habitManager: DataManager<FutureHabitModel>(context: context)))
+    let fakeCoordinator = FutureHabitCoordinator(dismiss: {
+    })
+    let viewModel = FutureHabitViewModel(
+        habitManager: DataManager<FutureHabitModel>(context: context),
+        coordinator: fakeCoordinator
+    )
+    FutureHabitView(futureHabitViewModel: viewModel)
 }

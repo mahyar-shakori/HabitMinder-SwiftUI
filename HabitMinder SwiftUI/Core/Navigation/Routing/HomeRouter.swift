@@ -10,46 +10,106 @@ import SwiftData
 
 struct HomeRouter {
     @ViewBuilder
-    func view(for route: HomeRoute, using coordinator: MainCoordinator, modelContext: ModelContext) -> some View {
+    func view(
+        for route: HomeRoute,
+        using coordinator: MainCoordinator,
+        modelContext: ModelContext
+    ) -> some View {
         switch route {
         case .home(let quote):
-            let viewCoordinator = HomeViewCoordinator(navigate: coordinator.navigate)
-            HomeView(
-                homeViewModel: HomeViewModel(
-                    quote: quote,
-                    habitManager: DataManager<HabitModel>(context: modelContext), futureHabitManager: DataManager<FutureHabitModel>(context: modelContext)
-                )
+            homeScreen(
+                mainCoordinator: coordinator,
+                modelContext: modelContext,
+                quote: quote
             )
-            .environmentObject(viewCoordinator)
-            .environmentObject(ThemeManager.shared)
-            
         case .addHabit:
-            let viewCoordinator = AddHabitViewCoordinator(dismiss: coordinator.pop)
-            AddHabitView(
-                addHabitViewModel: AddHabitViewModel(
-                    habitManager: DataManager<HabitModel>(context: modelContext)
-                )
-            ).environmentObject(viewCoordinator)
-        case .editHabit(let habit):
-            let viewCoordinator = EditHabitViewCoordinator(dismiss: coordinator.pop)
-            EditHabitView(
-                editHabitViewModel: EditHabitViewModel(habit: habit,
-                dataManager: DataManager<HabitModel>(context: modelContext))
+            addHabitScreen(
+                mainCoordinator: coordinator,
+                modelContext: modelContext
             )
-            .environmentObject(viewCoordinator)
+        case .editHabit(let habit):
+            editHabitScreen(
+                mainCoordinator: coordinator,
+                modelContext: modelContext,
+                habit: habit
+            )
         case .futureHabit:
-            let viewCoordinator = FutureHabitViewCoordinator(dismiss: coordinator.pop)
-            FutureHabitView(
-                futureHabitViewModel: FutureHabitViewModel(
-                    habitManager: DataManager<FutureHabitModel>(context: modelContext)
-                )
-            ).environmentObject(viewCoordinator)
+            futureHabitScreen(
+                mainCoordinator: coordinator,
+                modelContext: modelContext
+            )
         case .settingPage:
-            let viewCoordinator = SettingViewCoordinator(dismiss: coordinator.pop)
-            SettingView(settingViewModel: SettingViewModel())
-                .environmentObject(LanguageManager.shared)
-                .environmentObject(ThemeManager.shared)
-                .environmentObject(viewCoordinator)
+            settingScreen(
+                mainCoordinator: coordinator,
+                modelContext: modelContext
+            )
         }
+    }
+    
+    @ViewBuilder
+    private func homeScreen(
+        mainCoordinator: MainCoordinator,
+        modelContext: ModelContext,
+        quote: String
+    ) -> some View {
+        let viewCoordinator = HomeCoordinator(navigate: mainCoordinator.navigate)
+        let viewModel = HomeViewModel(
+            quote: quote,
+            habitManager: DataManager<HabitModel>(context: modelContext),
+            futureHabitManager: DataManager<FutureHabitModel>(context: modelContext),
+            coordinator: viewCoordinator
+        )
+        HomeView(homeViewModel: viewModel)
+    }
+    
+    @ViewBuilder
+    private func addHabitScreen(
+        mainCoordinator: MainCoordinator,
+        modelContext: ModelContext
+    ) -> some View {
+        let viewCoordinator = AddHabitCoordinator(dismiss: mainCoordinator.pop)
+        let viewModel = AddHabitViewModel(
+            habitManager: DataManager<HabitModel>(context: modelContext),
+            coordinator: viewCoordinator
+        )
+        AddHabitView(addHabitViewModel: viewModel)
+    }
+    
+    @ViewBuilder
+    private func editHabitScreen(
+        mainCoordinator: MainCoordinator,
+        modelContext: ModelContext,
+        habit: HabitModel
+    ) -> some View {
+        let viewCoordinator = EditHabitCoordinator(dismiss: mainCoordinator.pop)
+        let viewModel = EditHabitViewModel(
+            dataManager: DataManager<HabitModel>(context: modelContext),
+            coordinator: viewCoordinator,
+            habit: habit
+        )
+        EditHabitView(editHabitViewModel: viewModel)
+    }
+    
+    @ViewBuilder
+    private func futureHabitScreen(
+        mainCoordinator: MainCoordinator,
+        modelContext: ModelContext
+    ) -> some View {
+        let viewCoordinator = FutureHabitCoordinator(dismiss: mainCoordinator.pop)
+        let viewModel = FutureHabitViewModel(
+            habitManager: DataManager<FutureHabitModel>(context: modelContext),
+            coordinator: viewCoordinator
+        )
+        FutureHabitView(futureHabitViewModel: viewModel)
+    }
+    
+    @ViewBuilder
+    private func settingScreen(
+        mainCoordinator: MainCoordinator,
+        modelContext: ModelContext
+    ) -> some View {
+        let viewCoordinator = SettingCoordinator(dismiss: mainCoordinator.pop)
+        let viewModel = SettingViewModel(coordinator: viewCoordinator)
+        SettingView(settingViewModel: viewModel)
     }
 }

@@ -8,6 +8,7 @@
 import Foundation
 
 struct SetNameUIState {
+    var userName = ""
     var borderState: BorderState = .normal
     var errorText = ""
     var isValid = false

@@ -8,14 +8,21 @@
 import SwiftUI
 
 struct DropDownRowView: View {
-    let item: DropDownItem
-    let isEnabled: Bool
+    private let item: DropDownItem
+    private let isEnabled: Bool
+    
+    init(
+        item: DropDownItem,
+        isEnabled: Bool = true
+    ) {
+        self.item = item
+        self.isEnabled = isEnabled
+    }
     
     var body: some View {
         HStack(spacing: 16) {
             image
             text
-            
             Spacer()
         }
         .padding(.vertical, 16)
@@ -42,13 +49,12 @@ struct DropDownRowView: View {
 }
 
 #Preview {
-    DropDownRowView(
-        item: DropDownItem(
-            title: "Add Habit",
-            imageName: .addNewHabit,
-            target: .addHabit,
-            isEnabled: true
-        ),
+    let item = DropDownItem(
+        title: "Add Habit",
+        imageName: .addNewHabit,
+        target: .addHabit,
         isEnabled: true
     )
+    let isEnabled = true
+    DropDownRowView(item: item, isEnabled: isEnabled)
 }

@@ -9,7 +9,10 @@ import Foundation
 
 protocol BaseCoordinator: ObservableObject {
     var path: [NavigationItem] { get set }
-    func navigate(to route: AppRoute, style: PresentationStyle)
+    func navigate(
+        to route: AppRoute,
+        style: PresentationStyle
+    )
     func pop()
     func popToRoot()
     func start()

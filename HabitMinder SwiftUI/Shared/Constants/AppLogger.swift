@@ -7,7 +7,9 @@
 
 import OSLog
 
+#if DEBUG
 struct AppLogger {
     static let watch = Logger(subsystem: Bundle.main.bundleIdentifier ?? "App", category: "WatchConnectivity")
     static let data = Logger(subsystem: Bundle.main.bundleIdentifier ?? "App", category: "DataManager")
 }
+#endif

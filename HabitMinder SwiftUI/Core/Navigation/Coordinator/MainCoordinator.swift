@@ -12,12 +12,18 @@ final class MainCoordinator: BaseCoordinator {
     @Published var path: [NavigationItem] = []
     @Published var sheetItem: NavigationItem?
     @Published var fullScreenItem: NavigationItem?
-
+    
     private let introRouter = IntroRouter()
     private let homeRouter = HomeRouter()
-
-    func navigate(to route: AppRoute, style: PresentationStyle) {
-        let item = NavigationItem(route: route, style: style)
+    
+    func navigate(
+        to route: AppRoute,
+        style: PresentationStyle
+    ) {
+        let item = NavigationItem(
+            route: route,
+            style: style
+        )
         switch style {
         case .push:
             path.append(item)
@@ -33,23 +39,38 @@ final class MainCoordinator: BaseCoordinator {
     }
 
     func popToRoot() {
-        guard let first = path.first else { return }
+        guard let first = path.first else {
+            return
+        }
         path = [first]
     }
 
     func start() {
         let loginStorage = UserDefaultsStorage<UserDefaultKeys, Bool>(key: .isLogin)
         let initialRoute: AppRoute = loginStorage.fetch() == true ? .intro(.welcome) : .intro(.setLanguage)
-        path = [NavigationItem(route: initialRoute, style: .push)]
+        path = [NavigationItem(
+            route: initialRoute,
+            style: .push
+        )]
     }
 
     @ViewBuilder
-    func coordinator(for route: AppRoute, modelContext: ModelContext) -> some View {
+    func coordinator(
+        for route: AppRoute,
+        modelContext: ModelContext
+    ) -> some View {
         switch route {
         case .intro(let introRoute):
-            introRouter.view(for: introRoute, using: self)
+            introRouter.view(
+                    for: introRoute,
+                    using: self
+                )
         case .home(let homeRoute):
-            homeRouter.view(for: homeRoute, using: self, modelContext: modelContext)
+            homeRouter.view(
+                    for: homeRoute,
+                    using: self,
+                    modelContext: modelContext
+                )
         }
     }
 }

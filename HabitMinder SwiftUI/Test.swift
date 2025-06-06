@@ -4,15 +4,10 @@
 
 
 // MARK: - Future Tasks
-// Notification
+// Notification, CustomView
 
 // MARK: - Tasks
-// init
-// Chaine app
-// CustomView
-// DI
-
+// Unit test - Swift testing - DI
 
 // MARK: - Questions
-// Unit test - Swift testing - DI
-// Coordinator ViewModel or View, FullScreen or Sheet
+// Coordinator FullScreen or Sheet

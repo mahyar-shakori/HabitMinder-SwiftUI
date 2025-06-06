@@ -8,30 +8,30 @@
 import SwiftUI
 
 struct SetNameView: View {
-    @StateObject private var setNameViewModel: SetNameViewModel
-    @EnvironmentObject private var coordinator: SetNameViewCoordinator
+    @ObservedObject private var setNameViewModel: SetNameViewModel
     @FocusState private var isFocused: Bool
+    @State private var tempUserName = ""
     
     init(setNameViewModel: SetNameViewModel) {
-        _setNameViewModel = StateObject(wrappedValue: setNameViewModel)
+        self.setNameViewModel = setNameViewModel
     }
-   
+    
     var body: some View {
         VStack {
             Spacer()
-            
             headerImage
             hiText
             userNameTextField
             errorText
-            
             Spacer()
-            
             continueButton
         }
         .background(.appGray)
         .dismissKeyboard(focus: $isFocused)
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            tempUserName = setNameViewModel.uiState.userName
+        }
     }
     
     private var headerImage: some View {
@@ -50,18 +50,24 @@ struct SetNameView: View {
     }
     
     private var userNameTextField: some View {
-        TextField(LocalizedStrings.SetNamePage.userNamePlaceholder, text: $setNameViewModel.userName)
-            .font(.AppFont.rooneySansRegular.size(16))
-            .textContentType(.givenName)
-            .padding()
-            .background(
-                Capsule()
-                    .stroke(borderColor, lineWidth: borderWidth)
-            )
-            .padding(.horizontal, 32)
-            .padding(.top, 16)
-            .focused($isFocused)
-            .submitLabel(.done)
+        TextField(
+            LocalizedStrings.SetNamePage.userNamePlaceholder,
+            text: $tempUserName
+        )
+        .font(.AppFont.rooneySansRegular.size(16))
+        .textContentType(.givenName)
+        .padding()
+        .background(
+            Capsule()
+                .stroke(borderColor, lineWidth: borderWidth)
+        )
+        .padding(.horizontal, 32)
+        .padding(.top, 16)
+        .focused($isFocused)
+        .submitLabel(.done)
+        .onChange(of: tempUserName) { _, newValue in
+            setNameViewModel.setUserName(newValue)
+        }
     }
     
     private var errorText: some View {
@@ -77,7 +83,7 @@ struct SetNameView: View {
     private var continueButton: some View {
         Button {
             setNameViewModel.validateAndContinue {
-                coordinator.goToWelcome()
+                setNameViewModel.goToWelcomePage()
             }
         } label: {
             Text(LocalizedStrings.SetNamePage.continueButton)
@@ -92,18 +98,21 @@ struct SetNameView: View {
         .padding(.horizontal, 32)
         .padding(.bottom, 32)
     }
-}
-
-private extension SetNameView {
-    var borderColor: Color {
+    
+    private var borderColor: Color {
         setNameViewModel.uiState.borderState == .error ? .red : ThemeManager.shared.appPrimary
     }
     
-    var borderWidth: CGFloat {
+    private var borderWidth: CGFloat {
         setNameViewModel.uiState.borderState == .error ? 2 : 1
     }
 }
 
 #Preview {
-    SetNameView(setNameViewModel: SetNameViewModel())
+    let fakeCoordinator = SetNameCoordinator(navigate: { _, _ in
+    })
+    let viewModel = SetNameViewModel(
+        coordinator: fakeCoordinator
+    )
+    SetNameView(setNameViewModel: viewModel)
 }

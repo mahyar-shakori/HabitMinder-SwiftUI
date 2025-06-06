@@ -10,16 +10,26 @@ import Foundation
 final class IntroViewModel: ObservableObject {
     @Published private(set) var currentState: IntroViewState = .first
     
+    private let coordinator: IntroCoordinator
+
+    init(coordinator: IntroCoordinator) {
+        self.coordinator = coordinator
+    }
+    
     var pageState: IntroUIState {
         currentState.pageState
     }
-    
+   
     func nextState() {
         switch currentState {
         case .first:
             currentState = .second
         case .second:
-            break
+            goToSetNamePage()
         }
+    }
+    
+    func goToSetNamePage() {
+        coordinator.goToSetName()
     }
 }

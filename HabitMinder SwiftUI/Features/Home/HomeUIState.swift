@@ -8,6 +8,7 @@
 import Foundation
 
 struct HomeUIState {
+    var performLogoutAlert = false
     var isEditingList = false
     var itemToDelete: UUID?
     var navigationTarget: HomeNavigationTarget?
@@ -17,5 +18,9 @@ struct HomeUIState {
             let habitsToSend = listItems.map { $0.toWatchHabit }
             WatchConnectivityService.shared.sendHabits(habitsToSend)
         }
+    }
+    
+    var dropDownItems: [DropDownItem] {
+        DropDownItemFactory.makeItems(for: self)
     }
 }

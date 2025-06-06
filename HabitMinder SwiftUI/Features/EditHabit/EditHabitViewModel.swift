@@ -8,39 +8,44 @@
 import Foundation
 
 final class EditHabitViewModel: ObservableObject {
-    @Published var habitTitle = "" {
-        didSet { updateValidationState() }
-    }
-    @Published private(set) var isSaveButtonEnabled = false
-    
-    private let habit: HabitModel
-    private let dataManager: DataManager<HabitModel>
+    @Published private(set) var uiState = EditHabitUIState()
+
     private let habitID: UUID
+    private let dataManager: DataManager<HabitModel>
+    private let coordinator: EditHabitCoordinator
     
-    init(habit: HabitModel, dataManager: DataManager<HabitModel>) {
-        self.habit = habit
-        self.habitTitle = habit.title
-        self.habitID = habit.id
+    private var trimmedHabitTitle: String {
+        uiState.habitTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    
+    init(
+        dataManager: DataManager<HabitModel>,
+        coordinator: EditHabitCoordinator,
+        habit: HabitModel
+    ) {
         self.dataManager = dataManager
+        self.coordinator = coordinator
+        self.habitID = habit.id
+        self.uiState.habitTitle = habit.title
+    }
+    
+    func setHabitTitle(_ newValue: String) {
+        uiState.habitTitle = newValue
         updateValidationState()
     }
     
     private func updateValidationState() {
-        let trimmedName = habitTitle.trimmingCharacters(in: .whitespacesAndNewlines)
-        let isValid = trimmedName.count > 1
-        
-        isSaveButtonEnabled = isValid
+        let isValid = trimmedHabitTitle.count > 0
+        uiState.isSaveButtonEnabled = isValid
     }
     
-    func save() {
-        dataManager.update({ $0.title = habitTitle }, forID: habitID)
+    func saveAndDismiss() {
+        dataManager.update({ $0.title = uiState.habitTitle }, forID: habitID)
+        NotificationCenter.default.post(name: AppNotification.Habit.edited, object: nil)
+        coordinator.goBack()
     }
     
     func missHabit() {
         dataManager.update({ $0.createdAt = Date() }, forID: habitID)
-    }
-    
-    func postHabitEditedNotification() {
-        NotificationCenter.default.post(name: AppNotification.Habit.edited, object: nil)
     }
 }

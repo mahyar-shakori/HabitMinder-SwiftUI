@@ -8,14 +8,17 @@
 import SwiftUI
 
 struct UserNameEditorView: View {
-    @Binding var isPresented: Bool
-    @EnvironmentObject var settingViewModel: SettingViewModel
-    @State private var tempUserName: String
+    @EnvironmentObject private var settingViewModel: SettingViewModel
     @FocusState private var isFocused: Bool
+    @Binding private var isPresented: Bool
+    @State private var tempUserName: String
     
-    init(isPresented: Binding<Bool>, currentName: String) {
+    init(
+        isPresented: Binding<Bool>,
+        currentName: String
+    ) {
         self._isPresented = isPresented
-        self._tempUserName = State(initialValue: currentName)
+        self.tempUserName = currentName
     }
     
     var body: some View {
@@ -37,16 +40,19 @@ struct UserNameEditorView: View {
     
     private var userNameField: some View {
         VStack {
-            TextField(LocalizedStrings.SettingPage.enterNewUserName, text: $tempUserName)
-                .font(.AppFont.rooneySansRegular.size(16))
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(.appWhite)
-                )
-                .padding(.horizontal, 16)
-                .focused($isFocused)
-                .submitLabel(.done)
+            TextField(
+                LocalizedStrings.SettingPage.enterNewUserName,
+                text: $tempUserName
+            )
+            .font(.AppFont.rooneySansRegular.size(16))
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(.appWhite)
+            )
+            .padding(.horizontal, 16)
+            .focused($isFocused)
+            .submitLabel(.done)
             
             Spacer()
         }
@@ -61,8 +67,7 @@ struct UserNameEditorView: View {
     
     private var toolbarSaveButton: some View {
         Button {
-            settingViewModel.userName = tempUserName
-            settingViewModel.changeUserName()
+            settingViewModel.setUserName(tempUserName)
             isPresented = false
         } label: {
             Text(LocalizedStrings.Shared.saveButton)
@@ -81,5 +86,7 @@ struct UserNameEditorView: View {
 }
 
 #Preview {
-    UserNameEditorView(isPresented: .constant(false), currentName: "")
+    let isPresented = Binding<Bool>.constant(false)
+    let currentName = "Sample Name"
+    UserNameEditorView(isPresented: isPresented, currentName: currentName)
 }

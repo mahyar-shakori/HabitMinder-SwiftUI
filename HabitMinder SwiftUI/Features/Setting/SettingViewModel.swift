@@ -8,15 +8,24 @@
 import Foundation
 
 final class SettingViewModel: ObservableObject {
-    @Published var userName = ""
-   
+    @Published private(set) var userName = ""
+    
+    private let userNameStorage = UserDefaultsStorage<UserDefaultKeys, String>(key: .userName)
+    private let coordinator: SettingCoordinator
+    
+    init(coordinator: SettingCoordinator) {
+        self.coordinator = coordinator
+    }
+    
+    func setUserName(_ newName: String) {
+        changeUserName()
+    }
+    
     func load() {
-        let userNameStorage = UserDefaultsStorage<UserDefaultKeys, String>(key: .userName)        
         userName = userNameStorage.fetch() ?? LocalizedStrings.SettingPage.userName
     }
     
-    func changeUserName() {
-        let userNameStorage = UserDefaultsStorage<UserDefaultKeys, String>(key: .userName)
+    private func changeUserName() {
         userNameStorage.save(value: userName)
     }
 }

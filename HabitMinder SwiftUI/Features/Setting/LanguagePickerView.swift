@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct LanguagePickerView: View {
-    @EnvironmentObject var languageManager: LanguageManager
-    @Binding var isPresented: Bool
+    @EnvironmentObject private var languageManager: LanguageManager
+    @Binding private var isPresented: Bool
     @State private var tempSelectedLanguage: AppLanguage
     
     init(isPresented: Binding<Bool>) {
@@ -88,6 +88,7 @@ struct LanguagePickerView: View {
 }
 
 #Preview {
-    LanguagePickerView(isPresented: .constant(false))
+    let isPresented = Binding<Bool>.constant(false)
+    LanguagePickerView(isPresented: isPresented)
         .environmentObject(LanguageManager.shared)
 }

@@ -8,8 +8,16 @@
 import SwiftUI
 
 struct CustomEmptyView: View {
-    let image: Image
-    let text: String
+    private let image: Image
+    private let text: String
+    
+    init(
+        image: Image,
+        text: String
+    ) {
+        self.image = image
+        self.text = text
+    }
     
     var body: some View {
         VStack(spacing: 10) {
@@ -28,7 +36,7 @@ struct CustomEmptyView: View {
 }
 
 #Preview {
-    CustomEmptyView(
-        image: Image(.emptyView),
-        text: "Test")
+    let image = Image(.emptyView)
+    let text = "Test"
+    CustomEmptyView(image: image, text: text)
 }

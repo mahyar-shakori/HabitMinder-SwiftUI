@@ -27,7 +27,9 @@ final class WatchConnectivityService: WatchConnectivityProviding {
             do {
                 try session.updateApplicationContext(["habits": payload])
             } catch {
+#if DEBUG
                 AppLogger.watch.error("Failed to send habits: \(error.localizedDescription)")
+#endif
             }
         } else {
             delegate.queueHabits(payload)
