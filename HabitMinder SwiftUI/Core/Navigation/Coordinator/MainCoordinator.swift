@@ -13,8 +13,13 @@ final class MainCoordinator: BaseCoordinator {
     @Published var sheetItem: NavigationItem?
     @Published var fullScreenItem: NavigationItem?
     
-    private let introRouter = IntroRouter()
-    private let homeRouter = HomeRouter()
+    private let introRouting: IntroRouting
+    private let homeRouting: HomeRouting
+    
+    init(introRouting: IntroRouting, homeRouting: HomeRouting) {
+        self.introRouting = introRouting
+        self.homeRouting = homeRouting
+    }
     
     func navigate(
         to route: AppRoute,
@@ -33,18 +38,18 @@ final class MainCoordinator: BaseCoordinator {
             fullScreenItem = item
         }
     }
-
+    
     func pop() {
         _ = path.popLast()
     }
-
+    
     func popToRoot() {
         guard let first = path.first else {
             return
         }
         path = [first]
     }
-
+    
     func start() {
         let loginStorage = UserDefaultsStorage<UserDefaultKeys, Bool>(key: .isLogin)
         let initialRoute: AppRoute = loginStorage.fetch() == true ? .intro(.welcome) : .intro(.setLanguage)
@@ -53,7 +58,7 @@ final class MainCoordinator: BaseCoordinator {
             style: .push
         )]
     }
-
+    
     @ViewBuilder
     func coordinator(
         for route: AppRoute,
@@ -61,16 +66,20 @@ final class MainCoordinator: BaseCoordinator {
     ) -> some View {
         switch route {
         case .intro(let introRoute):
-            introRouter.view(
+            introRouting
+                .view(
                     for: introRoute,
                     using: self
                 )
+                .eraseToAnyView()
         case .home(let homeRoute):
-            homeRouter.view(
+            homeRouting
+                .view(
                     for: homeRoute,
                     using: self,
                     modelContext: modelContext
                 )
+                .eraseToAnyView()
         }
     }
 }

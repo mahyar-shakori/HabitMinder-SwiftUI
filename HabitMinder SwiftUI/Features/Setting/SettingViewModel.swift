@@ -18,14 +18,11 @@ final class SettingViewModel: ObservableObject {
     }
     
     func setUserName(_ newName: String) {
-        changeUserName()
+        userNameStorage.save(value: newName)
+        userName = newName
     }
     
-    func load() {
+    func loadUserName() {
         userName = userNameStorage.fetch() ?? LocalizedStrings.SettingPage.userName
-    }
-    
-    private func changeUserName() {
-        userNameStorage.save(value: userName)
     }
 }

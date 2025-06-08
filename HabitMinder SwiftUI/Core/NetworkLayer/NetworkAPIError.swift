@@ -15,11 +15,11 @@ enum NetworkAPIError: Error {
     var errorDescription: String? {
         switch self {
         case .invalidURL:
-            return "Invalid URL"
+            return LocalizedStrings.Alert.Network.invalidURL
         case .decodingError:
-            return "Failed to decode response"
+            return LocalizedStrings.Alert.Network.decodingFailed
         case .badResponseError:
-            return "Invalid response or error from the server."
+            return LocalizedStrings.Alert.Network.badResponse
         }
     }
 }

@@ -9,9 +9,18 @@ import SwiftUI
 
 @main
 struct HabitMinderApp: App {
+    private let coordinator: MainCoordinator
+    
+    init() {
+        self.coordinator = MainCoordinator(
+            introRouting: IntroRouter(),
+            homeRouting: HomeRouter()
+        )
+    }
+    
     var body: some Scene {
         WindowGroup {
-            RootView()
+            RootView(coordinator: coordinator)
                 .modelContainer(for: [HabitModel.self, FutureHabitModel.self])
                 .environmentObject(LanguageManager.shared)
                 .environmentObject(ThemeManager.shared)

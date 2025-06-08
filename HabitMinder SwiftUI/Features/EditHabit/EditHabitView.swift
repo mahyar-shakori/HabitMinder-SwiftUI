@@ -31,6 +31,9 @@ struct EditHabitView: View {
         }
         .background(.appGray)
         .dismissKeyboard(focus: $isFocused)
+        .onAppear() {
+            tempHabitTitle = editHabitViewModel.uiState.habitTitle
+        }
     }
     
     private var titleText: some View {

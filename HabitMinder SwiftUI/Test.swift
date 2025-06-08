@@ -8,6 +8,9 @@
 
 // MARK: - Tasks
 // Unit test - Swift testing - DI
+// DI: DataLayer, Managers
+
+// DI: Features
 
 // MARK: - Questions
 // Coordinator FullScreen or Sheet

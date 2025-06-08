@@ -7,14 +7,12 @@
 
 import WatchConnectivity
 
-final class WatchSessionManager: NSObject, WCSessionDelegate {
-    static let shared = WatchSessionManager()
+final class WatchSessionManager: NSObject, WCSessionDelegate, WatchSessionManaging {
     private var homeViewModel: HomeViewModel?
     
-    private override init() {
+    init(session: WCSession = .default) {
         super.init()
         if WCSession.isSupported() {
-            let session = WCSession.default
             session.delegate = self
             session.activate()
         }
@@ -28,15 +26,15 @@ final class WatchSessionManager: NSObject, WCSessionDelegate {
         _ session: WCSession,
         didReceiveApplicationContext applicationContext: [String : Any]
     ) {
-        guard let habits = applicationContext["habits"] as? [[String: Any]] else {
+        guard let habits = applicationContext[WatchConnectivityKeys.habits] as? [[String: Any]] else {
 #if DEBUG
             AppLogger.watch.warning("No habits found in received context.")
 #endif
             return
         }
         let parsedHabits: [HabitData] = habits.compactMap { dict in
-            guard let title = dict["title"] as? String,
-                  let daysLeft = dict["daysLeft"] as? Int else {
+            guard let title = dict[WatchConnectivityKeys.title] as? String,
+                  let daysLeft = dict[WatchConnectivityKeys.daysLeft] as? Int else {
                 return nil
             }
             return HabitData(title: title, daysLeft: daysLeft)

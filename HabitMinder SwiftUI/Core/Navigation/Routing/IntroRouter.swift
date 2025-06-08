@@ -7,29 +7,29 @@
 
 import SwiftUI
 
-struct IntroRouter {
+struct IntroRouter: IntroRouting {
     @ViewBuilder
     func view(
         for route: IntroRoute,
-        using coordinator: MainCoordinator,
-    ) -> some View {
+        using coordinator: any BaseCoordinator,
+    ) -> any View {
         switch route {
         case .setLanguage:
-            setLanguageScreen(mainCoordinator: coordinator)
+            setLanguageScreen(coordinator: coordinator)
         case .intro:
-            introScreen(mainCoordinator: coordinator)
+            introScreen(coordinator: coordinator)
         case .setName:
-            setNameScreen(mainCoordinator: coordinator)
+            setNameScreen(coordinator: coordinator)
         case .welcome:
-            welcomeScreen(mainCoordinator: coordinator)
+            welcomeScreen(coordinator: coordinator)
         }
     }
     
     @ViewBuilder
     private func setLanguageScreen(
-        mainCoordinator: MainCoordinator
+        coordinator: any BaseCoordinator
     ) -> some View {
-        let viewCoordinator = SetLanguageCoordinator(navigate: mainCoordinator.navigate)
+        let viewCoordinator = SetLanguageCoordinator(navigate: coordinator.navigate)
         let viewModel = SetLanguageViewModel(
             coordinator: viewCoordinator,
             languageManager: LanguageManager.shared
@@ -39,27 +39,27 @@ struct IntroRouter {
     
     @ViewBuilder
     private func introScreen(
-        mainCoordinator: MainCoordinator
+        coordinator: any BaseCoordinator
     ) -> some View {
-        let viewCoordinator = IntroCoordinator(navigate: mainCoordinator.navigate)
+        let viewCoordinator = IntroCoordinator(navigate: coordinator.navigate)
         let viewModel = IntroViewModel(coordinator: viewCoordinator)
         IntroView(introViewModel: viewModel)
     }
     
     @ViewBuilder
     private func setNameScreen(
-        mainCoordinator: MainCoordinator
+        coordinator: any BaseCoordinator
     ) -> some View {
-        let viewCoordinator = SetNameCoordinator(navigate: mainCoordinator.navigate)
+        let viewCoordinator = SetNameCoordinator(navigate: coordinator.navigate)
         let viewModel = SetNameViewModel(coordinator: viewCoordinator)
         SetNameView(setNameViewModel: viewModel)
     }
     
     @ViewBuilder
     private func welcomeScreen(
-        mainCoordinator: MainCoordinator
+        coordinator: any BaseCoordinator
     ) -> some View {
-        let viewCoordinator = WelcomeCoordinator(navigate: mainCoordinator.navigate)
+        let viewCoordinator = WelcomeCoordinator(navigate: coordinator.navigate)
         let viewModel = WelcomeViewModel(coordinator: viewCoordinator)
         WelcomeView(welcomeViewModel: viewModel)
     }

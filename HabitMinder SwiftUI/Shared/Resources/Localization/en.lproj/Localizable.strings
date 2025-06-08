@@ -48,7 +48,10 @@
 "noButton" = "No";
 "backButton" = "Back";
 "networkAlertTitle" = "Network Error";
-"networkAlertDefaultError" = "Unknown error occurred.";
+"networkAlertUnknownError" = "Unknown error occurred.";
+"networkAlertInvalidURL" = "Invalid URL";
+"networkAlertDecodingFailed" = "Failed to decode response";
+"networkAlertBadResponse" = "Invalid response or error from the server.";
 "logoutAlertTitle" = "Log Out";
 "logoutAlertMessage" = "Are you sure you want to log out? All your data will be permanently deleted.";
 "deleteHabitAlertTitle" = "Delete Habit";

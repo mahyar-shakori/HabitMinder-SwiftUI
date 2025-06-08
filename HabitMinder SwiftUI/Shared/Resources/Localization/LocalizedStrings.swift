@@ -83,7 +83,10 @@ struct LocalizedStrings {
     struct Alert {
         struct Network {
             static var title: String { "networkAlertTitle".localized }
-            static var networkAlertDefaultError: String { "defaultError".localized }
+            static var unknownError: String { "networkAlertUnknownError".localized }
+            static var invalidURL: String { "networkAlertInvalidURL".localized }
+            static var decodingFailed: String { "networkAlertDecodingFailed".localized }
+            static var badResponse: String { "networkAlertBadResponse".localized }
         }
         
         struct Habit {

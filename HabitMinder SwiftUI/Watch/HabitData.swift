@@ -13,8 +13,8 @@ struct HabitData: Hashable {
 
     var toDictionary: [String: Any] {
         return [
-            "title": title,
-            "daysLeft": daysLeft
+            WatchConnectivityKeys.title: title,
+            WatchConnectivityKeys.daysLeft: daysLeft
         ]
     }
 }

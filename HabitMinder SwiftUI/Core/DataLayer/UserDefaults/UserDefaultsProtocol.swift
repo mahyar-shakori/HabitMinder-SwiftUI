@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol UserDefaultsProtocol {
+protocol UserDefaultsStoring {
     associatedtype ValueType
     func save(value: ValueType)
     func fetch() -> ValueType?

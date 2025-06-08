@@ -27,7 +27,7 @@ struct WelcomeView: View {
                     welcomeViewModel.goToHomePage()
                 }
             } message: {
-                Text(welcomeViewModel.uiState.errorMessage ?? LocalizedStrings.Alert.Network.networkAlertDefaultError)
+                Text(welcomeViewModel.uiState.errorMessage ?? LocalizedStrings.Alert.Network.unknownError)
             }
     }
     

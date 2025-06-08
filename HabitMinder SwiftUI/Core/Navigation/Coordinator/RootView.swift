@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct RootView: View {
-    @StateObject private var coordinator = MainCoordinator()
+    @StateObject private var coordinator: MainCoordinator
     @Environment(\.modelContext) private var modelContext
-
+    
+    init(coordinator: @autoclosure @escaping () -> MainCoordinator) {
+        _coordinator = StateObject(wrappedValue: coordinator())
+    }
+    
     var body: some View {
         NavigationStack(path: $coordinator.path) {
             EmptyView()
@@ -34,5 +38,9 @@ struct RootView: View {
 }
 
 #Preview {
-    RootView()
+    let coordinator = MainCoordinator(
+        introRouting: IntroRouter(),
+        homeRouting: HomeRouter()
+    )
+    RootView(coordinator: coordinator)
 }

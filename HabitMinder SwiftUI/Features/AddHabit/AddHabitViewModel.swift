@@ -36,7 +36,13 @@ final class AddHabitViewModel: ObservableObject {
     }
     
     func saveAndDismiss() {
-        let newHabit = HabitModel(title: uiState.habitTitle)
+        let maxSortOrder = habitManager.fetchAll().map(\.sortOrder).max() ?? -1
+
+        let newHabit = HabitModel(
+            title: trimmedHabitTitle,
+            sortOrder: maxSortOrder + 1
+        )
+        
         habitManager.save(newHabit)
         NotificationCenter.default.post(name: AppNotification.Habit.added, object: nil)
         coordinator.goBack()

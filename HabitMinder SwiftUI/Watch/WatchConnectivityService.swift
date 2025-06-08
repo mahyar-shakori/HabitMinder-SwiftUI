@@ -8,31 +8,30 @@
 import WatchConnectivity
 
 final class WatchConnectivityService: WatchConnectivityProviding {
-    static let shared = WatchConnectivityService()
-
-    private let session: WCSession
-    private let delegate: WatchConnectivityDelegate
-
-    private init() {
-        self.session = WCSession.default
-        self.delegate = WatchConnectivityDelegate()
-        session.delegate = delegate
-        session.activate()
+    private var session: WatchConnectivitySession
+    private let delegate: WCSessionDelegate
+    
+    init(session: WatchConnectivitySession = WCSession.default,
+         delegate: WCSessionDelegate = WatchConnectivityDelegate()) {
+        self.session = session
+        self.delegate = delegate
+        self.session.delegate = delegate
+        self.session.activate()
     }
     
     func sendHabits(_ habits: [HabitData]) {
         let payload = habits.map { $0.toDictionary }
-
+        
         if session.activationState == .activated {
             do {
-                try session.updateApplicationContext(["habits": payload])
+                try session.updateApplicationContext([WatchConnectivityKeys.habits: payload])
             } catch {
 #if DEBUG
                 AppLogger.watch.error("Failed to send habits: \(error.localizedDescription)")
 #endif
             }
         } else {
-            delegate.queueHabits(payload)
+            (delegate as? WatchConnectivityDelegate)?.queueHabits(payload)
         }
     }
 }

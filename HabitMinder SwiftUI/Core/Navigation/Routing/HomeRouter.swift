@@ -8,39 +8,38 @@
 import SwiftUI
 import SwiftData
 
-struct HomeRouter {
-    @ViewBuilder
+struct HomeRouter: HomeRouting {
     func view(
         for route: HomeRoute,
-        using coordinator: MainCoordinator,
+        using coordinator: any BaseCoordinator,
         modelContext: ModelContext
-    ) -> some View {
+    ) -> any View {
         switch route {
         case .home(let quote):
             homeScreen(
-                mainCoordinator: coordinator,
+                coordinator: coordinator,
                 modelContext: modelContext,
                 quote: quote
             )
         case .addHabit:
             addHabitScreen(
-                mainCoordinator: coordinator,
+                coordinator: coordinator,
                 modelContext: modelContext
             )
         case .editHabit(let habit):
             editHabitScreen(
-                mainCoordinator: coordinator,
+                coordinator: coordinator,
                 modelContext: modelContext,
                 habit: habit
             )
         case .futureHabit:
             futureHabitScreen(
-                mainCoordinator: coordinator,
+                coordinator: coordinator,
                 modelContext: modelContext
             )
         case .settingPage:
             settingScreen(
-                mainCoordinator: coordinator,
+                coordinator: coordinator,
                 modelContext: modelContext
             )
         }
@@ -48,26 +47,28 @@ struct HomeRouter {
     
     @ViewBuilder
     private func homeScreen(
-        mainCoordinator: MainCoordinator,
+        coordinator: any BaseCoordinator,
         modelContext: ModelContext,
         quote: String
     ) -> some View {
-        let viewCoordinator = HomeCoordinator(navigate: mainCoordinator.navigate)
+        let viewCoordinator = HomeCoordinator(navigate: coordinator.navigate)
+        let connectivityService = WatchConnectivityService()
         let viewModel = HomeViewModel(
             quote: quote,
             habitManager: DataManager<HabitModel>(context: modelContext),
             futureHabitManager: DataManager<FutureHabitModel>(context: modelContext),
-            coordinator: viewCoordinator
+            coordinator: viewCoordinator,
+            connectivityService: connectivityService
         )
         HomeView(homeViewModel: viewModel)
     }
     
     @ViewBuilder
     private func addHabitScreen(
-        mainCoordinator: MainCoordinator,
+        coordinator: any BaseCoordinator,
         modelContext: ModelContext
     ) -> some View {
-        let viewCoordinator = AddHabitCoordinator(dismiss: mainCoordinator.pop)
+        let viewCoordinator = AddHabitCoordinator(dismiss: coordinator.pop)
         let viewModel = AddHabitViewModel(
             habitManager: DataManager<HabitModel>(context: modelContext),
             coordinator: viewCoordinator
@@ -77,11 +78,11 @@ struct HomeRouter {
     
     @ViewBuilder
     private func editHabitScreen(
-        mainCoordinator: MainCoordinator,
+        coordinator: any BaseCoordinator,
         modelContext: ModelContext,
         habit: HabitModel
     ) -> some View {
-        let viewCoordinator = EditHabitCoordinator(dismiss: mainCoordinator.pop)
+        let viewCoordinator = EditHabitCoordinator(dismiss: coordinator.pop)
         let viewModel = EditHabitViewModel(
             dataManager: DataManager<HabitModel>(context: modelContext),
             coordinator: viewCoordinator,
@@ -92,10 +93,10 @@ struct HomeRouter {
     
     @ViewBuilder
     private func futureHabitScreen(
-        mainCoordinator: MainCoordinator,
+        coordinator: any BaseCoordinator,
         modelContext: ModelContext
     ) -> some View {
-        let viewCoordinator = FutureHabitCoordinator(dismiss: mainCoordinator.pop)
+        let viewCoordinator = FutureHabitCoordinator(dismiss: coordinator.pop)
         let viewModel = FutureHabitViewModel(
             habitManager: DataManager<FutureHabitModel>(context: modelContext),
             coordinator: viewCoordinator
@@ -105,10 +106,10 @@ struct HomeRouter {
     
     @ViewBuilder
     private func settingScreen(
-        mainCoordinator: MainCoordinator,
+        coordinator: any BaseCoordinator,
         modelContext: ModelContext
     ) -> some View {
-        let viewCoordinator = SettingCoordinator(dismiss: mainCoordinator.pop)
+        let viewCoordinator = SettingCoordinator(dismiss: coordinator.pop)
         let viewModel = SettingViewModel(coordinator: viewCoordinator)
         SettingView(settingViewModel: viewModel)
     }

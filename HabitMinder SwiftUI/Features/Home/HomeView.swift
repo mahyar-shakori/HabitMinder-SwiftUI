@@ -216,11 +216,12 @@ struct HomeView: View {
     
     let fakeCoordinator = HomeCoordinator(navigate: { _, _ in
     })
+    let connectivityService = WatchConnectivityService()
     let viewModel = HomeViewModel(
         quote: "Test Quote",
         habitManager: DataManager<HabitModel>(context: context),
         futureHabitManager: DataManager<FutureHabitModel>(context: context),
-        coordinator: fakeCoordinator
+        coordinator: fakeCoordinator, connectivityService: connectivityService
     )
     HomeView(homeViewModel: viewModel)
 }

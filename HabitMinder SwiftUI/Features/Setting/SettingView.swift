@@ -31,7 +31,7 @@ struct SettingView: View {
         }
         .background(.appGray)
         .onAppear() {
-            settingViewModel.load()
+            settingViewModel.loadUserName()
         }
     }
     

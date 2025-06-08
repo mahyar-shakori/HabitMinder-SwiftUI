@@ -12,15 +12,20 @@ struct HomeUIState {
     var isEditingList = false
     var itemToDelete: UUID?
     var navigationTarget: HomeNavigationTarget?
+    var connectivityService: WatchConnectivityProviding
     
     var listItems: [HabitItem] = [] {
         didSet {
             let habitsToSend = listItems.map { $0.toWatchHabit }
-            WatchConnectivityService.shared.sendHabits(habitsToSend)
+            connectivityService.sendHabits(habitsToSend)
         }
     }
     
     var dropDownItems: [DropDownItem] {
         DropDownItemFactory.makeItems(for: self)
+    }
+    
+    init(connectivityService: WatchConnectivityProviding) {
+        self.connectivityService = connectivityService
     }
 }

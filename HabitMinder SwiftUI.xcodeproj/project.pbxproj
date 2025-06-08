@@ -55,10 +55,18 @@
 		3EA986472DEB67530004B71B /* PresentationStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA986462DEB67520004B71B /* PresentationStyle.swift */; };
 		3EA9864B2DEB74870004B71B /* FutureHabitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9864A2DEB74860004B71B /* FutureHabitCoordinator.swift */; };
 		3EA9864F2DEB74D10004B71B /* SettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9864E2DEB74D00004B71B /* SettingCoordinator.swift */; };
+		3EB305772DF5A9C400AAE9E0 /* WatchConnectivitySession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB305762DF5A9C300AAE9E0 /* WatchConnectivitySession.swift */; };
+		3EB305792DF5AA0300AAE9E0 /* WatchSessionManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB305782DF5AA0200AAE9E0 /* WatchSessionManaging.swift */; };
 		3EBDA8592DEEE631007D99F9 /* EditHabitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBDA8582DEEE62D007D99F9 /* EditHabitViewModel.swift */; };
 		3EBDA85B2DEEE63A007D99F9 /* EditHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBDA85A2DEEE63A007D99F9 /* EditHabitView.swift */; };
 		3EBDA85F2DEEF271007D99F9 /* EditHabitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBDA85E2DEEF267007D99F9 /* EditHabitCoordinator.swift */; };
 		3EBDA8622DEF2194007D99F9 /* DispatchQueue+Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBDA8602DEF2194007D99F9 /* DispatchQueue+Delay.swift */; };
+		3ECEB9252DF430D000BF8EB5 /* IntroRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECEB9242DF430CF00BF8EB5 /* IntroRouting.swift */; };
+		3ECEB9272DF430DF00BF8EB5 /* HomeRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECEB9262DF430DE00BF8EB5 /* HomeRouting.swift */; };
+		3ECEB9292DF4361600BF8EB5 /* View+TypeErasure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECEB9282DF4361600BF8EB5 /* View+TypeErasure.swift */; };
+		3ECEB92B2DF4387400BF8EB5 /* NetworkAPIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECEB92A2DF4387400BF8EB5 /* NetworkAPIConfiguration.swift */; };
+		3ECEB9342DF5A22200BF8EB5 /* WatchConnectivityKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECEB9332DF5A22000BF8EB5 /* WatchConnectivityKeys.swift */; };
+		3ECEB9352DF5A23300BF8EB5 /* WatchConnectivityKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECEB9332DF5A22000BF8EB5 /* WatchConnectivityKeys.swift */; };
 		3EE9241A2DB392AF0086B3F2 /* IntroUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE924192DB392AA0086B3F2 /* IntroUIState.swift */; };
 		3EE9241C2DB3A37A0086B3F2 /* SetNameUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE9241B2DB3A3750086B3F2 /* SetNameUIState.swift */; };
 		3EE9241E2DB3AC6A0086B3F2 /* WelcomeUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE9241D2DB3AC690086B3F2 /* WelcomeUIState.swift */; };
@@ -197,10 +205,17 @@
 		3EA986462DEB67520004B71B /* PresentationStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationStyle.swift; sourceTree = "<group>"; };
 		3EA9864A2DEB74860004B71B /* FutureHabitCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureHabitCoordinator.swift; sourceTree = "<group>"; };
 		3EA9864E2DEB74D00004B71B /* SettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinator.swift; sourceTree = "<group>"; };
+		3EB305762DF5A9C300AAE9E0 /* WatchConnectivitySession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivitySession.swift; sourceTree = "<group>"; };
+		3EB305782DF5AA0200AAE9E0 /* WatchSessionManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManaging.swift; sourceTree = "<group>"; };
 		3EBDA8582DEEE62D007D99F9 /* EditHabitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHabitViewModel.swift; sourceTree = "<group>"; };
 		3EBDA85A2DEEE63A007D99F9 /* EditHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHabitView.swift; sourceTree = "<group>"; };
 		3EBDA85E2DEEF267007D99F9 /* EditHabitCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHabitCoordinator.swift; sourceTree = "<group>"; };
 		3EBDA8602DEF2194007D99F9 /* DispatchQueue+Delay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Delay.swift"; sourceTree = "<group>"; };
+		3ECEB9242DF430CF00BF8EB5 /* IntroRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroRouting.swift; sourceTree = "<group>"; };
+		3ECEB9262DF430DE00BF8EB5 /* HomeRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouting.swift; sourceTree = "<group>"; };
+		3ECEB9282DF4361600BF8EB5 /* View+TypeErasure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+TypeErasure.swift"; sourceTree = "<group>"; };
+		3ECEB92A2DF4387400BF8EB5 /* NetworkAPIConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPIConfiguration.swift; sourceTree = "<group>"; };
+		3ECEB9332DF5A22000BF8EB5 /* WatchConnectivityKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivityKeys.swift; sourceTree = "<group>"; };
 		3EE924192DB392AA0086B3F2 /* IntroUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroUIState.swift; sourceTree = "<group>"; };
 		3EE9241B2DB3A3750086B3F2 /* SetNameUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNameUIState.swift; sourceTree = "<group>"; };
 		3EE9241D2DB3AC690086B3F2 /* WelcomeUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeUIState.swift; sourceTree = "<group>"; };
@@ -362,6 +377,7 @@
 				3EEFE3142DAFB20C00F5B0FF /* View+DismissKeyboard.swift */,
 				3EEFE3152DAFB20C00F5B0FF /* Image+CircularIcon.swift */,
 				3E439A522DEDD28900A171B6 /* Color+RGBA.swift */,
+				3ECEB9282DF4361600BF8EB5 /* View+TypeErasure.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -383,7 +399,9 @@
 				3E8DF9F42DE4CC280021E1EF /* AppRoute.swift */,
 				3EA986462DEB67520004B71B /* PresentationStyle.swift */,
 				3E8DF9FA2DE4CC730021E1EF /* IntroRouter.swift */,
+				3ECEB9242DF430CF00BF8EB5 /* IntroRouting.swift */,
 				3E8DF9FC2DE4CCB60021E1EF /* HomeRouter.swift */,
+				3ECEB9262DF430DE00BF8EB5 /* HomeRouting.swift */,
 			);
 			path = Routing;
 			sourceTree = "<group>";
@@ -580,6 +598,7 @@
 				3EEFE2F52DAFB20C00F5B0FF /* HTTPContentType.swift */,
 				3EEFE2F62DAFB20C00F5B0FF /* HTTPMethod.swift */,
 				3EEFE2F72DAFB20C00F5B0FF /* NetworkAPIError.swift */,
+				3ECEB92A2DF4387400BF8EB5 /* NetworkAPIConfiguration.swift */,
 				3EEFE2F82DAFB20C00F5B0FF /* NetworkAPI.swift */,
 				3E8DFA322DE5B7880021E1EF /* DataFetcher.swift */,
 				3EEFE2D52DAFB20C00F5B0FF /* QuoteResponse.swift */,
@@ -601,10 +620,10 @@
 		3EEFE3022DAFB20C00F5B0FF /* UserDefaults */ = {
 			isa = PBXGroup;
 			children = (
-				3EEFE2FE2DAFB20C00F5B0FF /* UserDefaultsProtocol.swift */,
-				3EEFE2FF2DAFB20C00F5B0FF /* StorageKeyProtocol.swift */,
-				3EEFE3002DAFB20C00F5B0FF /* UserDefaultKeys.swift */,
 				3EEFE3012DAFB20C00F5B0FF /* UserDefaultsStorage.swift */,
+				3EEFE2FE2DAFB20C00F5B0FF /* UserDefaultsProtocol.swift */,
+				3EEFE3002DAFB20C00F5B0FF /* UserDefaultKeys.swift */,
+				3EEFE2FF2DAFB20C00F5B0FF /* StorageKeyProtocol.swift */,
 			);
 			path = UserDefaults;
 			sourceTree = "<group>";
@@ -661,6 +680,8 @@
 				3EEFE30D2DAFB20C00F5B0FF /* WatchConnectivityService.swift */,
 				3EEFE30E2DAFB20C00F5B0FF /* WatchConnectivityDelegate.swift */,
 				3EEFE30F2DAFB20C00F5B0FF /* WatchConnectivityProviding.swift */,
+				3EB305762DF5A9C300AAE9E0 /* WatchConnectivitySession.swift */,
+				3ECEB9332DF5A22000BF8EB5 /* WatchConnectivityKeys.swift */,
 				3EEFE3102DAFB20C00F5B0FF /* HabitData.swift */,
 			);
 			path = Watch;
@@ -736,6 +757,7 @@
 			isa = PBXGroup;
 			children = (
 				3EEFE38F2DAFB2E800F5B0FF /* WatchSessionManager.swift */,
+				3EB305782DF5AA0200AAE9E0 /* WatchSessionManaging.swift */,
 			);
 			path = WatchConnectivity;
 			sourceTree = "<group>";
@@ -862,8 +884,11 @@
 			files = (
 				3EEFE3272DAFB20C00F5B0FF /* Image+CircularIcon.swift in Sources */,
 				3E81A99C2DE862C500DCDC79 /* SettingView.swift in Sources */,
+				3ECEB92B2DF4387400BF8EB5 /* NetworkAPIConfiguration.swift in Sources */,
 				3E81A9A62DE8A25600DCDC79 /* LanguagePickerView.swift in Sources */,
 				3E495E552DE71CAB0051188A /* HomeUIState.swift in Sources */,
+				3ECEB9252DF430D000BF8EB5 /* IntroRouting.swift in Sources */,
+				3ECEB9342DF5A22200BF8EB5 /* WatchConnectivityKeys.swift in Sources */,
 				3E495E6C2DE74EDF0051188A /* FutureHabitModel.swift in Sources */,
 				3EE9241A2DB392AF0086B3F2 /* IntroUIState.swift in Sources */,
 				3EE9241E2DB3AC6A0086B3F2 /* WelcomeUIState.swift in Sources */,
@@ -884,6 +909,7 @@
 				3EEFE3752DAFB25B00F5B0FF /* IntroImage.swift in Sources */,
 				3EEFE3312DAFB20C00F5B0FF /* HomeNavigationTarget.swift in Sources */,
 				3EE924222DB3B1FC0086B3F2 /* BorderState.swift in Sources */,
+				3EB305772DF5A9C400AAE9E0 /* WatchConnectivitySession.swift in Sources */,
 				3EBDA85B2DEEE63A007D99F9 /* EditHabitView.swift in Sources */,
 				3E8DF9FF2DE4CCF30021E1EF /* IntroCoordinator.swift in Sources */,
 				3EEFE3332DAFB20C00F5B0FF /* SetNameViewModel.swift in Sources */,
@@ -933,6 +959,7 @@
 				3EBDA85F2DEEF271007D99F9 /* EditHabitCoordinator.swift in Sources */,
 				3EEFE3502DAFB20C00F5B0FF /* AppLogger.swift in Sources */,
 				3E495E9A2DE7834A0051188A /* AppLanguage.swift in Sources */,
+				3ECEB9292DF4361600BF8EB5 /* View+TypeErasure.swift in Sources */,
 				3E8DFA072DE4CD7E0021E1EF /* AddHabitCoordinator.swift in Sources */,
 				3E495E8F2DE7807A0051188A /* String+Localization.swift in Sources */,
 				3E495E682DE74BA50051188A /* FutureHabitItem.swift in Sources */,
@@ -956,6 +983,7 @@
 				3E8DFA012DE4CD1A0021E1EF /* SetNameCoordinator.swift in Sources */,
 				3EEFE2D42DAFB1F000F5B0FF /* HabitMinderApp.swift in Sources */,
 				3EEFE2D22DAFB1E600F5B0FF /* Test.swift in Sources */,
+				3ECEB9272DF430DF00BF8EB5 /* HomeRouting.swift in Sources */,
 				3EA986472DEB67530004B71B /* PresentationStyle.swift in Sources */,
 				3E81A9A22DE8A22B00DCDC79 /* ThemeManager.swift in Sources */,
 			);
@@ -967,6 +995,7 @@
 			files = (
 				3EEFE3932DAFB2E800F5B0FF /* HomeView.swift in Sources */,
 				3EEFE39A2DAFB34500F5B0FF /* AppLogger.swift in Sources */,
+				3EB305792DF5AA0300AAE9E0 /* WatchSessionManaging.swift in Sources */,
 				3EEFE3942DAFB2E800F5B0FF /* HomeViewModel.swift in Sources */,
 				3EEFE3982DAFB31700F5B0FF /* HabitData.swift in Sources */,
 				3E495EA22DE78ADF0051188A /* UserDefaultsProtocol.swift in Sources */,
@@ -974,6 +1003,7 @@
 				3EEFE3952DAFB2E800F5B0FF /* HabitMinderApp.swift in Sources */,
 				3E495E942DE782190051188A /* LanguageManager.swift in Sources */,
 				3E495E9E2DE783FD0051188A /* AppLanguage.swift in Sources */,
+				3ECEB9352DF5A23300BF8EB5 /* WatchConnectivityKeys.swift in Sources */,
 				3E495EA02DE78ACB0051188A /* UserDefaultKeys.swift in Sources */,
 				3EEFE3962DAFB2E800F5B0FF /* WatchSessionManager.swift in Sources */,
 				3E495E932DE782120051188A /* String+Localization.swift in Sources */,

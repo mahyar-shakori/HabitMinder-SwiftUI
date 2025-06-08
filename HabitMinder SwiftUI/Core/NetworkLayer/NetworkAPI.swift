@@ -47,10 +47,3 @@ final class NetworkAPI: DataFetcher {
         }
     }
 }
-
-
-struct NetworkAPIConfiguration {
-    let timeoutInterval: TimeInterval
-
-    static let `default` = NetworkAPIConfiguration(timeoutInterval: 30)
-}

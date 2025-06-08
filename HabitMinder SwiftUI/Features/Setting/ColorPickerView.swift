@@ -64,7 +64,7 @@ struct ColorPickerView: View {
                     selectedColor = defaultColor
                     themeManager.appPrimary = defaultColor
                 }) {
-                    Text("Default Color")
+                    Text(LocalizedStrings.SettingPage.defaultColor)
                         .font(.AppFont.rooneySansRegular.size(16))
                         .padding()
                         .frame(maxWidth: .infinity)

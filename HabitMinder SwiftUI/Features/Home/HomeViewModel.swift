@@ -8,8 +8,8 @@
 import Foundation
 
 final class HomeViewModel: ObservableObject {
-    @Published private(set) var uiState = HomeUIState()
-    
+    @Published private(set) var uiState: HomeUIState
+
     private(set) var quote: String
     private(set) var coordinator: HomeCoordinator
     private let habitManager: DataManager<HabitModel>
@@ -19,12 +19,14 @@ final class HomeViewModel: ObservableObject {
         quote: String,
         habitManager: DataManager<HabitModel>,
         futureHabitManager: DataManager<FutureHabitModel>,
-        coordinator: HomeCoordinator
+        coordinator: HomeCoordinator,
+        connectivityService: WatchConnectivityProviding
     ) {
         self.quote = quote
         self.habitManager = habitManager
         self.futureHabitManager = futureHabitManager
         self.coordinator = coordinator
+        self.uiState = HomeUIState(connectivityService: connectivityService)
         
         fetchHabits()
     }

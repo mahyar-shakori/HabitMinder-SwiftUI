@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class UserDefaultsStorage<Key: StorageKeyProtocol, Value>: UserDefaultsProtocol {
+final class UserDefaultsStorage<Key: StorageKeyProtocol, Value>: UserDefaultsStoring {
     typealias ValueType = Value
     
     private var key: Key
