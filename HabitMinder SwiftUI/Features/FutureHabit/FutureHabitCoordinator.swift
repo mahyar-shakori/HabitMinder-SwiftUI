@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class FutureHabitCoordinator: ObservableObject {
+final class FutureHabitCoordinator: FutureHabitCoordinating {
     private let dismiss: () -> Void
     
     init(dismiss: @escaping () -> Void) {

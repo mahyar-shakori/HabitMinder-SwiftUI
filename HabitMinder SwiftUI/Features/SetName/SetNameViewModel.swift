@@ -10,13 +10,13 @@ import Foundation
 final class SetNameViewModel: ObservableObject {
     @Published private(set) var uiState = SetNameUIState()
     
-    private let coordinator: SetNameCoordinator
+    private let coordinator: SetNameCoordinating
     
     private var trimmedUserName: String {
         uiState.userName.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
-    init(coordinator: SetNameCoordinator) {
+    init(coordinator: SetNameCoordinating) {
         self.coordinator = coordinator
     }
     

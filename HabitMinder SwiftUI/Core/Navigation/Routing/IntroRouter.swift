@@ -15,7 +15,10 @@ struct IntroRouter: IntroRouting {
     ) -> any View {
         switch route {
         case .setLanguage:
-            setLanguageScreen(coordinator: coordinator)
+            setLanguageScreen(
+                coordinator: coordinator,
+                languageManager: LanguageManager()
+            )
         case .intro:
             introScreen(coordinator: coordinator)
         case .setName:
@@ -27,12 +30,13 @@ struct IntroRouter: IntroRouting {
     
     @ViewBuilder
     private func setLanguageScreen(
-        coordinator: any BaseCoordinator
+        coordinator: any BaseCoordinator,
+        languageManager: any LanguageManaging
     ) -> some View {
         let viewCoordinator = SetLanguageCoordinator(navigate: coordinator.navigate)
         let viewModel = SetLanguageViewModel(
             coordinator: viewCoordinator,
-            languageManager: LanguageManager.shared
+            languageManager: languageManager
         )
         SetLanguageView(setLanguageViewModel: viewModel)
     }

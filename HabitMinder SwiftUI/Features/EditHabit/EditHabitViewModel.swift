@@ -12,7 +12,7 @@ final class EditHabitViewModel: ObservableObject {
 
     private let habitID: UUID
     private let dataManager: DataManager<HabitModel>
-    private let coordinator: EditHabitCoordinator
+    private let coordinator: EditHabitCoordinating
     
     private var trimmedHabitTitle: String {
         uiState.habitTitle.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -20,7 +20,7 @@ final class EditHabitViewModel: ObservableObject {
     
     init(
         dataManager: DataManager<HabitModel>,
-        coordinator: EditHabitCoordinator,
+        coordinator: EditHabitCoordinating,
         habit: HabitModel
     ) {
         self.dataManager = dataManager

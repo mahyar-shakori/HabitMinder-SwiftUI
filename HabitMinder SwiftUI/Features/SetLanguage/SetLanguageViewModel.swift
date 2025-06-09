@@ -10,12 +10,12 @@ import Foundation
 final class SetLanguageViewModel: ObservableObject {
     @Published private var selectedLanguage: AppLanguage
     
-    private let coordinator: SetLanguageCoordinator
-    private let languageManager: LanguageManager
+    private let coordinator: SetLanguageCoordinating
+    private let languageManager: any LanguageManaging
     
     init(
-        coordinator: SetLanguageCoordinator,
-        languageManager: LanguageManager
+        coordinator: SetLanguageCoordinating,
+        languageManager: any LanguageManaging
     ) {
         self.coordinator = coordinator
         self.languageManager = languageManager

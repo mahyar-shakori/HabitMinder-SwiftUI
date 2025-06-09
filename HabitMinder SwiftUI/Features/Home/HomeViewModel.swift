@@ -10,16 +10,20 @@ import Foundation
 final class HomeViewModel: ObservableObject {
     @Published private(set) var uiState: HomeUIState
 
-    private(set) var quote: String
-    private(set) var coordinator: HomeCoordinator
+    private var quote: String
+    private var coordinator: HomeCoordinating
     private let habitManager: DataManager<HabitModel>
     private let futureHabitManager: DataManager<FutureHabitModel>
+    
+    var displayedQuote: String {
+        quote
+    }
     
     init(
         quote: String,
         habitManager: DataManager<HabitModel>,
         futureHabitManager: DataManager<FutureHabitModel>,
-        coordinator: HomeCoordinator,
+        coordinator: HomeCoordinating,
         connectivityService: WatchConnectivityProviding
     ) {
         self.quote = quote
@@ -73,9 +77,12 @@ final class HomeViewModel: ObservableObject {
     func cancelDelete() {
         uiState.itemToDelete = nil
     }
-    
-    func confirmEdit(id: UUID) -> HabitModel? {
-        return habitManager.fetch(byID: id)
+ 
+    func editHabit(id: UUID) {
+        guard let habit = habitManager.fetch(byID: id) else {
+            return
+        }
+        coordinator.goToEditHabit(habit: habit)
     }
     
     private func handleEditHabitList() {

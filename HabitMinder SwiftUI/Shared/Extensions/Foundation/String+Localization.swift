@@ -9,7 +9,8 @@ import Foundation
 
 extension String {
     var localized: String {
-        let lang = LanguageManager.shared.selectedLanguage.rawValue
+        let languageManager = LanguageManager()
+        let lang = languageManager.selectedLanguage.rawValue
         guard let path = Bundle.main.path(forResource: lang, ofType: "lproj"),
               let bundle = Bundle(path: path) else {
             return self

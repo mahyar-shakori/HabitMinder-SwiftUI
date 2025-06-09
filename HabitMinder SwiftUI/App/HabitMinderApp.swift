@@ -10,7 +10,9 @@ import SwiftUI
 @main
 struct HabitMinderApp: App {
     private let coordinator: MainCoordinator
-    
+    private let languageManager = LanguageManager()
+    private let themeManager = ThemeManager()
+
     init() {
         self.coordinator = MainCoordinator(
             introRouting: IntroRouter(),
@@ -22,8 +24,8 @@ struct HabitMinderApp: App {
         WindowGroup {
             RootView(coordinator: coordinator)
                 .modelContainer(for: [HabitModel.self, FutureHabitModel.self])
-                .environmentObject(LanguageManager.shared)
-                .environmentObject(ThemeManager.shared)
+                .environmentObject(languageManager)
+                .environmentObject(themeManager)
         }
     }
 }

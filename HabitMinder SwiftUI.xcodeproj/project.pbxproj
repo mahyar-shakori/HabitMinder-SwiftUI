@@ -57,6 +57,18 @@
 		3EA9864F2DEB74D10004B71B /* SettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9864E2DEB74D00004B71B /* SettingCoordinator.swift */; };
 		3EB305772DF5A9C400AAE9E0 /* WatchConnectivitySession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB305762DF5A9C300AAE9E0 /* WatchConnectivitySession.swift */; };
 		3EB305792DF5AA0300AAE9E0 /* WatchSessionManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB305782DF5AA0200AAE9E0 /* WatchSessionManaging.swift */; };
+		3EB3057B2DF5DD3B00AAE9E0 /* SetLanguageCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB3057A2DF5DD3A00AAE9E0 /* SetLanguageCoordinating.swift */; };
+		3EB3057D2DF5DD7400AAE9E0 /* IntroCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB3057C2DF5DD7300AAE9E0 /* IntroCoordinating.swift */; };
+		3EB3057F2DF5DDE800AAE9E0 /* SetNameCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB3057E2DF5DDE200AAE9E0 /* SetNameCoordinating.swift */; };
+		3EB305812DF5DE3E00AAE9E0 /* WelcomeCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB305802DF5DE3D00AAE9E0 /* WelcomeCoordinating.swift */; };
+		3EB305832DF5DF0200AAE9E0 /* HomeCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB305822DF5DF0000AAE9E0 /* HomeCoordinating.swift */; };
+		3EB305852DF5E0C100AAE9E0 /* AddHabitCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB305842DF5E0B900AAE9E0 /* AddHabitCoordinating.swift */; };
+		3EB305872DF5E13C00AAE9E0 /* EditHabitCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB305862DF5E13500AAE9E0 /* EditHabitCoordinating.swift */; };
+		3EB305892DF5E17E00AAE9E0 /* FutureHabitCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB305882DF5E17900AAE9E0 /* FutureHabitCoordinating.swift */; };
+		3EB3058B2DF5E1AD00AAE9E0 /* SettingCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB3058A2DF5E1A400AAE9E0 /* SettingCoordinating.swift */; };
+		3EB305A72DF7450600AAE9E0 /* LanguageManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB305A62DF7450400AAE9E0 /* LanguageManaging.swift */; };
+		3EB305A82DF7450600AAE9E0 /* LanguageManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB305A62DF7450400AAE9E0 /* LanguageManaging.swift */; };
+		3EB305AA2DF7452000AAE9E0 /* ThemeManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB305A92DF7451E00AAE9E0 /* ThemeManaging.swift */; };
 		3EBDA8592DEEE631007D99F9 /* EditHabitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBDA8582DEEE62D007D99F9 /* EditHabitViewModel.swift */; };
 		3EBDA85B2DEEE63A007D99F9 /* EditHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBDA85A2DEEE63A007D99F9 /* EditHabitView.swift */; };
 		3EBDA85F2DEEF271007D99F9 /* EditHabitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBDA85E2DEEF267007D99F9 /* EditHabitCoordinator.swift */; };
@@ -207,6 +219,17 @@
 		3EA9864E2DEB74D00004B71B /* SettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinator.swift; sourceTree = "<group>"; };
 		3EB305762DF5A9C300AAE9E0 /* WatchConnectivitySession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivitySession.swift; sourceTree = "<group>"; };
 		3EB305782DF5AA0200AAE9E0 /* WatchSessionManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManaging.swift; sourceTree = "<group>"; };
+		3EB3057A2DF5DD3A00AAE9E0 /* SetLanguageCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLanguageCoordinating.swift; sourceTree = "<group>"; };
+		3EB3057C2DF5DD7300AAE9E0 /* IntroCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroCoordinating.swift; sourceTree = "<group>"; };
+		3EB3057E2DF5DDE200AAE9E0 /* SetNameCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNameCoordinating.swift; sourceTree = "<group>"; };
+		3EB305802DF5DE3D00AAE9E0 /* WelcomeCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeCoordinating.swift; sourceTree = "<group>"; };
+		3EB305822DF5DF0000AAE9E0 /* HomeCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinating.swift; sourceTree = "<group>"; };
+		3EB305842DF5E0B900AAE9E0 /* AddHabitCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitCoordinating.swift; sourceTree = "<group>"; };
+		3EB305862DF5E13500AAE9E0 /* EditHabitCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHabitCoordinating.swift; sourceTree = "<group>"; };
+		3EB305882DF5E17900AAE9E0 /* FutureHabitCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureHabitCoordinating.swift; sourceTree = "<group>"; };
+		3EB3058A2DF5E1A400AAE9E0 /* SettingCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinating.swift; sourceTree = "<group>"; };
+		3EB305A62DF7450400AAE9E0 /* LanguageManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManaging.swift; sourceTree = "<group>"; };
+		3EB305A92DF7451E00AAE9E0 /* ThemeManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManaging.swift; sourceTree = "<group>"; };
 		3EBDA8582DEEE62D007D99F9 /* EditHabitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHabitViewModel.swift; sourceTree = "<group>"; };
 		3EBDA85A2DEEE63A007D99F9 /* EditHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHabitView.swift; sourceTree = "<group>"; };
 		3EBDA85E2DEEF267007D99F9 /* EditHabitCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHabitCoordinator.swift; sourceTree = "<group>"; };
@@ -322,6 +345,7 @@
 				3E495E612DE745900051188A /* FutureHabitView.swift */,
 				3E495E632DE7466D0051188A /* FutureHabitViewModel.swift */,
 				3EA9864A2DEB74860004B71B /* FutureHabitCoordinator.swift */,
+				3EB305882DF5E17900AAE9E0 /* FutureHabitCoordinating.swift */,
 				3E495E692DE74C850051188A /* FutureHabitUIState.swift */,
 				3E495E652DE74B8E0051188A /* FutureHabitListRowView.swift */,
 				3E495E672DE74BA50051188A /* FutureHabitItem.swift */,
@@ -335,6 +359,7 @@
 				3E495E872DE777170051188A /* SetLanguageView.swift */,
 				3EA9863D2DEB5CD20004B71B /* SetLanguageViewModel.swift */,
 				3E495E9B2DE7837E0051188A /* SetLanguageCoordinator.swift */,
+				3EB3057A2DF5DD3A00AAE9E0 /* SetLanguageCoordinating.swift */,
 			);
 			path = SetLanguage;
 			sourceTree = "<group>";
@@ -345,6 +370,7 @@
 				3E81A99B2DE862C500DCDC79 /* SettingView.swift */,
 				3E81A99F2DE862D200DCDC79 /* SettingViewModel.swift */,
 				3EA9864E2DEB74D00004B71B /* SettingCoordinator.swift */,
+				3EB3058A2DF5E1A400AAE9E0 /* SettingCoordinating.swift */,
 				3E81A9A72DE8AF4000DCDC79 /* UserNameEditorView.swift */,
 				3E81A9A52DE8A25600DCDC79 /* LanguagePickerView.swift */,
 				3E81A9A32DE8A23F00DCDC79 /* ColorPickerView.swift */,
@@ -468,6 +494,7 @@
 			isa = PBXGroup;
 			children = (
 				3E495E8C2DE77D4E0051188A /* LanguageManager.swift */,
+				3EB305A62DF7450400AAE9E0 /* LanguageManaging.swift */,
 				3E495E982DE7834A0051188A /* AppLanguage.swift */,
 			);
 			path = Language;
@@ -477,6 +504,7 @@
 			isa = PBXGroup;
 			children = (
 				3E81A9A12DE8A22A00DCDC79 /* ThemeManager.swift */,
+				3EB305A92DF7451E00AAE9E0 /* ThemeManaging.swift */,
 			);
 			path = Theme;
 			sourceTree = "<group>";
@@ -495,6 +523,7 @@
 				3EBDA85A2DEEE63A007D99F9 /* EditHabitView.swift */,
 				3EBDA8582DEEE62D007D99F9 /* EditHabitViewModel.swift */,
 				3EBDA85E2DEEF267007D99F9 /* EditHabitCoordinator.swift */,
+				3EB305862DF5E13500AAE9E0 /* EditHabitCoordinating.swift */,
 				3EF4991B2DF334EE001A31FE /* EditHabitUIState.swift */,
 			);
 			path = EditHabit;
@@ -506,6 +535,7 @@
 				3EEFE2D82DAFB20C00F5B0FF /* IntroView.swift */,
 				3EEFE2D92DAFB20C00F5B0FF /* IntroViewModel.swift */,
 				3E8DF9FE2DE4CCED0021E1EF /* IntroCoordinator.swift */,
+				3EB3057C2DF5DD7300AAE9E0 /* IntroCoordinating.swift */,
 				3EEFE2DA2DAFB20C00F5B0FF /* IntroViewState.swift */,
 				3EE924192DB392AA0086B3F2 /* IntroUIState.swift */,
 				3EEFE3652DAFB25B00F5B0FF /* IntroImage.swift */,
@@ -519,6 +549,7 @@
 				3EEFE2DC2DAFB20C00F5B0FF /* SetNameView.swift */,
 				3EEFE2DD2DAFB20C00F5B0FF /* SetNameViewModel.swift */,
 				3E8DFA002DE4CD100021E1EF /* SetNameCoordinator.swift */,
+				3EB3057E2DF5DDE200AAE9E0 /* SetNameCoordinating.swift */,
 				3EE9241B2DB3A3750086B3F2 /* SetNameUIState.swift */,
 				3EE924212DB3B1FB0086B3F2 /* BorderState.swift */,
 			);
@@ -531,6 +562,7 @@
 				3EEFE2DF2DAFB20C00F5B0FF /* WelcomeView.swift */,
 				3EEFE2E02DAFB20C00F5B0FF /* WelcomeViewModel.swift */,
 				3E8DFA022DE4CD370021E1EF /* WelcomeCoordinator.swift */,
+				3EB305802DF5DE3D00AAE9E0 /* WelcomeCoordinating.swift */,
 				3EE9241D2DB3AC690086B3F2 /* WelcomeUIState.swift */,
 			);
 			path = Welcome;
@@ -542,6 +574,7 @@
 				3EEFE2E42DAFB20C00F5B0FF /* AddHabitView.swift */,
 				3EEFE2E52DAFB20C00F5B0FF /* AddHabitViewModel.swift */,
 				3E8DFA062DE4CD790021E1EF /* AddHabitCoordinator.swift */,
+				3EB305842DF5E0B900AAE9E0 /* AddHabitCoordinating.swift */,
 				3EF499192DF331AE001A31FE /* AddHabitUIState.swift */,
 			);
 			path = AddHabit;
@@ -553,6 +586,7 @@
 				3EEFE2E72DAFB20C00F5B0FF /* HomeView.swift */,
 				3EEFE2E82DAFB20C00F5B0FF /* HomeViewModel.swift */,
 				3E8DFA042DE4CD530021E1EF /* HomeCoordinator.swift */,
+				3EB305822DF5DF0000AAE9E0 /* HomeCoordinating.swift */,
 				3E495E542DE71CAA0051188A /* HomeUIState.swift */,
 				3E495E582DE722270051188A /* DropDownItemFactory.swift */,
 				3EEFE2EB2DAFB20C00F5B0FF /* HomeNavigationTarget.swift */,
@@ -894,6 +928,7 @@
 				3EE9241E2DB3AC6A0086B3F2 /* WelcomeUIState.swift in Sources */,
 				3EBDA8622DEF2194007D99F9 /* DispatchQueue+Delay.swift in Sources */,
 				3EEFE3282DAFB20C00F5B0FF /* HabitData.swift in Sources */,
+				3EB305892DF5E17E00AAE9E0 /* FutureHabitCoordinating.swift in Sources */,
 				3E8DFA0A2DE4CDCB0021E1EF /* RootView.swift in Sources */,
 				3EEFE3292DAFB20C00F5B0FF /* WelcomeViewModel.swift in Sources */,
 				3EEFE32A2DAFB20C00F5B0FF /* UserDefaultsStorage.swift in Sources */,
@@ -907,6 +942,7 @@
 				3EEFE32F2DAFB20C00F5B0FF /* DataManager.swift in Sources */,
 				3EEFE3742DAFB25B00F5B0FF /* LocalizedStrings.swift in Sources */,
 				3EEFE3752DAFB25B00F5B0FF /* IntroImage.swift in Sources */,
+				3EB3057B2DF5DD3B00AAE9E0 /* SetLanguageCoordinating.swift in Sources */,
 				3EEFE3312DAFB20C00F5B0FF /* HomeNavigationTarget.swift in Sources */,
 				3EE924222DB3B1FC0086B3F2 /* BorderState.swift in Sources */,
 				3EB305772DF5A9C400AAE9E0 /* WatchConnectivitySession.swift in Sources */,
@@ -921,10 +957,12 @@
 				3EEFE3382DAFB20C00F5B0FF /* WatchConnectivityService.swift in Sources */,
 				3E8DF9F52DE4CC2A0021E1EF /* AppRoute.swift in Sources */,
 				3EA9864F2DEB74D10004B71B /* SettingCoordinator.swift in Sources */,
+				3EB305A82DF7450600AAE9E0 /* LanguageManaging.swift in Sources */,
 				3E495E882DE777170051188A /* SetLanguageView.swift in Sources */,
 				3EEFE3392DAFB20C00F5B0FF /* HabitModel.swift in Sources */,
 				3EEFE33A2DAFB20C00F5B0FF /* AddHabitView.swift in Sources */,
 				3EEFE33B2DAFB20C00F5B0FF /* DropDownItem..swift in Sources */,
+				3EB305832DF5DF0200AAE9E0 /* HomeCoordinating.swift in Sources */,
 				3EEFE33D2DAFB20C00F5B0FF /* AppIconName.swift in Sources */,
 				3E495E622DE745900051188A /* FutureHabitView.swift in Sources */,
 				3EF4991A2DF331B5001A31FE /* AddHabitUIState.swift in Sources */,
@@ -936,6 +974,7 @@
 				3EE9241C2DB3A37A0086B3F2 /* SetNameUIState.swift in Sources */,
 				3E8DFA332DE5B7890021E1EF /* DataFetcher.swift in Sources */,
 				3EEFE3432DAFB20C00F5B0FF /* AddHabitViewModel.swift in Sources */,
+				3EB3057F2DF5DDE800AAE9E0 /* SetNameCoordinating.swift in Sources */,
 				3E8DFA052DE4CD5A0021E1EF /* HomeCoordinator.swift in Sources */,
 				3EEFE3442DAFB20C00F5B0FF /* IntroViewModel.swift in Sources */,
 				3EBDA8592DEEE631007D99F9 /* EditHabitViewModel.swift in Sources */,
@@ -946,6 +985,7 @@
 				3E8DFA032DE4CD3D0021E1EF /* WelcomeCoordinator.swift in Sources */,
 				3EEFE3462DAFB20C00F5B0FF /* CustomEmptyView.swift in Sources */,
 				3EEFE3482DAFB20C00F5B0FF /* AuthEndpoint.swift in Sources */,
+				3EB305872DF5E13C00AAE9E0 /* EditHabitCoordinating.swift in Sources */,
 				3E8DF9E92DE4BB640021E1EF /* DropDownIcon.swift in Sources */,
 				3EEFE3492DAFB20C00F5B0FF /* UserDefaultKeys.swift in Sources */,
 				3EA9864B2DEB74870004B71B /* FutureHabitCoordinator.swift in Sources */,
@@ -965,16 +1005,20 @@
 				3E495E682DE74BA50051188A /* FutureHabitItem.swift in Sources */,
 				3E8DF9EF2DE4CAAC0021E1EF /* MainCoordinator.swift in Sources */,
 				3EEFE3512DAFB20C00F5B0FF /* NetworkAPIError.swift in Sources */,
+				3EB305852DF5E0C100AAE9E0 /* AddHabitCoordinating.swift in Sources */,
 				3E8DF9F12DE4CB380021E1EF /* BaseCoordinator.swift in Sources */,
 				3E81A9A02DE862D600DCDC79 /* SettingViewModel.swift in Sources */,
 				3EEFE3522DAFB20C00F5B0FF /* Types+Helpers.swift in Sources */,
 				3EEFE3532DAFB20C00F5B0FF /* Date+DayCounter.swift in Sources */,
 				3EEFE3542DAFB20C00F5B0FF /* WatchConnectivityProviding.swift in Sources */,
 				3E8DF9FD2DE4CCBF0021E1EF /* HomeRouter.swift in Sources */,
+				3EB305AA2DF7452000AAE9E0 /* ThemeManaging.swift in Sources */,
 				3EEFE3552DAFB20C00F5B0FF /* AppNotification.swift in Sources */,
 				3E495E8D2DE77D4E0051188A /* LanguageManager.swift in Sources */,
 				3EA9863E2DEB5CD60004B71B /* SetLanguageViewModel.swift in Sources */,
+				3EB3057D2DF5DD7400AAE9E0 /* IntroCoordinating.swift in Sources */,
 				3EEFE3562DAFB20C00F5B0FF /* WelcomeView.swift in Sources */,
+				3EB3058B2DF5E1AD00AAE9E0 /* SettingCoordinating.swift in Sources */,
 				3EEFE3572DAFB20C00F5B0FF /* HabitListRowView.swift in Sources */,
 				3EEFE3582DAFB20C00F5B0FF /* IdentifiableModel.swift in Sources */,
 				3EEFE3592DAFB20C00F5B0FF /* QuoteResponse.swift in Sources */,
@@ -984,6 +1028,7 @@
 				3EEFE2D42DAFB1F000F5B0FF /* HabitMinderApp.swift in Sources */,
 				3EEFE2D22DAFB1E600F5B0FF /* Test.swift in Sources */,
 				3ECEB9272DF430DF00BF8EB5 /* HomeRouting.swift in Sources */,
+				3EB305812DF5DE3E00AAE9E0 /* WelcomeCoordinating.swift in Sources */,
 				3EA986472DEB67530004B71B /* PresentationStyle.swift in Sources */,
 				3E81A9A22DE8A22B00DCDC79 /* ThemeManager.swift in Sources */,
 			);
@@ -1005,6 +1050,7 @@
 				3E495E9E2DE783FD0051188A /* AppLanguage.swift in Sources */,
 				3ECEB9352DF5A23300BF8EB5 /* WatchConnectivityKeys.swift in Sources */,
 				3E495EA02DE78ACB0051188A /* UserDefaultKeys.swift in Sources */,
+				3EB305A72DF7450600AAE9E0 /* LanguageManaging.swift in Sources */,
 				3EEFE3962DAFB2E800F5B0FF /* WatchSessionManager.swift in Sources */,
 				3E495E932DE782120051188A /* String+Localization.swift in Sources */,
 				3E495E9F2DE78ABA0051188A /* UserDefaultsStorage.swift in Sources */,

@@ -11,9 +11,9 @@ final class SettingViewModel: ObservableObject {
     @Published private(set) var userName = ""
     
     private let userNameStorage = UserDefaultsStorage<UserDefaultKeys, String>(key: .userName)
-    private let coordinator: SettingCoordinator
+    private let coordinator: SettingCoordinating
     
-    init(coordinator: SettingCoordinator) {
+    init(coordinator: SettingCoordinating) {
         self.coordinator = coordinator
     }
     

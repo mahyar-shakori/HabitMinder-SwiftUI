@@ -10,9 +10,9 @@ import Foundation
 final class IntroViewModel: ObservableObject {
     @Published private(set) var currentState: IntroViewState = .first
     
-    private let coordinator: IntroCoordinator
+    private let coordinator: IntroCoordinating
 
-    init(coordinator: IntroCoordinator) {
+    init(coordinator: IntroCoordinating) {
         self.coordinator = coordinator
     }
     

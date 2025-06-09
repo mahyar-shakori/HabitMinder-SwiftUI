@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class SettingCoordinator: ObservableObject {
+final class SettingCoordinator: SettingCoordinating {
     private let dismiss: () -> Void
     
     init(dismiss: @escaping () -> Void) {

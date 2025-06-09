@@ -104,6 +104,7 @@ struct ColorPickerView: View {
 
 #Preview {
     let isPresented = Binding<Bool>.constant(false)
+    let themeManager = ThemeManager()
     ColorPickerView(isPresented: isPresented)
-        .environmentObject(ThemeManager.shared)
+        .environmentObject(themeManager)
 }

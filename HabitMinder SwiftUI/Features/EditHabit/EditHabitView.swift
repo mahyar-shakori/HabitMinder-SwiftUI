@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EditHabitView: View {
     @ObservedObject private var editHabitViewModel: EditHabitViewModel
+    @EnvironmentObject private var themeManager: ThemeManager
     @FocusState private var isFocused: Bool
     @State private var tempHabitTitle = ""
     @State private var showToast = false
@@ -111,7 +112,7 @@ struct EditHabitView: View {
         .frame(maxWidth: .infinity)
         .padding(16)
         .background(
-            Capsule().fill(showToast ? ThemeManager.shared.appSecondary : ThemeManager.shared.appPrimary)
+            Capsule().fill(showToast ? themeManager.appSecondary : themeManager.appPrimary)
         )
         .disabled(showToast)
         .padding(.horizontal, 32)

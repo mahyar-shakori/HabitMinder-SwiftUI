@@ -12,10 +12,10 @@ final class WelcomeViewModel: ObservableObject {
     
     private let networkAPI: DataFetcher
     private let userDefaultsStorage: UserDefaultsStorage<UserDefaultKeys, String>
-    private let coordinator: WelcomeCoordinator
+    private let coordinator: WelcomeCoordinating
 
     init(
-        coordinator: WelcomeCoordinator,
+        coordinator: WelcomeCoordinating,
         networkAPI: DataFetcher = NetworkAPI(configuration: .init(timeoutInterval: 3)),
         userDefaultsStorage: UserDefaultsStorage<UserDefaultKeys, String> = UserDefaultsStorage(key: .userName)
     ) {

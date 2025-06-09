@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class HomeCoordinator: ObservableObject {
+final class HomeCoordinator: HomeCoordinating {
     private let navigate: (AppRoute, PresentationStyle) -> Void
     
     init(navigate: @escaping (AppRoute, PresentationStyle) -> Void) {

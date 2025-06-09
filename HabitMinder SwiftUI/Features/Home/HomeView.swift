@@ -119,7 +119,7 @@ struct HomeView: View {
     }
     
     private var quoteText: some View {
-        Text(homeViewModel.quote)
+        Text(homeViewModel.displayedQuote)
             .font(.AppFont.rooneySansRegular.size(17))
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 32)
@@ -182,10 +182,7 @@ struct HomeView: View {
     
     private func editSwipeButton(for id: UUID) -> some View {
         Button {
-            guard let habit = homeViewModel.confirmEdit(id: id) else {
-                return
-            }
-            homeViewModel.coordinator.goToEditHabit(habit: habit)
+            homeViewModel.editHabit(id: id)
         } label: {
             Image(uiImage: Image.circularIcon(
                 diameter: 50,

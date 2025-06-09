@@ -59,9 +59,10 @@ struct SetLanguageView: View {
 #Preview {
     let fakeCoordinator = SetLanguageCoordinator(navigate: { _, _ in
     })
+    let languageManager = LanguageManager()
     let viewModel = SetLanguageViewModel(
         coordinator: fakeCoordinator,
-        languageManager: LanguageManager.shared
+        languageManager: languageManager
     )
     SetLanguageView(setLanguageViewModel: viewModel)
 }

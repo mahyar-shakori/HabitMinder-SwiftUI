@@ -9,6 +9,7 @@ import SwiftUI
 
 struct IntroView: View {
     @ObservedObject private var introViewModel: IntroViewModel
+    @EnvironmentObject private var themeManager: ThemeManager
     
     init(introViewModel: IntroViewModel) {
         self.introViewModel = introViewModel
@@ -72,7 +73,7 @@ struct IntroView: View {
         } label: {
             Text(LocalizedStrings.IntroPage.skipButton)
                 .font(.AppFont.rooneySansRegular.size(16))
-                .tint(ThemeManager.shared.appPrimary)
+                .tint(themeManager.appPrimary)
         }
         .padding(.horizontal, 8)
     }
@@ -88,20 +89,20 @@ struct IntroView: View {
         .padding(8)
         .padding(.horizontal, 8)
         .background(
-            Capsule().fill(ThemeManager.shared.appPrimary)
+            Capsule().fill(themeManager.appPrimary)
         )
     }
     
     private var pageControl: some View {
         HStack(spacing: 10) {
             Capsule()
-                .fill(ThemeManager.shared.appPrimary)
+                .fill(themeManager.appPrimary)
                 .frame(width: introViewModel.currentState == .second ? 70 : 40, height: 10)
                 .animation(.easeInOut(duration: 0.3), value: introViewModel.currentState)
             
             if introViewModel.currentState == .first {
                 Capsule()
-                    .fill(ThemeManager.shared.appSecondary)
+                    .fill(themeManager.appSecondary)
                     .frame(width: 20, height: 10)
                     .transition(.opacity)
             }

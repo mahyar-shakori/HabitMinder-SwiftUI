@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class SetNameCoordinator: ObservableObject {
+final class SetNameCoordinator: SetNameCoordinating {
     private let navigate: (AppRoute, PresentationStyle) -> Void
     
     init(navigate: @escaping (AppRoute, PresentationStyle) -> Void) {

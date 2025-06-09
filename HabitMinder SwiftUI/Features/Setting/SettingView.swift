@@ -180,8 +180,10 @@ struct SettingView: View {
 #Preview {
     let fakeCoordinator = SettingCoordinator(dismiss: {
     })
+    let languageManager = LanguageManager()
+    let themeManager = ThemeManager()
     let viewModel = SettingViewModel(coordinator: fakeCoordinator)
     SettingView(settingViewModel: viewModel)
-        .environmentObject(ThemeManager.shared)
-        .environmentObject(LanguageManager.shared)
+        .environmentObject(themeManager)
+        .environmentObject(languageManager)
 }

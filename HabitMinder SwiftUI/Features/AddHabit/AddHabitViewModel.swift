@@ -11,7 +11,7 @@ final class AddHabitViewModel: ObservableObject {
     @Published private(set) var uiState = AddHabitUIState()
 
     private let habitManager: DataManager<HabitModel>
-    private let coordinator: AddHabitCoordinator
+    private let coordinator: AddHabitCoordinating
     
     private var trimmedHabitTitle: String {
         uiState.habitTitle.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -19,7 +19,7 @@ final class AddHabitViewModel: ObservableObject {
     
     init(
         habitManager: DataManager<HabitModel>,
-        coordinator: AddHabitCoordinator
+        coordinator: AddHabitCoordinating
     ) {
         self.habitManager = habitManager
         self.coordinator = coordinator

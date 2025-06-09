@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WelcomeView: View {
     @ObservedObject private var welcomeViewModel: WelcomeViewModel
+    @EnvironmentObject private var themeManager: ThemeManager
     @State private var showAlert = false
     
     init(welcomeViewModel: WelcomeViewModel) {
@@ -69,7 +70,7 @@ struct WelcomeView: View {
     private var progressView: some View {
         ProgressView()
             .scaleEffect(1.5)
-            .tint(ThemeManager.shared.appPrimary)
+            .tint(themeManager.appPrimary)
             .padding(.top, 32)
     }
 }

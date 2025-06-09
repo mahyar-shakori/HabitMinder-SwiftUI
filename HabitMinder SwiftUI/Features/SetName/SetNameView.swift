@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SetNameView: View {
     @ObservedObject private var setNameViewModel: SetNameViewModel
+    @EnvironmentObject private var themeManager: ThemeManager
     @FocusState private var isFocused: Bool
     @State private var tempUserName = ""
     
@@ -93,14 +94,14 @@ struct SetNameView: View {
         .frame(maxWidth: .infinity)
         .padding(16)
         .background(
-            Capsule().fill(setNameViewModel.uiState.isValid ? ThemeManager.shared.appPrimary : ThemeManager.shared.appSecondary)
+            Capsule().fill(setNameViewModel.uiState.isValid ? themeManager.appPrimary : themeManager.appSecondary)
         )
         .padding(.horizontal, 32)
         .padding(.bottom, 32)
     }
     
     private var borderColor: Color {
-        setNameViewModel.uiState.borderState == .error ? .red : ThemeManager.shared.appPrimary
+        setNameViewModel.uiState.borderState == .error ? .red : themeManager.appPrimary
     }
     
     private var borderWidth: CGFloat {

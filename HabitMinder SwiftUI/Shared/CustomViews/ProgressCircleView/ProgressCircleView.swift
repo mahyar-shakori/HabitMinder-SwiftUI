@@ -32,6 +32,7 @@ struct ProgressCircleView: View {
 
 #Preview {
     let progress = 0.2
+    let themeManager = ThemeManager()
     ProgressCircleView(progress: progress)
-        .environmentObject(ThemeManager.shared)
+        .environmentObject(themeManager)
 }
