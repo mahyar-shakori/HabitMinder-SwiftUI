@@ -57,6 +57,7 @@ struct FutureHabitView: View {
     private var saveButton: some View {
         Button {
             futureHabitViewModel.save()
+            tempHabitTitle = ""
         } label: {
             Text(LocalizedStrings.Shared.saveButton)
                 .font(.AppFont.rooneySansBold.size(20))
@@ -127,8 +128,9 @@ struct FutureHabitView: View {
     
     let fakeCoordinator = FutureHabitCoordinator(dismiss: {
     })
+    let databaseContainer = DIContainer.Database(context: context)
     let viewModel = FutureHabitViewModel(
-        habitManager: DataManager<FutureHabitModel>(context: context),
+        futureHabitDataManager: databaseContainer.futureHabitDataManager,
         coordinator: fakeCoordinator
     )
     FutureHabitView(futureHabitViewModel: viewModel)

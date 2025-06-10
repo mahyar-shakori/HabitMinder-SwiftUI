@@ -10,10 +10,11 @@ import SwiftUI
 struct LanguagePickerView: View {
     @EnvironmentObject private var languageManager: LanguageManager
     @Binding private var isPresented: Bool
-    @State private var tempSelectedLanguage: AppLanguage = .en
+    @State private var tempSelectedLanguage: AppLanguage
     
     init(isPresented: Binding<Bool>) {
         self._isPresented = isPresented
+        _tempSelectedLanguage = State(initialValue: LanguageManager.shared.selectedLanguage)
     }
     
     var body: some View {
@@ -88,7 +89,6 @@ struct LanguagePickerView: View {
 
 #Preview {
     let isPresented = Binding<Bool>.constant(false)
-    let languageManager = LanguageManager()
     LanguagePickerView(isPresented: isPresented)
-        .environmentObject(languageManager)
+        .environmentObject(LanguageManager.shared)
 }

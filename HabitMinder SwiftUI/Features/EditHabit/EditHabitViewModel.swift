@@ -11,7 +11,7 @@ final class EditHabitViewModel: ObservableObject {
     @Published private(set) var uiState = EditHabitUIState()
 
     private let habitID: UUID
-    private let dataManager: DataManager<HabitModel>
+    private let habitDataManager: AnyDataManager<HabitModel>
     private let coordinator: EditHabitCoordinating
     
     private var trimmedHabitTitle: String {
@@ -19,11 +19,11 @@ final class EditHabitViewModel: ObservableObject {
     }
     
     init(
-        dataManager: DataManager<HabitModel>,
+        habitDataManager: AnyDataManager<HabitModel>,
         coordinator: EditHabitCoordinating,
         habit: HabitModel
     ) {
-        self.dataManager = dataManager
+        self.habitDataManager = habitDataManager
         self.coordinator = coordinator
         self.habitID = habit.id
         self.uiState.habitTitle = habit.title
@@ -40,12 +40,12 @@ final class EditHabitViewModel: ObservableObject {
     }
     
     func saveAndDismiss() {
-        dataManager.update({ $0.title = uiState.habitTitle }, forID: habitID)
+        habitDataManager.update({ $0.title = uiState.habitTitle }, forID: habitID)
         NotificationCenter.default.post(name: AppNotification.Habit.edited, object: nil)
         coordinator.goBack()
     }
     
     func missHabit() {
-        dataManager.update({ $0.createdAt = Date() }, forID: habitID)
+        habitDataManager.update({ $0.createdAt = Date() }, forID: habitID)
     }
 }

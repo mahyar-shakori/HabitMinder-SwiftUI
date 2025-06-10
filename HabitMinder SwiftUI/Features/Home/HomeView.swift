@@ -214,11 +214,14 @@ struct HomeView: View {
     let fakeCoordinator = HomeCoordinator(navigate: { _, _ in
     })
     let connectivityService = WatchConnectivityService()
+    let databaseContainer = DIContainer.Database(context: context)
     let viewModel = HomeViewModel(
         quote: "Test Quote",
-        habitManager: DataManager<HabitModel>(context: context),
-        futureHabitManager: DataManager<FutureHabitModel>(context: context),
-        coordinator: fakeCoordinator, connectivityService: connectivityService
+        habitDataManager: databaseContainer.habitDataManager,
+        futureHabitDataManager: databaseContainer.futureHabitDataManager,
+        coordinator: fakeCoordinator,
+        connectivityService: connectivityService,
+        loginStorage: DIContainer.UserDefaults.loginStorage
     )
     HomeView(homeViewModel: viewModel)
 }

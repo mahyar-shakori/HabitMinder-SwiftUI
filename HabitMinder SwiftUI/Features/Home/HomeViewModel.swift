@@ -12,25 +12,32 @@ final class HomeViewModel: ObservableObject {
 
     private var quote: String
     private var coordinator: HomeCoordinating
-    private let habitManager: DataManager<HabitModel>
-    private let futureHabitManager: DataManager<FutureHabitModel>
+    private let habitDataManager: AnyDataManager<HabitModel>
+    private let futureHabitDataManager: AnyDataManager<FutureHabitModel>
+    private let loginStorage: AnyUserDefaultsStorage<Bool>
     
     var displayedQuote: String {
-        quote
+        if quote.count > 100 {
+            return LocalizedStrings.HomePage.defaultQuote
+        } else {
+            return quote
+        }
     }
     
     init(
         quote: String,
-        habitManager: DataManager<HabitModel>,
-        futureHabitManager: DataManager<FutureHabitModel>,
+        habitDataManager: AnyDataManager<HabitModel>,
+        futureHabitDataManager: AnyDataManager<FutureHabitModel>,
         coordinator: HomeCoordinating,
-        connectivityService: WatchConnectivityProviding
+        connectivityService: WatchConnectivityProviding,
+        loginStorage: AnyUserDefaultsStorage<Bool>
     ) {
         self.quote = quote
-        self.habitManager = habitManager
-        self.futureHabitManager = futureHabitManager
+        self.habitDataManager = habitDataManager
+        self.futureHabitDataManager = futureHabitDataManager
         self.coordinator = coordinator
         self.uiState = HomeUIState(connectivityService: connectivityService)
+        self.loginStorage = loginStorage
         
         fetchHabits()
     }
@@ -43,7 +50,7 @@ final class HomeViewModel: ObservableObject {
     }
     
     func fetchHabits() {
-        let habits = habitManager.fetchAll().sorted(by: { $0.sortOrder < $1.sortOrder })
+        let habits = habitDataManager.fetchAll().sorted(by: { $0.sortOrder < $1.sortOrder })
         uiState.listItems = habits.map(mapToHabitItem)
     }
     
@@ -54,9 +61,9 @@ final class HomeViewModel: ObservableObject {
         uiState.listItems.move(fromOffsets: source, toOffset: destination)
         
         for (index, item) in uiState.listItems.enumerated() {
-            if let habit = habitManager.fetch(byID: item.id) {
+            if let habit = habitDataManager.fetch(byID: item.id) {
                 habit.sortOrder = index
-                habitManager.save(habit)
+                habitDataManager.save(habit)
             }
         }
     }
@@ -69,7 +76,7 @@ final class HomeViewModel: ObservableObject {
         guard let id = uiState.itemToDelete else {
             return
         }
-        habitManager.delete(byID: id)
+        habitDataManager.delete(byID: id)
         uiState.listItems.removeAll { $0.id == id }
         cancelDelete()
     }
@@ -79,7 +86,7 @@ final class HomeViewModel: ObservableObject {
     }
  
     func editHabit(id: UUID) {
-        guard let habit = habitManager.fetch(byID: id) else {
+        guard let habit = habitDataManager.fetch(byID: id) else {
             return
         }
         coordinator.goToEditHabit(habit: habit)
@@ -106,11 +113,10 @@ final class HomeViewModel: ObservableObject {
     }
     
     func performLogout() {
-        let loginStorage = UserDefaultsStorage<UserDefaultKeys, Bool>(key: .isLogin)
         loginStorage.save(value: false)
         
-        habitManager.deleteAll()
-        futureHabitManager.deleteAll()
+        habitDataManager.deleteAll()
+        futureHabitDataManager.deleteAll()
         coordinator.goToSetLanguage()
     }
     

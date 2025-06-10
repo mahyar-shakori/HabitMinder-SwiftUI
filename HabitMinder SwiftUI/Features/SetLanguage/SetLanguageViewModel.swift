@@ -11,11 +11,11 @@ final class SetLanguageViewModel: ObservableObject {
     @Published private var selectedLanguage: AppLanguage
     
     private let coordinator: SetLanguageCoordinating
-    private let languageManager: any LanguageManaging
-    
+    private let languageManager: LanguageManager
+
     init(
         coordinator: SetLanguageCoordinating,
-        languageManager: any LanguageManaging
+        languageManager: LanguageManager
     ) {
         self.coordinator = coordinator
         self.languageManager = languageManager

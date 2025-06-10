@@ -76,8 +76,9 @@ struct AddHabitView: View {
     
     let fakeCoordinator = AddHabitCoordinator(dismiss: {
     })
+    let databaseContainer = DIContainer.Database(context: context)
     let viewModel = AddHabitViewModel(
-        habitManager: DataManager<HabitModel>(context: context),
+        habitDataManager: databaseContainer.habitDataManager,
         coordinator: fakeCoordinator
     )
     AddHabitView(addHabitViewModel: viewModel)

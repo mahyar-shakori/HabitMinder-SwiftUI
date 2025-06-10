@@ -8,17 +8,13 @@
 import SwiftUI
 
 struct IntroRouter: IntroRouting {
-    @ViewBuilder
     func view(
         for route: IntroRoute,
         using coordinator: any BaseCoordinator,
     ) -> any View {
         switch route {
         case .setLanguage:
-            setLanguageScreen(
-                coordinator: coordinator,
-                languageManager: LanguageManager()
-            )
+            setLanguageScreen(coordinator: coordinator)
         case .intro:
             introScreen(coordinator: coordinator)
         case .setName:
@@ -30,13 +26,12 @@ struct IntroRouter: IntroRouting {
     
     @ViewBuilder
     private func setLanguageScreen(
-        coordinator: any BaseCoordinator,
-        languageManager: any LanguageManaging
+        coordinator: any BaseCoordinator
     ) -> some View {
         let viewCoordinator = SetLanguageCoordinator(navigate: coordinator.navigate)
         let viewModel = SetLanguageViewModel(
             coordinator: viewCoordinator,
-            languageManager: languageManager
+            languageManager: LanguageManager.shared
         )
         SetLanguageView(setLanguageViewModel: viewModel)
     }
@@ -55,7 +50,11 @@ struct IntroRouter: IntroRouting {
         coordinator: any BaseCoordinator
     ) -> some View {
         let viewCoordinator = SetNameCoordinator(navigate: coordinator.navigate)
-        let viewModel = SetNameViewModel(coordinator: viewCoordinator)
+        let viewModel = SetNameViewModel(
+            coordinator: viewCoordinator,
+            userNameStorage: DIContainer.UserDefaults.userNameStorage,
+            loginStorage: DIContainer.UserDefaults.loginStorage
+        )
         SetNameView(setNameViewModel: viewModel)
     }
     
@@ -64,7 +63,10 @@ struct IntroRouter: IntroRouting {
         coordinator: any BaseCoordinator
     ) -> some View {
         let viewCoordinator = WelcomeCoordinator(navigate: coordinator.navigate)
-        let viewModel = WelcomeViewModel(coordinator: viewCoordinator)
+        let viewModel = WelcomeViewModel(
+            coordinator: viewCoordinator,
+            userNameStorage: DIContainer.UserDefaults.userNameStorage
+)
         WelcomeView(welcomeViewModel: viewModel)
     }
 }

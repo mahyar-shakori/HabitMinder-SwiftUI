@@ -7,16 +7,18 @@
 
 import Foundation
 
-final class LanguageManager: LanguageManaging {
+final class LanguageManager: ObservableObject {
     @Published var selectedLanguage: AppLanguage {
         didSet {
-            languageStorage.save(value: selectedLanguage.displayName)
+            languageStorage.save(value: selectedLanguage.rawValue)
         }
     }
     
-    private let languageStorage = UserDefaultsStorage<UserDefaultKeys, String>(key: .language)
+    static let shared = LanguageManager()
+    private let languageStorage: AnyUserDefaultsStorage<String>
 
-    init() {
+    private init(languageStorage: AnyUserDefaultsStorage<String> = DIContainer.UserDefaults.languageStorage) {
+        self.languageStorage = languageStorage
         let saved = languageStorage.fetch() ?? "en"
         self.selectedLanguage = AppLanguage(rawValue: saved) ?? .en
     }

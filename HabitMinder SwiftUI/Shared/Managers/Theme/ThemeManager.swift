@@ -13,17 +13,19 @@ final class ThemeManager: ThemeManaging {
             saveColorToDefaults(appPrimary)
         }
     }
+    
+    private let colorStorage: AnyUserDefaultsStorage<[CGFloat]>
 
     var appSecondary: Color {
         appPrimary.opacity(0.4)
     }
 
-    init() {
+    init(colorStorage: AnyUserDefaultsStorage<[CGFloat]> = DIContainer.UserDefaults.colorStorage) {
+        self.colorStorage = colorStorage
         self.appPrimary = Self.loadColorFromDefaults() ?? .appPrimary
     }
 
     private func saveColorToDefaults(_ color: Color) {
-        let colorStorage = UserDefaultsStorage<UserDefaultKeys, [CGFloat]>(key: .appPrimaryColor)
         if let components = color.rgbaComponents {
             colorStorage.save(value: components)
         }

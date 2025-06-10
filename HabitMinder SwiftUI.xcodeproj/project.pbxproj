@@ -29,7 +29,19 @@
 		3E495E9F2DE78ABA0051188A /* UserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE3012DAFB20C00F5B0FF /* UserDefaultsStorage.swift */; };
 		3E495EA02DE78ACB0051188A /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE3002DAFB20C00F5B0FF /* UserDefaultKeys.swift */; };
 		3E495EA12DE78AD50051188A /* StorageKeyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE2FF2DAFB20C00F5B0FF /* StorageKeyProtocol.swift */; };
-		3E495EA22DE78ADF0051188A /* UserDefaultsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE2FE2DAFB20C00F5B0FF /* UserDefaultsProtocol.swift */; };
+		3E495EA22DE78ADF0051188A /* UserDefaultsStoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE2FE2DAFB20C00F5B0FF /* UserDefaultsStoring.swift */; };
+		3E58FDF32DF8404D00B108C4 /* AnyDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E58FDF22DF8404C00B108C4 /* AnyDataManager.swift */; };
+		3E58FDF52DF8405800B108C4 /* DataManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E58FDF42DF8405700B108C4 /* DataManaging.swift */; };
+		3E58FDF72DF8650700B108C4 /* AnyUserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E58FDF62DF8650600B108C4 /* AnyUserDefaultsStorage.swift */; };
+		3E58FDF82DF8650700B108C4 /* AnyUserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E58FDF62DF8650600B108C4 /* AnyUserDefaultsStorage.swift */; };
+		3E58FDFA2DF8652400B108C4 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E58FDF92DF8652300B108C4 /* DIContainer.swift */; };
+		3E58FDFB2DF865BF00B108C4 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E58FDF92DF8652300B108C4 /* DIContainer.swift */; };
+		3E58FDFC2DF86DC300B108C4 /* AnyDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E58FDF22DF8404C00B108C4 /* AnyDataManager.swift */; };
+		3E58FDFD2DF86DCF00B108C4 /* HabitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE2D62DAFB20C00F5B0FF /* HabitModel.swift */; };
+		3E58FDFE2DF86DDD00B108C4 /* FutureHabitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E495E6B2DE74EDB0051188A /* FutureHabitModel.swift */; };
+		3E58FDFF2DF86DE600B108C4 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE2FA2DAFB20C00F5B0FF /* DataManager.swift */; };
+		3E58FE002DF86DEA00B108C4 /* DataManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E58FDF42DF8405700B108C4 /* DataManaging.swift */; };
+		3E58FE012DF86DF300B108C4 /* IdentifiableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE2FB2DAFB20C00F5B0FF /* IdentifiableModel.swift */; };
 		3E81A99C2DE862C500DCDC79 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E81A99B2DE862C500DCDC79 /* SettingView.swift */; };
 		3E81A9A02DE862D600DCDC79 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E81A99F2DE862D200DCDC79 /* SettingViewModel.swift */; };
 		3E81A9A22DE8A22B00DCDC79 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E81A9A12DE8A22A00DCDC79 /* ThemeManager.swift */; };
@@ -66,8 +78,6 @@
 		3EB305872DF5E13C00AAE9E0 /* EditHabitCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB305862DF5E13500AAE9E0 /* EditHabitCoordinating.swift */; };
 		3EB305892DF5E17E00AAE9E0 /* FutureHabitCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB305882DF5E17900AAE9E0 /* FutureHabitCoordinating.swift */; };
 		3EB3058B2DF5E1AD00AAE9E0 /* SettingCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB3058A2DF5E1A400AAE9E0 /* SettingCoordinating.swift */; };
-		3EB305A72DF7450600AAE9E0 /* LanguageManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB305A62DF7450400AAE9E0 /* LanguageManaging.swift */; };
-		3EB305A82DF7450600AAE9E0 /* LanguageManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB305A62DF7450400AAE9E0 /* LanguageManaging.swift */; };
 		3EB305AA2DF7452000AAE9E0 /* ThemeManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB305A92DF7451E00AAE9E0 /* ThemeManaging.swift */; };
 		3EBDA8592DEEE631007D99F9 /* EditHabitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBDA8582DEEE62D007D99F9 /* EditHabitViewModel.swift */; };
 		3EBDA85B2DEEE63A007D99F9 /* EditHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBDA85A2DEEE63A007D99F9 /* EditHabitView.swift */; };
@@ -96,7 +106,7 @@
 		3EEFE32F2DAFB20C00F5B0FF /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE2FA2DAFB20C00F5B0FF /* DataManager.swift */; };
 		3EEFE3312DAFB20C00F5B0FF /* HomeNavigationTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE2EB2DAFB20C00F5B0FF /* HomeNavigationTarget.swift */; };
 		3EEFE3332DAFB20C00F5B0FF /* SetNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE2DD2DAFB20C00F5B0FF /* SetNameViewModel.swift */; };
-		3EEFE3342DAFB20C00F5B0FF /* UserDefaultsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE2FE2DAFB20C00F5B0FF /* UserDefaultsProtocol.swift */; };
+		3EEFE3342DAFB20C00F5B0FF /* UserDefaultsStoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE2FE2DAFB20C00F5B0FF /* UserDefaultsStoring.swift */; };
 		3EEFE3352DAFB20C00F5B0FF /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE2F62DAFB20C00F5B0FF /* HTTPMethod.swift */; };
 		3EEFE3362DAFB20C00F5B0FF /* DropDownSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE3052DAFB20C00F5B0FF /* DropDownSheetView.swift */; };
 		3EEFE3372DAFB20C00F5B0FF /* IntroViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE2DA2DAFB20C00F5B0FF /* IntroViewState.swift */; };
@@ -191,6 +201,10 @@
 		3E495E8E2DE7806D0051188A /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
 		3E495E982DE7834A0051188A /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
 		3E495E9B2DE7837E0051188A /* SetLanguageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLanguageCoordinator.swift; sourceTree = "<group>"; };
+		3E58FDF22DF8404C00B108C4 /* AnyDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyDataManager.swift; sourceTree = "<group>"; };
+		3E58FDF42DF8405700B108C4 /* DataManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManaging.swift; sourceTree = "<group>"; };
+		3E58FDF62DF8650600B108C4 /* AnyUserDefaultsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyUserDefaultsStorage.swift; sourceTree = "<group>"; };
+		3E58FDF92DF8652300B108C4 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		3E81A99B2DE862C500DCDC79 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		3E81A99F2DE862D200DCDC79 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		3E81A9A12DE8A22A00DCDC79 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
@@ -228,7 +242,6 @@
 		3EB305862DF5E13500AAE9E0 /* EditHabitCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHabitCoordinating.swift; sourceTree = "<group>"; };
 		3EB305882DF5E17900AAE9E0 /* FutureHabitCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureHabitCoordinating.swift; sourceTree = "<group>"; };
 		3EB3058A2DF5E1A400AAE9E0 /* SettingCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinating.swift; sourceTree = "<group>"; };
-		3EB305A62DF7450400AAE9E0 /* LanguageManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManaging.swift; sourceTree = "<group>"; };
 		3EB305A92DF7451E00AAE9E0 /* ThemeManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManaging.swift; sourceTree = "<group>"; };
 		3EBDA8582DEEE62D007D99F9 /* EditHabitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHabitViewModel.swift; sourceTree = "<group>"; };
 		3EBDA85A2DEEE63A007D99F9 /* EditHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHabitView.swift; sourceTree = "<group>"; };
@@ -269,7 +282,7 @@
 		3EEFE2F82DAFB20C00F5B0FF /* NetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPI.swift; sourceTree = "<group>"; };
 		3EEFE2FA2DAFB20C00F5B0FF /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		3EEFE2FB2DAFB20C00F5B0FF /* IdentifiableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableModel.swift; sourceTree = "<group>"; };
-		3EEFE2FE2DAFB20C00F5B0FF /* UserDefaultsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsProtocol.swift; sourceTree = "<group>"; };
+		3EEFE2FE2DAFB20C00F5B0FF /* UserDefaultsStoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStoring.swift; sourceTree = "<group>"; };
 		3EEFE2FF2DAFB20C00F5B0FF /* StorageKeyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageKeyProtocol.swift; sourceTree = "<group>"; };
 		3EEFE3002DAFB20C00F5B0FF /* UserDefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
 		3EEFE3012DAFB20C00F5B0FF /* UserDefaultsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorage.swift; sourceTree = "<group>"; };
@@ -468,6 +481,7 @@
 			children = (
 				3EEFE3122DAFB20C00F5B0FF /* AppIconName.swift */,
 				3EEFE3162DAFB20C00F5B0FF /* AppNotification.swift */,
+				3E58FDF92DF8652300B108C4 /* DIContainer.swift */,
 				3EEFE3192DAFB20C00F5B0FF /* AppLogger.swift */,
 			);
 			path = Constants;
@@ -494,7 +508,6 @@
 			isa = PBXGroup;
 			children = (
 				3E495E8C2DE77D4E0051188A /* LanguageManager.swift */,
-				3EB305A62DF7450400AAE9E0 /* LanguageManaging.swift */,
 				3E495E982DE7834A0051188A /* AppLanguage.swift */,
 			);
 			path = Language;
@@ -644,6 +657,8 @@
 			isa = PBXGroup;
 			children = (
 				3EEFE2FA2DAFB20C00F5B0FF /* DataManager.swift */,
+				3E58FDF42DF8405700B108C4 /* DataManaging.swift */,
+				3E58FDF22DF8404C00B108C4 /* AnyDataManager.swift */,
 				3EEFE2FB2DAFB20C00F5B0FF /* IdentifiableModel.swift */,
 				3EEFE2D62DAFB20C00F5B0FF /* HabitModel.swift */,
 				3E495E6B2DE74EDB0051188A /* FutureHabitModel.swift */,
@@ -655,7 +670,8 @@
 			isa = PBXGroup;
 			children = (
 				3EEFE3012DAFB20C00F5B0FF /* UserDefaultsStorage.swift */,
-				3EEFE2FE2DAFB20C00F5B0FF /* UserDefaultsProtocol.swift */,
+				3E58FDF62DF8650600B108C4 /* AnyUserDefaultsStorage.swift */,
+				3EEFE2FE2DAFB20C00F5B0FF /* UserDefaultsStoring.swift */,
 				3EEFE3002DAFB20C00F5B0FF /* UserDefaultKeys.swift */,
 				3EEFE2FF2DAFB20C00F5B0FF /* StorageKeyProtocol.swift */,
 			);
@@ -919,6 +935,7 @@
 				3EEFE3272DAFB20C00F5B0FF /* Image+CircularIcon.swift in Sources */,
 				3E81A99C2DE862C500DCDC79 /* SettingView.swift in Sources */,
 				3ECEB92B2DF4387400BF8EB5 /* NetworkAPIConfiguration.swift in Sources */,
+				3E58FDF52DF8405800B108C4 /* DataManaging.swift in Sources */,
 				3E81A9A62DE8A25600DCDC79 /* LanguagePickerView.swift in Sources */,
 				3E495E552DE71CAB0051188A /* HomeUIState.swift in Sources */,
 				3ECEB9252DF430D000BF8EB5 /* IntroRouting.swift in Sources */,
@@ -936,6 +953,7 @@
 				3E8DF9F32DE4CB700021E1EF /* NavigationItem.swift in Sources */,
 				3E439A532DEDD28900A171B6 /* Color+RGBA.swift in Sources */,
 				3EEFE32B2DAFB20C00F5B0FF /* StorageKeyProtocol.swift in Sources */,
+				3E58FDF72DF8650700B108C4 /* AnyUserDefaultsStorage.swift in Sources */,
 				3EEFE32C2DAFB20C00F5B0FF /* SetNameView.swift in Sources */,
 				3EEFE32D2DAFB20C00F5B0FF /* HTTPContentType.swift in Sources */,
 				3EEFE32E2DAFB20C00F5B0FF /* NetworkAPI.swift in Sources */,
@@ -949,7 +967,7 @@
 				3EBDA85B2DEEE63A007D99F9 /* EditHabitView.swift in Sources */,
 				3E8DF9FF2DE4CCF30021E1EF /* IntroCoordinator.swift in Sources */,
 				3EEFE3332DAFB20C00F5B0FF /* SetNameViewModel.swift in Sources */,
-				3EEFE3342DAFB20C00F5B0FF /* UserDefaultsProtocol.swift in Sources */,
+				3EEFE3342DAFB20C00F5B0FF /* UserDefaultsStoring.swift in Sources */,
 				3EEFE3352DAFB20C00F5B0FF /* HTTPMethod.swift in Sources */,
 				3EEFE3362DAFB20C00F5B0FF /* DropDownSheetView.swift in Sources */,
 				3EEFE3372DAFB20C00F5B0FF /* IntroViewState.swift in Sources */,
@@ -957,7 +975,6 @@
 				3EEFE3382DAFB20C00F5B0FF /* WatchConnectivityService.swift in Sources */,
 				3E8DF9F52DE4CC2A0021E1EF /* AppRoute.swift in Sources */,
 				3EA9864F2DEB74D10004B71B /* SettingCoordinator.swift in Sources */,
-				3EB305A82DF7450600AAE9E0 /* LanguageManaging.swift in Sources */,
 				3E495E882DE777170051188A /* SetLanguageView.swift in Sources */,
 				3EEFE3392DAFB20C00F5B0FF /* HabitModel.swift in Sources */,
 				3EEFE33A2DAFB20C00F5B0FF /* AddHabitView.swift in Sources */,
@@ -970,6 +987,7 @@
 				3EEFE3402DAFB20C00F5B0FF /* HabitItem.swift in Sources */,
 				3E81A9A42DE8A24000DCDC79 /* ColorPickerView.swift in Sources */,
 				3E495E662DE74B8E0051188A /* FutureHabitListRowView.swift in Sources */,
+				3E58FDFA2DF8652400B108C4 /* DIContainer.swift in Sources */,
 				3EEFE3412DAFB20C00F5B0FF /* ProgressCircleView.swift in Sources */,
 				3EE9241C2DB3A37A0086B3F2 /* SetNameUIState.swift in Sources */,
 				3E8DFA332DE5B7890021E1EF /* DataFetcher.swift in Sources */,
@@ -1008,6 +1026,7 @@
 				3EB305852DF5E0C100AAE9E0 /* AddHabitCoordinating.swift in Sources */,
 				3E8DF9F12DE4CB380021E1EF /* BaseCoordinator.swift in Sources */,
 				3E81A9A02DE862D600DCDC79 /* SettingViewModel.swift in Sources */,
+				3E58FDF32DF8404D00B108C4 /* AnyDataManager.swift in Sources */,
 				3EEFE3522DAFB20C00F5B0FF /* Types+Helpers.swift in Sources */,
 				3EEFE3532DAFB20C00F5B0FF /* Date+DayCounter.swift in Sources */,
 				3EEFE3542DAFB20C00F5B0FF /* WatchConnectivityProviding.swift in Sources */,
@@ -1038,22 +1057,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E58FDFC2DF86DC300B108C4 /* AnyDataManager.swift in Sources */,
 				3EEFE3932DAFB2E800F5B0FF /* HomeView.swift in Sources */,
 				3EEFE39A2DAFB34500F5B0FF /* AppLogger.swift in Sources */,
 				3EB305792DF5AA0300AAE9E0 /* WatchSessionManaging.swift in Sources */,
 				3EEFE3942DAFB2E800F5B0FF /* HomeViewModel.swift in Sources */,
+				3E58FDFF2DF86DE600B108C4 /* DataManager.swift in Sources */,
 				3EEFE3982DAFB31700F5B0FF /* HabitData.swift in Sources */,
-				3E495EA22DE78ADF0051188A /* UserDefaultsProtocol.swift in Sources */,
+				3E58FDFD2DF86DCF00B108C4 /* HabitModel.swift in Sources */,
+				3E495EA22DE78ADF0051188A /* UserDefaultsStoring.swift in Sources */,
+				3E58FE002DF86DEA00B108C4 /* DataManaging.swift in Sources */,
 				3E495E922DE7820D0051188A /* LocalizedStrings.swift in Sources */,
 				3EEFE3952DAFB2E800F5B0FF /* HabitMinderApp.swift in Sources */,
 				3E495E942DE782190051188A /* LanguageManager.swift in Sources */,
 				3E495E9E2DE783FD0051188A /* AppLanguage.swift in Sources */,
 				3ECEB9352DF5A23300BF8EB5 /* WatchConnectivityKeys.swift in Sources */,
 				3E495EA02DE78ACB0051188A /* UserDefaultKeys.swift in Sources */,
-				3EB305A72DF7450600AAE9E0 /* LanguageManaging.swift in Sources */,
+				3E58FE012DF86DF300B108C4 /* IdentifiableModel.swift in Sources */,
+				3E58FDF82DF8650700B108C4 /* AnyUserDefaultsStorage.swift in Sources */,
 				3EEFE3962DAFB2E800F5B0FF /* WatchSessionManager.swift in Sources */,
+				3E58FDFE2DF86DDD00B108C4 /* FutureHabitModel.swift in Sources */,
 				3E495E932DE782120051188A /* String+Localization.swift in Sources */,
 				3E495E9F2DE78ABA0051188A /* UserDefaultsStorage.swift in Sources */,
+				3E58FDFB2DF865BF00B108C4 /* DIContainer.swift in Sources */,
 				3E495EA12DE78AD50051188A /* StorageKeyProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

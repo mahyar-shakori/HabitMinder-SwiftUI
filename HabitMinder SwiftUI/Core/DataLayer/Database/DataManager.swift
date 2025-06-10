@@ -102,3 +102,7 @@ final class DataManager<T: PersistentModel & IdentifiableModel> {
         }
     }
 }
+
+extension DataManager: DataManaging {
+    typealias Entity = T
+}

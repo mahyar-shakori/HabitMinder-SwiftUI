@@ -10,11 +10,15 @@ import Foundation
 final class SettingViewModel: ObservableObject {
     @Published private(set) var userName = ""
     
-    private let userNameStorage = UserDefaultsStorage<UserDefaultKeys, String>(key: .userName)
     private let coordinator: SettingCoordinating
+    private let userNameStorage: AnyUserDefaultsStorage<String>
     
-    init(coordinator: SettingCoordinating) {
+    init(
+        coordinator: SettingCoordinating,
+        userNameStorage: AnyUserDefaultsStorage<String>
+    ) {
         self.coordinator = coordinator
+        self.userNameStorage = userNameStorage
     }
     
     func setUserName(_ newName: String) {

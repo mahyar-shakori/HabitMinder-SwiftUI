@@ -15,15 +15,19 @@ enum AppLanguage: String, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .en: return "English"
-        case .nl: return "Nederlands"
+        case .en: 
+            return "English"
+        case .nl: 
+            return "Nederlands"
         }
     }
     
     var displayImage: String {
         switch self {
-        case .en: return "EnglishFlag"
-        case .nl: return "NederlandsFlag"
+        case .en: 
+            return "EnglishFlag"
+        case .nl: 
+            return "NederlandsFlag"
         }
     }
 }

@@ -9,8 +9,8 @@ import SwiftUI
 
 struct SettingView: View {
     @ObservedObject private var settingViewModel: SettingViewModel
-    @EnvironmentObject private var languageManager: LanguageManager
     @EnvironmentObject private var themeManager: ThemeManager
+    @EnvironmentObject private var languageManager: LanguageManager
     @State private var isShowingLanguagePicker = false
     @State private var isShowingColorPicker = false
     @State private var isEditingUserName = false
@@ -98,7 +98,7 @@ struct SettingView: View {
     
     private var languageSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(LocalizedStrings.SettingPage.Language)
+            Text(LocalizedStrings.SettingPage.language)
                 .font(.AppFont.rooneySansRegular.size(18))
                 .foregroundColor(.gray)
             languagePickerField
@@ -180,10 +180,12 @@ struct SettingView: View {
 #Preview {
     let fakeCoordinator = SettingCoordinator(dismiss: {
     })
-    let languageManager = LanguageManager()
     let themeManager = ThemeManager()
-    let viewModel = SettingViewModel(coordinator: fakeCoordinator)
+    let viewModel = SettingViewModel(
+        coordinator: fakeCoordinator,
+        userNameStorage: DIContainer.UserDefaults.userNameStorage
+    )
     SettingView(settingViewModel: viewModel)
         .environmentObject(themeManager)
-        .environmentObject(languageManager)
+        .environmentObject(LanguageManager.shared)
 }

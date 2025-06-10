@@ -9,7 +9,5 @@ import Foundation
 
 struct WelcomeUIState {
     var errorMessage: String?
-    var isFetchSuccessful = false
-    var quote = ""
     var userName = ""
 }

@@ -79,7 +79,8 @@ struct WelcomeView: View {
     let fakeCoordinator = WelcomeCoordinator(navigate: { _, _ in
     })
     let viewModel = WelcomeViewModel(
-        coordinator: fakeCoordinator
+        coordinator: fakeCoordinator,
+        userNameStorage: DIContainer.UserDefaults.userNameStorage
     )
     WelcomeView(welcomeViewModel: viewModel)
 }

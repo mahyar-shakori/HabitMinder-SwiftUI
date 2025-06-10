@@ -10,7 +10,7 @@ import Foundation
 final class FutureHabitViewModel: ObservableObject {
     @Published private(set) var uiState = FutureHabitUIState()
     
-    private let habitManager: DataManager<FutureHabitModel>
+    private let futureHabitDataManager: AnyDataManager<FutureHabitModel>
     private let coordinator: FutureHabitCoordinating
     
     private var trimmedHabitTitle: String {
@@ -18,10 +18,10 @@ final class FutureHabitViewModel: ObservableObject {
     }
     
     init(
-        habitManager: DataManager<FutureHabitModel>,
+        futureHabitDataManager: AnyDataManager<FutureHabitModel>,
         coordinator: FutureHabitCoordinating
     ) {
-        self.habitManager = habitManager
+        self.futureHabitDataManager = futureHabitDataManager
         self.coordinator = coordinator
         fetchHabits()
     }
@@ -32,7 +32,7 @@ final class FutureHabitViewModel: ObservableObject {
     }
     
     func fetchHabits() {
-        let models = habitManager.fetchAll()
+        let models = futureHabitDataManager.fetchAll()
         uiState.listItems = models.map {
             FutureHabitItem(
                 id: $0.id,
@@ -49,7 +49,7 @@ final class FutureHabitViewModel: ObservableObject {
     
     func save() {
         let newHabit = FutureHabitModel(title: uiState.habitTitle)
-        habitManager.save(newHabit)
+        futureHabitDataManager.save(newHabit)
         uiState.habitTitle = ""
         fetchHabits()
     }
@@ -62,7 +62,7 @@ final class FutureHabitViewModel: ObservableObject {
         guard let id = uiState.itemToDelete else {
             return
         }
-        habitManager.delete(byID: id)
+        futureHabitDataManager.delete(byID: id)
         uiState.listItems.removeAll { $0.id == id }
         cancelDelete()
     }

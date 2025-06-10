@@ -113,7 +113,9 @@ struct SetNameView: View {
     let fakeCoordinator = SetNameCoordinator(navigate: { _, _ in
     })
     let viewModel = SetNameViewModel(
-        coordinator: fakeCoordinator
+        coordinator: fakeCoordinator,
+        userNameStorage: DIContainer.UserDefaults.userNameStorage,
+        loginStorage: DIContainer.UserDefaults.loginStorage
     )
     SetNameView(setNameViewModel: viewModel)
 }

@@ -32,7 +32,7 @@ struct SetLanguageView: View {
     }
     
     private var titleText: some View {
-        Text(LocalizedStrings.setLanguagePage.title)
+        Text(LocalizedStrings.SetLanguagePage.title)
             .font(.AppFont.rooneySansBold.size(20))
             .padding(.bottom, 32)
     }
@@ -59,10 +59,9 @@ struct SetLanguageView: View {
 #Preview {
     let fakeCoordinator = SetLanguageCoordinator(navigate: { _, _ in
     })
-    let languageManager = LanguageManager()
     let viewModel = SetLanguageViewModel(
         coordinator: fakeCoordinator,
-        languageManager: languageManager
+        languageManager: LanguageManager.shared
     )
     SetLanguageView(setLanguageViewModel: viewModel)
 }

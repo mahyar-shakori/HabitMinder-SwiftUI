@@ -11,21 +11,21 @@ final class WelcomeViewModel: ObservableObject {
     @Published private(set) var uiState = WelcomeUIState()
     
     private let networkAPI: DataFetcher
-    private let userDefaultsStorage: UserDefaultsStorage<UserDefaultKeys, String>
+    private let userNameStorage: AnyUserDefaultsStorage<String>
     private let coordinator: WelcomeCoordinating
 
     init(
         coordinator: WelcomeCoordinating,
         networkAPI: DataFetcher = NetworkAPI(configuration: .init(timeoutInterval: 3)),
-        userDefaultsStorage: UserDefaultsStorage<UserDefaultKeys, String> = UserDefaultsStorage(key: .userName)
+        userNameStorage: AnyUserDefaultsStorage<String>
     ) {
         self.coordinator = coordinator
         self.networkAPI = networkAPI
-        self.userDefaultsStorage = userDefaultsStorage
+        self.userNameStorage = userNameStorage
     }
   
     func loadUserName() {
-        let storedName = userDefaultsStorage.fetch()
+        let storedName = userNameStorage.fetch()
         uiState.userName = formattedWelcomeName(from: storedName)
     }
   
@@ -45,14 +45,8 @@ final class WelcomeViewModel: ObservableObject {
     
     private func handleQuoteSuccess(_ quotes: [QuoteResponse]) {
         let rawQuote = quotes.first?.quote ?? ""
-        let trimmedQuote = rawQuote.count > 100
-        ? LocalizedStrings.WelcomePage.defaultQuote
-        : rawQuote
-        
-        coordinator.goToHome(trimmedQuote)
-        
-        uiState.quote = trimmedQuote
-        uiState.isFetchSuccessful = true
+
+        coordinator.goToHome(rawQuote)
         uiState.errorMessage = nil
     }
     

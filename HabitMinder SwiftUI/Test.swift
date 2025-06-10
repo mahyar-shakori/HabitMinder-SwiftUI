@@ -7,10 +7,9 @@
 // Notification, CustomView
 
 // MARK: - Tasks
-// Swift testing - DI
-// DI: DataLayer
+// Swift testing
 
 
 // MARK: - Questions
 // Test - DI
-// Coordinator FullScreen or Sheet
+// Coordinator FullScreen or Sheet, LanguageManger DI

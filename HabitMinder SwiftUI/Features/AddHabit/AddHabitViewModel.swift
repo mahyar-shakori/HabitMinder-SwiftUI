@@ -10,7 +10,7 @@ import Foundation
 final class AddHabitViewModel: ObservableObject {
     @Published private(set) var uiState = AddHabitUIState()
 
-    private let habitManager: DataManager<HabitModel>
+    private let habitDataManager: AnyDataManager<HabitModel>
     private let coordinator: AddHabitCoordinating
     
     private var trimmedHabitTitle: String {
@@ -18,10 +18,10 @@ final class AddHabitViewModel: ObservableObject {
     }
     
     init(
-        habitManager: DataManager<HabitModel>,
+        habitDataManager: AnyDataManager<HabitModel>,
         coordinator: AddHabitCoordinating
     ) {
-        self.habitManager = habitManager
+        self.habitDataManager = habitDataManager
         self.coordinator = coordinator
     }
     
@@ -36,14 +36,14 @@ final class AddHabitViewModel: ObservableObject {
     }
     
     func saveAndDismiss() {
-        let maxSortOrder = habitManager.fetchAll().map(\.sortOrder).max() ?? -1
+        let maxSortOrder = habitDataManager.fetchAll().map(\.sortOrder).max() ?? -1
 
         let newHabit = HabitModel(
             title: trimmedHabitTitle,
             sortOrder: maxSortOrder + 1
         )
         
-        habitManager.save(newHabit)
+        habitDataManager.save(newHabit)
         NotificationCenter.default.post(name: AppNotification.Habit.added, object: nil)
         coordinator.goBack()
     }

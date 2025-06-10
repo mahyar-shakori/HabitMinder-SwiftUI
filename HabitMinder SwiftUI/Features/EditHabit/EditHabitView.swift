@@ -126,8 +126,9 @@ struct EditHabitView: View {
     let sampleHabit = HabitModel(title: "Read book")
     let fakeCoordinator = EditHabitCoordinator(dismiss: {
     })
+    let databaseContainer = DIContainer.Database(context: context)
     let viewModel = EditHabitViewModel(
-        dataManager: DataManager<HabitModel>(context: context),
+        habitDataManager: databaseContainer.habitDataManager,
         coordinator: fakeCoordinator,
         habit: sampleHabit
     )
