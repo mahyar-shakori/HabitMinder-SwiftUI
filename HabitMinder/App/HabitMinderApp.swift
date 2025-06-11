@@ -10,12 +10,25 @@ import SwiftUI
 @main
 struct HabitMinderApp: App {
     private let coordinator: MainCoordinator
-    private let themeManager = ThemeManager()
+    private let themeManager: ThemeManager
 
-    init() {
+    init(
+        introRouting: IntroRouting,
+        homeRouting: HomeRouting,
+        themeManager: ThemeManager
+    ) {
         self.coordinator = MainCoordinator(
+            introRouting: introRouting,
+            homeRouting: homeRouting
+        )
+        self.themeManager = themeManager
+    }
+    
+    init() {
+        self.init(
             introRouting: IntroRouter(),
-            homeRouting: HomeRouter()
+            homeRouting: HomeRouter(),
+            themeManager: ThemeManager()
         )
     }
     
