@@ -48,4 +48,15 @@ final class EditHabitViewModel: ObservableObject {
     func missHabit() {
         habitDataManager.update({ $0.createdAt = Date() }, forID: habitID)
     }
+    
+    func missHabitAndShowToast() {
+        missHabit()
+        uiState.showToast = true
+        
+        Task {
+            await Task.delay()
+            await MainActor.run {
+            }
+        }
+    }
 }

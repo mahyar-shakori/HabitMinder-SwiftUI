@@ -10,63 +10,56 @@ import SwiftUI
 struct IntroRouter: IntroRouting {
     func view(
         for route: IntroRoute,
-        using coordinator: any BaseCoordinator,
+        using coordinator: any MainCoordinating,
     ) -> any View {
+        let userDefaultsContainer = DIContainer.UserDefaults()
+        
         switch route {
-        case .setLanguage:
-            setLanguageScreen(coordinator: coordinator)
         case .intro:
-            introScreen(coordinator: coordinator)
+            return introScreen(coordinator: coordinator)
         case .setName:
-            setNameScreen(coordinator: coordinator)
+            return setNameScreen(
+                coordinator: coordinator,
+                userDefaultsContainer: userDefaultsContainer
+            )
         case .welcome:
-            welcomeScreen(coordinator: coordinator)
+            return welcomeScreen(
+                coordinator: coordinator,
+                userDefaultsContainer: userDefaultsContainer
+            )
         }
     }
     
-    @ViewBuilder
-    private func setLanguageScreen(
-        coordinator: any BaseCoordinator
-    ) -> some View {
-        let viewCoordinator = SetLanguageCoordinator(navigate: coordinator.navigate)
-        let viewModel = SetLanguageViewModel(
-            coordinator: viewCoordinator,
-            languageManager: LanguageManager.shared
-        )
-        SetLanguageView(setLanguageViewModel: viewModel)
-    }
-    
-    @ViewBuilder
     private func introScreen(
-        coordinator: any BaseCoordinator
+        coordinator: any MainCoordinating
     ) -> some View {
         let viewCoordinator = IntroCoordinator(navigate: coordinator.navigate)
         let viewModel = IntroViewModel(coordinator: viewCoordinator)
-        IntroView(introViewModel: viewModel)
+        return IntroView(introViewModel: viewModel)
     }
     
-    @ViewBuilder
     private func setNameScreen(
-        coordinator: any BaseCoordinator
+        coordinator: any MainCoordinating,
+        userDefaultsContainer: DIContainer.UserDefaults
     ) -> some View {
         let viewCoordinator = SetNameCoordinator(navigate: coordinator.navigate)
         let viewModel = SetNameViewModel(
             coordinator: viewCoordinator,
-            userNameStorage: DIContainer.UserDefaults.userNameStorage,
-            loginStorage: DIContainer.UserDefaults.loginStorage
+            userNameStorage: userDefaultsContainer.userNameStorage,
+            loginStorage: userDefaultsContainer.loginStorage
         )
-        SetNameView(setNameViewModel: viewModel)
+        return SetNameView(setNameViewModel: viewModel)
     }
     
-    @ViewBuilder
     private func welcomeScreen(
-        coordinator: any BaseCoordinator
+        coordinator: any MainCoordinating,
+        userDefaultsContainer: DIContainer.UserDefaults
     ) -> some View {
         let viewCoordinator = WelcomeCoordinator(navigate: coordinator.navigate)
         let viewModel = WelcomeViewModel(
             coordinator: viewCoordinator,
-            userNameStorage: DIContainer.UserDefaults.userNameStorage
-)
-        WelcomeView(welcomeViewModel: viewModel)
+            userNameStorage: userDefaultsContainer.userNameStorage
+        )
+        return WelcomeView(welcomeViewModel: viewModel)
     }
 }

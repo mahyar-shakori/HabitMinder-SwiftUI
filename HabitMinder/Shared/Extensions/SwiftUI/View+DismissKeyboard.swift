@@ -9,12 +9,10 @@ import SwiftUI
 
 extension View {
     func dismissKeyboard(focus: FocusState<Bool>.Binding) -> some View {
-        self.background(
-            Color.clear
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    focus.wrappedValue = false
-                }
-        )
+        self
+            .contentShape(Rectangle())
+            .onTapGesture {
+                focus.wrappedValue = false
+            }
     }
 }

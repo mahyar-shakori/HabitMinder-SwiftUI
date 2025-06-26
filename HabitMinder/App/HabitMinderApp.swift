@@ -9,34 +9,18 @@ import SwiftUI
 
 @main
 struct HabitMinderApp: App {
-    private let coordinator: MainCoordinator
-    private let themeManager: ThemeManager
-
-    init(
-        introRouting: IntroRouting,
-        homeRouting: HomeRouting,
-        themeManager: ThemeManager
-    ) {
-        self.coordinator = MainCoordinator(
-            introRouting: introRouting,
-            homeRouting: homeRouting
-        )
-        self.themeManager = themeManager
-    }
-    
-    init() {
-        self.init(
+    var body: some Scene {
+        let userDefaultsContainer = DIContainer.UserDefaults()
+        let mainCoordinator = MainCoordinator(
             introRouting: IntroRouter(),
             homeRouting: HomeRouter(),
-            themeManager: ThemeManager()
+            loginStorage: userDefaultsContainer.loginStorage
         )
-    }
-    
-    var body: some Scene {
+        let themeManager = ThemeManager()
+
         WindowGroup {
-            RootView(coordinator: coordinator)
+            RootView(mainCoordinator: mainCoordinator)
                 .modelContainer(for: [HabitModel.self, FutureHabitModel.self])
-                .environmentObject(LanguageManager.shared)
                 .environmentObject(themeManager)
         }
     }

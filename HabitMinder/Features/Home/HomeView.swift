@@ -211,17 +211,18 @@ struct HomeView: View {
 #Preview {
     @Previewable @Environment(\.modelContext) var context
     
-    let fakeCoordinator = HomeCoordinator(navigate: { _, _ in
+    let fakeCoordinator = HomeCoordinator(navigate: { _ in
     })
     let connectivityService = WatchConnectivityService()
     let databaseContainer = DIContainer.Database(context: context)
+    let userDefaultsContainer = DIContainer.UserDefaults()
     let viewModel = HomeViewModel(
         quote: "Test Quote",
         habitDataManager: databaseContainer.habitDataManager,
         futureHabitDataManager: databaseContainer.futureHabitDataManager,
         coordinator: fakeCoordinator,
         connectivityService: connectivityService,
-        loginStorage: DIContainer.UserDefaults.loginStorage
+        loginStorage: userDefaultsContainer.loginStorage
     )
     HomeView(homeViewModel: viewModel)
 }

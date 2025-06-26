@@ -10,10 +10,8 @@ import SwiftUI
 struct SettingView: View {
     @ObservedObject private var settingViewModel: SettingViewModel
     @EnvironmentObject private var themeManager: ThemeManager
-    @EnvironmentObject private var languageManager: LanguageManager
-    @State private var isShowingLanguagePicker = false
-    @State private var isShowingColorPicker = false
     @State private var isEditingUserName = false
+    @State private var isShowingColorPicker = false
     
     init(settingViewModel: SettingViewModel) {
         self.settingViewModel = settingViewModel
@@ -46,7 +44,6 @@ struct SettingView: View {
     private var settingCustomize: some View {
         VStack(alignment: .leading, spacing: 24) {
             userNameSection
-            languageSection
             colorSection
         }
         .padding(.top, 8)
@@ -86,45 +83,6 @@ struct SettingView: View {
     private var userNameButtonContent: some View {
         HStack {
             Text(settingViewModel.userName)
-                .font(.AppFont.rooneySansRegular.size(18))
-            
-            Spacer()
-            
-            Image(systemName: AppIconName.chevronDown)
-                .foregroundColor(.gray)
-        }
-    }
-    
-    
-    private var languageSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(LocalizedStrings.SettingPage.language)
-                .font(.AppFont.rooneySansRegular.size(18))
-                .foregroundColor(.gray)
-            languagePickerField
-        }
-    }
-    
-    private var languagePickerField: some View {
-        Button {
-            isShowingLanguagePicker = true
-        } label: {
-            languagePickerButtonContent
-                .padding(12)
-                .background(
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(Color.appWhite)
-                )
-        }
-        .buttonStyle(PlainButtonStyle())
-        .sheet(isPresented: $isShowingLanguagePicker) {
-            LanguagePickerView(isPresented: $isShowingLanguagePicker)
-        }
-    }
-    
-    private var languagePickerButtonContent: some View {
-        HStack {
-            Text(languageManager.selectedLanguage.displayName)
                 .font(.AppFont.rooneySansRegular.size(18))
             
             Spacer()
@@ -180,12 +138,12 @@ struct SettingView: View {
 #Preview {
     let fakeCoordinator = SettingCoordinator(dismiss: {
     })
+    let userDefaultsContainer = DIContainer.UserDefaults()
     let themeManager = ThemeManager()
     let viewModel = SettingViewModel(
         coordinator: fakeCoordinator,
-        userNameStorage: DIContainer.UserDefaults.userNameStorage
+        userNameStorage: userDefaultsContainer.userNameStorage
     )
     SettingView(settingViewModel: viewModel)
         .environmentObject(themeManager)
-        .environmentObject(LanguageManager.shared)
 }

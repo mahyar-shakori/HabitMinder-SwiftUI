@@ -10,17 +10,17 @@ import Foundation
 final class WelcomeViewModel: ObservableObject {
     @Published private(set) var uiState = WelcomeUIState()
     
-    private let networkAPI: DataFetcher
+    private let apiFetching: APIFetching
     private let userNameStorage: AnyUserDefaultsStorage<String>
     private let coordinator: WelcomeCoordinating
 
     init(
         coordinator: WelcomeCoordinating,
-        networkAPI: DataFetcher = NetworkAPI(configuration: .init(timeoutInterval: 3)),
+        apiFetching: APIFetching = APIService(configuration: .init(timeoutInterval: 3)),
         userNameStorage: AnyUserDefaultsStorage<String>
     ) {
         self.coordinator = coordinator
-        self.networkAPI = networkAPI
+        self.apiFetching = apiFetching
         self.userNameStorage = userNameStorage
     }
   
@@ -40,7 +40,7 @@ final class WelcomeViewModel: ObservableObject {
     }
     
     private func fetchQuotes() async throws -> [QuoteResponse] {
-        try await networkAPI.fetchData(from: AuthEndpoint.getQuote)
+        try await apiFetching.fetchData(from: AuthEndpoints.getQuote)
     }
     
     private func handleQuoteSuccess(_ quotes: [QuoteResponse]) {

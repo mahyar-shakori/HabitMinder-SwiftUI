@@ -13,7 +13,6 @@ enum AppRoute: Hashable {
 }
 
 enum IntroRoute: Hashable {
-    case setLanguage
     case intro
     case setName
     case welcome

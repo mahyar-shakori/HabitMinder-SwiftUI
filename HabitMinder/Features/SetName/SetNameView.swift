@@ -110,12 +110,15 @@ struct SetNameView: View {
 }
 
 #Preview {
-    let fakeCoordinator = SetNameCoordinator(navigate: { _, _ in
+    let fakeCoordinator = SetNameCoordinator(navigate: { _ in
     })
+    let themeManager = ThemeManager()
+    let userDefaultsContainer = DIContainer.UserDefaults()
     let viewModel = SetNameViewModel(
         coordinator: fakeCoordinator,
-        userNameStorage: DIContainer.UserDefaults.userNameStorage,
-        loginStorage: DIContainer.UserDefaults.loginStorage
+        userNameStorage: userDefaultsContainer.userNameStorage,
+        loginStorage: userDefaultsContainer.loginStorage
     )
     SetNameView(setNameViewModel: viewModel)
+        .environmentObject(themeManager)
 }

@@ -11,7 +11,9 @@ extension Color {
     var rgbaComponents: [CGFloat]? {
         let uiColor = UIColor(self)
         var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
-        guard uiColor.getRed(&r, green: &g, blue: &b, alpha: &a) else { return nil }
+        guard uiColor.getRed(&r, green: &g, blue: &b, alpha: &a) else {
+            return nil
+        }
         return [r, g, b, a]
     }
 }

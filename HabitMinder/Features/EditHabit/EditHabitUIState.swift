@@ -10,4 +10,5 @@ import Foundation
 struct EditHabitUIState {
     var habitTitle = ""
     var isSaveButtonEnabled = false
+    var showToast = false
 }

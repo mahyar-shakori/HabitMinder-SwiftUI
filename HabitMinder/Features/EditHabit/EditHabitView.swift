@@ -12,7 +12,6 @@ struct EditHabitView: View {
     @EnvironmentObject private var themeManager: ThemeManager
     @FocusState private var isFocused: Bool
     @State private var tempHabitTitle = ""
-    @State private var showToast = false
     
     init(editHabitViewModel: EditHabitViewModel) {
         self.editHabitViewModel = editHabitViewModel
@@ -24,7 +23,7 @@ struct EditHabitView: View {
             addHabitTextField
             Spacer()
             
-            if showToast {
+            if editHabitViewModel.uiState.showToast {
                 toastLabel
             }
             
@@ -96,13 +95,7 @@ struct EditHabitView: View {
     private var missHabitButton: some View {
         Button {
             withAnimation {
-                editHabitViewModel.missHabit()
-                showToast = true
-            }
-            DispatchQueue.delay(2) {
-                withAnimation {
-                    showToast = false
-                }
+                editHabitViewModel.missHabitAndShowToast()
             }
         } label: {
             Text(LocalizedStrings.EditHabitPage.missHabitButton)
@@ -112,9 +105,9 @@ struct EditHabitView: View {
         .frame(maxWidth: .infinity)
         .padding(16)
         .background(
-            Capsule().fill(showToast ? themeManager.appSecondary : themeManager.appPrimary)
+            Capsule().fill(editHabitViewModel.uiState.showToast ? themeManager.appSecondary : themeManager.appPrimary)
         )
-        .disabled(showToast)
+        .disabled(editHabitViewModel.uiState.showToast)
         .padding(.horizontal, 32)
         .padding(.bottom, 32)
     }
@@ -127,10 +120,12 @@ struct EditHabitView: View {
     let fakeCoordinator = EditHabitCoordinator(dismiss: {
     })
     let databaseContainer = DIContainer.Database(context: context)
+    let themeManager = ThemeManager()
     let viewModel = EditHabitViewModel(
         habitDataManager: databaseContainer.habitDataManager,
         coordinator: fakeCoordinator,
         habit: sampleHabit
     )
     EditHabitView(editHabitViewModel: viewModel)
+        .environmentObject(themeManager)
 }

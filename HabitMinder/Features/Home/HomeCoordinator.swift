@@ -8,32 +8,29 @@
 import Foundation
 
 final class HomeCoordinator: HomeCoordinating {
-    private let navigate: (AppRoute, PresentationStyle) -> Void
+    private let navigate: (AppRoute) -> Void
     
-    init(navigate: @escaping (AppRoute, PresentationStyle) -> Void) {
+    init(navigate: @escaping (AppRoute) -> Void) {
         self.navigate = navigate
     }
 
-    func goToAddHabit(presentationStyle: PresentationStyle = .push) {
-        navigate(.home(.addHabit), presentationStyle)
+    func goToAddHabit() {
+        navigate(.home(.addHabit))
     }
     
-    func goToEditHabit(
-        habit: HabitModel,
-        presentationStyle: PresentationStyle = .push
-    ) {
-        navigate(.home(.editHabit(habit: habit)), presentationStyle)
+    func goToEditHabit(habit: HabitModel) {
+        navigate(.home(.editHabit(habit: habit)))
     }
    
-    func goToFutureHabit(presentationStyle: PresentationStyle = .push) {
-        navigate(.home(.futureHabit), presentationStyle)
+    func goToFutureHabit() {
+        navigate(.home(.futureHabit))
     }
     
-    func goToSetting(presentationStyle: PresentationStyle = .push) {
-        navigate(.home(.settingPage), presentationStyle)
+    func goToSetting() {
+        navigate(.home(.settingPage))
     }
     
-    func goToSetLanguage(presentationStyle: PresentationStyle = .push) {
-        navigate(.intro(.setLanguage), presentationStyle)
+    func goToIntro() {
+        navigate(.intro(.intro))
     }
 }

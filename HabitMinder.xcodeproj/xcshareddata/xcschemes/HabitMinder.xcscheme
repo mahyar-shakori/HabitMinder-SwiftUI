@@ -41,6 +41,17 @@
                ReferencedContainer = "container:HabitMinder.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3E85523F2E01518F00F87F09"
+               BuildableName = "HabitMinderUITests.xctest"
+               BlueprintName = "HabitMinderUITests"
+               ReferencedContainer = "container:HabitMinder.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

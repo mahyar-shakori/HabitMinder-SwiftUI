@@ -20,7 +20,7 @@ final class ThemeManager: ThemeManaging {
         appPrimary.opacity(0.4)
     }
 
-    init(colorStorage: AnyUserDefaultsStorage<[CGFloat]> = DIContainer.UserDefaults.colorStorage) {
+    init(colorStorage: AnyUserDefaultsStorage<[CGFloat]> = DIContainer.UserDefaults().colorStorage) {
         self.colorStorage = colorStorage
         self.appPrimary = Self.loadColorFromDefaults() ?? .appPrimary
     }

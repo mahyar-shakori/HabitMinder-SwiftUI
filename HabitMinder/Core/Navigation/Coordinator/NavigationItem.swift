@@ -10,5 +10,4 @@ import Foundation
 struct NavigationItem: Hashable, Identifiable {
     let id = UUID()
     let route: AppRoute
-    let style: PresentationStyle
 }

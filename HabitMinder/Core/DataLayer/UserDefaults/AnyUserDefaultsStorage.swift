@@ -16,6 +16,11 @@ final class AnyUserDefaultsStorage<Value>: UserDefaultsStoring {
         _fetch = storage.fetch
     }
 
-    func save(value: Value) { _save(value) }
-    func fetch() -> Value? { _fetch() }
+    func save(value: Value) {
+        _save(value)
+    }
+    
+    func fetch() -> Value? {
+        _fetch()
+    }
 }

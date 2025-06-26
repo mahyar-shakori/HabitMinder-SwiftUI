@@ -8,35 +8,26 @@
 import SwiftUI
 import SwiftData
 
-final class MainCoordinator: BaseCoordinator {
+final class MainCoordinator: MainCoordinating {
     @Published var path: [NavigationItem] = []
-    @Published var sheetItem: NavigationItem?
-    @Published var fullScreenItem: NavigationItem?
     
     private let introRouting: IntroRouting
     private let homeRouting: HomeRouting
+    private let loginStorage: AnyUserDefaultsStorage<Bool>
     
-    init(introRouting: IntroRouting, homeRouting: HomeRouting) {
+    init(
+        introRouting: IntroRouting,
+        homeRouting: HomeRouting,
+        loginStorage: AnyUserDefaultsStorage<Bool>
+    ) {
         self.introRouting = introRouting
         self.homeRouting = homeRouting
+        self.loginStorage = loginStorage
     }
     
-    func navigate(
-        to route: AppRoute,
-        style: PresentationStyle
-    ) {
-        let item = NavigationItem(
-            route: route,
-            style: style
-        )
-        switch style {
-        case .push:
-            path.append(item)
-        case .sheet:
-            sheetItem = item
-        case .fullScreenCover:
-            fullScreenItem = item
-        }
+    func navigate(to route: AppRoute) {
+        let item = NavigationItem(route: route)
+        path.append(item)
     }
     
     func pop() {
@@ -51,15 +42,12 @@ final class MainCoordinator: BaseCoordinator {
     }
     
     func start() {
-        let loginStorage = UserDefaultsStorage<UserDefaultKeys, Bool>(key: .isLogin)
-        let initialRoute: AppRoute = loginStorage.fetch() == true ? .intro(.welcome) : .intro(.setLanguage)
+        let initialRoute: AppRoute = loginStorage.fetch() == true ? .intro(.welcome) : .intro(.intro)
         path = [NavigationItem(
-            route: initialRoute,
-            style: .push
+            route: initialRoute
         )]
     }
     
-    @ViewBuilder
     func coordinator(
         for route: AppRoute,
         modelContext: ModelContext

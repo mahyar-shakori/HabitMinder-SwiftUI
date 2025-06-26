@@ -8,11 +8,11 @@
 import Foundation
 
 protocol SetNameCoordinating {
-    func goToWelcome(presentationStyle: PresentationStyle)
+    func goToWelcome()
 }
 
 extension SetNameCoordinating {
     func goToWelcome() {
-        goToWelcome(presentationStyle: .push)
+        goToWelcome()
     }
 }

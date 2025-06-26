@@ -8,16 +8,13 @@
 import Foundation
 
 final class WelcomeCoordinator: WelcomeCoordinating {
-    private let navigate: (AppRoute, PresentationStyle) -> Void
+    private let navigate: (AppRoute) -> Void
     
-    init(navigate: @escaping (AppRoute, PresentationStyle) -> Void) {
+    init(navigate: @escaping (AppRoute) -> Void) {
         self.navigate = navigate
     }
     
-    func goToHome(
-        _ quote: String,
-        presentationStyle: PresentationStyle = .push
-    ) {
-        navigate(.home(.home(quote: quote)), presentationStyle)
+    func goToHome(_ quote: String) {
+        navigate(.home(.home(quote: quote)))
     }
 }

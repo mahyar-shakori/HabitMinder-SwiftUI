@@ -100,7 +100,7 @@ final class HomeViewModel: ObservableObject {
     
     @MainActor
     func refresh() async {
-        try? await Task.sleep(nanoseconds: 1_000_000_000)
+        await Task.delay()
         fetchHabits()
     }
     
@@ -117,7 +117,7 @@ final class HomeViewModel: ObservableObject {
         
         habitDataManager.deleteAll()
         futureHabitDataManager.deleteAll()
-        coordinator.goToSetLanguage()
+        coordinator.goToIntro()
     }
     
     func resetLogoutAlert() {

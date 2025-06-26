@@ -9,6 +9,5 @@ import SwiftUI
 import SwiftData
 
 protocol HomeRouting {
-    @ViewBuilder
-    func view(for route: HomeRoute, using coordinator: any BaseCoordinator, modelContext: ModelContext) -> any View
+    func view(for route: HomeRoute, using coordinator: any MainCoordinating, modelContext: ModelContext) -> any View
 }

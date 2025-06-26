@@ -38,6 +38,7 @@ struct HabitListRowView: View {
 
 #Preview {
     let id = UUID()
+    let themeManager = ThemeManager()
     let item = HabitItem(
         id: id,
         title: "Drink Water",
@@ -45,4 +46,5 @@ struct HabitListRowView: View {
         progress: 0.7
     )
     HabitListRowView(item: item)
+        .environmentObject(themeManager)
 }

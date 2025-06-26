@@ -8,17 +8,11 @@
 import Foundation
 
 protocol WelcomeCoordinating {
-    func goToHome(
-        _ quote: String,
-        presentationStyle: PresentationStyle
-    )
+    func goToHome(_ quote: String)
 }
 
 extension WelcomeCoordinating {
     func goToHome(_ quote: String) {
-        goToHome(
-            quote,
-            presentationStyle: .push
-        )
+        goToHome(quote)
     }
 }

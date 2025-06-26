@@ -76,11 +76,14 @@ struct WelcomeView: View {
 }
 
 #Preview {
-    let fakeCoordinator = WelcomeCoordinator(navigate: { _, _ in
+    let fakeCoordinator = WelcomeCoordinator(navigate: { _ in
     })
+    let userDefaultsContainer = DIContainer.UserDefaults()
+    let themeManager = ThemeManager()
     let viewModel = WelcomeViewModel(
         coordinator: fakeCoordinator,
-        userNameStorage: DIContainer.UserDefaults.userNameStorage
+        userNameStorage: userDefaultsContainer.userNameStorage
     )
     WelcomeView(welcomeViewModel: viewModel)
+        .environmentObject(themeManager)
 }

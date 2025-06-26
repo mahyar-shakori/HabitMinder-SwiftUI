@@ -77,9 +77,11 @@ struct AddHabitView: View {
     let fakeCoordinator = AddHabitCoordinator(dismiss: {
     })
     let databaseContainer = DIContainer.Database(context: context)
+    let themeManager = ThemeManager()
     let viewModel = AddHabitViewModel(
         habitDataManager: databaseContainer.habitDataManager,
         coordinator: fakeCoordinator
     )
     AddHabitView(addHabitViewModel: viewModel)
+        .environmentObject(themeManager)
 }

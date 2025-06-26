@@ -20,9 +20,35 @@ struct DIContainer {
     }
     
     struct UserDefaults {
-        static let languageStorage = AnyUserDefaultsStorage(UserDefaultsStorage<UserDefaultKeys, String>(key: .language))
-        static let userNameStorage = AnyUserDefaultsStorage(UserDefaultsStorage<UserDefaultKeys, String>(key: .userName))
-        static let loginStorage = AnyUserDefaultsStorage(UserDefaultsStorage<UserDefaultKeys, Bool>(key: .isLogin))
-        static let colorStorage = AnyUserDefaultsStorage(UserDefaultsStorage<UserDefaultKeys, [CGFloat]>(key: .appPrimaryColor))
+        let userNameStorage: AnyUserDefaultsStorage<String>
+        let loginStorage: AnyUserDefaultsStorage<Bool>
+        let colorStorage: AnyUserDefaultsStorage<[CGFloat]>
+
+        init() {
+            self.init(
+                initialUserName: nil,
+                initialLoginValue: nil,
+                initialColor: nil
+            )
+        }
+
+        init(
+            initialUserName: String? = nil,
+            initialLoginValue: Bool? = false,
+            initialColor: [CGFloat]? = nil
+        ) {
+            let userNameStore = UserDefaultsStorage<UserDefaultKeys, String>(key: .userName)
+            if let name = initialUserName { userNameStore.save(value: name) }
+
+            let loginStore = UserDefaultsStorage<UserDefaultKeys, Bool>(key: .isLogin)
+            if let login = initialLoginValue { loginStore.save(value: login) }
+
+            let colorStore = UserDefaultsStorage<UserDefaultKeys, [CGFloat]>(key: .appPrimaryColor)
+            if let color = initialColor { colorStore.save(value: color) }
+
+            self.userNameStorage = AnyUserDefaultsStorage(userNameStore)
+            self.loginStorage = AnyUserDefaultsStorage(loginStore)
+            self.colorStorage = AnyUserDefaultsStorage(colorStore)
+        }
     }
 }

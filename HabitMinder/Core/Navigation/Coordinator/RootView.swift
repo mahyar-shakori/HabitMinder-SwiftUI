@@ -8,39 +8,36 @@
 import SwiftUI
 
 struct RootView: View {
-    @StateObject private var coordinator: MainCoordinator
+    @ObservedObject private var mainCoordinator: MainCoordinator
     @Environment(\.modelContext) private var modelContext
     
-    init(coordinator: @autoclosure @escaping () -> MainCoordinator) {
-        _coordinator = StateObject(wrappedValue: coordinator())
+    init(mainCoordinator: MainCoordinator) {
+        self.mainCoordinator = mainCoordinator
     }
     
     var body: some View {
-        NavigationStack(path: $coordinator.path) {
+        NavigationStack(path: $mainCoordinator.path) {
             EmptyView()
                 .navigationDestination(for: NavigationItem.self) { item in
-                    coordinator.coordinator(for: item.route, modelContext: modelContext)
-                        .environment(\.modelContext, modelContext)
+                    mainCoordinator.coordinator(for: item.route, modelContext: modelContext)
                 }
         }
-        .sheet(item: $coordinator.sheetItem) { item in
-            coordinator.coordinator(for: item.route, modelContext: modelContext)
-                .environment(\.modelContext, modelContext)
-        }
-        .fullScreenCover(item: $coordinator.fullScreenItem) { item in
-            coordinator.coordinator(for: item.route, modelContext: modelContext)
-                .environment(\.modelContext, modelContext)
-        }
-        .task {
-            coordinator.start()
+        .onAppear() {
+            if mainCoordinator.path.isEmpty {
+                mainCoordinator.start()
+            }
         }
     }
 }
 
 #Preview {
+    let userDefaultsContainer = DIContainer.UserDefaults()
+    let themeManager = ThemeManager()
     let coordinator = MainCoordinator(
         introRouting: IntroRouter(),
-        homeRouting: HomeRouter()
+        homeRouting: HomeRouter(),
+        loginStorage: userDefaultsContainer.loginStorage
     )
-    RootView(coordinator: coordinator)
+    RootView(mainCoordinator: coordinator)
+        .environmentObject(themeManager)
 }

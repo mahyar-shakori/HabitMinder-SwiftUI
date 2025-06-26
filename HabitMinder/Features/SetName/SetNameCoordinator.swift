@@ -8,13 +8,13 @@
 import Foundation
 
 final class SetNameCoordinator: SetNameCoordinating {
-    private let navigate: (AppRoute, PresentationStyle) -> Void
+    private let navigate: (AppRoute) -> Void
     
-    init(navigate: @escaping (AppRoute, PresentationStyle) -> Void) {
+    init(navigate: @escaping (AppRoute) -> Void) {
         self.navigate = navigate
     }
 
-    func goToWelcome(presentationStyle: PresentationStyle = .push) {
-        navigate(.intro(.welcome), presentationStyle)
+    func goToWelcome() {
+        navigate(.intro(.welcome))
     }
 }

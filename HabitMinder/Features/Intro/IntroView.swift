@@ -111,10 +111,12 @@ struct IntroView: View {
 }
 
 #Preview {
-    let fakeCoordinator = IntroCoordinator(navigate: { _, _ in
+    let fakeCoordinator = IntroCoordinator(navigate: { _ in
     })
+    let themeManager = ThemeManager()
     let viewModel = IntroViewModel(
         coordinator: fakeCoordinator
     )
     IntroView(introViewModel: viewModel)
+        .environmentObject(themeManager)
 }

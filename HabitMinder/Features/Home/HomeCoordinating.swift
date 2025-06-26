@@ -8,31 +8,31 @@
 import Foundation
 
 protocol HomeCoordinating {
-    func goToAddHabit(presentationStyle: PresentationStyle)
-    func goToEditHabit(habit: HabitModel, presentationStyle: PresentationStyle)
-    func goToFutureHabit(presentationStyle: PresentationStyle)
-    func goToSetting(presentationStyle: PresentationStyle)
-    func goToSetLanguage(presentationStyle: PresentationStyle)
+    func goToAddHabit()
+    func goToEditHabit(habit: HabitModel)
+    func goToFutureHabit()
+    func goToSetting()
+    func goToIntro()
 }
 
 extension HomeCoordinating {
     func goToAddHabit() {
-        goToAddHabit(presentationStyle: .push)
+        goToAddHabit()
     }
     
     func goToEditHabit(habit: HabitModel) {
-        goToEditHabit(habit: habit, presentationStyle: .push)
+        goToEditHabit(habit: habit)
     }
 
     func goToFutureHabit() {
-        goToFutureHabit(presentationStyle: .push)
+        goToFutureHabit()
     }
     
     func goToSetting() {
-        goToSetting(presentationStyle: .push)
+        goToSetting()
     }
     
-    func goToSetLanguage() {
-        goToSetLanguage(presentationStyle: .push)
+    func goToIntro() {
+        goToIntro()
     }
 }

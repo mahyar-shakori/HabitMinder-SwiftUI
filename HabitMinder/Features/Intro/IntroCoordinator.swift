@@ -8,13 +8,13 @@
 import Foundation
 
 final class IntroCoordinator: IntroCoordinating {
-    private let navigate: (AppRoute, PresentationStyle) -> Void
+    private let navigate: (AppRoute) -> Void
     
-    init(navigate: @escaping (AppRoute, PresentationStyle) -> Void) {
+    init(navigate: @escaping (AppRoute) -> Void) {
         self.navigate = navigate
     }
 
-    func goToSetName(presentationStyle: PresentationStyle = .push) {
-        navigate(.intro(.setName), presentationStyle)
+    func goToSetName() {
+        navigate(.intro(.setName))
     }
 }
