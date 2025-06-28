@@ -42,14 +42,13 @@ struct EditHabitView: View {
     }
     
     private var saveButton: some View {
-        Button {
+        CustomButton(style: CustomButtonStylePreset.default(
+            isDisabled: editHabitViewModel.uiState.isSaveButtonEnabled.not
+        )) {
             editHabitViewModel.saveAndDismiss()
         } label: {
             Text(LocalizedStrings.Shared.saveButton)
-                .font(.AppFont.rooneySansBold.size(20))
-                .tint(.primary)
         }
-        .disabled(editHabitViewModel.uiState.isSaveButtonEnabled.not)
     }
     
     private var topViews: some View {
@@ -83,33 +82,25 @@ struct EditHabitView: View {
     private var toastLabel: some View {
         Text(LocalizedStrings.EditHabitPage.missHabitToast)
             .font(.AppFont.rooneySansBold.size(16))
-            .foregroundColor(.white)
+            .foregroundColor(.appWhite)
             .padding(.vertical, 8)
             .padding(.horizontal, 16)
-            .background(.black.opacity(0.8))
+            .background(.primary.opacity(0.8))
             .cornerRadius(12)
             .transition(.opacity.combined(with: .scale))
             .padding(.bottom, 100)
     }
-    
+   
     private var missHabitButton: some View {
-        Button {
+        CustomButton(style: CustomButtonStylePreset.tertiary(
+            backgroundColor: editHabitViewModel.uiState.showToast ? themeManager.appSecondary : themeManager.appPrimary
+        )) {
             withAnimation {
                 editHabitViewModel.missHabitAndShowToast()
             }
         } label: {
             Text(LocalizedStrings.EditHabitPage.missHabitButton)
-                .font(.AppFont.rooneySansBold.size(20))
-                .foregroundColor(.white)
         }
-        .frame(maxWidth: .infinity)
-        .padding(16)
-        .background(
-            Capsule().fill(editHabitViewModel.uiState.showToast ? themeManager.appSecondary : themeManager.appPrimary)
-        )
-        .disabled(editHabitViewModel.uiState.showToast)
-        .padding(.horizontal, 32)
-        .padding(.bottom, 32)
     }
 }
 

@@ -68,29 +68,28 @@ struct IntroView: View {
     }
     
     private var skipButton: some View {
-        Button {
-            introViewModel.goToSetNamePage()
+        CustomButton(style: CustomButtonStylePreset.secondary(
+            font: .AppFont.rooneySansRegular.size(16),
+            tintColor: themeManager.appPrimary,
+            backgroundColor: .clear,
+        )
+        ) {
+            introViewModel
+                .goToSetNamePage()
         } label: {
             Text(LocalizedStrings.IntroPage.skipButton)
-                .font(.AppFont.rooneySansRegular.size(16))
-                .tint(themeManager.appPrimary)
         }
-        .padding(.horizontal, 8)
     }
     
     private var nextButton: some View {
-        Button {
+        CustomButton(style: CustomButtonStylePreset.secondary(
+            tintColor: .white,
+            backgroundColor: themeManager.appPrimary
+        )) {
             introViewModel.nextState()
         } label: {
-          Text(LocalizedStrings.IntroPage.nextButton)
-                .font(.AppFont.rooneySansRegular.size(18))
-                .foregroundColor(.white)
+            Text(LocalizedStrings.IntroPage.nextButton)
         }
-        .padding(8)
-        .padding(.horizontal, 8)
-        .background(
-            Capsule().fill(themeManager.appPrimary)
-        )
     }
     
     private var pageControl: some View {

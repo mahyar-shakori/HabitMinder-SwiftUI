@@ -82,24 +82,17 @@ struct SetNameView: View {
     }
     
     private var continueButton: some View {
-        Button {
+        CustomButton(style: CustomButtonStylePreset.tertiary(
+            backgroundColor: setNameViewModel.uiState.isValid ? themeManager.appPrimary : themeManager.appSecondary
+        )) {
             setNameViewModel.validateAndContinue {
                 setNameViewModel.goToWelcomePage()
             }
         } label: {
             Text(LocalizedStrings.SetNamePage.continueButton)
-                .font(.AppFont.rooneySansBold.size(20))
-                .foregroundColor(.white)
         }
-        .frame(maxWidth: .infinity)
-        .padding(16)
-        .background(
-            Capsule().fill(setNameViewModel.uiState.isValid ? themeManager.appPrimary : themeManager.appSecondary)
-        )
-        .padding(.horizontal, 32)
-        .padding(.bottom, 32)
     }
-    
+  
     private var borderColor: Color {
         setNameViewModel.uiState.borderState == .error ? .red : themeManager.appPrimary
     }

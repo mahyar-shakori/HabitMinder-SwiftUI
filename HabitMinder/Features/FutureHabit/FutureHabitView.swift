@@ -55,15 +55,14 @@ struct FutureHabitView: View {
     }
     
     private var saveButton: some View {
-        Button {
+        CustomButton(style: CustomButtonStylePreset.default(
+            isDisabled: futureHabitViewModel.uiState.isSaveButtonEnabled.not
+        )) {
             futureHabitViewModel.save()
             tempHabitTitle = ""
         } label: {
             Text(LocalizedStrings.Shared.saveButton)
-                .font(.AppFont.rooneySansBold.size(20))
-                .tint(.primary)
         }
-        .disabled(futureHabitViewModel.uiState.isSaveButtonEnabled.not)
     }
     
     private var topViews: some View {

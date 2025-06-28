@@ -32,14 +32,13 @@ struct AddHabitView: View {
     }
     
     private var saveButton: some View {
-        Button {
+        CustomButton(style: CustomButtonStylePreset.default(
+            isDisabled: addHabitViewModel.uiState.isSaveButtonEnabled.not
+        )) {
             addHabitViewModel.saveAndDismiss()
         } label: {
             Text(LocalizedStrings.Shared.saveButton)
-                .font(.AppFont.rooneySansBold.size(20))
-                .tint(.primary)
         }
-        .disabled(addHabitViewModel.uiState.isSaveButtonEnabled.not)
     }
     
     private var topViews: some View {

@@ -60,15 +60,14 @@ struct SettingView: View {
     }
     
     private var userNameField: some View {
-        Button {
+        CustomButton(style: CustomButtonStylePreset.secondary(
+            innerPadding: .insets(12),
+            outerPadding: .none,
+            shape: AnyShape(RoundedRectangle(cornerSize: 12.asCGSize))
+        )) {
             isEditingUserName = true
         } label: {
             userNameButtonContent
-                .padding(12)
-                .background(
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(Color.appWhite)
-                )
         }
         .buttonStyle(PlainButtonStyle())
         .sheet(isPresented: $isEditingUserName) {
@@ -83,10 +82,7 @@ struct SettingView: View {
     private var userNameButtonContent: some View {
         HStack {
             Text(settingViewModel.userName)
-                .font(.AppFont.rooneySansRegular.size(18))
-            
             Spacer()
-            
             Image(systemName: AppIconName.chevronDown)
                 .foregroundColor(.gray)
         }
@@ -102,15 +98,14 @@ struct SettingView: View {
     }
     
     private var colorPickerField: some View {
-        Button {
+        CustomButton(style: CustomButtonStylePreset.secondary(
+            innerPadding: .insets(12),
+            outerPadding: .none,
+            shape: AnyShape(RoundedRectangle(cornerSize: 12.asCGSize))
+        )) {
             isShowingColorPicker = true
         } label: {
             colorPickerButtonContent
-                .padding(12)
-                .background(
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(Color.appWhite)
-                )
         }
         .buttonStyle(PlainButtonStyle())
         .sheet(isPresented: $isShowingColorPicker) {
@@ -121,8 +116,6 @@ struct SettingView: View {
     private var colorPickerButtonContent: some View {
         HStack {
             Text(LocalizedStrings.SettingPage.setColor)
-                .font(.AppFont.rooneySansRegular.size(18))
-            
             Spacer()
             
             Circle()

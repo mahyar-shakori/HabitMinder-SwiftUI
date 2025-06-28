@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import SwiftUICore
+//import SwiftUICore
 
 final class HomeViewModel: ObservableObject {
     @Published private(set) var uiState: HomeUIState
@@ -15,7 +17,7 @@ final class HomeViewModel: ObservableObject {
     private let habitDataManager: AnyDataManager<HabitModel>
     private let futureHabitDataManager: AnyDataManager<FutureHabitModel>
     private let loginStorage: AnyUserDefaultsStorage<Bool>
-    
+
     var displayedQuote: String {
         if quote.count > 100 {
             return LocalizedStrings.HomePage.defaultQuote
@@ -30,7 +32,7 @@ final class HomeViewModel: ObservableObject {
         futureHabitDataManager: AnyDataManager<FutureHabitModel>,
         coordinator: HomeCoordinating,
         connectivityService: WatchConnectivityProviding,
-        loginStorage: AnyUserDefaultsStorage<Bool>
+        loginStorage: AnyUserDefaultsStorage<Bool>,
     ) {
         self.quote = quote
         self.habitDataManager = habitDataManager

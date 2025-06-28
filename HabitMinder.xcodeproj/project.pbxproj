@@ -24,6 +24,11 @@
 		3E495EA02DE78ACB0051188A /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE3002DAFB20C00F5B0FF /* UserDefaultKeys.swift */; };
 		3E495EA12DE78AD50051188A /* StorageKeyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE2FF2DAFB20C00F5B0FF /* StorageKeyProtocol.swift */; };
 		3E495EA22DE78ADF0051188A /* UserDefaultsStoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE2FE2DAFB20C00F5B0FF /* UserDefaultsStoring.swift */; };
+		3E4D7DB12E1035D200E9CD8C /* CustomButtonStylePreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D7DB02E1035D100E9CD8C /* CustomButtonStylePreset.swift */; };
+		3E4D7DB32E1035F800E9CD8C /* CustomButtonStyle .swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D7DB22E1035F700E9CD8C /* CustomButtonStyle .swift */; };
+		3E4D7DB52E10364400E9CD8C /* CustomPadding+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D7DB42E10364300E9CD8C /* CustomPadding+Helpers.swift */; };
+		3E4D7DB72E10365D00E9CD8C /* Int+CGSizeConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D7DB62E10365400E9CD8C /* Int+CGSizeConvertible.swift */; };
+		3E4D7DB82E1045C000E9CD8C /* ThemeManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB305A92DF7451E00AAE9E0 /* ThemeManaging.swift */; };
 		3E58FDF32DF8404D00B108C4 /* AnyDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E58FDF22DF8404C00B108C4 /* AnyDataManager.swift */; };
 		3E58FDF52DF8405800B108C4 /* DataManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E58FDF42DF8405700B108C4 /* DataManaging.swift */; };
 		3E58FDF72DF8650700B108C4 /* AnyUserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E58FDF62DF8650600B108C4 /* AnyUserDefaultsStorage.swift */; };
@@ -94,6 +99,7 @@
 		3ED509E42E0C3AB9000A9ABB /* MultipartHeaderBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED509E32E0C3AB7000A9ABB /* MultipartHeaderBuilder.swift */; };
 		3ED509E62E0C3AD6000A9ABB /* MultipartBoundaryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED509E52E0C3AD5000A9ABB /* MultipartBoundaryBuilder.swift */; };
 		3ED509EA2E0D4B0E000A9ABB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ED509E92E0D4B0E000A9ABB /* Preview Assets.xcassets */; };
+		3ED509F42E0D82EC000A9ABB /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED509F32E0D82E9000A9ABB /* CustomButton.swift */; };
 		3EE9241A2DB392AF0086B3F2 /* IntroUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE924192DB392AA0086B3F2 /* IntroUIState.swift */; };
 		3EE9241C2DB3A37A0086B3F2 /* SetNameUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE9241B2DB3A3750086B3F2 /* SetNameUIState.swift */; };
 		3EE9241E2DB3AC6A0086B3F2 /* WelcomeUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE9241D2DB3AC690086B3F2 /* WelcomeUIState.swift */; };
@@ -214,6 +220,10 @@
 		3E495E6B2DE74EDB0051188A /* FutureHabitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureHabitModel.swift; sourceTree = "<group>"; };
 		3E495E862DE775D80051188A /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3E495E8E2DE7806D0051188A /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
+		3E4D7DB02E1035D100E9CD8C /* CustomButtonStylePreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonStylePreset.swift; sourceTree = "<group>"; };
+		3E4D7DB22E1035F700E9CD8C /* CustomButtonStyle .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomButtonStyle .swift"; sourceTree = "<group>"; };
+		3E4D7DB42E10364300E9CD8C /* CustomPadding+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomPadding+Helpers.swift"; sourceTree = "<group>"; };
+		3E4D7DB62E10365400E9CD8C /* Int+CGSizeConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+CGSizeConvertible.swift"; sourceTree = "<group>"; };
 		3E58FDF22DF8404C00B108C4 /* AnyDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyDataManager.swift; sourceTree = "<group>"; };
 		3E58FDF42DF8405700B108C4 /* DataManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManaging.swift; sourceTree = "<group>"; };
 		3E58FDF62DF8650600B108C4 /* AnyUserDefaultsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyUserDefaultsStorage.swift; sourceTree = "<group>"; };
@@ -278,6 +288,7 @@
 		3ED509E32E0C3AB7000A9ABB /* MultipartHeaderBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartHeaderBuilder.swift; sourceTree = "<group>"; };
 		3ED509E52E0C3AD5000A9ABB /* MultipartBoundaryBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartBoundaryBuilder.swift; sourceTree = "<group>"; };
 		3ED509E92E0D4B0E000A9ABB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3ED509F32E0D82E9000A9ABB /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		3EE924192DB392AA0086B3F2 /* IntroUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroUIState.swift; sourceTree = "<group>"; };
 		3EE9241B2DB3A3750086B3F2 /* SetNameUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNameUIState.swift; sourceTree = "<group>"; };
 		3EE9241D2DB3AC690086B3F2 /* WelcomeUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeUIState.swift; sourceTree = "<group>"; };
@@ -481,6 +492,7 @@
 				3EEFE3152DAFB20C00F5B0FF /* Image+CircularIcon.swift */,
 				3E439A522DEDD28900A171B6 /* Color+RGBA.swift */,
 				3ECEB9282DF4361600BF8EB5 /* View+TypeErasure.swift */,
+				3E4D7DB42E10364300E9CD8C /* CustomPadding+Helpers.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -492,6 +504,7 @@
 				3EEFE3182DAFB20C00F5B0FF /* Types+Helpers.swift */,
 				3E495E8E2DE7806D0051188A /* String+Localization.swift */,
 				3EBDA8602DEF2194007D99F9 /* Task+Delay.swift */,
+				3E4D7DB62E10365400E9CD8C /* Int+CGSizeConvertible.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -671,6 +684,16 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		3ED509EB2E0D7AA8000A9ABB /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				3E4D7DB22E1035F700E9CD8C /* CustomButtonStyle .swift */,
+				3E4D7DB02E1035D100E9CD8C /* CustomButtonStylePreset.swift */,
+				3ED509F32E0D82E9000A9ABB /* CustomButton.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
 		3EEFE2DB2DAFB20C00F5B0FF /* Intro */ = {
 			isa = PBXGroup;
 			children = (
@@ -823,12 +846,12 @@
 			path = DropDown;
 			sourceTree = "<group>";
 		};
-		3EEFE3092DAFB20C00F5B0FF /* CustomEmptyView */ = {
+		3EEFE3092DAFB20C00F5B0FF /* EmptyView */ = {
 			isa = PBXGroup;
 			children = (
 				3EEFE3082DAFB20C00F5B0FF /* CustomEmptyView.swift */,
 			);
-			path = CustomEmptyView;
+			path = EmptyView;
 			sourceTree = "<group>";
 		};
 		3EEFE30B2DAFB20C00F5B0FF /* ProgressCircleView */ = {
@@ -842,8 +865,9 @@
 		3EEFE30C2DAFB20C00F5B0FF /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				3ED509EB2E0D7AA8000A9ABB /* Button */,
 				3EEFE3072DAFB20C00F5B0FF /* DropDown */,
-				3EEFE3092DAFB20C00F5B0FF /* CustomEmptyView */,
+				3EEFE3092DAFB20C00F5B0FF /* EmptyView */,
 				3EEFE30B2DAFB20C00F5B0FF /* ProgressCircleView */,
 			);
 			path = CustomViews;
@@ -1151,6 +1175,7 @@
 				3E8DF9F32DE4CB700021E1EF /* NavigationItem.swift in Sources */,
 				3E439A532DEDD28900A171B6 /* Color+RGBA.swift in Sources */,
 				3EEFE32B2DAFB20C00F5B0FF /* StorageKeyProtocol.swift in Sources */,
+				3E4D7DB72E10365D00E9CD8C /* Int+CGSizeConvertible.swift in Sources */,
 				3E58FDF72DF8650700B108C4 /* AnyUserDefaultsStorage.swift in Sources */,
 				3ED509E42E0C3AB9000A9ABB /* MultipartHeaderBuilder.swift in Sources */,
 				3EEFE32C2DAFB20C00F5B0FF /* SetNameView.swift in Sources */,
@@ -1182,6 +1207,7 @@
 				3EEFE3402DAFB20C00F5B0FF /* HabitItem.swift in Sources */,
 				3E81A9A42DE8A24000DCDC79 /* ColorPickerView.swift in Sources */,
 				3E495E662DE74B8E0051188A /* FutureHabitListRowView.swift in Sources */,
+				3E4D7DB32E1035F800E9CD8C /* CustomButtonStyle .swift in Sources */,
 				3E58FDFA2DF8652400B108C4 /* DIContainer.swift in Sources */,
 				3EEFE3412DAFB20C00F5B0FF /* ProgressCircleView.swift in Sources */,
 				3EE9241C2DB3A37A0086B3F2 /* SetNameUIState.swift in Sources */,
@@ -1200,6 +1226,7 @@
 				3EEFE3452DAFB20C00F5B0FF /* DropDownRowView.swift in Sources */,
 				3E8DFA032DE4CD3D0021E1EF /* WelcomeCoordinator.swift in Sources */,
 				3EEFE3462DAFB20C00F5B0FF /* CustomEmptyView.swift in Sources */,
+				3E4D7DB52E10364400E9CD8C /* CustomPadding+Helpers.swift in Sources */,
 				3EEFE3482DAFB20C00F5B0FF /* AuthEndpoint.swift in Sources */,
 				3EB305872DF5E13C00AAE9E0 /* EditHabitCoordinating.swift in Sources */,
 				3E8DF9E92DE4BB640021E1EF /* DropDownIcon.swift in Sources */,
@@ -1220,6 +1247,8 @@
 				3E495E682DE74BA50051188A /* FutureHabitItem.swift in Sources */,
 				3E8DF9EF2DE4CAAC0021E1EF /* MainCoordinator.swift in Sources */,
 				3EEFE3512DAFB20C00F5B0FF /* NetworkAPIError.swift in Sources */,
+				3ED509F42E0D82EC000A9ABB /* CustomButton.swift in Sources */,
+				3E4D7DB12E1035D200E9CD8C /* CustomButtonStylePreset.swift in Sources */,
 				3EB305852DF5E0C100AAE9E0 /* AddHabitCoordinating.swift in Sources */,
 				3E8DF9F12DE4CB380021E1EF /* MainCoordinating.swift in Sources */,
 				3E81A9A02DE862D600DCDC79 /* SettingViewModel.swift in Sources */,
@@ -1269,6 +1298,7 @@
 				3EEFE3932DAFB2E800F5B0FF /* HomeView.swift in Sources */,
 				3EEFE39A2DAFB34500F5B0FF /* AppLogger.swift in Sources */,
 				3EB305792DF5AA0300AAE9E0 /* WatchSessionManaging.swift in Sources */,
+				3E4D7DB82E1045C000E9CD8C /* ThemeManaging.swift in Sources */,
 				3EEFE3942DAFB2E800F5B0FF /* HomeViewModel.swift in Sources */,
 				3E58FDFF2DF86DE600B108C4 /* DataManager.swift in Sources */,
 				3EEFE3982DAFB31700F5B0FF /* HabitData.swift in Sources */,

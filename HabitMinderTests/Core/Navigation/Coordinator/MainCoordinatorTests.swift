@@ -13,7 +13,7 @@ import Foundation
 struct MainCoordinatorTests {
     
     @Test("pop() should remove the last item from the path if not empty")
-    func testPopSuccess() {
+    func testPopRemovesLastItemWhenPathIsNotEmpty() {
         // Arrange
         let userDefaultsContainer = DIContainer.UserDefaults()
         let coordinator = MainCoordinator(
@@ -34,8 +34,8 @@ struct MainCoordinatorTests {
     }
     
     @Test("pop() should do nothing when the path is already empty")
-    func testPopWhenEmpty() {
-        // Arrange
+    func testPopDoesNothingWhenPathIsEmpty() {
+    // Arrange
         let userDefaultsContainer = DIContainer.UserDefaults()
         let coordinator = MainCoordinator(
             introRouting: IntroRouter(),
@@ -52,7 +52,7 @@ struct MainCoordinatorTests {
     }
     
     @Test("popToRoot() keeps only the first item when path has multiple elements")
-    func testPopToRootSuccess() {
+    func testPopToRootKeepsOnlyFirstItemWhenPathHasMultipleItems() {
         // Arrange
         let userDefaultsContainer = DIContainer.UserDefaults()
         let coordinator = MainCoordinator(
@@ -76,7 +76,7 @@ struct MainCoordinatorTests {
     }
     
     @Test("popToRoot() does nothing when path is empty")
-    func testPopToRootWhenPathIsEmpty() {
+    func testPopToRootDoesNothingWhenPathIsEmpty() {
         // Arrange
         let userDefaultsContainer = DIContainer.UserDefaults()
         let coordinator = MainCoordinator(
@@ -94,7 +94,7 @@ struct MainCoordinatorTests {
     }
     
     @Test("start() navigates to .intro(.intro) if user is not logged in")
-    func testStartWhenNotLoggedIn() {
+    func testStartNavigatesToIntroPageWhenUserIsNotLoggedIn() {
         // Arrange
         let userDefaultsContainer = DIContainer.UserDefaults(initialLoginValue: false)
         let coordinator = MainCoordinator(
@@ -112,7 +112,7 @@ struct MainCoordinatorTests {
     }
     
     @Test("start() navigates to .intro(.welcome) if user is logged in")
-    func testStartWhenLoggedIn() {
+    func testStartNavigatesToWelcomePageWhenUserIsLoggedIn() {
         // Arrange
         let userDefaultsContainer = DIContainer.UserDefaults(initialLoginValue: true)
         let coordinator = MainCoordinator(
@@ -130,7 +130,7 @@ struct MainCoordinatorTests {
     }
     
     @Test("navigate(to:) appends route to path")
-    func testNavigateStyles() {
+    func testNavigateAppendsRouteToPath() {
         // Arrange
         let route: AppRoute = .intro(.welcome)
         let userDefaultsContainer = DIContainer.UserDefaults()

@@ -80,22 +80,26 @@ struct HomeView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
     }
     
-    private var dropDownButton: some View {
-        Button {
-            isDropDownPresented = true
-        } label: {
+    @ViewBuilder
+    private var editingButtonLabel: some View {
+        if homeViewModel.uiState.isEditingList {
+            Text(LocalizedStrings.HomePage.doneButton)
+                .font(.AppFont.rooneySansBold.size(20))
+        } else {
             Image(.dropDownButton)
-                .tint(.primary)
         }
     }
     
-    private var doneButton: some View {
-        Button {
-            homeViewModel.stopEditingList()
+    private var editingControl: some View {
+        CustomButton(style: CustomButtonStylePreset.default()
+        ) {
+            if homeViewModel.uiState.isEditingList {
+                homeViewModel.stopEditingList()
+            } else {
+                isDropDownPresented = true
+            }
         } label: {
-            Text(LocalizedStrings.HomePage.doneButton)
-                .font(.AppFont.rooneySansBold.size(20))
-                .tint(.primary)
+            editingButtonLabel
         }
     }
     
@@ -107,15 +111,6 @@ struct HomeView: View {
         }
         .padding(.top, 32)
         .padding(.horizontal, 24)
-    }
-    
-    @ViewBuilder
-    private var editingControl: some View {
-        if homeViewModel.uiState.isEditingList {
-            doneButton
-        } else {
-            dropDownButton
-        }
     }
     
     private var quoteText: some View {

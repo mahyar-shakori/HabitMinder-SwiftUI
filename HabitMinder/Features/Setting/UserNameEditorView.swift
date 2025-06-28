@@ -64,23 +64,27 @@ struct UserNameEditorView: View {
         Text(LocalizedStrings.SettingPage.editUserName)
             .font(.AppFont.rooneySansBold.size(18))
     }
-    
+   
     private var toolbarSaveButton: some View {
-        Button {
+        CustomButton(style: CustomButtonStylePreset.default(
+            font: .AppFont.rooneySansBold.size(18),
+            tintColor: .blue
+        )) {
             settingViewModel.setUserName(tempUserName)
             isPresented = false
         } label: {
             Text(LocalizedStrings.Shared.saveButton)
-                .font(.AppFont.rooneySansBold.size(18))
         }
     }
-    
+   
     private var toolbarCancelButton: some View {
-        Button {
+        CustomButton(style: CustomButtonStylePreset.default(
+            font: .AppFont.rooneySansRegular.size(18),
+            tintColor: .blue
+        )) {
             isPresented = false
         } label: {
             Text(LocalizedStrings.Shared.cancelButton)
-                .font(.AppFont.rooneySansRegular.size(18))
         }
     }
 }

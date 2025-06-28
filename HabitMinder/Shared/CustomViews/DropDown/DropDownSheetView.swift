@@ -33,6 +33,7 @@ struct DropDownSheetView: View {
                         
                         if index < items.count - 1 {
                             Divider()
+                                .frame(height: 1)
                                 .padding(.leading, 16)
                         }
                     }
