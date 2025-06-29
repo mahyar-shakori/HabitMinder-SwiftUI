@@ -126,7 +126,7 @@ struct MainCoordinatorTests {
         
         // Assert
         #expect(coordinator.path.count == 1)
-        #expect(coordinator.path.first?.route == .intro(.welcome))
+        #expect(coordinator.path.first?.route == .intro(.intro))
     }
     
     @Test("navigate(to:) appends route to path")

@@ -45,7 +45,10 @@ extension Endpoint {
                 let boundary = UUID().uuidString
                 request.addValue(HTTPHeaderValue.multipart(boundary: boundary), forHTTPHeaderField: HTTPHeaderKey.contentType)
                 if let parts = multipartParts {
-                    request.httpBody = buildMultipartBody(with: parts, boundary: boundary)
+                    guard let multipartBody = buildMultipartBody(with: parts, boundary: boundary) else {
+                        throw NetworkAPIError.invalidMultipartBody
+                    }
+                    request.httpBody = multipartBody
                 }
             } else if method != .get, let body = body {
                 request.httpBody = try JSONEncoder().encode(body)
@@ -55,25 +58,38 @@ extension Endpoint {
             return request
         }
     
-        func buildMultipartBody(with parts: [MultipartPart], boundary: String) -> Data {
-            var body = Data()
+    func buildMultipartBody(with parts: [MultipartPart], boundary: String) -> Data? {
+        var body = Data()
 
-            for part in parts {
-                body.append(MultipartBoundaryBuilder.boundary(boundary).data(using: .utf8)!)
-                body.append(MultipartHeaderBuilder.contentDisposition(name: part.name, filename: part.filename).data(using: .utf8)!)
-                body.append(MultipartConstants.newLine.data(using: .utf8)!)
-
-                if let mimeType = part.mimeType {
-                    body.append(MultipartHeaderBuilder.contentType(mimeType).data(using: .utf8)!)
-                    body.append(MultipartConstants.newLine.data(using: .utf8)!)
-                }
-
-                body.append(MultipartConstants.newLine.data(using: .utf8)!)
-                body.append(part.data)
-                body.append(MultipartConstants.newLine.data(using: .utf8)!)
+        for part in parts {
+            guard
+                let boundaryData = MultipartBoundaryBuilder.boundary(boundary).data(using: .utf8),
+                let contentDispositionData = MultipartHeaderBuilder.contentDisposition(name: part.name, filename: part.filename).data(using: .utf8),
+                let newLineData = MultipartConstants.newLine.data(using: .utf8)
+            else {
+                return nil
             }
 
-            body.append(MultipartBoundaryBuilder.closing(boundary: boundary).data(using: .utf8)!)
-            return body
+            body.append(boundaryData)
+            body.append(contentDispositionData)
+            body.append(newLineData)
+
+            if let mimeType = part.mimeType,
+               let contentTypeData = MultipartHeaderBuilder.contentType(mimeType).data(using: .utf8) {
+                body.append(contentTypeData)
+                body.append(newLineData)
+            }
+
+            body.append(newLineData)
+            body.append(part.data)
+            body.append(newLineData)
         }
+
+        guard let closingData = MultipartBoundaryBuilder.closing(boundary: boundary).data(using: .utf8) else {
+            return nil
+        }
+
+        body.append(closingData)
+        return body
+    }
 }

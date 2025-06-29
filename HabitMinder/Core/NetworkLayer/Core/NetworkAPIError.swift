@@ -11,6 +11,7 @@ enum NetworkAPIError: Error, LocalizedError {
     case invalidURL
     case decodingError
     case badResponseError
+    case invalidMultipartBody
 
     var errorDescription: String? {
         switch self {
@@ -20,6 +21,8 @@ enum NetworkAPIError: Error, LocalizedError {
             return LocalizedStrings.Alert.Network.decodingFailed
         case .badResponseError:
             return LocalizedStrings.Alert.Network.badResponse
+        case .invalidMultipartBody:
+            return LocalizedStrings.Alert.Network.invalidMultipartBody
         }
     }
 }

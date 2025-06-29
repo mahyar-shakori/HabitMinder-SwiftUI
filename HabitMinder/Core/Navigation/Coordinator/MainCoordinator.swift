@@ -42,7 +42,7 @@ final class MainCoordinator: MainCoordinating {
     }
     
     func start() {
-        let initialRoute: AppRoute = loginStorage.fetch() == true ? .intro(.welcome) : .intro(.intro)
+        let initialRoute: AppRoute = loginStorage.fetch() == true ? .intro(.intro) : .intro(.intro)
         path = [NavigationItem(
             route: initialRoute
         )]

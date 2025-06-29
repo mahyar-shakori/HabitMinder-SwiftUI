@@ -33,6 +33,8 @@ struct IntroView: View {
             .resizable()
             .scaledToFit()
             .padding(.horizontal, 16)
+            .accessibilityIdentifier(AccessibilityIdentifier.IntroView.image)
+            .accessibilityLabel(introViewModel.pageState.image)
     }
     
     private var titleText: some View {
@@ -41,6 +43,7 @@ struct IntroView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 16)
             .padding(.top, 32)
+            .accessibilityIdentifier(AccessibilityIdentifier.IntroView.title)
     }
     
     private var descriptionText: some View {
@@ -48,11 +51,12 @@ struct IntroView: View {
             .font(.AppFont.rooneySansRegular.size(18))
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 16)
+            .accessibilityIdentifier(AccessibilityIdentifier.IntroView.description)
     }
     
     private var bottomControls: some View {
         ZStack {
-            pageControl
+            pageIndicator
             HStack {
                 
                 if introViewModel.currentState == .first {
@@ -79,6 +83,7 @@ struct IntroView: View {
         } label: {
             Text(LocalizedStrings.IntroPage.skipButton)
         }
+        .accessibilityIdentifier(AccessibilityIdentifier.IntroView.skipButton)
     }
     
     private var nextButton: some View {
@@ -90,20 +95,23 @@ struct IntroView: View {
         } label: {
             Text(LocalizedStrings.IntroPage.nextButton)
         }
+        .accessibilityIdentifier(AccessibilityIdentifier.IntroView.nextButton)
     }
     
-    private var pageControl: some View {
+    private var pageIndicator: some View {
         HStack(spacing: 10) {
             Capsule()
                 .fill(themeManager.appPrimary)
                 .frame(width: introViewModel.currentState == .second ? 70 : 40, height: 10)
                 .animation(.easeInOut(duration: 0.3), value: introViewModel.currentState)
-            
+                .accessibilityIdentifier(AccessibilityIdentifier.IntroView.pageIndicatorPrimary)
+
             if introViewModel.currentState == .first {
                 Capsule()
                     .fill(themeManager.appSecondary)
                     .frame(width: 20, height: 10)
                     .transition(.opacity)
+                    .accessibilityIdentifier(AccessibilityIdentifier.IntroView.pageIndicatorSecondary)
             }
         }
     }

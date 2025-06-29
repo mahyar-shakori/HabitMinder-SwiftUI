@@ -52,6 +52,7 @@
 "networkAlertInvalidURL" = "Ongeldige URL";
 "networkAlertDecodingFailed" = "Kan reactie niet decoderen.";
 "networkAlertBadResponse" = "Ongeldige reactie of fout van de server.";
+"networkAlertInvalidMultipartBody" = "Kan multipart body niet opbouwen.";
 "logoutAlertTitle" = "Uitloggen";
 "logoutAlertMessage" = "Weet je zeker dat je wilt uitloggen? Al je gegevens worden permanent verwijderd.";
 "deleteHabitAlertTitle" = "Gewoonte verwijderen";

@@ -17,23 +17,3 @@ struct CustomButtonStyle {
     let shape: AnyShape?
     let isDisabled: Bool
 }
-
-enum CustomPadding {
-    case none
-    case standard
-    case insets(EdgeInsets)
-}
-
-extension View {
-    @ViewBuilder
-    func applyButtonPadding(_ padding: CustomPadding) -> some View {
-        switch padding {
-        case .none:
-            self
-        case .standard:
-            self.padding()
-        case .insets(let insets):
-            self.padding(insets)
-        }
-    }
-}

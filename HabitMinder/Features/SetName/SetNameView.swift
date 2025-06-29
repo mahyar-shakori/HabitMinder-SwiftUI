@@ -48,6 +48,7 @@ struct SetNameView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 32)
             .padding(.top, 64)
+            .accessibilityIdentifier(AccessibilityIdentifier.SetNameView.hiText)
     }
     
     private var userNameTextField: some View {

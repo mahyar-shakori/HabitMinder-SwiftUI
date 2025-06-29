@@ -86,6 +86,7 @@ struct LocalizedStrings {
             static var invalidURL: String { "networkAlertInvalidURL".localized }
             static var decodingFailed: String { "networkAlertDecodingFailed".localized }
             static var badResponse: String { "networkAlertBadResponse".localized }
+            static var invalidMultipartBody: String { "networkAlertInvalidMultipartBody".localized }
         }
 
         struct Habit {
