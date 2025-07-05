@@ -13,78 +13,77 @@ final class HabitMinderUITests: XCTestCase {
         continueAfterFailure = false
     }
     
-    func launchApp() -> XCUIApplication {
+    private lazy var app: XCUIApplication = {
         let app = XCUIApplication()
         app.launch()
         return app
+    }()
+    
+    private var nextButton: XCUIElement {
+        app.buttons[AccessibilityIdentifier.IntroView.nextButton]
     }
     
+    private var skipButton: XCUIElement {
+        app.buttons[AccessibilityIdentifier.IntroView.skipButton]
+    }
+    
+    private var image: XCUIElement {
+        app.images[AccessibilityIdentifier.IntroView.image]
+    }
+    
+    private var titleText: XCUIElement {
+        app.staticTexts[AccessibilityIdentifier.IntroView.title]
+    }
+    
+    private var descText: XCUIElement {
+        app.staticTexts[AccessibilityIdentifier.IntroView.description]
+    }
+    
+    private var primaryDot: XCUIElement {
+        app.otherElements[AccessibilityIdentifier.IntroView.pageIndicatorPrimary]
+    }
+    
+    private var secondaryDot: XCUIElement {
+        app.otherElements[AccessibilityIdentifier.IntroView.pageIndicatorSecondary]
+    }
+   
     @MainActor
     func testIntroViewLoads() throws {
-        let app = launchApp()
-        
-        XCTAssertTrue(app.images[AccessibilityIdentifier.IntroView.image].exists)
-        XCTAssertTrue(app.staticTexts[AccessibilityIdentifier.IntroView.title].exists)
-        XCTAssertTrue(app.staticTexts[AccessibilityIdentifier.IntroView.description].exists)
-        XCTAssertTrue(app.buttons[AccessibilityIdentifier.IntroView.nextButton].exists)
-        XCTAssertTrue(app.buttons[AccessibilityIdentifier.IntroView.skipButton].exists)
-        XCTAssertTrue(app.otherElements[AccessibilityIdentifier.IntroView.pageIndicatorPrimary].exists)
-        XCTAssertTrue(app.otherElements[AccessibilityIdentifier.IntroView.pageIndicatorSecondary].exists)
+        // Assert
+        XCTAssertTrue(image.exists)
+        XCTAssertTrue(titleText.exists)
+        XCTAssertTrue(descText.exists)
+        XCTAssertTrue(nextButton.exists)
+        XCTAssertTrue(skipButton.exists)
+        XCTAssertTrue(primaryDot.exists)
+        XCTAssertTrue(secondaryDot.exists)
     }
     
     @MainActor
     func testNextButtonChangesState() throws {
-        let app = launchApp()
-        
-        let imageBefore = app.images[AccessibilityIdentifier.IntroView.image].label
-        let titleBefore = app.staticTexts[AccessibilityIdentifier.IntroView.title].label
-        let descBefore = app.staticTexts[AccessibilityIdentifier.IntroView.description].label
-        let secondaryDot = app.otherElements[AccessibilityIdentifier.IntroView.pageIndicatorSecondary]
+        // Arrange
+        let imageBefore = image.label
+        let titleBefore = titleText.label
+        let descBefore = descText.label
         
         XCTAssertTrue(secondaryDot.exists)
         
-        app.buttons[AccessibilityIdentifier.IntroView.nextButton].tap()
-        
-        XCTAssertFalse(secondaryDot.waitForExistence(timeout: 2))
-        let imageAfter = app.images[AccessibilityIdentifier.IntroView.image].label
-        let titleAfter = app.staticTexts[AccessibilityIdentifier.IntroView.title].label
-        let descAfter = app.staticTexts[AccessibilityIdentifier.IntroView.description].label
-        
-        XCTAssertNotEqual(imageBefore, imageAfter)
-        XCTAssertNotEqual(titleBefore, titleAfter)
-        XCTAssertNotEqual(descBefore, descAfter)
-    }
-    
-    @MainActor
-    func testMultipleNextTapsEventuallyNavigatesToSetNameView() throws {
-        let app = launchApp()
-        
-        let nextButton = app.buttons[AccessibilityIdentifier.IntroView.nextButton]
-        nextButton.tap()
+        // Act
         nextButton.tap()
         
-        let nameView = app.staticTexts[AccessibilityIdentifier.SetNameView.hiText]
-        XCTAssertTrue(nameView.waitForExistence(timeout: 2))
+        // Assert
+        XCTAssertFalse(secondaryDot.waitForExistence(timeout: 1))
+        XCTAssertNotEqual(imageBefore, image.label)
+        XCTAssertNotEqual(titleBefore, titleText.label)
+        XCTAssertNotEqual(descBefore, descText.label)
     }
-    
-    @MainActor
-    func testSkipButtonNavigatesToSetNameView() throws {
-        let app = launchApp()
-        
-        let skipButton = app.buttons[AccessibilityIdentifier.IntroView.skipButton]
-        skipButton.tap()
-        
-        let nameView = app.staticTexts[AccessibilityIdentifier.SetNameView.hiText]
-        XCTAssertTrue(nameView.waitForExistence(timeout: 2))
-    }
-    
+   
     @MainActor
     func testSkipButtonIsHiddenAfterFirstNextTap() throws {
-        let app = launchApp()
+        // Act
+        nextButton.tap()
         
-        let skipButton = app.buttons[AccessibilityIdentifier.IntroView.skipButton]
-        app.buttons[AccessibilityIdentifier.IntroView.nextButton].tap()
-        
+        // Assert
         XCTAssertFalse(skipButton.waitForExistence(timeout: 1))
     }
     

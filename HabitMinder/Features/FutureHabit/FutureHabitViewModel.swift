@@ -10,49 +10,50 @@ import Foundation
 final class FutureHabitViewModel: ObservableObject {
     @Published private(set) var uiState = FutureHabitUIState()
     
-    private let futureHabitDataManager: AnyDataManager<FutureHabitModel>
+    private let dataManager: DataManaging
     private let coordinator: FutureHabitCoordinating
+    private var habitTitle = ""
     
     private var trimmedHabitTitle: String {
-        uiState.habitTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+        habitTitle.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     init(
-        futureHabitDataManager: AnyDataManager<FutureHabitModel>,
+        dataManager: DataManaging,
         coordinator: FutureHabitCoordinating
     ) {
-        self.futureHabitDataManager = futureHabitDataManager
+        self.dataManager = dataManager
         self.coordinator = coordinator
         fetchHabits()
     }
     
     func setHabitTitle(_ newValue: String) {
-        uiState.habitTitle = newValue
+        habitTitle = newValue
         updateValidationState()
     }
-    
+   
     func fetchHabits() {
-        let models = futureHabitDataManager.fetchAll()
-        uiState.listItems = models.map {
-            FutureHabitItem(
-                id: $0.id,
-                title: $0.title,
-                dateCreate: $0.createdAt
-            )
+            let models: [FutureHabitModel] = dataManager.fetchAll(FutureHabitModel.self)
+            uiState.listItems = models.map {
+                FutureHabitItem(
+                    id: $0.id,
+                    title: $0.title,
+                    dateCreate: $0.createdAt
+                )
+            }
         }
-    }
     
     private func updateValidationState() {
         let isValid = trimmedHabitTitle.count > 0
         uiState.isSaveButtonEnabled = isValid
     }
-    
+ 
     func save() {
-        let newHabit = FutureHabitModel(title: uiState.habitTitle)
-        futureHabitDataManager.save(newHabit)
-        uiState.habitTitle = ""
-        fetchHabits()
-    }
+            let newHabit = FutureHabitModel(title: habitTitle)
+            dataManager.save(newHabit)
+            habitTitle = ""
+            fetchHabits()
+        }
     
     func confirmDelete(id: UUID) {
         uiState.itemToDelete = id
@@ -62,7 +63,7 @@ final class FutureHabitViewModel: ObservableObject {
         guard let id = uiState.itemToDelete else {
             return
         }
-        futureHabitDataManager.delete(byID: id)
+        dataManager.delete(byID: id, FutureHabitModel.self)
         uiState.listItems.removeAll { $0.id == id }
         cancelDelete()
     }

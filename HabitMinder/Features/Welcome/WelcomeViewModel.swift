@@ -11,21 +11,21 @@ final class WelcomeViewModel: ObservableObject {
     @Published private(set) var uiState = WelcomeUIState()
     
     private let apiFetching: APIFetching
-    private let userNameStorage: AnyUserDefaultsStorage<String>
+    private let userDefaultsStorage: UserDefaultsStoring
     private let coordinator: WelcomeCoordinating
 
     init(
         coordinator: WelcomeCoordinating,
-        apiFetching: APIFetching = APIService(configuration: .init(timeoutInterval: 3)),
-        userNameStorage: AnyUserDefaultsStorage<String>
+        apiFetching: APIFetching,
+        userDefaultsStorage: UserDefaultsStoring
     ) {
         self.coordinator = coordinator
         self.apiFetching = apiFetching
-        self.userNameStorage = userNameStorage
+        self.userDefaultsStorage = userDefaultsStorage
     }
   
     func loadUserName() {
-        let storedName = userNameStorage.fetch()
+        let storedName: String? = userDefaultsStorage.fetch(for: UserDefaultKeys.userName)
         uiState.userName = formattedWelcomeName(from: storedName)
     }
   

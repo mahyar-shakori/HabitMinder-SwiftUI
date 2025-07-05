@@ -8,13 +8,17 @@
 import Foundation
 import SwiftData
 
+typealias ModelEntity = PersistentModel & IdentifiableModel
+
 protocol DataManaging {
-    associatedtype Entity: PersistentModel & IdentifiableModel
-    
-    func fetchAll() -> [Entity]
-    func fetch(byID id: UUID) -> Entity?
-    func save(_ item: Entity)
-    func delete(byID id: UUID)
-    func deleteAll()
-    func update(_ updateBlock: (Entity) -> Void, forID id: UUID)
+    func fetchAll<T: ModelEntity>(_ type: T.Type) -> [T]
+    func fetch<T: ModelEntity>(byID id: UUID, _ type: T.Type) -> T?
+    func save<T: ModelEntity>(_ item: T)
+    func delete<T: ModelEntity>(byID id: UUID, _ type: T.Type)
+    func deleteAll<T: ModelEntity>(_ type: T.Type)
+    func update<T: ModelEntity>(
+        _ updateBlock: (T) -> Void,
+        forID id: UUID,
+        _ type: T.Type
+    )
 }

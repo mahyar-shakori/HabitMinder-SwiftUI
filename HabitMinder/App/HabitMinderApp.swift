@@ -10,13 +10,13 @@ import SwiftUI
 @main
 struct HabitMinderApp: App {
     var body: some Scene {
-        let userDefaultsContainer = DIContainer.UserDefaults()
+        let userDefaultsStorage = UserDefaultsStorage()
         let mainCoordinator = MainCoordinator(
             introRouting: IntroRouter(),
             homeRouting: HomeRouter(),
-            loginStorage: userDefaultsContainer.loginStorage
+            userDefaultsStorage: userDefaultsStorage
         )
-        let themeManager = ThemeManager()
+        let themeManager = ThemeManager()  
 
         WindowGroup {
             RootView(mainCoordinator: mainCoordinator)

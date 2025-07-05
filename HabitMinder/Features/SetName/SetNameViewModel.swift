@@ -11,8 +11,7 @@ final class SetNameViewModel: ObservableObject {
     @Published private(set) var uiState = SetNameUIState()
     
     private let coordinator: SetNameCoordinating
-    private let userNameStorage: AnyUserDefaultsStorage<String>
-    private let loginStorage: AnyUserDefaultsStorage<Bool>
+    private let userDefaultsStorage: UserDefaultsStoring
     
     private var trimmedUserName: String {
         uiState.userName.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -20,12 +19,10 @@ final class SetNameViewModel: ObservableObject {
     
     init(
         coordinator: SetNameCoordinating,
-        userNameStorage: AnyUserDefaultsStorage<String>,
-        loginStorage: AnyUserDefaultsStorage<Bool>
+        userDefaultsStorage: UserDefaultsStoring
     ) {
         self.coordinator = coordinator
-        self.userNameStorage = userNameStorage
-        self.loginStorage = loginStorage
+        self.userDefaultsStorage = userDefaultsStorage
     }
     
     func setUserName(_ newValue: String) {
@@ -59,8 +56,8 @@ final class SetNameViewModel: ObservableObject {
     }
     
     private func saveUserName(_ name: String) {
-        userNameStorage.save(value: name)
-        loginStorage.save(value: true)
+        userDefaultsStorage.save(value: name, for: UserDefaultKeys.userName)
+        userDefaultsStorage.save(value: true, for: UserDefaultKeys.isLogin)
     }
     
     func goToWelcomePage() {

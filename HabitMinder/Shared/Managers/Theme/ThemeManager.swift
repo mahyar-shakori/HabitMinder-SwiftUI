@@ -7,33 +7,33 @@
 
 import SwiftUI
 
-final class ThemeManager: ThemeManaging {
+final class ThemeManager: ThemeManaging, ObservableObject{
     @Published var appPrimary: Color {
         didSet {
             saveColorToDefaults(appPrimary)
         }
     }
     
-    private let colorStorage: AnyUserDefaultsStorage<[CGFloat]>
-
+    private let userDefaultsStorage: UserDefaultsStoring
+    
     var appSecondary: Color {
         appPrimary.opacity(0.4)
     }
-
-    init(colorStorage: AnyUserDefaultsStorage<[CGFloat]> = DIContainer.UserDefaults().colorStorage) {
-        self.colorStorage = colorStorage
-        self.appPrimary = Self.loadColorFromDefaults() ?? .appPrimary
+    
+    init(userDefaultsStorage: UserDefaultsStoring = UserDefaultsStorage()) {
+        self.userDefaultsStorage = userDefaultsStorage
+        self.appPrimary = Self.loadColorFromDefaults(storage: userDefaultsStorage) ?? .appPrimary
     }
-
+    
     private func saveColorToDefaults(_ color: Color) {
         if let components = color.rgbaComponents {
-            colorStorage.save(value: components)
+            userDefaultsStorage.save(value: components, for: UserDefaultKeys.appPrimaryColor)
         }
     }
-
-    private static func loadColorFromDefaults() -> Color? {
-        let colorStorage = UserDefaultsStorage<UserDefaultKeys, [CGFloat]>(key: .appPrimaryColor)
-        guard let components = colorStorage.fetch(), components.count == 4 else {
+    
+    private static func loadColorFromDefaults(storage: UserDefaultsStoring) -> Color? {
+        guard let components: [CGFloat] = storage.fetch(for: UserDefaultKeys.appPrimaryColor),
+              components.count == 4 else {
             return nil
         }
         return Color(.sRGB,

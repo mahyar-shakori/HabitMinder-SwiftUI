@@ -11,19 +11,19 @@ final class EditHabitViewModel: ObservableObject {
     @Published private(set) var uiState = EditHabitUIState()
 
     private let habitID: UUID
-    private let habitDataManager: AnyDataManager<HabitModel>
+    private let dataManager: DataManaging
     private let coordinator: EditHabitCoordinating
-    
+
     private var trimmedHabitTitle: String {
         uiState.habitTitle.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     init(
-        habitDataManager: AnyDataManager<HabitModel>,
+        dataManager: DataManaging,
         coordinator: EditHabitCoordinating,
         habit: HabitModel
     ) {
-        self.habitDataManager = habitDataManager
+        self.dataManager = dataManager
         self.coordinator = coordinator
         self.habitID = habit.id
         self.uiState.habitTitle = habit.title
@@ -40,13 +40,13 @@ final class EditHabitViewModel: ObservableObject {
     }
     
     func saveAndDismiss() {
-        habitDataManager.update({ $0.title = uiState.habitTitle }, forID: habitID)
+        dataManager.update({ $0.title = uiState.habitTitle }, forID: habitID, HabitModel.self)
         NotificationCenter.default.post(name: AppNotification.Habit.edited, object: nil)
         coordinator.goBack()
     }
     
     func missHabit() {
-        habitDataManager.update({ $0.createdAt = Date() }, forID: habitID)
+        dataManager.update({ $0.createdAt = Date() }, forID: habitID, HabitModel.self)
     }
     
     func missHabitAndShowToast() {
@@ -56,6 +56,7 @@ final class EditHabitViewModel: ObservableObject {
         Task {
             await Task.delay()
             await MainActor.run {
+                uiState.showToast = false
             }
         }
     }

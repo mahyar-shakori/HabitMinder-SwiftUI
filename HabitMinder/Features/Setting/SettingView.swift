@@ -131,11 +131,11 @@ struct SettingView: View {
 #Preview {
     let fakeCoordinator = SettingCoordinator(dismiss: {
     })
-    let userDefaultsContainer = DIContainer.UserDefaults()
+    let userDefaults = UserDefaultsStorage()
     let themeManager = ThemeManager()
     let viewModel = SettingViewModel(
         coordinator: fakeCoordinator,
-        userNameStorage: userDefaultsContainer.userNameStorage
+        userDefaultsStorage: userDefaults
     )
     SettingView(settingViewModel: viewModel)
         .environmentObject(themeManager)

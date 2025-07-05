@@ -8,44 +8,21 @@
 import SwiftUI
 import SwiftData
 
-final class MainCoordinator: MainCoordinating {
+final class MainCoordinator: ObservableObject {
     @Published var path: [NavigationItem] = []
     
     private let introRouting: IntroRouting
     private let homeRouting: HomeRouting
-    private let loginStorage: AnyUserDefaultsStorage<Bool>
+    private let userDefaultsStorage: UserDefaultsStoring
     
     init(
         introRouting: IntroRouting,
         homeRouting: HomeRouting,
-        loginStorage: AnyUserDefaultsStorage<Bool>
+        userDefaultsStorage: UserDefaultsStoring
     ) {
         self.introRouting = introRouting
         self.homeRouting = homeRouting
-        self.loginStorage = loginStorage
-    }
-    
-    func navigate(to route: AppRoute) {
-        let item = NavigationItem(route: route)
-        path.append(item)
-    }
-    
-    func pop() {
-        _ = path.popLast()
-    }
-    
-    func popToRoot() {
-        guard let first = path.first else {
-            return
-        }
-        path = [first]
-    }
-    
-    func start() {
-        let initialRoute: AppRoute = loginStorage.fetch() == true ? .intro(.intro) : .intro(.intro)
-        path = [NavigationItem(
-            route: initialRoute
-        )]
+        self.userDefaultsStorage = userDefaultsStorage
     }
     
     func coordinator(
@@ -69,5 +46,29 @@ final class MainCoordinator: MainCoordinating {
                 )
                 .eraseToAnyView()
         }
+    }
+}
+
+extension MainCoordinator: MainCoordinating {
+    func navigate(to route: AppRoute) {
+        let item = NavigationItem(route: route)
+        path.append(item)
+    }
+    
+    func pop() {
+        _ = path.popLast()
+    }
+    
+    func popToRoot() {
+        guard let first = path.first else {
+            return
+        }
+        path = [first]
+    }
+    
+    func start() {
+        let isLoggedIn = userDefaultsStorage.fetch(for: UserDefaultKeys.isLogin) ?? false
+        let initialRoute: AppRoute = isLoggedIn ? .intro(.welcome) : .intro(.intro)
+        path = [NavigationItem(route: initialRoute)]
     }
 }

@@ -31,12 +31,12 @@ struct RootView: View {
 }
 
 #Preview {
-    let userDefaultsContainer = DIContainer.UserDefaults()
+    let userDefaults = UserDefaultsStorage()
     let themeManager = ThemeManager()
     let coordinator = MainCoordinator(
         introRouting: IntroRouter(),
         homeRouting: HomeRouter(),
-        loginStorage: userDefaultsContainer.loginStorage
+        userDefaultsStorage: userDefaults
     )
     RootView(mainCoordinator: coordinator)
         .environmentObject(themeManager)

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-protocol ThemeManaging: ObservableObject {
+protocol ThemeManaging {
     var appPrimary: Color { get set }
     var appSecondary: Color { get }
 }

@@ -46,7 +46,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3E85523F2E01518F00F87F09"
+               BlueprintIdentifier = "3E6201D22E112C2300E69E28"
                BuildableName = "HabitMinderUITests.xctest"
                BlueprintName = "HabitMinderUITests"
                ReferencedContainer = "container:HabitMinder.xcodeproj">

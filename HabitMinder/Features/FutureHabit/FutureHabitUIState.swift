@@ -8,7 +8,6 @@
 import Foundation
 
 struct FutureHabitUIState {
-    var habitTitle = ""
     var isSaveButtonEnabled = false
     var listItems: [FutureHabitItem] = []
     var itemToDelete: UUID?

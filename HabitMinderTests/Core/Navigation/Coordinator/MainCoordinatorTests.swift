@@ -15,11 +15,11 @@ struct MainCoordinatorTests {
     @Test("pop() should remove the last item from the path if not empty")
     func testPopRemovesLastItemWhenPathIsNotEmpty() {
         // Arrange
-        let userDefaultsContainer = DIContainer.UserDefaults()
+        let userDefaultsStorage = UserDefaultsStorage()
         let coordinator = MainCoordinator(
             introRouting: IntroRouter(),
             homeRouting: HomeRouter(),
-            loginStorage: userDefaultsContainer.loginStorage
+            userDefaultsStorage: userDefaultsStorage
         )
         coordinator.path = [
             NavigationItem(route: .intro(.intro)),
@@ -35,12 +35,12 @@ struct MainCoordinatorTests {
     
     @Test("pop() should do nothing when the path is already empty")
     func testPopDoesNothingWhenPathIsEmpty() {
-    // Arrange
-        let userDefaultsContainer = DIContainer.UserDefaults()
+        // Arrange
+        let userDefaultsStorage = UserDefaultsStorage()
         let coordinator = MainCoordinator(
             introRouting: IntroRouter(),
             homeRouting: HomeRouter(),
-            loginStorage: userDefaultsContainer.loginStorage
+            userDefaultsStorage: userDefaultsStorage
         )
         coordinator.path = []
         
@@ -54,11 +54,11 @@ struct MainCoordinatorTests {
     @Test("popToRoot() keeps only the first item when path has multiple elements")
     func testPopToRootKeepsOnlyFirstItemWhenPathHasMultipleItems() {
         // Arrange
-        let userDefaultsContainer = DIContainer.UserDefaults()
+        let userDefaultsStorage = UserDefaultsStorage()
         let coordinator = MainCoordinator(
             introRouting: IntroRouter(),
             homeRouting: HomeRouter(),
-            loginStorage: userDefaultsContainer.loginStorage
+            userDefaultsStorage: userDefaultsStorage
         )
         let firstItem = NavigationItem(route: .intro(.intro))
         coordinator.path = [
@@ -78,11 +78,11 @@ struct MainCoordinatorTests {
     @Test("popToRoot() does nothing when path is empty")
     func testPopToRootDoesNothingWhenPathIsEmpty() {
         // Arrange
-        let userDefaultsContainer = DIContainer.UserDefaults()
+        let userDefaultsStorage = UserDefaultsStorage()
         let coordinator = MainCoordinator(
             introRouting: IntroRouter(),
             homeRouting: HomeRouter(),
-            loginStorage: userDefaultsContainer.loginStorage
+            userDefaultsStorage: userDefaultsStorage
         )
         coordinator.path = []
         
@@ -96,11 +96,12 @@ struct MainCoordinatorTests {
     @Test("start() navigates to .intro(.intro) if user is not logged in")
     func testStartNavigatesToIntroPageWhenUserIsNotLoggedIn() {
         // Arrange
-        let userDefaultsContainer = DIContainer.UserDefaults(initialLoginValue: false)
+        let userDefaultsStorage = UserDefaultsStorage()
+        userDefaultsStorage.save(value: false, for: UserDefaultKeys.isLogin)
         let coordinator = MainCoordinator(
             introRouting: IntroRouter(),
             homeRouting: HomeRouter(),
-            loginStorage: userDefaultsContainer.loginStorage
+            userDefaultsStorage: userDefaultsStorage
         )
         
         // Act
@@ -114,11 +115,11 @@ struct MainCoordinatorTests {
     @Test("start() navigates to .intro(.welcome) if user is logged in")
     func testStartNavigatesToWelcomePageWhenUserIsLoggedIn() {
         // Arrange
-        let userDefaultsContainer = DIContainer.UserDefaults(initialLoginValue: true)
+        let userDefaultsStorage = UserDefaultsStorage()
         let coordinator = MainCoordinator(
             introRouting: IntroRouter(),
             homeRouting: HomeRouter(),
-            loginStorage: userDefaultsContainer.loginStorage
+            userDefaultsStorage: userDefaultsStorage
         )
         
         // Act
@@ -133,12 +134,12 @@ struct MainCoordinatorTests {
     func testNavigateAppendsRouteToPath() {
         // Arrange
         let route: AppRoute = .intro(.welcome)
-        let userDefaultsContainer = DIContainer.UserDefaults()
+        let userDefaultsStorage = UserDefaultsStorage()
         
         let coordinator = MainCoordinator(
             introRouting: IntroRouter(),
             homeRouting: HomeRouter(),
-            loginStorage: userDefaultsContainer.loginStorage
+            userDefaultsStorage: userDefaultsStorage
         )
         
         // Act

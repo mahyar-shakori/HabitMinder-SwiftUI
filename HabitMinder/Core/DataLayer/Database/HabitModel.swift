@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-final class HabitModel {
+final class HabitModel: IdentifiableModel {
     @Attribute(.unique) var id: UUID
     var title: String
     var createdAt: Date

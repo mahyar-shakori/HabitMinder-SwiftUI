@@ -127,9 +127,8 @@ struct FutureHabitView: View {
     
     let fakeCoordinator = FutureHabitCoordinator(dismiss: {
     })
-    let databaseContainer = DIContainer.Database(context: context)
     let viewModel = FutureHabitViewModel(
-        futureHabitDataManager: databaseContainer.futureHabitDataManager,
+        dataManager: DataManager(context: context),
         coordinator: fakeCoordinator
     )
     FutureHabitView(futureHabitViewModel: viewModel)

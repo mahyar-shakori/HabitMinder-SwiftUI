@@ -17,8 +17,4 @@ enum AccessibilityIdentifier {
         static let pageIndicatorPrimary = "intro_page_indicator_primary"
         static let pageIndicatorSecondary = "intro_page_indicator_secondary"
     }
-
-    enum SetNameView {
-        static let hiText = "setname_hi_text"
-    }
 }

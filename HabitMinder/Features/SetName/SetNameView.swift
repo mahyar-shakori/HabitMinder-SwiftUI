@@ -48,7 +48,6 @@ struct SetNameView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 32)
             .padding(.top, 64)
-            .accessibilityIdentifier(AccessibilityIdentifier.SetNameView.hiText)
     }
     
     private var userNameTextField: some View {
@@ -106,12 +105,11 @@ struct SetNameView: View {
 #Preview {
     let fakeCoordinator = SetNameCoordinator(navigate: { _ in
     })
+    let userDefaults = UserDefaultsStorage()
     let themeManager = ThemeManager()
-    let userDefaultsContainer = DIContainer.UserDefaults()
     let viewModel = SetNameViewModel(
         coordinator: fakeCoordinator,
-        userNameStorage: userDefaultsContainer.userNameStorage,
-        loginStorage: userDefaultsContainer.loginStorage
+        userDefaultsStorage: userDefaults
     )
     SetNameView(setNameViewModel: viewModel)
         .environmentObject(themeManager)

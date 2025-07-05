@@ -7,20 +7,14 @@
 
 import Foundation
 
-final class UserDefaultsStorage<Key: StorageKeyProtocol, Value>: UserDefaultsStoring {
-    typealias ValueType = Value
+final class UserDefaultsStorage: UserDefaultsStoring {
+    private let defaults = UserDefaults.standard
     
-    private var key: Key
-    
-    init(key: Key) {
-        self.key = key
+    func save<Value: Codable>(value: Value, for key: any StorageKeyProtocol) {
+        defaults.set(value, forKey: key.rawValue)
     }
     
-    func save(value: Value) {
-        UserDefaults.standard.set(value, forKey: key.rawValue)
-    }
-    
-    func fetch() -> Value? {
-        UserDefaults.standard.object(forKey: key.rawValue) as? Value
+    func fetch<Value: Codable>(for key: any StorageKeyProtocol) -> Value? {
+        defaults.object(forKey: key.rawValue) as? Value
     }
 }

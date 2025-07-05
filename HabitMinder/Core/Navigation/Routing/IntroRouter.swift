@@ -12,20 +12,20 @@ struct IntroRouter: IntroRouting {
         for route: IntroRoute,
         using coordinator: any MainCoordinating,
     ) -> any View {
-        let userDefaultsContainer = DIContainer.UserDefaults()
-        
+        let userDefaultsStorage = UserDefaultsStorage()
+
         switch route {
         case .intro:
             return introScreen(coordinator: coordinator)
         case .setName:
             return setNameScreen(
                 coordinator: coordinator,
-                userDefaultsContainer: userDefaultsContainer
+                userDefaultsStorage: userDefaultsStorage
             )
         case .welcome:
             return welcomeScreen(
                 coordinator: coordinator,
-                userDefaultsContainer: userDefaultsContainer
+                userDefaultsStorage: userDefaultsStorage
             )
         }
     }
@@ -40,25 +40,26 @@ struct IntroRouter: IntroRouting {
     
     private func setNameScreen(
         coordinator: any MainCoordinating,
-        userDefaultsContainer: DIContainer.UserDefaults
+        userDefaultsStorage: UserDefaultsStoring
     ) -> some View {
         let viewCoordinator = SetNameCoordinator(navigate: coordinator.navigate)
         let viewModel = SetNameViewModel(
             coordinator: viewCoordinator,
-            userNameStorage: userDefaultsContainer.userNameStorage,
-            loginStorage: userDefaultsContainer.loginStorage
+            userDefaultsStorage: userDefaultsStorage
         )
         return SetNameView(setNameViewModel: viewModel)
     }
     
     private func welcomeScreen(
         coordinator: any MainCoordinating,
-        userDefaultsContainer: DIContainer.UserDefaults
+        userDefaultsStorage: UserDefaultsStoring
     ) -> some View {
         let viewCoordinator = WelcomeCoordinator(navigate: coordinator.navigate)
+        let apiFetching = APIService(configuration: .init(timeoutInterval: 3))
         let viewModel = WelcomeViewModel(
             coordinator: viewCoordinator,
-            userNameStorage: userDefaultsContainer.userNameStorage
+            apiFetching: apiFetching,
+            userDefaultsStorage: userDefaultsStorage
         )
         return WelcomeView(welcomeViewModel: viewModel)
     }

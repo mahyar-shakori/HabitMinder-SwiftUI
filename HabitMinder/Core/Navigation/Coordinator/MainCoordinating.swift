@@ -7,11 +7,10 @@
 
 import Foundation
 
-protocol MainCoordinating: ObservableObject {
+protocol MainCoordinating {
     var path: [NavigationItem] { get set }
     func navigate(to route: AppRoute)
     func pop()
     func popToRoot()
     func start()
-//    func coordinator(for route: AppRoute, modelContext: ModelContext) -> AnyView
 }

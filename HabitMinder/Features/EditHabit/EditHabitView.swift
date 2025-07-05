@@ -93,7 +93,8 @@ struct EditHabitView: View {
    
     private var missHabitButton: some View {
         CustomButton(style: CustomButtonStylePreset.tertiary(
-            backgroundColor: editHabitViewModel.uiState.showToast ? themeManager.appSecondary : themeManager.appPrimary
+            backgroundColor: editHabitViewModel.uiState.showToast ? themeManager.appSecondary : themeManager.appPrimary,
+            isDisabled: editHabitViewModel.uiState.showToast
         )) {
             withAnimation {
                 editHabitViewModel.missHabitAndShowToast()
@@ -110,10 +111,9 @@ struct EditHabitView: View {
     let sampleHabit = HabitModel(title: "Read book")
     let fakeCoordinator = EditHabitCoordinator(dismiss: {
     })
-    let databaseContainer = DIContainer.Database(context: context)
     let themeManager = ThemeManager()
     let viewModel = EditHabitViewModel(
-        habitDataManager: databaseContainer.habitDataManager,
+        dataManager: DataManager(context: context),
         coordinator: fakeCoordinator,
         habit: sampleHabit
     )

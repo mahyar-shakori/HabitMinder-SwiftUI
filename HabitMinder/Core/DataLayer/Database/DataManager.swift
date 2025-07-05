@@ -8,46 +8,39 @@
 import Foundation
 import SwiftData
 
-final class DataManager<T: PersistentModel & IdentifiableModel> {
+final class DataManager: DataManaging {
     private let context: ModelContext
-    
+
     init(context: ModelContext) {
         self.context = context
     }
-    
-    private func makeFetchAllDescriptor() -> FetchDescriptor<T> {
-        return FetchDescriptor<T>()
-    }
-    
-    private func makeFetchDescriptor(forID id: UUID) -> FetchDescriptor<T> {
-        return FetchDescriptor<T>(
-            predicate: #Predicate<T> { $0.id == id }
-        )
-    }
-    
-    func fetchAll() -> [T] {
+
+    func fetchAll<T: ModelEntity>(_ type: T.Type) -> [T] {
         do {
-            return try context.fetch(makeFetchAllDescriptor())
+            return try context.fetch(FetchDescriptor<T>())
         } catch {
 #if DEBUG
-            AppLogger.data.error("Failed to fetch \(String(describing: T.self)): \(error.localizedDescription)")
+            AppLogger.data.error("Failed to fetch all \(String(describing: T.self)): \(error.localizedDescription)")
 #endif
             return []
         }
     }
-    
-    func fetch(byID id: UUID) -> T? {
+
+    func fetch<T: ModelEntity>(byID id: UUID, _ type: T.Type) -> T? {
+        let descriptor = FetchDescriptor<T>(
+            predicate: #Predicate<T> { $0.id == id }
+        )
         do {
-            return try context.fetch(makeFetchDescriptor(forID: id)).first
+            return try context.fetch(descriptor).first
         } catch {
 #if DEBUG
-            AppLogger.data.error("Failed to fetch \(String(describing: T.self)) with ID \(id.uuidString): \(error.localizedDescription)")
+            AppLogger.data.error("Failed to fetch \(String(describing: T.self)) with ID \(id): \(error.localizedDescription)")
 #endif
             return nil
         }
     }
-    
-    func save(_ item: T) {
+
+    func save<T: ModelEntity>(_ item: T) {
         context.insert(item)
         do {
             try context.save()
@@ -57,39 +50,46 @@ final class DataManager<T: PersistentModel & IdentifiableModel> {
 #endif
         }
     }
-    
-    func delete(byID id: UUID) {
+
+    func delete<T: ModelEntity>(byID id: UUID, _ type: T.Type) {
+        let descriptor = FetchDescriptor<T>(
+            predicate: #Predicate<T> { $0.id == id }
+        )
         do {
-            let results = try context.fetch(makeFetchDescriptor(forID: id))
+            let results = try context.fetch(descriptor)
             results.forEach { context.delete($0) }
             try context.save()
         } catch {
 #if DEBUG
-            AppLogger.data.error("Failed to delete \(String(describing: T.self)): \(error.localizedDescription)")
+            AppLogger.data.error("Failed to delete \(String(describing: T.self)) with ID \(id): \(error.localizedDescription)")
 #endif
         }
     }
-    
-    func deleteAll() {
+
+    func deleteAll<T: ModelEntity>(_ type: T.Type) {
         do {
-            let allItems = try context.fetch(makeFetchAllDescriptor())
+            let allItems = try context.fetch(FetchDescriptor<T>())
             allItems.forEach { context.delete($0) }
             try context.save()
         } catch {
 #if DEBUG
-            AppLogger.data.error("Failed to delete all \(String(describing: T.self)) records: \(error.localizedDescription)")
+            AppLogger.data.error("Failed to delete all \(String(describing: T.self)): \(error.localizedDescription)")
 #endif
         }
     }
-    
-    func update(
+
+    func update<T: ModelEntity>(
         _ updateBlock: (T) -> Void,
-        forID id: UUID
+        forID id: UUID,
+        _ type: T.Type
     ) {
+        let descriptor = FetchDescriptor<T>(
+            predicate: #Predicate<T> { $0.id == id }
+        )
         do {
-            guard let item = try context.fetch(makeFetchDescriptor(forID: id)).first else {
+            guard let item = try context.fetch(descriptor).first else {
 #if DEBUG
-                AppLogger.data.warning("No item with id \(id.uuidString, privacy: .private) found for update.")
+                AppLogger.data.warning("No item with ID \(id.uuidString, privacy: .private) found for update.")
 #endif
                 return
             }
@@ -101,8 +101,4 @@ final class DataManager<T: PersistentModel & IdentifiableModel> {
 #endif
         }
     }
-}
-
-extension DataManager: DataManaging {
-    typealias Entity = T
 }

@@ -10,6 +10,3 @@ import Foundation
 protocol IdentifiableModel {
     var id: UUID { get }
 }
-
-extension HabitModel: IdentifiableModel {}
-extension FutureHabitModel: IdentifiableModel {}

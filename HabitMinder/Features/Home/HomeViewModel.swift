@@ -6,17 +6,14 @@
 //
 
 import Foundation
-import SwiftUICore
-//import SwiftUICore
 
 final class HomeViewModel: ObservableObject {
     @Published private(set) var uiState: HomeUIState
-
+    
     private var quote: String
     private var coordinator: HomeCoordinating
-    private let habitDataManager: AnyDataManager<HabitModel>
-    private let futureHabitDataManager: AnyDataManager<FutureHabitModel>
-    private let loginStorage: AnyUserDefaultsStorage<Bool>
+    private let dataManager: DataManaging
+    private let userDefaultsStorage: UserDefaultsStoring
 
     var displayedQuote: String {
         if quote.count > 100 {
@@ -28,19 +25,17 @@ final class HomeViewModel: ObservableObject {
     
     init(
         quote: String,
-        habitDataManager: AnyDataManager<HabitModel>,
-        futureHabitDataManager: AnyDataManager<FutureHabitModel>,
+        dataManager: DataManaging,
         coordinator: HomeCoordinating,
         connectivityService: WatchConnectivityProviding,
-        loginStorage: AnyUserDefaultsStorage<Bool>,
+        userDefaultsStorage: UserDefaultsStoring
     ) {
         self.quote = quote
-        self.habitDataManager = habitDataManager
-        self.futureHabitDataManager = futureHabitDataManager
+        self.dataManager = dataManager
         self.coordinator = coordinator
         self.uiState = HomeUIState(connectivityService: connectivityService)
-        self.loginStorage = loginStorage
-        
+        self.userDefaultsStorage = userDefaultsStorage
+
         fetchHabits()
     }
     
@@ -52,7 +47,8 @@ final class HomeViewModel: ObservableObject {
     }
     
     func fetchHabits() {
-        let habits = habitDataManager.fetchAll().sorted(by: { $0.sortOrder < $1.sortOrder })
+        let habits: [HabitModel] = dataManager.fetchAll(HabitModel.self)
+            .sorted(by: { $0.sortOrder < $1.sortOrder })
         uiState.listItems = habits.map(mapToHabitItem)
     }
     
@@ -63,9 +59,9 @@ final class HomeViewModel: ObservableObject {
         uiState.listItems.move(fromOffsets: source, toOffset: destination)
         
         for (index, item) in uiState.listItems.enumerated() {
-            if let habit = habitDataManager.fetch(byID: item.id) {
+            if let habit = dataManager.fetch(byID: item.id, HabitModel.self) {
                 habit.sortOrder = index
-                habitDataManager.save(habit)
+                dataManager.save(habit)
             }
         }
     }
@@ -78,7 +74,7 @@ final class HomeViewModel: ObservableObject {
         guard let id = uiState.itemToDelete else {
             return
         }
-        habitDataManager.delete(byID: id)
+        dataManager.delete(byID: id, HabitModel.self)
         uiState.listItems.removeAll { $0.id == id }
         cancelDelete()
     }
@@ -86,9 +82,9 @@ final class HomeViewModel: ObservableObject {
     func cancelDelete() {
         uiState.itemToDelete = nil
     }
- 
+    
     func editHabit(id: UUID) {
-        guard let habit = habitDataManager.fetch(byID: id) else {
+        guard let habit = dataManager.fetch(byID: id, HabitModel.self) else {
             return
         }
         coordinator.goToEditHabit(habit: habit)
@@ -115,10 +111,9 @@ final class HomeViewModel: ObservableObject {
     }
     
     func performLogout() {
-        loginStorage.save(value: false)
-        
-        habitDataManager.deleteAll()
-        futureHabitDataManager.deleteAll()
+        userDefaultsStorage.save(value: false, for: UserDefaultKeys.isLogin)
+        dataManager.deleteAll(HabitModel.self)
+        dataManager.deleteAll(FutureHabitModel.self)
         coordinator.goToIntro()
     }
     
