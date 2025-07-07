@@ -15,22 +15,22 @@ final class HomeCoordinator: HomeCoordinating {
     }
 
     func goToAddHabit() {
-        navigate(.home(.addHabit))
+        navigate(.main(.addHabit))
     }
     
     func goToEditHabit(habit: HabitModel) {
-        navigate(.home(.editHabit(habit: habit)))
+        navigate(.main(.editHabit(habit: habit)))
     }
    
     func goToFutureHabit() {
-        navigate(.home(.futureHabit))
+        navigate(.main(.futureHabit))
     }
     
     func goToSetting() {
-        navigate(.home(.settingPage))
+        navigate(.main(.settingPage))
     }
     
     func goToIntro() {
-        navigate(.intro(.intro))
+        navigate(.intro(.onboarding))
     }
 }

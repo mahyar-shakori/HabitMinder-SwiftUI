@@ -35,7 +35,7 @@ struct RootView: View {
     let themeManager = ThemeManager()
     let coordinator = MainCoordinator(
         introRouting: IntroRouter(),
-        homeRouting: HomeRouter(),
+        mainRouting: MainRouter(),
         userDefaultsStorage: userDefaults
     )
     RootView(mainCoordinator: coordinator)

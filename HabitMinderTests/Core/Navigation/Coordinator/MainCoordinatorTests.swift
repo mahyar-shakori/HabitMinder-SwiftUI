@@ -18,11 +18,11 @@ struct MainCoordinatorTests {
         let userDefaultsStorage = UserDefaultsStorage()
         let coordinator = MainCoordinator(
             introRouting: IntroRouter(),
-            homeRouting: HomeRouter(),
+            mainRouting: MainRouter(),
             userDefaultsStorage: userDefaultsStorage
         )
         coordinator.path = [
-            NavigationItem(route: .intro(.intro)),
+            NavigationItem(route: .intro(.onboarding)),
             NavigationItem(route: .intro(.setName))
         ]
         
@@ -39,7 +39,7 @@ struct MainCoordinatorTests {
         let userDefaultsStorage = UserDefaultsStorage()
         let coordinator = MainCoordinator(
             introRouting: IntroRouter(),
-            homeRouting: HomeRouter(),
+            mainRouting: MainRouter(),
             userDefaultsStorage: userDefaultsStorage
         )
         coordinator.path = []
@@ -57,14 +57,14 @@ struct MainCoordinatorTests {
         let userDefaultsStorage = UserDefaultsStorage()
         let coordinator = MainCoordinator(
             introRouting: IntroRouter(),
-            homeRouting: HomeRouter(),
+            mainRouting: MainRouter(),
             userDefaultsStorage: userDefaultsStorage
         )
-        let firstItem = NavigationItem(route: .intro(.intro))
+        let firstItem = NavigationItem(route: .intro(.onboarding))
         coordinator.path = [
             firstItem,
             NavigationItem(route: .intro(.welcome)),
-            NavigationItem(route: .home(.home(quote: "test")))
+            NavigationItem(route: .main(.home(quote: "test")))
         ]
         
         // Act
@@ -81,7 +81,7 @@ struct MainCoordinatorTests {
         let userDefaultsStorage = UserDefaultsStorage()
         let coordinator = MainCoordinator(
             introRouting: IntroRouter(),
-            homeRouting: HomeRouter(),
+            mainRouting: MainRouter(),
             userDefaultsStorage: userDefaultsStorage
         )
         coordinator.path = []
@@ -100,7 +100,7 @@ struct MainCoordinatorTests {
         userDefaultsStorage.save(value: false, for: UserDefaultKeys.isLogin)
         let coordinator = MainCoordinator(
             introRouting: IntroRouter(),
-            homeRouting: HomeRouter(),
+            mainRouting: MainRouter(),
             userDefaultsStorage: userDefaultsStorage
         )
         
@@ -109,7 +109,7 @@ struct MainCoordinatorTests {
         
         // Assert
         #expect(coordinator.path.count == 1)
-        #expect(coordinator.path.first?.route == .intro(.intro))
+        #expect(coordinator.path.first?.route == .intro(.onboarding))
     }
     
     @Test("start() navigates to .intro(.welcome) if user is logged in")
@@ -118,7 +118,7 @@ struct MainCoordinatorTests {
         let userDefaultsStorage = UserDefaultsStorage()
         let coordinator = MainCoordinator(
             introRouting: IntroRouter(),
-            homeRouting: HomeRouter(),
+            mainRouting: MainRouter(),
             userDefaultsStorage: userDefaultsStorage
         )
         
@@ -127,7 +127,7 @@ struct MainCoordinatorTests {
         
         // Assert
         #expect(coordinator.path.count == 1)
-        #expect(coordinator.path.first?.route == .intro(.intro))
+        #expect(coordinator.path.first?.route == .intro(.onboarding))
     }
     
     @Test("navigate(to:) appends route to path")
@@ -138,7 +138,7 @@ struct MainCoordinatorTests {
         
         let coordinator = MainCoordinator(
             introRouting: IntroRouter(),
-            homeRouting: HomeRouter(),
+            mainRouting: MainRouter(),
             userDefaultsStorage: userDefaultsStorage
         )
         

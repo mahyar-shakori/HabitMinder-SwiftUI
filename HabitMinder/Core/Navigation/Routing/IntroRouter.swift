@@ -12,10 +12,10 @@ struct IntroRouter: IntroRouting {
         for route: IntroRoute,
         using coordinator: any MainCoordinating,
     ) -> any View {
-        let userDefaultsStorage = UserDefaultsStorage()
+        let userDefaultsStorage = DIContainer.shared.resolveOptional(fallback: UserDefaultsStorage())
 
         switch route {
-        case .intro:
+        case .onboarding:
             return introScreen(coordinator: coordinator)
         case .setName:
             return setNameScreen(
@@ -55,7 +55,12 @@ struct IntroRouter: IntroRouting {
         userDefaultsStorage: UserDefaultsStoring
     ) -> some View {
         let viewCoordinator = WelcomeCoordinator(navigate: coordinator.navigate)
-        let apiFetching = APIService(configuration: .init(timeoutInterval: 3))
+       
+        let apiFetching = DIContainer.shared.resolveOptional(
+            scope: .feature(.welcome),
+            fallback: APIService()
+        )
+
         let viewModel = WelcomeViewModel(
             coordinator: viewCoordinator,
             apiFetching: apiFetching,

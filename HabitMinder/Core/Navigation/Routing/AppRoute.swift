@@ -9,16 +9,16 @@ import Foundation
 
 enum AppRoute: Hashable {
     case intro(IntroRoute)
-    case home(HomeRoute)
+    case main(MainRoute)
 }
 
 enum IntroRoute: Hashable {
-    case intro
+    case onboarding
     case setName
     case welcome
 }
 
-enum HomeRoute: Hashable {
+enum MainRoute: Hashable {
     case home(quote: String)
     case addHabit
     case editHabit(habit: HabitModel)

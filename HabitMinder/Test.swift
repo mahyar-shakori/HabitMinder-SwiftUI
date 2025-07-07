@@ -5,12 +5,11 @@
 // Swift testing, UITest, IntegrationTest, CustomView
 
 // MARK: - Tasks
-// DataLayer, DIContainer
-// CustomView, Features, Watch, Test
+// CustomView, Features, Watch, Test, DIContainer, DataLayer
 
 // PROTOCOL
 // logic ke ghabeliate mock shodan dare protocol? vali age mock nemikhad protocol nemikhad
 
-// CONTAINER
 
 // MARK: - Questions
+// Should use DIContainer in test?

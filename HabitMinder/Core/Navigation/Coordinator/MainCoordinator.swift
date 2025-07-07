@@ -12,16 +12,16 @@ final class MainCoordinator: ObservableObject {
     @Published var path: [NavigationItem] = []
     
     private let introRouting: IntroRouting
-    private let homeRouting: HomeRouting
+    private let mainRouting: MainRouting
     private let userDefaultsStorage: UserDefaultsStoring
     
     init(
         introRouting: IntroRouting,
-        homeRouting: HomeRouting,
+        mainRouting: MainRouting,
         userDefaultsStorage: UserDefaultsStoring
     ) {
         self.introRouting = introRouting
-        self.homeRouting = homeRouting
+        self.mainRouting = mainRouting
         self.userDefaultsStorage = userDefaultsStorage
     }
     
@@ -37,10 +37,10 @@ final class MainCoordinator: ObservableObject {
                     using: self
                 )
                 .eraseToAnyView()
-        case .home(let homeRoute):
-            homeRouting
+        case .main(let mainRoute):
+            mainRouting
                 .view(
-                    for: homeRoute,
+                    for: mainRoute,
                     using: self,
                     modelContext: modelContext
                 )
@@ -68,7 +68,7 @@ extension MainCoordinator: MainCoordinating {
     
     func start() {
         let isLoggedIn = userDefaultsStorage.fetch(for: UserDefaultKeys.isLogin) ?? false
-        let initialRoute: AppRoute = isLoggedIn ? .intro(.welcome) : .intro(.intro)
+        let initialRoute: AppRoute = isLoggedIn ? .intro(.welcome) : .intro(.onboarding)
         path = [NavigationItem(route: initialRoute)]
     }
 }

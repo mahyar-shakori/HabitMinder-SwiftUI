@@ -1,5 +1,5 @@
 //
-//  HomeRouter.swift
+//  MainRouter.swift
 //  HabitMinder SwiftUI
 //
 //  Created by Mahyar on 26/05/2025.
@@ -8,14 +8,14 @@
 import SwiftUI
 import SwiftData
 
-struct HomeRouter: HomeRouting {
+struct MainRouter: MainRouting {
     func view(
-        for route: HomeRoute,
+        for route: MainRoute,
         using coordinator: any MainCoordinating,
         modelContext: ModelContext
     ) -> any View {
-        let dataManager = DataManager(context: modelContext)
-        let userDefaultsStorage = UserDefaultsStorage()
+        let userDefaultsStorage = DIContainer.shared.resolveOptional(fallback: UserDefaultsStorage())
+        let dataManager = DIContainer.shared.resolveOptional(fallback: DataManager(context: modelContext))
 
         switch route {
         case .home(let quote):

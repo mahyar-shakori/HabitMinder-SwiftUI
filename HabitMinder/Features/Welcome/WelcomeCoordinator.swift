@@ -15,6 +15,6 @@ final class WelcomeCoordinator: WelcomeCoordinating {
     }
     
     func goToHome(_ quote: String) {
-        navigate(.home(.home(quote: quote)))
+        navigate(.main(.home(quote: quote)))
     }
 }
