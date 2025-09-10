@@ -156,9 +156,6 @@ struct HomeView: View {
         }
         .listStyle(.plain)
         .environment(\.editMode, .constant(homeViewModel.uiState.isEditingList ? .active : .inactive))
-        .refreshable {
-            await homeViewModel.refresh()
-        }
     }
     
     private func deleteSwipeButton(for id: UUID) -> some View {

@@ -60,6 +60,7 @@ struct FutureHabitView: View {
         )) {
             futureHabitViewModel.save()
             tempHabitTitle = ""
+            isFocused = false 
         } label: {
             Text(LocalizedStrings.Shared.saveButton)
         }

@@ -104,7 +104,6 @@
 		3EE9241C2DB3A37A0086B3F2 /* SetNameUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE9241B2DB3A3750086B3F2 /* SetNameUIState.swift */; };
 		3EE9241E2DB3AC6A0086B3F2 /* WelcomeUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE9241D2DB3AC690086B3F2 /* WelcomeUIState.swift */; };
 		3EE924222DB3B1FC0086B3F2 /* BorderState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE924212DB3B1FB0086B3F2 /* BorderState.swift */; };
-		3EEFE2D22DAFB1E600F5B0FF /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE2D12DAFB1E600F5B0FF /* Test.swift */; };
 		3EEFE2D42DAFB1F000F5B0FF /* HabitMinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE2D32DAFB1F000F5B0FF /* HabitMinderApp.swift */; };
 		3EEFE3272DAFB20C00F5B0FF /* Image+CircularIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE3152DAFB20C00F5B0FF /* Image+CircularIcon.swift */; };
 		3EEFE3282DAFB20C00F5B0FF /* HabitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE3102DAFB20C00F5B0FF /* HabitData.swift */; };
@@ -295,7 +294,6 @@
 		3EE9241B2DB3A3750086B3F2 /* SetNameUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNameUIState.swift; sourceTree = "<group>"; };
 		3EE9241D2DB3AC690086B3F2 /* WelcomeUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeUIState.swift; sourceTree = "<group>"; };
 		3EE924212DB3B1FB0086B3F2 /* BorderState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderState.swift; sourceTree = "<group>"; };
-		3EEFE2D12DAFB1E600F5B0FF /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		3EEFE2D32DAFB1F000F5B0FF /* HabitMinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitMinderApp.swift; sourceTree = "<group>"; };
 		3EEFE2D52DAFB20C00F5B0FF /* QuoteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteResponse.swift; sourceTree = "<group>"; };
 		3EEFE2D62DAFB20C00F5B0FF /* HabitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitModel.swift; sourceTree = "<group>"; };
@@ -392,7 +390,6 @@
 		3E1470092D9A87580064D6AD /* HabitMinder */ = {
 			isa = PBXGroup;
 			children = (
-				3EEFE2D12DAFB1E600F5B0FF /* Test.swift */,
 				3EBBC0212D9BF1500064D04B /* App */,
 				3E8DFA362DE5B8160021E1EF /* Core */,
 				3EEFE2ED2DAFB20C00F5B0FF /* Features */,
@@ -1318,7 +1315,6 @@
 				3E8DFA012DE4CD1A0021E1EF /* SetNameCoordinator.swift in Sources */,
 				3E5D806E2E1BE6DE00BC573B /* AppDependencies.swift in Sources */,
 				3EEFE2D42DAFB1F000F5B0FF /* HabitMinderApp.swift in Sources */,
-				3EEFE2D22DAFB1E600F5B0FF /* Test.swift in Sources */,
 				3ED509E22E0C3A97000A9ABB /* MultipartConstants.swift in Sources */,
 				3ECEB9272DF430DF00BF8EB5 /* MainRouting.swift in Sources */,
 				3EB305812DF5DE3E00AAE9E0 /* WelcomeCoordinating.swift in Sources */,

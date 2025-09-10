@@ -96,12 +96,6 @@ final class HomeViewModel: ObservableObject {
         }
     }
     
-    @MainActor
-    func refresh() async {
-        await Task.delay()
-        fetchHabits()
-    }
-    
     func stopEditingList() {
         uiState.isEditingList = false
     }
