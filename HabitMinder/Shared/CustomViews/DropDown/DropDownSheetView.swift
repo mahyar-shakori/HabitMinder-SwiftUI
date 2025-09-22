@@ -10,38 +10,51 @@ import SwiftUI
 struct DropDownSheetView: View {
     private let items: [DropDownItem]
     private let onSelect: (Int) -> Void
-    
+    private let onHeightChange: (CGFloat) -> Void
+
     init(
         items: [DropDownItem],
-        onSelect: @escaping (Int) -> Void
+        onSelect: @escaping (Int) -> Void,
+        onHeightChange: @escaping (CGFloat) -> Void
     ) {
         self.items = items
         self.onSelect = onSelect
+        self.onHeightChange = onHeightChange
     }
-    
+
     var body: some View {
         VStack(spacing: 0) {
             ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
-                
                 Button {
-                    if item.isEnabled {
-                        onSelect(index)
-                    }
+                    if item.isEnabled { onSelect(index) }
                 } label: {
                     VStack(spacing: 0) {
                         DropDownRowView(item: item, isEnabled: item.isEnabled)
-                        
-                        if index < items.count - 1 {
+
                             Divider()
                                 .frame(height: 1)
                                 .padding(.leading, 16)
-                        }
                     }
-                    .contentShape(Rectangle())
                 }
                 .disabled(item.isEnabled.not)
             }
         }
+        .background(
+            GeometryReader { geo in
+                Color.clear
+                    .preference(key: ViewHeightKey.self, value: geo.size.height)
+            }
+        )
+        .onPreferenceChange(ViewHeightKey.self) { h in
+            onHeightChange(h)
+        }
+    }
+}
+
+private struct ViewHeightKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
     }
 }
 
@@ -61,8 +74,10 @@ struct DropDownSheetView: View {
         )
     ]
     let onSelect: (Int) -> Void = { _ in }
+    let onHeightChange: (CGFloat) -> Void = { _ in }
     DropDownSheetView(
         items: items,
-        onSelect: onSelect
+        onSelect: onSelect,
+        onHeightChange: onHeightChange
     )
 }

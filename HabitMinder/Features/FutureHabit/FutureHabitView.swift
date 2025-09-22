@@ -109,17 +109,11 @@ struct FutureHabitView: View {
     }
     
     private func deleteSwipeButton(for id: UUID) -> some View {
-        Button {
+        Button(role: .destructive) {
             futureHabitViewModel.confirmDelete(id: id)
         } label: {
-            Image(uiImage: Image.circularIcon(
-                diameter: 50,
-                iconName: AppIconName.trash,
-                circleColor: .red,
-                iconColor: .white
-            ))
+            Image(systemName: AppIconName.trash)
         }
-        .tint(.clear)
     }
 }
 

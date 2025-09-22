@@ -11,6 +11,7 @@ struct HomeView: View {
     @ObservedObject private var homeViewModel: HomeViewModel
     @State private var showDeleteAlert = false
     @State private var showLogoutAlert = false
+    @State private var dropDownHeight: CGFloat = 0
     @State private var isDropDownPresented = false
     
     init(homeViewModel: HomeViewModel) {
@@ -69,7 +70,6 @@ struct HomeView: View {
             topViews
             quoteText
             habitSection
-            Spacer()
         }
         .background(.appGray)
     }
@@ -120,13 +120,9 @@ struct HomeView: View {
             .padding(.horizontal, 32)
             .padding(.top, 16)
     }
-    
-    private var habitSection: some View {
-        habitContentView
-    }
-    
+   
     @ViewBuilder
-    private var habitContentView: some View {
+    private var habitSection: some View {
         if homeViewModel.uiState.listItems.isEmpty {
             VStack {
                 Spacer()
@@ -159,43 +155,35 @@ struct HomeView: View {
     }
     
     private func deleteSwipeButton(for id: UUID) -> some View {
-        Button {
+        Button(role: .destructive) {
             homeViewModel.confirmDelete(id: id)
         } label: {
-            Image(uiImage: Image.circularIcon(
-                diameter: 50,
-                iconName: AppIconName.trash,
-                circleColor: .red,
-                iconColor: .white
-            ))
+            Image(systemName: AppIconName.trash)
         }
-        .tint(.clear)
     }
     
     private func editSwipeButton(for id: UUID) -> some View {
         Button {
             homeViewModel.editHabit(id: id)
         } label: {
-            Image(uiImage: Image.circularIcon(
-                diameter: 50,
-                iconName: AppIconName.pencil,
-                circleColor: .blue,
-                iconColor: .white
-            ))
+            Image(systemName: AppIconName.pencil)
         }
-        .tint(.clear)
+        .tint(.blue)
     }
     
+    
     private var dropDownSheet: some View {
-        let items = homeViewModel.uiState.dropDownItems
-        let rowHeight: CGFloat = 65
-        
-        return DropDownSheetView(items: items) { selectedIndex in
-            homeViewModel.handleDropDownSelection(index: selectedIndex)
-            isDropDownPresented = false
-        }
-        .presentationDetents([.height(rowHeight * CGFloat(items.count))])
-        .presentationCornerRadius(20)
+        DropDownSheetView(
+            items: homeViewModel.uiState.dropDownItems,
+            onSelect: { selectedIndex in
+                homeViewModel.handleDropDownSelection(index: selectedIndex)
+                isDropDownPresented = false
+            },
+            onHeightChange: { height in
+                dropDownHeight = height
+            }
+        )
+        .presentationDetents([.height(dropDownHeight + 25)])
         .presentationDragIndicator(.visible)
     }
 }

@@ -1,0 +1,45 @@
+{
+  "configurations" : [
+    {
+      "id" : "F792D668-527B-4F20-980E-B61C2901A49D",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:HabitMinder.xcodeproj",
+          "identifier" : "3EB022462DF988FD00A3F305",
+          "name" : "HabitMinderTests"
+        },
+        {
+          "containerPath" : "container:HabitMinder.xcodeproj",
+          "identifier" : "3E6201D22E112C2300E69E28",
+          "name" : "HabitMinderUITests"
+        }
+      ]
+    },
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:HabitMinder.xcodeproj",
+        "identifier" : "3E6201D22E112C2300E69E28",
+        "name" : "HabitMinderUITests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:HabitMinder.xcodeproj",
+        "identifier" : "3EB022462DF988FD00A3F305",
+        "name" : "HabitMinderTests"
+      }
+    }
+  ],
+  "version" : 1
+}

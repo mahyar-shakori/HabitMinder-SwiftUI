@@ -17,6 +17,7 @@ struct HabitListRowView: View {
     var body: some View {
         content
         .padding(20)
+        .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 8))
         .background(.appWhite)
         .cornerRadius(20)
     }

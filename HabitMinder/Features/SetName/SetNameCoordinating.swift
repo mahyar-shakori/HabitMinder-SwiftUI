@@ -10,9 +10,3 @@ import Foundation
 protocol SetNameCoordinating {
     func goToWelcome()
 }
-
-extension SetNameCoordinating {
-    func goToWelcome() {
-        goToWelcome()
-    }
-}

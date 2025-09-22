@@ -10,9 +10,3 @@ import Foundation
 protocol IntroCoordinating {
     func goToSetName()
 }
-
-extension IntroCoordinating {
-    func goToSetName() {
-        goToSetName()
-    }
-}
