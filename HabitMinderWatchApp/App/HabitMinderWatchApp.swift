@@ -18,7 +18,7 @@ struct HabitMinderWatchApp: App {
 
     var body: some Scene {
         WindowGroup {
-            HomeView(viewModel: homeViewModel)
+            HomeView(homeViewModel: homeViewModel)
         }
     }
 }

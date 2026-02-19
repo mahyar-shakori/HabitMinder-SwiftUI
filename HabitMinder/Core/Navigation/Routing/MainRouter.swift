@@ -14,8 +14,9 @@ struct MainRouter: MainRouting {
         using coordinator: any MainCoordinating,
         modelContext: ModelContext
     ) -> any View {
-        let userDefaultsStorage = DIContainer.shared.resolveOptional(fallback: UserDefaultsStorage())
-        let dataManager = DIContainer.shared.resolveOptional(fallback: DataManager(context: modelContext))
+        let userDefaultsStorage = AppDependencies.userDefaultsStoring
+        let dataManager: DataManaging = DIContainer.shared.resolveOptional(fallback: DataManager(context: modelContext))
+
 
         switch route {
         case .home(let quote):

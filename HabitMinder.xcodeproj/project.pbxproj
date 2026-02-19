@@ -51,6 +51,15 @@
 		3E81A9A22DE8A22B00DCDC79 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E81A9A12DE8A22A00DCDC79 /* ThemeManager.swift */; };
 		3E81A9A42DE8A24000DCDC79 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E81A9A32DE8A23F00DCDC79 /* ColorPickerView.swift */; };
 		3E81A9A82DE8AF4000DCDC79 /* UserNameEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E81A9A72DE8AF4000DCDC79 /* UserNameEditorView.swift */; };
+		3E87C6752EA1533C00B4C944 /* AddObjectBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E87C6742EA1533B00B4C944 /* AddObjectBody.swift */; };
+		3E87C6772EA1535A00B4C944 /* AddObjectResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E87C6762EA1535900B4C944 /* AddObjectResponse.swift */; };
+		3E87C6792EA1537900B4C944 /* APIHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E87C6782EA1537700B4C944 /* APIHost.swift */; };
+		3E87C6802EA165D100B4C944 /* QuoteRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E87C67F2EA165D000B4C944 /* QuoteRepositoryProtocol.swift */; };
+		3E87C6822EA165EC00B4C944 /* QuoteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E87C6812EA165EB00B4C944 /* QuoteRepository.swift */; };
+		3E87C6852EA1660C00B4C944 /* FetchQuoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E87C6842EA1660B00B4C944 /* FetchQuoteUseCase.swift */; };
+		3E87C6872EA16CE100B4C944 /* AddObjectRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E87C6862EA16CDF00B4C944 /* AddObjectRepositoryProtocol.swift */; };
+		3E87C6892EA16CFF00B4C944 /* AddObjectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E87C6882EA16CFE00B4C944 /* AddObjectRepository.swift */; };
+		3E87C68B2EA16D1A00B4C944 /* AddObjectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E87C68A2EA16D1500B4C944 /* AddObjectUseCase.swift */; };
 		3E8DF9E92DE4BB640021E1EF /* DropDownIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8DF9E82DE4BB620021E1EF /* DropDownIcon.swift */; };
 		3E8DF9EF2DE4CAAC0021E1EF /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8DF9EE2DE4CAAC0021E1EF /* MainCoordinator.swift */; };
 		3E8DF9F12DE4CB380021E1EF /* MainCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8DF9F02DE4CB320021E1EF /* MainCoordinating.swift */; };
@@ -240,6 +249,15 @@
 		3E81A9A12DE8A22A00DCDC79 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		3E81A9A32DE8A23F00DCDC79 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		3E81A9A72DE8AF4000DCDC79 /* UserNameEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNameEditorView.swift; sourceTree = "<group>"; };
+		3E87C6742EA1533B00B4C944 /* AddObjectBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddObjectBody.swift; sourceTree = "<group>"; };
+		3E87C6762EA1535900B4C944 /* AddObjectResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddObjectResponse.swift; sourceTree = "<group>"; };
+		3E87C6782EA1537700B4C944 /* APIHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHost.swift; sourceTree = "<group>"; };
+		3E87C67F2EA165D000B4C944 /* QuoteRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteRepositoryProtocol.swift; sourceTree = "<group>"; };
+		3E87C6812EA165EB00B4C944 /* QuoteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteRepository.swift; sourceTree = "<group>"; };
+		3E87C6842EA1660B00B4C944 /* FetchQuoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchQuoteUseCase.swift; sourceTree = "<group>"; };
+		3E87C6862EA16CDF00B4C944 /* AddObjectRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddObjectRepositoryProtocol.swift; sourceTree = "<group>"; };
+		3E87C6882EA16CFE00B4C944 /* AddObjectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddObjectRepository.swift; sourceTree = "<group>"; };
+		3E87C68A2EA16D1500B4C944 /* AddObjectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddObjectUseCase.swift; sourceTree = "<group>"; };
 		3E89D6F62D9869F100E8414C /* HabitMinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitMinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E8DF9E82DE4BB620021E1EF /* DropDownIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownIcon.swift; sourceTree = "<group>"; };
 		3E8DF9EE2DE4CAAC0021E1EF /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
@@ -496,6 +514,69 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
+		3E87C6722EA152F200B4C944 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				3E87C6742EA1533B00B4C944 /* AddObjectBody.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		3E87C6732EA152FA00B4C944 /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				3EEFE2D52DAFB20C00F5B0FF /* QuoteResponse.swift */,
+				3E87C6762EA1535900B4C944 /* AddObjectResponse.swift */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
+		3E87C67B2EA1585D00B4C944 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				3EEFE2F92DAFB20C00F5B0FF /* Network */,
+				3EEFE3032DAFB20C00F5B0FF /* Persistence  */,
+				3E87C67C2EA158AD00B4C944 /* Repository */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		3E87C67C2EA158AD00B4C944 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				3E87C6812EA165EB00B4C944 /* QuoteRepository.swift */,
+				3E87C6882EA16CFE00B4C944 /* AddObjectRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		3E87C67D2EA158F100B4C944 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				3E87C67E2EA165C400B4C944 /* Protocol */,
+				3E87C6832EA165FC00B4C944 /* UseCases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		3E87C67E2EA165C400B4C944 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				3E87C67F2EA165D000B4C944 /* QuoteRepositoryProtocol.swift */,
+				3E87C6862EA16CDF00B4C944 /* AddObjectRepositoryProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		3E87C6832EA165FC00B4C944 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				3E87C6842EA1660B00B4C944 /* FetchQuoteUseCase.swift */,
+				3E87C68A2EA16D1500B4C944 /* AddObjectUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
 		3E89D6ED2D9869F000E8414C = {
 			isa = PBXGroup;
 			children = (
@@ -579,8 +660,8 @@
 			isa = PBXGroup;
 			children = (
 				3E8DFA342DE5B7C70021E1EF /* Navigation */,
-				3EEFE2F92DAFB20C00F5B0FF /* NetworkLayer */,
-				3EEFE3032DAFB20C00F5B0FF /* DataLayer */,
+				3E87C67B2EA1585D00B4C944 /* Data */,
+				3E87C67D2EA158F100B4C944 /* Domain */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -667,6 +748,7 @@
 			children = (
 				3ED509D02E0C2841000A9ABB /* NetworkAPIConfiguration.swift */,
 				3ED509CD2E0BF562000A9ABB /* Secrets.swift */,
+				3E87C6782EA1537700B4C944 /* APIHost.swift */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -702,12 +784,13 @@
 			path = Endpoints;
 			sourceTree = "<group>";
 		};
-		3ED509DC2E0C2924000A9ABB /* Model */ = {
+		3ED509DC2E0C2924000A9ABB /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3EEFE2D52DAFB20C00F5B0FF /* QuoteResponse.swift */,
+				3E87C6722EA152F200B4C944 /* Requests */,
+				3E87C6732EA152FA00B4C944 /* Responses */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		3ED509E72E0C3AFF000A9ABB /* Protocol */ = {
@@ -831,7 +914,7 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		3EEFE2F92DAFB20C00F5B0FF /* NetworkLayer */ = {
+		3EEFE2F92DAFB20C00F5B0FF /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				3ED509D42E0C2892000A9ABB /* Core */,
@@ -839,9 +922,9 @@
 				3ED509E72E0C3AFF000A9ABB /* Protocol */,
 				3ED509DA2E0C2907000A9ABB /* Service */,
 				3ED509DB2E0C291B000A9ABB /* Endpoints */,
-				3ED509DC2E0C2924000A9ABB /* Model */,
+				3ED509DC2E0C2924000A9ABB /* Models */,
 			);
-			path = NetworkLayer;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		3EEFE2FD2DAFB20C00F5B0FF /* Database */ = {
@@ -867,13 +950,13 @@
 			path = UserDefaults;
 			sourceTree = "<group>";
 		};
-		3EEFE3032DAFB20C00F5B0FF /* DataLayer */ = {
+		3EEFE3032DAFB20C00F5B0FF /* Persistence  */ = {
 			isa = PBXGroup;
 			children = (
 				3EEFE2FD2DAFB20C00F5B0FF /* Database */,
 				3EEFE3022DAFB20C00F5B0FF /* UserDefaults */,
 			);
-			path = DataLayer;
+			path = "Persistence ";
 			sourceTree = "<group>";
 		};
 		3EEFE3072DAFB20C00F5B0FF /* DropDown */ = {
@@ -1202,6 +1285,7 @@
 				3ECEB9252DF430D000BF8EB5 /* IntroRouting.swift in Sources */,
 				3ECEB9342DF5A22200BF8EB5 /* WatchConnectivityKeys.swift in Sources */,
 				3E495E6C2DE74EDF0051188A /* FutureHabitModel.swift in Sources */,
+				3E87C68B2EA16D1A00B4C944 /* AddObjectUseCase.swift in Sources */,
 				3EE9241A2DB392AF0086B3F2 /* IntroUIState.swift in Sources */,
 				3EE9241E2DB3AC6A0086B3F2 /* WelcomeUIState.swift in Sources */,
 				3EBDA8622DEF2194007D99F9 /* Task+Delay.swift in Sources */,
@@ -1218,6 +1302,7 @@
 				3E4D7DB72E10365D00E9CD8C /* Int+CGSizeConvertible.swift in Sources */,
 				3ED509E42E0C3AB9000A9ABB /* MultipartHeaderBuilder.swift in Sources */,
 				3E5D80662E1BCAA200BC573B /* DIContainer+Helpers.swift in Sources */,
+				3E87C6852EA1660C00B4C944 /* FetchQuoteUseCase.swift in Sources */,
 				3EEFE32C2DAFB20C00F5B0FF /* SetNameView.swift in Sources */,
 				3EEFE32E2DAFB20C00F5B0FF /* APIService.swift in Sources */,
 				3EEFE32F2DAFB20C00F5B0FF /* DataManager.swift in Sources */,
@@ -1258,6 +1343,7 @@
 				3E8DFA052DE4CD5A0021E1EF /* HomeCoordinator.swift in Sources */,
 				3ED509CE2E0BF565000A9ABB /* Secrets.swift in Sources */,
 				3EEFE3442DAFB20C00F5B0FF /* IntroViewModel.swift in Sources */,
+				3E87C6822EA165EC00B4C944 /* QuoteRepository.swift in Sources */,
 				3ED509D62E0C28A4000A9ABB /* HTTPMethod.swift in Sources */,
 				3EBDA8592DEEE631007D99F9 /* EditHabitViewModel.swift in Sources */,
 				3E8DF9FB2DE4CC780021E1EF /* IntroRouter.swift in Sources */,
@@ -1292,6 +1378,7 @@
 				3E5D806C2E1BCCE300BC573B /* DISetup.swift in Sources */,
 				3E4D7DB12E1035D200E9CD8C /* CustomButtonStylePreset.swift in Sources */,
 				3EB305852DF5E0C100AAE9E0 /* AddHabitCoordinating.swift in Sources */,
+				3E87C6792EA1537900B4C944 /* APIHost.swift in Sources */,
 				3E8DF9F12DE4CB380021E1EF /* MainCoordinating.swift in Sources */,
 				3E81A9A02DE862D600DCDC79 /* SettingViewModel.swift in Sources */,
 				3EEFE3522DAFB20C00F5B0FF /* Types+Helpers.swift in Sources */,
@@ -1299,6 +1386,7 @@
 				3EEFE3542DAFB20C00F5B0FF /* WatchConnectivityProviding.swift in Sources */,
 				3E8DF9FD2DE4CCBF0021E1EF /* MainRouter.swift in Sources */,
 				3EB305AA2DF7452000AAE9E0 /* ThemeManaging.swift in Sources */,
+				3E87C6872EA16CE100B4C944 /* AddObjectRepositoryProtocol.swift in Sources */,
 				3EEFE3552DAFB20C00F5B0FF /* AppNotification.swift in Sources */,
 				3ED509DE2E0C3A5F000A9ABB /* HTTPHeaderKey.swift in Sources */,
 				3EB3057D2DF5DD7400AAE9E0 /* IntroCoordinating.swift in Sources */,
@@ -1308,6 +1396,7 @@
 				3E5D80682E1BCAD100BC573B /* Scope.swift in Sources */,
 				3E6201E32E116C3100E69E28 /* AccessibilityIdentifier.swift in Sources */,
 				3EEFE3582DAFB20C00F5B0FF /* IdentifiableModel.swift in Sources */,
+				3E87C6772EA1535A00B4C944 /* AddObjectResponse.swift in Sources */,
 				3EEFE3592DAFB20C00F5B0FF /* QuoteResponse.swift in Sources */,
 				3EEFE35A2DAFB20C00F5B0FF /* IntroView.swift in Sources */,
 				3EEFE35B2DAFB20C00F5B0FF /* HomeViewModel.swift in Sources */,
@@ -1316,7 +1405,10 @@
 				3E5D806E2E1BE6DE00BC573B /* AppDependencies.swift in Sources */,
 				3EEFE2D42DAFB1F000F5B0FF /* HabitMinderApp.swift in Sources */,
 				3ED509E22E0C3A97000A9ABB /* MultipartConstants.swift in Sources */,
+				3E87C6752EA1533C00B4C944 /* AddObjectBody.swift in Sources */,
+				3E87C6802EA165D100B4C944 /* QuoteRepositoryProtocol.swift in Sources */,
 				3ECEB9272DF430DF00BF8EB5 /* MainRouting.swift in Sources */,
+				3E87C6892EA16CFF00B4C944 /* AddObjectRepository.swift in Sources */,
 				3EB305812DF5DE3E00AAE9E0 /* WelcomeCoordinating.swift in Sources */,
 				3E81A9A22DE8A22B00DCDC79 /* ThemeManager.swift in Sources */,
 			);

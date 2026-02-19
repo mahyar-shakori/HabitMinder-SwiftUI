@@ -10,18 +10,20 @@ import Foundation
 final class WelcomeViewModel: ObservableObject {
     @Published private(set) var uiState = WelcomeUIState()
     
-    private let apiFetching: APIFetching
+    private let fetchQuoteUseCase: APIFetching
     private let userDefaultsStorage: UserDefaultsStoring
     private let coordinator: WelcomeCoordinating
 
     init(
         coordinator: WelcomeCoordinating,
-        apiFetching: APIFetching,
+        fetchQuoteUseCase: APIFetching,
         userDefaultsStorage: UserDefaultsStoring
     ) {
         self.coordinator = coordinator
-        self.apiFetching = apiFetching
+        self.fetchQuoteUseCase = fetchQuoteUseCase
         self.userDefaultsStorage = userDefaultsStorage
+        
+        loadUserName()
     }
   
     func loadUserName() {
@@ -29,24 +31,49 @@ final class WelcomeViewModel: ObservableObject {
         uiState.userName = formattedWelcomeName(from: storedName)
     }
   
-    @MainActor
+//    @MainActor
     func fetchData() async {
         do {
             let quotes = try await fetchQuotes()
-            handleQuoteSuccess(quotes)
+            
+            await MainActor.run {
+                handleQuoteSuccess(quotes)
+                        }
+            
+//            let quoteResponse = try await fetchQuoteUseCase.execute()
+//            handleQuoteSuccess([quoteResponse])
         } catch {
+                        await MainActor.run {
+            
             handleQuoteFailure(error)
+        }
         }
     }
     
     private func fetchQuotes() async throws -> [QuoteResponse] {
-        try await apiFetching.fetchData(from: AuthEndpoints.getQuote)
+        try await fetchQuoteUseCase.fetchData(from: AuthEndpoints.getQuote)
     }
     
+//    func fetchData() async {
+//        do {
+//            // background
+//            let quoteResponse = try await fetchQuoteUseCase.execute()
+//            
+//            // back to main thread
+//            await MainActor.run {
+//                handleQuoteSuccess([quoteResponse])
+//            }
+//        } catch {
+//            await MainActor.run {
+//                handleQuoteFailure(error)
+//            }
+//        }
+//    }
+   
     private func handleQuoteSuccess(_ quotes: [QuoteResponse]) {
-        let rawQuote = quotes.first?.quote ?? ""
+        let quote = quotes.first?.quote ?? ""
 
-        coordinator.goToHome(rawQuote)
+        coordinator.goToHome(quote)
         uiState.errorMessage = nil
     }
     
@@ -59,7 +86,7 @@ final class WelcomeViewModel: ObservableObject {
     }
     
     private func formattedWelcomeName(from userName: String?) -> String {
-        userName.map { LocalizedStrings.WelcomePage.welcome + $0 }
+        return userName.map { LocalizedStrings.WelcomePage.welcome + $0 }
         ?? LocalizedStrings.WelcomePage.guest
     }
 }

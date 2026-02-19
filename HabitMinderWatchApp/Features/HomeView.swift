@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject private var homeViewModel: HomeViewModel
+    @ObservedObject private var homeViewModel: HomeViewModel
     
-    init(viewModel: @autoclosure @escaping () -> HomeViewModel) {
-        _homeViewModel = StateObject(wrappedValue: viewModel())
+    
+    init(homeViewModel: HomeViewModel) {
+        self.homeViewModel = homeViewModel
     }
     
     var body: some View {
@@ -55,5 +56,5 @@ struct HomeView: View {
 #Preview {
     let sessionManager = WatchSessionManager()
     let viewModel = HomeViewModel(sessionManager: sessionManager)
-    HomeView(viewModel: viewModel)
+    HomeView(homeViewModel: viewModel)
 }

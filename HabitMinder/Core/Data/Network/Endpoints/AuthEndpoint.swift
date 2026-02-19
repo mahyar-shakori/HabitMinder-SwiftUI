@@ -9,13 +9,23 @@ import Foundation
 
 enum AuthEndpoints: Endpoint {
     case getQuote
+    case addObject(AddObjectBody)
     
-    struct Body: Encodable {}
+    var host: APIHost {
+        switch self {
+        case .getQuote:
+            return .getQuote
+        case .addObject:
+            return .addObject
+        }
+    }
     
     var method: HTTPMethod {
         switch self {
         case .getQuote:
             return .get
+        case .addObject:
+            return .post
         }
     }
     
@@ -23,13 +33,17 @@ enum AuthEndpoints: Endpoint {
         switch self {
         case .getQuote:
             return "/v1/quotes"
+        case .addObject:
+            return "/objects"
         }
     }
     
-    var body: Body? {
+    var body: Encodable? {
         switch self {
         case .getQuote:
             return nil
+        case .addObject(let body):
+            return body
         }
     }
     
@@ -37,6 +51,8 @@ enum AuthEndpoints: Endpoint {
         switch self {
         case .getQuote:
             return ["X-Api-Key": Secrets.apiKey]
+        case .addObject:
+            return nil
         }
     }
     

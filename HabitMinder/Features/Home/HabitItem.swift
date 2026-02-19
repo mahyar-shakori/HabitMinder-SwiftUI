@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct HabitItem: Identifiable {
+struct HabitItem: Identifiable, Equatable {
     let id: UUID
     let title: String
     let daysLeft: Int

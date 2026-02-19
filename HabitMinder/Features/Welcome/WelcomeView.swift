@@ -19,7 +19,11 @@ struct WelcomeView: View {
     var body: some View {
         content
             .navigationBarBackButtonHidden(true)
-            .onAppear(perform: setupViewModel)
+            .onAppear {
+                Task {
+                    await welcomeViewModel.fetchData()
+                }
+            }
             .onChange(of: welcomeViewModel.uiState.errorMessage) { _, newError in
                 showAlert = (newError != nil)
             }
@@ -44,13 +48,6 @@ struct WelcomeView: View {
                 progressView
                 Spacer()
             }
-        }
-    }
-    
-    private func setupViewModel() {
-        welcomeViewModel.loadUserName()
-        Task {
-            await welcomeViewModel.fetchData()
         }
     }
     
@@ -80,10 +77,10 @@ struct WelcomeView: View {
     })
     let userDefaults = UserDefaultsStorage()
     let themeManager = ThemeManager()
-    let apiFetching = APIService()
+    let fetchQuoteUseCase = FetchQuoteUseCase()
     let viewModel = WelcomeViewModel(
         coordinator: fakeCoordinator,
-        apiFetching: apiFetching,
+        fetchQuoteUseCase: fetchQuoteUseCase as! APIFetching,
         userDefaultsStorage: userDefaults
     )
     WelcomeView(welcomeViewModel: viewModel)

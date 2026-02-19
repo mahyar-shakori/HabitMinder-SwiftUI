@@ -25,11 +25,7 @@ struct DISetup {
         DIContainer.shared.register {
             UserDefaultsStorage() as UserDefaultsStoring
         }
-        
-        DIContainer.shared.register {
-            UserDefaultsStorage() as UserDefaultsStoring
-        }
-        
+       
         DIContainer.shared.register {
             ThemeManager() as ThemeManaging
         }
