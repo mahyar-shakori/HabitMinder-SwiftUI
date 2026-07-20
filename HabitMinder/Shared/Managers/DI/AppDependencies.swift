@@ -2,25 +2,65 @@
 //  AppDependencies.swift
 //  HabitMinder
 //
-//  Created by Mahyar on 07/07/2025.
+//  Created by Mahyar on 20/07/2026.
 //
 
 import Foundation
-import SwiftData
 
-enum AppDependencies {
-    static let themeManager: ThemeManager = DIContainer.shared.resolveOptional(fallback: ThemeManager())
-    static let userDefaultsStoring: UserDefaultsStorage = DIContainer.shared.resolveOptional(fallback: UserDefaultsStorage())
-//    static let fetchQuoteUseCase: FetchQuoteUseCase = DIContainer.shared.resolveOptional(
-//        scope: .feature(.welcome),
-//        fallback: FetchQuoteUseCase()
-//    )
-    static let introRouting: IntroRouting = DIContainer.shared.resolveOptional(fallback: IntroRouter())
-    static let mainRouting: MainRouting = DIContainer.shared.resolveOptional(fallback: MainRouter())
-    
-    static let mainCoordinator: MainCoordinator = MainCoordinator(
-        introRouting: introRouting,
-        mainRouting: mainRouting,
-        userDefaultsStorage: userDefaultsStoring
-    )
+struct AppDependencies {
+    private let container: DIContainer
+
+    init(container: DIContainer = DISetup.makeContainer()) {
+        self.container = container
+    }
+
+    var themeManager: ThemeManager {
+        container.resolve(ThemeManager.self)
+    }
+
+    var mainCoordinator: MainCoordinator {
+        container.resolve(MainCoordinator.self)
+    }
+
+    var destinationDependencies: AppDestinationDependencies {
+        AppDestinationDependencies(
+            intro: introDependencies,
+            main: mainDependencies
+        )
+    }
+
+    private var introDependencies: IntroDestinationDependencies {
+        IntroDestinationDependencies(
+            userDefaultsStorage: container.resolve(UserDefaultsStoring.self),
+            quoteRepository: container.resolve(QuoteRepositoryProtocol.self)
+        )
+    }
+
+    private var mainDependencies: MainDestinationDependencies {
+        MainDestinationDependencies(
+            habits: habitDependencies,
+            manageHabit: manageHabitDependencies,
+            settings: settingsDependencies
+        )
+    }
+
+    private var habitDependencies: HabitDestinationDependencies {
+        HabitDestinationDependencies(
+            userDefaultsStorage: container.resolve(UserDefaultsStoring.self),
+            connectivityService: container.resolve(WatchConnectivityProviding.self),
+            reminderScheduler: container.resolve(HabitReminderScheduling.self)
+        )
+    }
+
+    private var manageHabitDependencies: ManageHabitDestinationDependencies {
+        ManageHabitDestinationDependencies(
+            reminderScheduler: container.resolve(HabitReminderScheduling.self)
+        )
+    }
+
+    private var settingsDependencies: SettingsDestinationDependencies {
+        SettingsDestinationDependencies(
+            userDefaultsStorage: container.resolve(UserDefaultsStoring.self)
+        )
+    }
 }

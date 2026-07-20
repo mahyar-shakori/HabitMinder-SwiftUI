@@ -20,7 +20,8 @@ enum NetworkError: Error, LocalizedError, Equatable, Sendable {
         case .invalidResponse:
             return LocalizedStrings.Alert.Network.decodingFailed
         case .unacceptableStatusCode(let code):
-            return LocalizedStrings.Alert.Network.badResponse
+            // Should Change
+            return "(BAD RESPONSE CODE: \(code))"
         case .decodingFailed:
             return LocalizedStrings.Alert.Network.invalidMultipartBody
         }

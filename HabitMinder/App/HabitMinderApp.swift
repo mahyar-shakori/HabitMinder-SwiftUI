@@ -9,21 +9,18 @@ import SwiftUI
 
 @main
 struct HabitMinderApp: App {
-    
-    init() {
-        DISetup.registerAllDependencies()
-    }
-  
+    private let dependencies = AppDependencies()
+
     var body: some Scene {
         WindowGroup {
-            RootView(mainCoordinator: AppDependencies.mainCoordinator)
+            RootView(dependencies: dependencies)
                 .modelContainer(
                     for: [
                         HabitModel.self,
                         FutureHabitModel.self
                     ]
                 )
-                .environmentObject(AppDependencies.themeManager)
+                .environmentObject(dependencies.themeManager)
         }
     }
 }

@@ -44,10 +44,11 @@ final class WelcomeViewModel {
         }
     }
     
-    private func handleQuoteSuccess(_ quote: [Quote]) {
-        let quote = quote.first?.quote ?? ""
-        
-        coordinator.goToHome(quote)
+    private func handleQuoteSuccess(_ quotes: [Quote]) {
+        let quote = quotes.first?.quote ?? ""
+        let author = quotes.first?.author ?? ""
+
+        coordinator.goToHome(quote: quote, author: author)
         errorMessage = nil
     }
     
@@ -56,7 +57,7 @@ final class WelcomeViewModel {
     }
     
     func goToHomePage() {
-        coordinator.goToHome("")
+        coordinator.goToHome(quote: "", author: "")
     }
     
     private func formattedWelcomeName(from userName: String?) -> String {

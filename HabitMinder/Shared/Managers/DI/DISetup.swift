@@ -8,32 +8,69 @@
 import Foundation
 
 struct DISetup {
-    static func registerAllDependencies() {
-        registerGlobalDependencies()
-        registerScopedDependencies()
+    static func makeContainer() -> DIContainer {
+        let container = DIContainer()
+
+        registerUserDefaults(in: container)
+        registerAPIService(in: container)
+        registerQuoteRepository(in: container)
+        registerWatchConnectivity(in: container)
+        registerHabitReminderScheduler(in: container)
+        registerThemeManager(in: container)
+        registerMainCoordinator(in: container)
+
+        return container
+    }
+}
+
+private extension DISetup {
+    static func registerUserDefaults(in container: DIContainer) {
+        container.register(UserDefaultsStoring.self) { _ in
+            UserDefaultsStorage()
+        }
     }
 
-    private static func registerGlobalDependencies() {
-        DIContainer.shared.register {
-            IntroRouter() as IntroRouting
-        }
-
-        DIContainer.shared.register {
-            MainRouter() as MainRouting
-        }
-        
-        DIContainer.shared.register {
-            UserDefaultsStorage() as UserDefaultsStoring
-        }
-       
-        DIContainer.shared.register {
-            ThemeManager() as ThemeManaging
+    static func registerAPIService(in container: DIContainer) {
+        container.register(APIFetching.self) { _ in
+            APIService()
         }
     }
 
-    private static func registerScopedDependencies() {
-        DIContainer.shared.register(scope: .feature(.welcome)) {
-            APIService() as APIFetching
+    static func registerQuoteRepository(in container: DIContainer) {
+        container.register(QuoteRepositoryProtocol.self) { container in
+            QuoteRepository(
+                apiService: container.resolve(APIFetching.self)
+            )
+        }
+    }
+
+    static func registerWatchConnectivity(in container: DIContainer) {
+        container.register(WatchConnectivityProviding.self) { _ in
+            WatchConnectivityService()
+        }
+    }
+
+    static func registerHabitReminderScheduler(in container: DIContainer) {
+        container.register(HabitReminderScheduling.self) { _ in
+            let scheduler = HabitReminderScheduler()
+            scheduler.configureForegroundPresentation()
+            return scheduler
+        }
+    }
+
+    static func registerThemeManager(in container: DIContainer) {
+        container.register(ThemeManager.self) { container in
+            ThemeManager(
+                userDefaultsStorage: container.resolve(UserDefaultsStoring.self)
+            )
+        }
+    }
+
+    static func registerMainCoordinator(in container: DIContainer) {
+        container.register(MainCoordinator.self) { container in
+            MainCoordinator(
+                userDefaultsStorage: container.resolve(UserDefaultsStoring.self)
+            )
         }
     }
 }

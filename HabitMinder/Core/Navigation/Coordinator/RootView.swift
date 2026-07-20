@@ -6,38 +6,39 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct RootView: View {
+    private let dependencies: AppDependencies
     @State private var mainCoordinator: MainCoordinator
     @Environment(\.modelContext) private var modelContext
-    
-    init(mainCoordinator: MainCoordinator) {
-        self.mainCoordinator = mainCoordinator
+
+    init(dependencies: AppDependencies) {
+        self.dependencies = dependencies
+        _mainCoordinator = State(initialValue: dependencies.mainCoordinator)
     }
-    
+
     var body: some View {
         NavigationStack(path: $mainCoordinator.path) {
-            EmptyView()
+            Color.clear
                 .navigationDestination(for: NavigationItem.self) { item in
-                    mainCoordinator.coordinator(for: item.route, modelContext: modelContext)
+                    AppDestinationView(
+                        route: item.route,
+                        dependencies: dependencies.destinationDependencies,
+                        coordinator: mainCoordinator,
+                        modelContext: modelContext
+                    )
                 }
         }
-        .onAppear() {
-            if mainCoordinator.path.isEmpty {
-                mainCoordinator.start()
-            }
+        .task {
+            mainCoordinator.start()
         }
     }
 }
 
 #Preview {
-    let userDefaults = UserDefaultsStorage()
-    let themeManager = ThemeManager()
-    let coordinator = MainCoordinator(
-        introRouting: IntroRouter(),
-        mainRouting: MainRouter(),
-        userDefaultsStorage: userDefaults
-    )
-    RootView(mainCoordinator: coordinator)
-        .environmentObject(themeManager)
+    let dependencies = AppDependencies()
+
+    RootView(dependencies: dependencies)
+        .environmentObject(dependencies.themeManager)
 }

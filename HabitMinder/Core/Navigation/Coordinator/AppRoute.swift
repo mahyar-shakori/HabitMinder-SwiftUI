@@ -19,9 +19,21 @@ enum IntroRoute: Hashable {
 }
 
 enum MainRoute: Hashable {
-    case home(quote: String)
-    case addHabit
-    case editHabit(habit: HabitModel)
-    case futureHabit
-    case settingPage
+    case habits(HabitRoute)
+    case manageHabit(ManageHabitRoute)
+    case settings(SettingsRoute)
+}
+
+enum HabitRoute: Hashable {
+    case home(quote: String, author: String)
+    case history
+}
+
+enum ManageHabitRoute: Hashable {
+    case add
+    case edit(id: UUID)
+}
+
+enum SettingsRoute: Hashable {
+    case settings
 }

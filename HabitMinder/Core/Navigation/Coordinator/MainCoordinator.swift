@@ -5,48 +5,16 @@
 //  Created by Mahyar on 26/05/2025.
 //
 
-import SwiftUI
-import SwiftData
+import Foundation
 import Observation
 
 @Observable
 final class MainCoordinator {
     var path: [NavigationItem] = []
-    private let introRouting: IntroRouting
-    private let mainRouting: MainRouting
     private let userDefaultsStorage: UserDefaultsStoring
     
-    init(
-        introRouting: IntroRouting,
-        mainRouting: MainRouting,
-        userDefaultsStorage: UserDefaultsStoring
-    ) {
-        self.introRouting = introRouting
-        self.mainRouting = mainRouting
+    init(userDefaultsStorage: UserDefaultsStoring) {
         self.userDefaultsStorage = userDefaultsStorage
-    }
-    
-    func coordinator(
-        for route: AppRoute,
-        modelContext: ModelContext
-    ) -> some View {
-        switch route {
-        case .intro(let introRoute):
-            introRouting
-                .view(
-                    for: introRoute,
-                    using: self
-                )
-                .eraseToAnyView()
-        case .main(let mainRoute):
-            mainRouting
-                .view(
-                    for: mainRoute,
-                    using: self,
-                    modelContext: modelContext
-                )
-                .eraseToAnyView()
-        }
     }
 }
 
@@ -57,17 +25,21 @@ extension MainCoordinator: MainCoordinating {
     }
     
     func pop() {
-        _ = path.popLast()
+        guard path.isNotEmpty else { return }
+        path.removeLast()
     }
     
     func popToRoot() {
-        guard let first = path.first else {
+        guard let root = path.first else {
             return
         }
-        path = [first]
+        path = [root]
     }
     
     func start() {
+        guard path.isEmpty else {
+            return
+        }
         let isLoggedIn = userDefaultsStorage.fetch(for: UserDefaultKeys.isLogin) ?? false
         let initialRoute: AppRoute = isLoggedIn ? .intro(.welcome) : .intro(.onboarding)
         path = [NavigationItem(route: initialRoute)]

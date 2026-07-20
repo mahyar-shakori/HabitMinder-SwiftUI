@@ -1,10 +1,23 @@
 
-
-// navigation
+// Check:
 // Watch
-// DI
+
+// Usage:
+// localization
+
+// Clean:
+// view ha
+// features
+
+
+// Risks
+
+// login
+// setting
+
+
+// AppNotification
 // AppIconName
 
 
-
-// features - Onboarding
+// Should Change

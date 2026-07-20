@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    private var welcomeViewModel: WelcomeViewModel
+    @State private var welcomeViewModel: WelcomeViewModel
     @EnvironmentObject private var themeManager: ThemeManager
     @State private var showAlert = false
     
     init(welcomeViewModel: WelcomeViewModel) {
-        self.welcomeViewModel = welcomeViewModel
+        _welcomeViewModel = State(initialValue: welcomeViewModel)
     }
     
     var body: some View {
@@ -73,16 +73,15 @@ struct WelcomeView: View {
 }
 
 #Preview {
+    let dependencies = AppDependencies()
+    let introDependencies = dependencies.destinationDependencies.intro
     let fakeCoordinator = WelcomeCoordinator(navigate: { _ in
     })
-    let userDefaults = UserDefaultsStorage()
-    let themeManager = ThemeManager()
-    let repository = QuoteRepository(apiService: APIService())
     let viewModel = WelcomeViewModel(
         coordinator: fakeCoordinator,
-        repository: repository,
-        userDefaultsStorage: userDefaults
+        repository: introDependencies.quoteRepository,
+        userDefaultsStorage: introDependencies.userDefaultsStorage
     )
     WelcomeView(welcomeViewModel: viewModel)
-        .environmentObject(themeManager)
+        .environmentObject(dependencies.themeManager)
 }

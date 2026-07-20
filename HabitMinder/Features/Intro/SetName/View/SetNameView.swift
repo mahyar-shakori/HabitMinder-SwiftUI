@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct SetNameView: View {
-    private var setNameViewModel: SetNameViewModel
+    @State private var setNameViewModel: SetNameViewModel
     @EnvironmentObject private var themeManager: ThemeManager
     @FocusState private var isFocused: Bool
     @State private var tempUserName = ""
     
     init(setNameViewModel: SetNameViewModel) {
-        self.setNameViewModel = setNameViewModel
+        _setNameViewModel = State(initialValue: setNameViewModel)
     }
     
     var body: some View {
@@ -85,15 +85,16 @@ struct SetNameView: View {
     }
     
     private var continueButton: some View {
-        CustomButton(style: CustomButtonStylePreset.tertiary(
-            backgroundColor: setNameViewModel.isValid ? themeManager.appPrimary : themeManager.appSecondary
-        )) {
+        AppButton(
+            LocalizedStrings.SetNamePage.continueButton,
+            isEnabled: setNameViewModel.isValid
+        ) {
             setNameViewModel.validateAndContinue {
                 setNameViewModel.goToWelcomePage()
             }
-        } label: {
-            Text(LocalizedStrings.SetNamePage.continueButton)
         }
+        .padding(.horizontal, 32)
+        .padding(.bottom, 32)
     }
   
     private var borderColor: Color {
@@ -106,14 +107,14 @@ struct SetNameView: View {
 }
 
 #Preview {
+    let dependencies = AppDependencies()
+    let introDependencies = dependencies.destinationDependencies.intro
     let fakeCoordinator = SetNameCoordinator(navigate: { _ in
     })
-    let userDefaults = UserDefaultsStorage()
-    let themeManager = ThemeManager()
     let viewModel = SetNameViewModel(
         coordinator: fakeCoordinator,
-        userDefaultsStorage: userDefaults
+        userDefaultsStorage: introDependencies.userDefaultsStorage
     )
     SetNameView(setNameViewModel: viewModel)
-        .environmentObject(themeManager)
+        .environmentObject(dependencies.themeManager)
 }

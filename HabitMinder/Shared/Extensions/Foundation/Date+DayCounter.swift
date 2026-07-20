@@ -8,10 +8,13 @@
 import Foundation
 
 extension Date {
-    func habitDaysCountSinceCreation(for id: UUID) -> Int {
+    func habitDaysCountSinceCreation(
+        for id: UUID,
+        totalDays: Int = 21
+    ) -> Int {
         let calendar = Calendar.current
         let now = Date()
         let days = calendar.dateComponents([.day], from: self, to: now).day ?? 0
-        return max(0, 21 - days)
+        return max(0, totalDays - days)
     }
 }

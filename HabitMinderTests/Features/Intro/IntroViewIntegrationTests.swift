@@ -60,7 +60,8 @@ struct IntroViewIntegrationTests {
 
 extension ThemeManager {
     static var previewInstance: ThemeManager {
-        let manager = ThemeManager()
+        let container = DISetup.makeContainer()
+        let manager = container.resolve(ThemeManager.self)
         manager.appPrimary = .blue
         return manager
     }

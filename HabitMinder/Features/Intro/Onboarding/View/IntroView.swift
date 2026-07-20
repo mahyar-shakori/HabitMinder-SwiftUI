@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct IntroView: View {
-    private var introViewModel: IntroViewModel
+    @State private var introViewModel: IntroViewModel
     @EnvironmentObject private var themeManager: ThemeManager
     
     init(introViewModel: IntroViewModel) {
-        self.introViewModel = introViewModel
+        _introViewModel = State(initialValue: introViewModel)
     }
     
     var body: some View {
@@ -71,27 +71,17 @@ struct IntroView: View {
     }
     
     private var skipButton: some View {
-        CustomButton(style: CustomButtonStylePreset.secondary(
-            font: Fonts.bodyLarge,
-            tintColor: themeManager.appPrimary,
-            backgroundColor: .clear,
-        )
+        AppButton(
+            LocalizedStrings.IntroPage.skipButton,
+            variant: .secondary
         ) {
-            introViewModel
-                .goToSetNamePage()
-        } label: {
-            Text(LocalizedStrings.IntroPage.skipButton)
+            introViewModel.goToSetNamePage()
         }
     }
     
     private var nextButton: some View {
-        CustomButton(style: CustomButtonStylePreset.secondary(
-            tintColor: .white,
-            backgroundColor: themeManager.appPrimary
-        )) {
+        AppButton(LocalizedStrings.IntroPage.nextButton) {
             introViewModel.nextState()
-        } label: {
-            Text(LocalizedStrings.IntroPage.nextButton)
         }
     }
     
@@ -113,12 +103,12 @@ struct IntroView: View {
 }
 
 #Preview {
+    let dependencies = AppDependencies()
     let fakeCoordinator = IntroCoordinator(navigate: { _ in
     })
-    let themeManager = ThemeManager()
     let viewModel = IntroViewModel(
         coordinator: fakeCoordinator
     )
     IntroView(introViewModel: viewModel)
-        .environmentObject(themeManager)
+        .environmentObject(dependencies.themeManager)
 }

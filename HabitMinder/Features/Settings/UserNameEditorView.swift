@@ -44,53 +44,55 @@ struct UserNameEditorView: View {
                 LocalizedStrings.SettingPage.enterNewUserName,
                 text: $tempUserName
             )
-            .font(.AppFont.rooneySansRegular.size(16))
+            .font(.AppFont.rooneySansRegular.size(Metrics.textFieldFontSize))
             .padding()
             .background(
-                RoundedRectangle(cornerRadius: 12)
+                RoundedRectangle(cornerRadius: Metrics.textFieldCornerRadius)
                     .fill(.appWhite)
             )
-            .padding(.horizontal, 16)
+            .padding(.horizontal, Metrics.horizontalPadding)
             .focused($isFocused)
             .submitLabel(.done)
             
             Spacer()
         }
-        .padding(.top, 16)
+        .padding(.top, Metrics.topPadding)
         .background(.appGray)
     }
     
     private var toolbarTitle: some View {
         Text(LocalizedStrings.SettingPage.editUserName)
-            .font(.AppFont.rooneySansBold.size(18))
+            .font(.AppFont.rooneySansBold.size(Metrics.toolbarTitleFontSize))
     }
    
     private var toolbarSaveButton: some View {
-        CustomButton(style: CustomButtonStylePreset.default(
-            font: .AppFont.rooneySansBold.size(18),
-            tintColor: .blue
-        )) {
+        ToolbarTextButton(LocalizedStrings.Shared.saveButton, weight: .bold) {
             settingViewModel.setUserName(tempUserName)
             isPresented = false
-        } label: {
-            Text(LocalizedStrings.Shared.saveButton)
         }
     }
    
     private var toolbarCancelButton: some View {
-        CustomButton(style: CustomButtonStylePreset.default(
-            font: .AppFont.rooneySansRegular.size(18),
-            tintColor: .blue
-        )) {
+        ToolbarTextButton(LocalizedStrings.Shared.cancelButton) {
             isPresented = false
-        } label: {
-            Text(LocalizedStrings.Shared.cancelButton)
         }
     }
 }
 
+private enum Metrics {
+    static let textFieldFontSize: CGFloat = 16
+    static let textFieldCornerRadius: CGFloat = 12
+    static let horizontalPadding: CGFloat = 16
+    static let topPadding: CGFloat = 16
+    static let toolbarTitleFontSize: CGFloat = 18
+}
+
+private enum PreviewData {
+    static let currentName = LocalizedStrings.SettingPage.userName
+}
+
 #Preview {
     let isPresented = Binding<Bool>.constant(false)
-    let currentName = "Sample Name"
+    let currentName = PreviewData.currentName
     UserNameEditorView(isPresented: isPresented, currentName: currentName)
 }

@@ -9,11 +9,18 @@ import SwiftUI
 
 extension Color {
     var rgbaComponents: [CGFloat]? {
-        let uiColor = UIColor(self)
-        var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
-        guard uiColor.getRed(&r, green: &g, blue: &b, alpha: &a) else {
+        let cgColor = UIColor(self).cgColor
+        guard let components = cgColor.components else {
             return nil
         }
-        return [r, g, b, a]
+
+        switch cgColor.numberOfComponents {
+        case 4:
+            return [components[0], components[1], components[2], components[3]]
+        case 2:
+            return [components[0], components[0], components[0], components[1]]
+        default:
+            return nil
+        }
     }
 }

@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct SettingView: View {
-    @ObservedObject private var settingViewModel: SettingViewModel
+    @StateObject private var settingViewModel: SettingViewModel
     @EnvironmentObject private var themeManager: ThemeManager
     @State private var isEditingUserName = false
     @State private var isShowingColorPicker = false
     
     init(settingViewModel: SettingViewModel) {
-        self.settingViewModel = settingViewModel
+        _settingViewModel = StateObject(wrappedValue: settingViewModel)
     }
     
     var body: some View {
@@ -35,41 +35,36 @@ struct SettingView: View {
     
     private var titleText: some View {
         Text(LocalizedStrings.SettingPage.title)
-            .font(.AppFont.rooneySansBold.size(28))
+            .font(.AppFont.rooneySansBold.size(Metrics.titleFontSize))
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.top, 32)
-            .padding(.horizontal, 24)
+            .padding(.top, Metrics.titleTopPadding)
+            .padding(.horizontal, Metrics.horizontalPadding)
     }
     
     private var settingCustomize: some View {
-        VStack(alignment: .leading, spacing: 24) {
+        VStack(alignment: .leading, spacing: Metrics.sectionSpacing) {
             userNameSection
             colorSection
         }
-        .padding(.top, 8)
+        .padding(.top, Metrics.contentTopPadding)
         .padding()
     }
     
     private var userNameSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: Metrics.fieldSpacing) {
             Text(LocalizedStrings.SettingPage.userName)
-                .font(.AppFont.rooneySansRegular.size(18))
+                .font(.AppFont.rooneySansRegular.size(Metrics.labelFontSize))
                 .foregroundColor(.gray)
             userNameField
         }
     }
     
     private var userNameField: some View {
-        CustomButton(style: CustomButtonStylePreset.secondary(
-            innerPadding: .insets(12),
-            outerPadding: .none,
-            shape: AnyShape(RoundedRectangle(cornerSize: 12.asCGSize))
-        )) {
+        SettingsRowButton {
             isEditingUserName = true
-        } label: {
+        } content: {
             userNameButtonContent
         }
-        .buttonStyle(PlainButtonStyle())
         .sheet(isPresented: $isEditingUserName) {
             UserNameEditorView(
                 isPresented: $isEditingUserName,
@@ -89,25 +84,20 @@ struct SettingView: View {
     }
     
     private var colorSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: Metrics.fieldSpacing) {
             Text(LocalizedStrings.SettingPage.appColor)
-                .font(.AppFont.rooneySansRegular.size(18))
+                .font(.AppFont.rooneySansRegular.size(Metrics.labelFontSize))
                 .foregroundColor(.gray)
             colorPickerField
         }
     }
     
     private var colorPickerField: some View {
-        CustomButton(style: CustomButtonStylePreset.secondary(
-            innerPadding: .insets(12),
-            outerPadding: .none,
-            shape: AnyShape(RoundedRectangle(cornerSize: 12.asCGSize))
-        )) {
+        SettingsRowButton {
             isShowingColorPicker = true
-        } label: {
+        } content: {
             colorPickerButtonContent
         }
-        .buttonStyle(PlainButtonStyle())
         .sheet(isPresented: $isShowingColorPicker) {
             ColorPickerView(isPresented: $isShowingColorPicker)
         }
@@ -120,7 +110,7 @@ struct SettingView: View {
             
             Circle()
                 .fill(themeManager.appPrimary)
-                .frame(width: 24, height: 24)
+                .frame(width: Metrics.colorPreviewSize, height: Metrics.colorPreviewSize)
             
             Image(systemName: AppIconName.chevronDown)
                 .foregroundColor(.gray)
@@ -128,15 +118,26 @@ struct SettingView: View {
     }
 }
 
+private enum Metrics {
+    static let titleFontSize: CGFloat = 28
+    static let titleTopPadding: CGFloat = 32
+    static let horizontalPadding: CGFloat = 24
+    static let sectionSpacing: CGFloat = 24
+    static let fieldSpacing: CGFloat = 8
+    static let contentTopPadding: CGFloat = 8
+    static let labelFontSize: CGFloat = 18
+    static let colorPreviewSize: CGFloat = 24
+}
+
 #Preview {
+    let dependencies = AppDependencies()
+    let settingsDependencies = dependencies.destinationDependencies.main.settings
     let fakeCoordinator = SettingCoordinator(dismiss: {
     })
-    let userDefaults = UserDefaultsStorage()
-    let themeManager = ThemeManager()
     let viewModel = SettingViewModel(
         coordinator: fakeCoordinator,
-        userDefaultsStorage: userDefaults
+        userDefaultsStorage: settingsDependencies.userDefaultsStorage
     )
     SettingView(settingViewModel: viewModel)
-        .environmentObject(themeManager)
+        .environmentObject(dependencies.themeManager)
 }

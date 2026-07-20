@@ -14,7 +14,7 @@ final class WelcomeCoordinator: WelcomeCoordinating {
         self.navigate = navigate
     }
     
-    func goToHome(_ quote: String) {
-        navigate(.main(.home(quote: quote)))
+    func goToHome(quote: String, author: String) {
+        navigate(.main(.habits(.home(quote: quote, author: author))))
     }
 }

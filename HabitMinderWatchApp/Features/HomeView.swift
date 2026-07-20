@@ -27,11 +27,11 @@ struct HomeView: View {
             HStack {
                 Text(habit.title)
                 Spacer()
-                Text("\(habit.daysLeft)" + LocalizedStrings.Cell.Habit.daysLeft)
+                Text(daysLeftText(for: habit))
                     .font(.footnote)
                     .foregroundColor(.gray)
             }
-            .padding(.vertical, 8)
+            .padding(.vertical, Metrics.rowVerticalPadding)
         }
     }
     
@@ -51,6 +51,14 @@ struct HomeView: View {
             Spacer()
         }
     }
+
+    private func daysLeftText(for habit: HabitData) -> String {
+        habit.daysLeft.description + LocalizedStrings.Cell.Habit.daysLeft
+    }
+}
+
+private enum Metrics {
+    static let rowVerticalPadding: CGFloat = 8
 }
 
 #Preview {

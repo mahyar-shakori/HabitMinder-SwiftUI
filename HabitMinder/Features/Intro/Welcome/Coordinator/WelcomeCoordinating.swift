@@ -8,5 +8,5 @@
 import Foundation
 
 protocol WelcomeCoordinating {
-    func goToHome(_ quote: String)
+    func goToHome(quote: String, author: String)
 }

@@ -20,7 +20,7 @@ final class ThemeManager: ThemeManaging, ObservableObject{
         appPrimary.opacity(0.4)
     }
     
-    init(userDefaultsStorage: UserDefaultsStoring = UserDefaultsStorage()) {
+    init(userDefaultsStorage: UserDefaultsStoring) {
         self.userDefaultsStorage = userDefaultsStorage
         self.appPrimary = Self.loadColorFromDefaults(storage: userDefaultsStorage) ?? .appPrimary
     }

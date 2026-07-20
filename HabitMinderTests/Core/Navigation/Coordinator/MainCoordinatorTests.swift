@@ -15,12 +15,7 @@ struct MainCoordinatorTests {
     @Test("pop() should remove the last item from the path if not empty")
     func testPopRemovesLastItemWhenPathIsNotEmpty() {
         // Arrange
-        let userDefaultsStorage = UserDefaultsStorage()
-        let coordinator = MainCoordinator(
-            introRouting: IntroRouter(),
-            mainRouting: MainRouter(),
-            userDefaultsStorage: userDefaultsStorage
-        )
+        let coordinator = makeCoordinator()
         coordinator.path = [
             NavigationItem(route: .intro(.onboarding)),
             NavigationItem(route: .intro(.setName))
@@ -36,12 +31,7 @@ struct MainCoordinatorTests {
     @Test("pop() should do nothing when the path is already empty")
     func testPopDoesNothingWhenPathIsEmpty() {
         // Arrange
-        let userDefaultsStorage = UserDefaultsStorage()
-        let coordinator = MainCoordinator(
-            introRouting: IntroRouter(),
-            mainRouting: MainRouter(),
-            userDefaultsStorage: userDefaultsStorage
-        )
+        let coordinator = makeCoordinator()
         coordinator.path = []
         
         // Act
@@ -54,17 +44,12 @@ struct MainCoordinatorTests {
     @Test("popToRoot() keeps only the first item when path has multiple elements")
     func testPopToRootKeepsOnlyFirstItemWhenPathHasMultipleItems() {
         // Arrange
-        let userDefaultsStorage = UserDefaultsStorage()
-        let coordinator = MainCoordinator(
-            introRouting: IntroRouter(),
-            mainRouting: MainRouter(),
-            userDefaultsStorage: userDefaultsStorage
-        )
+        let coordinator = makeCoordinator()
         let firstItem = NavigationItem(route: .intro(.onboarding))
         coordinator.path = [
             firstItem,
             NavigationItem(route: .intro(.welcome)),
-            NavigationItem(route: .main(.home(quote: "test")))
+            NavigationItem(route: .main(.habits(.home(quote: "test", author: "author"))))
         ]
         
         // Act
@@ -78,12 +63,7 @@ struct MainCoordinatorTests {
     @Test("popToRoot() does nothing when path is empty")
     func testPopToRootDoesNothingWhenPathIsEmpty() {
         // Arrange
-        let userDefaultsStorage = UserDefaultsStorage()
-        let coordinator = MainCoordinator(
-            introRouting: IntroRouter(),
-            mainRouting: MainRouter(),
-            userDefaultsStorage: userDefaultsStorage
-        )
+        let coordinator = makeCoordinator()
         coordinator.path = []
         
         // Act
@@ -96,13 +76,10 @@ struct MainCoordinatorTests {
     @Test("start() navigates to .intro(.intro) if user is not logged in")
     func testStartNavigatesToIntroPageWhenUserIsNotLoggedIn() {
         // Arrange
-        let userDefaultsStorage = UserDefaultsStorage()
+        let container = DISetup.makeContainer()
+        let userDefaultsStorage = container.resolve(UserDefaultsStoring.self)
         userDefaultsStorage.save(value: false, for: UserDefaultKeys.isLogin)
-        let coordinator = MainCoordinator(
-            introRouting: IntroRouter(),
-            mainRouting: MainRouter(),
-            userDefaultsStorage: userDefaultsStorage
-        )
+        let coordinator = container.resolve(MainCoordinator.self)
         
         // Act
         coordinator.start()
@@ -115,12 +92,7 @@ struct MainCoordinatorTests {
     @Test("start() navigates to .intro(.welcome) if user is logged in")
     func testStartNavigatesToWelcomePageWhenUserIsLoggedIn() {
         // Arrange
-        let userDefaultsStorage = UserDefaultsStorage()
-        let coordinator = MainCoordinator(
-            introRouting: IntroRouter(),
-            mainRouting: MainRouter(),
-            userDefaultsStorage: userDefaultsStorage
-        )
+        let coordinator = makeCoordinator()
         
         // Act
         coordinator.start()
@@ -134,18 +106,17 @@ struct MainCoordinatorTests {
     func testNavigateAppendsRouteToPath() {
         // Arrange
         let route: AppRoute = .intro(.welcome)
-        let userDefaultsStorage = UserDefaultsStorage()
-        
-        let coordinator = MainCoordinator(
-            introRouting: IntroRouter(),
-            mainRouting: MainRouter(),
-            userDefaultsStorage: userDefaultsStorage
-        )
+        let coordinator = makeCoordinator()
         
         // Act
         coordinator.navigate(to: route)
         
         // Assert
         #expect(coordinator.path.last?.route == route)
+    }
+
+    private func makeCoordinator() -> MainCoordinator {
+        let container = DISetup.makeContainer()
+        return container.resolve(MainCoordinator.self)
     }
 }
