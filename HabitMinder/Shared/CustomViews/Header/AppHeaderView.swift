@@ -21,38 +21,29 @@ struct AppHeaderView: View {
     }
 
     var body: some View {
-        HStack(spacing: Metrics.spacing) {
+        HStack(spacing: Spacing.xSmall) {
             Image(systemName: systemImage)
-                .font(.system(size: Metrics.titleIconSize, weight: .medium))
+                .font(.system(size: Spacing.x4Large, weight: .medium))
                 .foregroundStyle(themeManager.appPrimary)
 
             Text(title)
-                .font(.AppFont.rooneySansBold.size(Metrics.titleFontSize))
+                .font(.AppFont.rooneySansBold.size(FontSize.x7Large))
                 .foregroundStyle(themeManager.appPrimary)
 
             Spacer()
 
             profileIcon
         }
-        .padding(.horizontal, Metrics.horizontalPadding)
-        .padding(.top, Metrics.topPadding)
-        .padding(.bottom, Metrics.bottomPadding)
+        .padding(.horizontal, Spacing.x4Large)
+        .padding(.top, Spacing.medium)
+        .padding(.bottom, Spacing.x6Large)
     }
 
     private var profileIcon: some View {
-        Image(systemName: AppIconName.profile)
-            .font(.system(size: Metrics.profileIconSize))
+        Image(systemName: SystemIconName.profile)
+            .font(.system(size: Size.xLarge))
             .symbolRenderingMode(.palette)
-            .foregroundStyle(.appWhite, themeManager.appPrimary.opacity(0.45))
+            .foregroundStyle(.appWhite, themeManager.appPrimary.opacity(Opacity.iconBackground))
     }
-}
-private enum Metrics {
-    static let spacing: CGFloat = 8
-    static let titleIconSize: CGFloat = 22
-    static let titleFontSize: CGFloat = 22
-    static let horizontalPadding: CGFloat = 22
-    static let topPadding: CGFloat = 12
-    static let bottomPadding: CGFloat = 28
-    static let profileIconSize: CGFloat = 36
 }
 

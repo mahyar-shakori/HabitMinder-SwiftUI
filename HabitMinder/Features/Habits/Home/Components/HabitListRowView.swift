@@ -24,48 +24,48 @@ struct HabitListRowView: View {
     private var rowBackground: some View {
         if #available(iOS 26.0, *) {
             content
-                .padding(Metrics.cardPadding)
-                .glassEffect(.regular, in: .rect(cornerRadius: Metrics.cardCornerRadius))
+                .padding(Spacing.x2Large)
+                .glassEffect(.regular, in: .rect(cornerRadius: CornerRadius.x3Large))
         } else {
             content
-                .padding(Metrics.cardPadding)
+                .padding(Spacing.x2Large)
                 .background(.appWhite)
-                .clipShape(RoundedRectangle(cornerRadius: Metrics.cardCornerRadius))
+                .clipShape(RoundedRectangle(cornerRadius: CornerRadius.x3Large))
         }
     }
 
     private var content: some View {
-        VStack(alignment: .leading, spacing: Metrics.contentSpacing) {
-            HStack(alignment: .center, spacing: Metrics.headerSpacing) {
+        VStack(alignment: .leading, spacing: Spacing.x4Large) {
+            HStack(alignment: .center, spacing: Spacing.large) {
                 habitIcon
 
                 Text(item.title)
-                    .font(.AppFont.rooneySansBold.size(Metrics.titleFontSize))
+                    .font(.AppFont.rooneySansBold.size(FontSize.x4Large))
                     .foregroundStyle(.primary)
                     .lineLimit(1)
 
-                Spacer(minLength: Metrics.streakMinSpacing)
+                Spacer(minLength: Spacing.medium)
 
                 streakLabel
             }
 
-            VStack(alignment: .leading, spacing: Metrics.progressSpacing) {
+            VStack(alignment: .leading, spacing: Spacing.small) {
                 HStack {
-                    Text(LocalizedStrings.Cell.Habit.journey(item.commitmentDays))
-                        .font(.AppFont.rooneySansBold.size(Metrics.progressTextFontSize))
+                    Text(L10n.Cell.Habit.journey(item.commitmentDays))
+                        .font(.AppFont.rooneySansBold.size(FontSize.xLarge))
                         .textCase(.uppercase)
                         .foregroundStyle(.secondary)
 
                     Spacer()
 
-                    Text(LocalizedStrings.Cell.Habit.progressDay(completed: completedDays, total: item.commitmentDays))
-                        .font(.AppFont.rooneySansBold.size(Metrics.progressTextFontSize))
+                    Text(L10n.Cell.Habit.progressDay(completed: completedDays, total: item.commitmentDays))
+                        .font(.AppFont.rooneySansBold.size(FontSize.xLarge))
                         .foregroundStyle(themeManager.appPrimary)
                 }
 
                 ProgressView(value: min(max(item.progress, 0), 1))
                     .tint(themeManager.appPrimary)
-                    .scaleEffect(x: Metrics.progressScaleX, y: Metrics.progressScaleY, anchor: .center)
+                    .scaleEffect(x: Scale.normal, y: Scale.emphasizedProgress, anchor: .center)
             }
         }
     }
@@ -73,25 +73,25 @@ struct HabitListRowView: View {
     private var habitIcon: some View {
         ZStack {
             Circle()
-                .fill(themeManager.appSecondary.opacity(Metrics.iconBackgroundOpacity))
+                .fill(themeManager.appSecondary.opacity(Opacity.iconBackground))
 
             Image(systemName: item.iconName)
-                .font(.system(size: Metrics.iconFontSize, weight: .semibold))
+                .font(.system(size: FontSize.x5Large, weight: .semibold))
                 .foregroundStyle(themeManager.appPrimary)
         }
-        .frame(width: Metrics.iconContainerSize, height: Metrics.iconContainerSize)
+        .frame(width: Size.x3Large, height: Size.x3Large)
     }
 
     private var streakLabel: some View {
-        HStack(spacing: Metrics.streakSpacing) {
-            Image(systemName: AppIconName.flameFill)
+        HStack(spacing: Spacing.x2Small) {
+            Image(systemName: SystemIconName.flameFill)
 
-            Text(LocalizedStrings.Cell.Habit.streak(completedDays))
+            Text(L10n.Cell.Habit.streak(completedDays))
         }
-        .font(.AppFont.rooneySansRegular.size(Metrics.progressTextFontSize))
+        .font(.AppFont.rooneySansRegular.size(FontSize.xLarge))
         .foregroundStyle(themeManager.appPrimary)
         .lineLimit(1)
-        .minimumScaleFactor(Metrics.streakMinimumScaleFactor)
+        .minimumScaleFactor(Scale.minimumText)
     }
 
     private var completedDays: Int {
@@ -99,42 +99,17 @@ struct HabitListRowView: View {
     }
 }
 
-private enum Metrics {
-    static let cardPadding: CGFloat = 18
-    static let cardCornerRadius: CGFloat = 20
-    static let contentSpacing: CGFloat = 22
-    static let headerSpacing: CGFloat = 14
-    static let progressSpacing: CGFloat = 10
-    static let streakSpacing: CGFloat = 4
-    static let streakMinSpacing: CGFloat = 12
-    static let titleFontSize: CGFloat = 18
-    static let progressTextFontSize: CGFloat = 15
-    static let iconFontSize: CGFloat = 20
-    static let iconContainerSize: CGFloat = 48
-    static let iconBackgroundOpacity: CGFloat = 0.45
-    static let progressScaleX: CGFloat = 1
-    static let progressScaleY: CGFloat = 1.8
-    static let streakMinimumScaleFactor: CGFloat = 0.8
-}
-
-private enum PreviewData {
-    static let title = LocalizedStrings.AddHabitPage.titlePlaceholder
-    static let daysLeft = 5
-    static let progress = 0.7
-    static let iconName = AppIconName.drop
-    static let commitmentDays = 21
-}
 
 #Preview {
     let dependencies = AppDependencies()
     let id = UUID()
     let item = HabitItem(
         id: id,
-        title: PreviewData.title,
-        daysLeft: PreviewData.daysLeft,
-        progress: PreviewData.progress,
-        iconName: PreviewData.iconName,
-        commitmentDays: PreviewData.commitmentDays
+        title: "test",
+        daysLeft: 21,
+        progress: 1,
+        iconName: SystemIconName.drop,
+        commitmentDays: 21
     )
     HabitListRowView(item: item)
         .environmentObject(dependencies.themeManager)

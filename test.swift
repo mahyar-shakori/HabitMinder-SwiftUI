@@ -1,23 +1,24 @@
 
 // Check:
 // Watch
+// Risks
+// AppNotification
+
+
 
 // Usage:
 // localization
 
-// Clean:
-// view ha
+
+
 // features
+// view add
+// home scroll
+// view ha
+// AddHabitView, EditHabitView yeki shodan
+// too much custom button
 
 
-// Risks
-
+// add:
 // login
 // setting
-
-
-// AppNotification
-// AppIconName
-
-
-// Should Change

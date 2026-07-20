@@ -15,18 +15,18 @@ enum HabitFrequency: String, CaseIterable {
     var title: String {
         switch self {
         case .daily:
-            return "Daily"
+            return L10n.AddHabitPage.frequencyDaily
         case .weekly:
-            return "Weekly"
+            return L10n.AddHabitPage.frequencyWeekly
         case .custom:
-            return "Custom"
+            return L10n.AddHabitPage.frequencyCustom
         }
     }
 }
 
 struct AddHabitUIState {
     var habitTitle = ""
-    var selectedIconName = "book"
+    var selectedIconName = ""
     var selectedFrequency = HabitFrequency.daily
     var selectedCustomWeekdays = [Calendar.current.component(.weekday, from: Date())]
     var commitmentDays = 21

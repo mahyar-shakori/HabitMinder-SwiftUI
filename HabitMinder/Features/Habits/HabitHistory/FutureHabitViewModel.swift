@@ -22,10 +22,10 @@ final class FutureHabitViewModel: ObservableObject {
     var deleteConfirmationMessage: String {
         guard let itemToDelete = uiState.itemToDelete,
               let title = uiState.listItems.first(where: { $0.id == itemToDelete })?.title else {
-            return LocalizedStrings.Alert.Habit.deleteMessage
+            return L10n.Alert.Habit.deleteMessage
         }
 
-        return "Are you sure you want to delete \"\(title)\"?"
+        return L10n.Alert.Habit.deleteMessage(title: title)
     }
     
     init(

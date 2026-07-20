@@ -21,20 +21,20 @@ struct EditHabitView: View {
     }
     
     var body: some View {
-        VStack(spacing: HabitFormConstants.Metrics.rootSpacing) {
+        VStack(spacing: Spacing.none) {
             topViews
 
             ScrollView {
-                VStack(alignment: .leading, spacing: HabitFormConstants.Metrics.contentSpacing) {
+                VStack(alignment: .leading, spacing: Spacing.x5Large) {
                     habitIdentitySection
                     visualAnchorSection
                     commitmentSection
                     frequencySection
                     reminderSection
                 }
-                .padding(.horizontal, HabitFormConstants.Metrics.contentHorizontalPadding)
-                .padding(.top, HabitFormConstants.Metrics.contentTopPadding)
-                .padding(.bottom, HabitFormConstants.Metrics.contentBottomPadding)
+                .padding(.horizontal, Spacing.x3Large)
+                .padding(.top, Spacing.x3Large)
+                .padding(.bottom, Spacing.x5Large)
             }
             .scrollIndicators(.hidden)
 
@@ -51,7 +51,7 @@ struct EditHabitView: View {
             tempHabitTitle = editHabitViewModel.uiState.habitTitle
         }
         .alert(
-            LocalizedStrings.AddHabitPage.notificationAlertTitle,
+            L10n.AddHabitPage.notificationAlertTitle,
             isPresented: Binding(
                 get: { editHabitViewModel.uiState.isNotificationSettingsAlertPresented },
                 set: { isPresented in
@@ -61,26 +61,26 @@ struct EditHabitView: View {
                 }
             )
         ) {
-            Button(LocalizedStrings.AddHabitPage.notificationSettingsButton) {
+            Button(L10n.AddHabitPage.notificationSettingsButton) {
                 editHabitViewModel.dismissNotificationSettingsAlert()
                 openAppSettings()
             }
-            Button(LocalizedStrings.Shared.cancelButton, role: .cancel) {
+            Button(L10n.Shared.cancelButton, role: .cancel) {
                 editHabitViewModel.dismissNotificationSettingsAlert()
             }
         } message: {
-            Text(LocalizedStrings.AddHabitPage.notificationAlertMessage)
+            Text(L10n.AddHabitPage.notificationAlertMessage)
         }
     }
     
     private var titleText: some View {
-        Text(LocalizedStrings.EditHabitPage.title)
-            .font(.AppFont.rooneySansBold.size(HabitFormConstants.Metrics.topTitleFontSize))
+        Text(L10n.EditHabitPage.title)
+            .font(.AppFont.rooneySansBold.size(FontSize.x9Large))
     }
     
     private var saveButton: some View {
         AppButton(
-            LocalizedStrings.Shared.saveButton,
+            L10n.Shared.saveButton,
             variant: .compactPrimary,
             isEnabled: editHabitViewModel.uiState.isSaveButtonEnabled
         ) {
@@ -89,29 +89,29 @@ struct EditHabitView: View {
     }
     
     private var topViews: some View {
-        HStack(spacing: HabitFormConstants.Metrics.topBarSpacing) {
+        HStack(spacing: Spacing.medium) {
             titleText
             Spacer()
             saveButton
         }
-        .padding(.horizontal, HabitFormConstants.Metrics.contentHorizontalPadding)
-        .padding(.top, HabitFormConstants.Metrics.topBarTopPadding)
+        .padding(.horizontal, Spacing.x3Large)
+        .padding(.top, Spacing.x7Large)
     }
 
 
     private var habitIdentitySection: some View {
-        VStack(alignment: .leading, spacing: HabitFormConstants.Metrics.sectionSpacing) {
-            sectionTitle(LocalizedStrings.AddHabitPage.identitySectionTitle)
+        VStack(alignment: .leading, spacing: Spacing.large) {
+            sectionTitle(L10n.AddHabitPage.identitySectionTitle)
 
-            TextField(LocalizedStrings.AddHabitPage.titlePlaceholder, text: $tempHabitTitle)
-                .font(.AppFont.rooneySansBold.size(HabitFormConstants.Metrics.titleFontSize))
+            TextField(L10n.AddHabitPage.titlePlaceholder, text: $tempHabitTitle)
+                .font(.AppFont.rooneySansBold.size(FontSize.x8Large))
                 .foregroundStyle(.primary)
-                .padding(.horizontal, HabitFormConstants.Metrics.textFieldHorizontalPadding)
-                .frame(height: HabitFormConstants.Metrics.textFieldHeight)
+                .padding(.horizontal, Spacing.xLarge)
+                .frame(height: Size.x4Large)
                 .background(.appGray)
                 .overlay {
                     Rectangle()
-                        .stroke(.appPrimary.opacity(HabitFormConstants.Metrics.fieldBorderOpacity), lineWidth: LineWidth.thin)
+                        .stroke(.appPrimary.opacity(Opacity.fieldBorder), lineWidth: LineWidth.thin)
                 }
                 .focused($isFocused)
                 .submitLabel(.done)
@@ -122,21 +122,21 @@ struct EditHabitView: View {
     }
 
     private var visualAnchorSection: some View {
-        VStack(alignment: .leading, spacing: HabitFormConstants.Metrics.sectionSpacing) {
+        VStack(alignment: .leading, spacing: Spacing.large) {
             HStack {
-                sectionTitle(LocalizedStrings.AddHabitPage.visualAnchorSectionTitle)
+                sectionTitle(L10n.AddHabitPage.visualAnchorSectionTitle)
                 Spacer()
-                Text(LocalizedStrings.AddHabitPage.selectIconHint)
-                    .font(.AppFont.rooneySansRegular.size(HabitFormConstants.Metrics.hintFontSize))
+                Text(L10n.AddHabitPage.selectIconHint)
+                    .font(.AppFont.rooneySansRegular.size(FontSize.medium))
                     .foregroundStyle(.secondary)
             }
 
             LazyVGrid(
                 columns: Array(
-                    repeating: GridItem(.flexible(), spacing: HabitFormConstants.Metrics.iconGridSpacing),
-                    count: HabitFormConstants.Metrics.gridColumnCount
+                    repeating: GridItem(.flexible(), spacing: Spacing.x2Large),
+                    count: LayoutCount.four
                 ),
-                spacing: HabitFormConstants.Metrics.iconGridSpacing
+                spacing: Spacing.x2Large
             ) {
                 ForEach(iconNames, id: \.self) { icon in
                     iconButton(icon)
@@ -147,24 +147,24 @@ struct EditHabitView: View {
 
     private var commitmentSection: some View {
         formCard {
-            VStack(alignment: .leading, spacing: HabitFormConstants.Metrics.formCardSpacing) {
-                Label(LocalizedStrings.AddHabitPage.commitmentSectionTitle, systemImage: AppIconName.link)
-                    .font(.AppFont.rooneySansBold.size(HabitFormConstants.Metrics.labelFontSize))
+            VStack(alignment: .leading, spacing: Spacing.x3Large) {
+                Label(L10n.AddHabitPage.commitmentSectionTitle, systemImage: SystemIconName.link)
+                    .font(.AppFont.rooneySansBold.size(FontSize.small))
                     .textCase(.uppercase)
-                    .foregroundStyle(.primary.opacity(HabitFormConstants.Metrics.formHeaderOpacity))
+                    .foregroundStyle(.primary.opacity(Opacity.formHeader))
 
                 HStack {
-                    Text(LocalizedStrings.AddHabitPage.commitmentDays(editHabitViewModel.uiState.commitmentDays))
-                        .font(.AppFont.rooneySansRegular.size(HabitFormConstants.Metrics.valueFontSize))
+                    Text(L10n.AddHabitPage.commitmentDays(editHabitViewModel.uiState.commitmentDays))
+                        .font(.AppFont.rooneySansRegular.size(FontSize.x2Large))
                         .foregroundStyle(.appPrimary)
 
                     Spacer()
 
-                    stepperButton(systemImage: AppIconName.minus) {
+                    stepperButton(systemImage: SystemIconName.minus) {
                         editHabitViewModel.decrementCommitmentDays()
                     }
 
-                    stepperButton(systemImage: AppIconName.plus) {
+                    stepperButton(systemImage: SystemIconName.plus) {
                         editHabitViewModel.incrementCommitmentDays()
                     }
                 }
@@ -174,13 +174,13 @@ struct EditHabitView: View {
 
     private var frequencySection: some View {
         formCard {
-            VStack(alignment: .leading, spacing: HabitFormConstants.Metrics.sectionSpacing) {
-                Label(LocalizedStrings.AddHabitPage.frequencySectionTitle, systemImage: AppIconName.calendar)
-                    .font(.AppFont.rooneySansBold.size(HabitFormConstants.Metrics.labelFontSize))
+            VStack(alignment: .leading, spacing: Spacing.large) {
+                Label(L10n.AddHabitPage.frequencySectionTitle, systemImage: SystemIconName.calendar)
+                    .font(.AppFont.rooneySansBold.size(FontSize.small))
                     .textCase(.uppercase)
-                    .foregroundStyle(.primary.opacity(HabitFormConstants.Metrics.formHeaderOpacity))
+                    .foregroundStyle(.primary.opacity(Opacity.formHeader))
 
-                HStack(spacing: HabitFormConstants.Metrics.chipSpacing) {
+                HStack(spacing: Spacing.small) {
                     ForEach(HabitFrequency.allCases, id: \.self) { frequency in
                         frequencyButton(frequency)
                     }
@@ -196,10 +196,10 @@ struct EditHabitView: View {
     private var customWeekdayPicker: some View {
         LazyVGrid(
             columns: Array(
-                repeating: GridItem(.flexible(), spacing: HabitFormConstants.Metrics.weekdayGridSpacing),
-                count: HabitFormConstants.Metrics.gridColumnCount
+                repeating: GridItem(.flexible(), spacing: Spacing.xSmall),
+                count: LayoutCount.four
             ),
-            spacing: HabitFormConstants.Metrics.weekdayGridSpacing
+            spacing: Spacing.xSmall
         ) {
             ForEach(customWeekdays, id: \.weekday) { item in
                 customWeekdayButton(item)
@@ -210,76 +210,76 @@ struct EditHabitView: View {
 
     private var reminderSection: some View {
         formCard {
-            VStack(alignment: .leading, spacing: HabitFormConstants.Metrics.reminderSectionSpacing) {
-                Label(LocalizedStrings.AddHabitPage.reminderSectionTitle, systemImage: AppIconName.bell)
-                    .font(.AppFont.rooneySansBold.size(HabitFormConstants.Metrics.labelFontSize))
+            VStack(alignment: .leading, spacing: Spacing.medium) {
+                Label(L10n.AddHabitPage.reminderSectionTitle, systemImage: SystemIconName.bell)
+                    .font(.AppFont.rooneySansBold.size(FontSize.small))
                     .textCase(.uppercase)
-                    .foregroundStyle(.primary.opacity(HabitFormConstants.Metrics.formHeaderOpacity))
+                    .foregroundStyle(.primary.opacity(Opacity.formHeader))
 
-                Text(LocalizedStrings.AddHabitPage.reminderSubtitle)
-                    .font(.AppFont.rooneySansRegular.size(HabitFormConstants.Metrics.bodyFontSize))
+                Text(L10n.AddHabitPage.reminderSubtitle)
+                    .font(.AppFont.rooneySansRegular.size(FontSize.large))
                     .foregroundStyle(.secondary)
 
-                HStack(spacing: HabitFormConstants.Metrics.sectionSpacing) {
+                HStack(spacing: Spacing.large) {
                     DatePicker("", selection: $newReminderTime, displayedComponents: .hourAndMinute)
                         .labelsHidden()
                         .frame(maxWidth: .infinity, alignment: .leading)
 
-                    stepperButton(systemImage: AppIconName.plus) {
+                    stepperButton(systemImage: SystemIconName.plus) {
                         editHabitViewModel.addReminderTime(formattedReminderTime(newReminderTime))
                     }
                 }
 
                 if editHabitViewModel.uiState.reminderTimes.isNotEmpty {
-                    VStack(spacing: HabitFormConstants.Metrics.weekdayGridSpacing) {
+                    VStack(spacing: Spacing.xSmall) {
                         ForEach(editHabitViewModel.uiState.reminderTimes, id: \.self) { time in
                             reminderRow(time)
                         }
                     }
-                    .padding(.top, HabitFormConstants.Metrics.reminderListTopPadding)
+                    .padding(.top, Spacing.x2Small)
                 }
             }
         }
     }
     
     private var toastLabel: some View {
-        Text(LocalizedStrings.EditHabitPage.missHabitToast)
-            .font(.AppFont.rooneySansBold.size(HabitFormConstants.Metrics.toastFontSize))
+        Text(L10n.EditHabitPage.missHabitToast)
+            .font(.AppFont.rooneySansBold.size(FontSize.x2Large))
             .foregroundColor(.appWhite)
-            .padding(.vertical, HabitFormConstants.Metrics.toastVerticalPadding)
-            .padding(.horizontal, HabitFormConstants.Metrics.textFieldHorizontalPadding)
-            .background(.primary.opacity(HabitFormConstants.Metrics.toastOpacity))
-            .cornerRadius(HabitFormConstants.Metrics.toastCornerRadius)
+            .padding(.vertical, Spacing.xSmall)
+            .padding(.horizontal, Spacing.xLarge)
+            .background(.primary.opacity(Opacity.toastBackground))
+            .cornerRadius(CornerRadius.medium)
             .transition(.opacity.combined(with: .scale))
-            .padding(.bottom, HabitFormConstants.Metrics.toastBottomPadding)
+            .padding(.bottom, Spacing.xSmall)
     }
 
     private var bottomButtons: some View {
-        VStack(spacing: HabitFormConstants.Metrics.bottomButtonSpacing) {
+        VStack(spacing: Spacing.small) {
             missHabitButton
         }
-        .padding(.bottom, HabitFormConstants.Metrics.bottomButtonsBottomPadding)
+        .padding(.bottom, Spacing.x2Large)
         .background(.appGray)
     }
    
     private var missHabitButton: some View {
         AppButton(
-            LocalizedStrings.EditHabitPage.missHabitButton,
+            L10n.EditHabitPage.missHabitButton,
             isEnabled: editHabitViewModel.uiState.showToast.not
         ) {
             withAnimation {
                 editHabitViewModel.missHabitAndShowToast()
             }
         }
-        .padding(.horizontal, HabitFormConstants.Metrics.missButtonHorizontalPadding)
-        .padding(.bottom, HabitFormConstants.Metrics.missButtonBottomPadding)
+        .padding(.horizontal, Spacing.x7Large)
+        .padding(.bottom, Spacing.x7Large)
     }
 
     private func sectionTitle(_ title: String) -> some View {
         Text(title.uppercased())
-            .font(.AppFont.rooneySansBold.size(HabitFormConstants.Metrics.labelFontSize))
-            .tracking(2)
-            .foregroundStyle(.primary.opacity(0.72))
+            .font(.AppFont.rooneySansBold.size(FontSize.small))
+            .tracking(Spacing.x3Small)
+            .foregroundStyle(.primary.opacity(Opacity.sectionTitle))
     }
 
     private func iconButton(_ icon: String) -> some View {
@@ -312,21 +312,21 @@ struct EditHabitView: View {
     private func reminderRow(_ time: String) -> some View {
         HStack {
             Text(displayReminderTime(time))
-                .font(.AppFont.rooneySansRegular.size(HabitFormConstants.Metrics.valueFontSize - LineWidth.thin))
+                .font(.AppFont.rooneySansRegular.size(FontSize.x2Large - LineWidth.thin))
                 .foregroundStyle(.appPrimary)
 
             Spacer()
 
-            InlineIconButton(systemImage: AppIconName.xmark) {
+            InlineIconButton(systemImage: SystemIconName.xmark) {
                 if let index = editHabitViewModel.uiState.reminderTimes.firstIndex(of: time) {
                     editHabitViewModel.removeReminderTime(at: IndexSet(integer: index))
                 }
             }
         }
-        .padding(.horizontal, HabitFormConstants.Metrics.reminderRowHorizontalPadding)
-        .padding(.vertical, HabitFormConstants.Metrics.reminderRowVerticalPadding)
-        .background(.appPrimary.opacity(HabitFormConstants.Metrics.reminderRowOpacity))
-        .clipShape(RoundedRectangle(cornerRadius: HabitFormConstants.Metrics.reminderRowCornerRadius))
+        .padding(.horizontal, Spacing.large)
+        .padding(.vertical, Spacing.small)
+        .background(.appPrimary.opacity(Opacity.quiet))
+        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.small))
     }
 
     private func stepperButton(
@@ -336,8 +336,8 @@ struct EditHabitView: View {
         InlineIconButton(
             systemImage: systemImage,
             variant: .outlinedCircle,
-            size: HabitFormConstants.Metrics.stepperSize,
-            fontSize: HabitFormConstants.Metrics.stepperFontSize,
+            size: Size.large,
+            fontSize: FontSize.medium,
             fontWeight: .semibold,
             action: action
         )
@@ -345,14 +345,14 @@ struct EditHabitView: View {
 
     private func formCard<Content: View>(@ViewBuilder content: () -> Content) -> some View {
         content()
-            .padding(HabitFormConstants.Metrics.formCardPadding)
+            .padding(Spacing.x3Large)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(.appGray)
             .overlay {
-                RoundedRectangle(cornerRadius: HabitFormConstants.Metrics.formCardCornerRadius)
-                    .stroke(.appPrimary.opacity(0.08), lineWidth: LineWidth.thin)
+                RoundedRectangle(cornerRadius: CornerRadius.medium)
+                    .stroke(.appPrimary.opacity(Opacity.quiet), lineWidth: LineWidth.thin)
             }
-            .clipShape(RoundedRectangle(cornerRadius: HabitFormConstants.Metrics.formCardCornerRadius))
+            .clipShape(RoundedRectangle(cornerRadius: CornerRadius.medium))
     }
 
     private func formattedReminderTime(_ date: Date) -> String {
@@ -409,7 +409,7 @@ struct EditHabitView: View {
     let dependencies = AppDependencies()
     let manageHabitDependencies = dependencies.destinationDependencies.main.manageHabit
     
-    let sampleHabit = HabitModel(title: LocalizedStrings.AddHabitPage.titlePlaceholder)
+    let sampleHabit = HabitModel(title: L10n.AddHabitPage.titlePlaceholder)
     let fakeCoordinator = EditHabitCoordinator(dismiss: {
     })
     let viewModel = EditHabitViewModel(

@@ -25,8 +25,8 @@ final class HabitModel: IdentifiableModel {
         title: String,
         createdAt: Date = .now,
         sortOrder: Int = 0,
-        iconName: String = "checkmark.circle",
-        frequency: String = "daily",
+        iconName: String = SystemIconName.checkmark,
+        frequency: String = L10n.AddHabitPage.frequencyDaily,
         commitmentDays: Int = 21,
         reminderTimes: [String] = [],
         customWeekdays: [Int] = [Calendar.current.component(.weekday, from: Date())]

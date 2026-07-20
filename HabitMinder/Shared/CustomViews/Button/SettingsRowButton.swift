@@ -22,10 +22,10 @@ struct SettingsRowButton<Content: View>: View {
     var body: some View {
         Button(action: action) {
             content
-                .padding(12)
+                .padding(Spacing.medium)
                 .frame(maxWidth: .infinity)
                 .background(.appWhite)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .clipShape(RoundedRectangle(cornerRadius: CornerRadius.medium))
         }
         .buttonStyle(.plain)
     }

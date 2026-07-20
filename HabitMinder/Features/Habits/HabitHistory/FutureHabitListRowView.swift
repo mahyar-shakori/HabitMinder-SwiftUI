@@ -22,55 +22,55 @@ struct FutureHabitListRowView: View {
     }
 
     var body: some View {
-        VStack(spacing: Metrics.contentSpacing) {
-            HStack(alignment: .center, spacing: Metrics.contentSpacing) {
+        VStack(spacing: Spacing.large) {
+            HStack(alignment: .center, spacing: Spacing.large) {
                 habitIcon
 
                 Text(item.title)
-                    .font(.AppFont.rooneySansBold.size(Metrics.titleFontSize))
+                    .font(.AppFont.rooneySansBold.size(FontSize.x3Large))
                     .foregroundStyle(.primary)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 dateBadge
             }
 
-            AppButton(LocalizedStrings.FutureHabitsPage.startNowButton, variant: .compactPrimary) {
+            AppButton(L10n.FutureHabitsPage.startNowButton, variant: .compactPrimary) {
                 onStart()
             }
         }
-        .padding(Metrics.cardPadding)
+        .padding(Spacing.xLarge)
         .background(.appWhite)
-        .clipShape(RoundedRectangle(cornerRadius: Metrics.cardCornerRadius))
+        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.large))
     }
 
     private var habitIcon: some View {
         ZStack {
             Circle()
-                .fill(themeManager.appSecondary.opacity(Metrics.iconBackgroundOpacity))
+                .fill(themeManager.appSecondary.opacity(Opacity.iconBackground))
 
             Image(systemName: item.iconName)
-                .font(.system(size: Metrics.iconFontSize, weight: .medium))
+                .font(.system(size: FontSize.x4Large, weight: .medium))
                 .foregroundStyle(themeManager.appPrimary)
         }
-        .frame(width: Metrics.iconContainerSize, height: Metrics.iconContainerSize)
+        .frame(width: Size.x3Large, height: Size.x3Large)
     }
 
     private var dateBadge: some View {
         Text(dateText)
-            .font(.AppFont.rooneySansBold.size(Metrics.badgeFontSize))
+            .font(.AppFont.rooneySansBold.size(FontSize.xSmall))
             .textCase(.uppercase)
             .foregroundStyle(themeManager.appPrimary)
-            .padding(.horizontal, Metrics.badgeHorizontalPadding)
-            .padding(.vertical, Metrics.badgeVerticalPadding)
-            .background(themeManager.appSecondary.opacity(0.45))
+            .padding(.horizontal, Spacing.xSmall + LineWidth.thin)
+            .padding(.vertical, Spacing.x2Small + LineWidth.thin)
+            .background(themeManager.appSecondary.opacity(Opacity.iconBackground))
             .clipShape(Capsule())
     }
 
     private var dateText: String {
         let daysUntilStart = Calendar.current.dateComponents([.day], from: .now, to: item.dateCreate).day ?? 0
 
-        if daysUntilStart > Metrics.todayOffset, daysUntilStart <= Metrics.nearFutureDayLimit {
-            return LocalizedStrings.FutureHabitsPage.startInDays(daysUntilStart)
+        if daysUntilStart > LayoutCount.zero, daysUntilStart <= LayoutCount.nearFutureDayLimit {
+            return L10n.FutureHabitsPage.startInDays(daysUntilStart)
         }
 
         return item.dateCreate.formatted(.dateTime.month(.abbreviated).day())
@@ -78,36 +78,15 @@ struct FutureHabitListRowView: View {
 
 }
 
-private enum Metrics {
-    static let contentSpacing: CGFloat = 14
-    static let cardPadding: CGFloat = 16
-    static let cardCornerRadius: CGFloat = 14
-    static let titleFontSize: CGFloat = 17
-    static let iconFontSize: CGFloat = 18
-    static let iconContainerSize: CGFloat = 48
-    static let iconBackgroundOpacity: CGFloat = 0.45
-    static let badgeFontSize: CGFloat = 11
-    static let badgeHorizontalPadding: CGFloat = 9
-    static let badgeVerticalPadding: CGFloat = 5
-    static let todayOffset = 0
-    static let nearFutureDayLimit = 7
-}
-
-private enum PreviewData {
-    static let title = LocalizedStrings.AddHabitPage.titlePlaceholder
-    static let startDelay: TimeInterval = 60 * 60 * 24 * 3
-    static let iconName = AppIconName.book
-    static let commitmentDays = 21
-}
 
 #Preview {
     let dependencies = AppDependencies()
     let item = FutureHabitItem(
         id: UUID(),
-        title: PreviewData.title,
-        dateCreate: .now.addingTimeInterval(PreviewData.startDelay),
-        iconName: PreviewData.iconName,
-        commitmentDays: PreviewData.commitmentDays
+        title: "test",
+        dateCreate: .now.addingTimeInterval(10),
+        iconName: SystemIconName.book,
+        commitmentDays: 21
     )
 
     FutureHabitListRowView(item: item)

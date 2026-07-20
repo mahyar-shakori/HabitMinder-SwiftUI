@@ -48,7 +48,7 @@ struct ColorPickerView: View {
             Color.appGray
                 .ignoresSafeArea()
 
-            VStack(spacing: Metrics.contentSpacing) {
+            VStack(spacing: Spacing.xLarge) {
                 colorPickerField
                 defaultColorButton
                 Spacer()
@@ -59,56 +59,50 @@ struct ColorPickerView: View {
     
     private var colorPickerField: some View {
         ColorPicker(selection: $selectedColor, supportsOpacity: false) {
-            Text(LocalizedStrings.SettingPage.pickColor)
-                .font(.AppFont.rooneySansRegular.size(Metrics.textFontSize))
+            Text(L10n.SettingPage.pickColor)
+                .font(.AppFont.rooneySansRegular.size(FontSize.x4Large))
         }
-        .padding(Metrics.cardPadding)
+        .padding(Spacing.medium)
         .background(
-            RoundedRectangle(cornerRadius: Metrics.cardCornerRadius)
+            RoundedRectangle(cornerRadius: CornerRadius.medium)
                 .fill(.appWhite)
         )
     }
     
     private var defaultColorButton: some View {
         AppButton(
-            LocalizedStrings.SettingPage.defaultColor,
+            L10n.SettingPage.defaultColor,
             variant: .plain
         ) {
             let defaultColor = Color.appPrimary
             selectedColor = defaultColor
             themeManager.appPrimary = defaultColor
         }
-        .padding(Metrics.cardPadding)
+        .padding(Spacing.medium)
         .frame(maxWidth: .infinity)
         .background(.appWhite)
-        .clipShape(RoundedRectangle(cornerRadius: Metrics.cardCornerRadius))
+        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.medium))
     }
     
     private var toolbarTitle: some View {
-        Text(LocalizedStrings.SettingPage.chooseColor)
-            .font(.AppFont.rooneySansBold.size(Metrics.textFontSize))
+        Text(L10n.SettingPage.chooseColor)
+            .font(.AppFont.rooneySansBold.size(FontSize.x4Large))
     }
     
     private var toolbarSaveButton: some View {
-        ToolbarTextButton(LocalizedStrings.Shared.saveButton, weight: .bold) {
+        ToolbarTextButton(L10n.Shared.saveButton, weight: .bold) {
             themeManager.appPrimary = selectedColor
             isPresented = false
         }
     }
    
     private var toolbarCancelButton: some View {
-        ToolbarTextButton(LocalizedStrings.Shared.cancelButton) {
+        ToolbarTextButton(L10n.Shared.cancelButton) {
             isPresented = false
         }
     }
 }
 
-private enum Metrics {
-    static let contentSpacing: CGFloat = 16
-    static let cardPadding: CGFloat = 12
-    static let cardCornerRadius: CGFloat = 12
-    static let textFontSize: CGFloat = 18
-}
 
 #Preview {
     let dependencies = AppDependencies()

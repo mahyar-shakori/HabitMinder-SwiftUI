@@ -17,12 +17,12 @@ struct SelectableIconButton: View {
     var body: some View {
         Button(action: action) {
             Image(systemName: systemImage)
-                .font(.system(size: 18, weight: .medium))
+                .font(.system(size: FontSize.x4Large, weight: .medium))
                 .foregroundStyle(isSelected ? .appWhite : themeManager.appPrimary)
                 .frame(maxWidth: .infinity)
-                .frame(height: 56)
-                .background(isSelected ? themeManager.appPrimary : themeManager.appPrimary.opacity(0.07))
-                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .frame(height: Size.x4Large)
+                .background(isSelected ? themeManager.appPrimary : themeManager.appPrimary.opacity(Opacity.quiet))
+                .clipShape(RoundedRectangle(cornerRadius: CornerRadius.small))
         }
         .buttonStyle(.plain)
     }

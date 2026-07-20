@@ -57,6 +57,7 @@
 "logoutAlertMessage" = "Are you sure you want to log out? All your data will be permanently deleted.";
 "deleteHabitAlertTitle" = "Delete Habit";
 "deleteHabitAlertMessage" = "Are you sure you want to delete this habit?";
+"deleteHabitNamedAlertMessage" = "Are you sure you want to delete \"%@\"?";
 "editHabitAlertTitle" = "Edit Habit";
 "editHabitAlertMessage" = "Are you sure you want to start this habit over?";
 "dropDownAddNewHabit" = "Add New Habit";
@@ -73,6 +74,8 @@
 "homeListSubtitle" = "Focus on your ritual for today";
 "homeQuoteLabel" = "QUOTE";
 "homeQuoteFormat" = "\"%@\"";
+"homeDefaultAuthor" = "Edward Corey";
+"homeAuthorFormat" = "- %@";
 "habitNotificationAlertTitle" = "Notifications are off";
 "habitNotificationAlertMessage" = "Enable notifications in Settings to use habit reminders.";
 "habitNotificationSettingsButton" = "Settings";
@@ -86,6 +89,9 @@
 "habitReminderSectionTitle" = "Reminder";
 "habitReminderSubtitle" = "Stay on track with a gentle nudge.";
 "habitStartJourneyButton" = "Start Journey";
+"habitFrequencyDaily" = "Daily";
+"habitFrequencyWeekly" = "Weekly";
+"habitFrequencyCustom" = "Custom";
 "habitCommitmentDaysFormat" = "%d Days";
 "habitCellJourneyFormat" = "%d-Day Journey";
 "habitCellProgressFormat" = "Day %d of %d";

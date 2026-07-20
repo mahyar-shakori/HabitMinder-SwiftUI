@@ -11,6 +11,7 @@ struct AppButton: View {
     enum Variant: Equatable {
         case primary
         case compactPrimary
+        case onboardingNext
         case secondary
         case plain
     }
@@ -64,17 +65,17 @@ struct AppButton: View {
     private var font: Font {
         switch variant {
         case .primary:
-            .AppFont.rooneySansBold.size(20)
+            .AppFont.rooneySansBold.size(FontSize.x5Large)
         case .compactPrimary:
-            .AppFont.rooneySansBold.size(13)
-        case .secondary, .plain:
-            .AppFont.rooneySansBold.size(18)
+            .AppFont.rooneySansBold.size(FontSize.medium)
+        case .onboardingNext, .secondary, .plain:
+            .AppFont.rooneySansBold.size(FontSize.x4Large)
         }
     }
 
     private var foregroundColor: Color {
         switch variant {
-        case .primary, .compactPrimary:
+        case .primary, .compactPrimary, .onboardingNext:
             .appWhite
         case .secondary:
             themeManager.appPrimary
@@ -85,7 +86,7 @@ struct AppButton: View {
 
     private var backgroundColor: Color {
         switch variant {
-        case .primary, .compactPrimary:
+        case .primary, .compactPrimary, .onboardingNext:
             isEnabled ? themeManager.appPrimary : themeManager.appSecondary
         case .secondary, .plain:
             .clear
@@ -99,45 +100,39 @@ struct AppButton: View {
     private var horizontalPadding: CGFloat {
         switch variant {
         case .primary:
-            16
+            Spacing.xLarge
         case .compactPrimary:
-            14
-        case .secondary:
-            16
+            Spacing.large
+        case .onboardingNext, .secondary:
+            Spacing.xLarge
         case .plain:
-            0
+            Spacing.none
         }
     }
 
     private var verticalPadding: CGFloat {
         switch variant {
         case .primary:
-            16
+            Spacing.xLarge
         case .compactPrimary:
-            9
-        case .secondary:
-            8
+            Spacing.xSmall + LineWidth.thin
+        case .onboardingNext, .secondary:
+            Spacing.xSmall
         case .plain:
-            0
+            Spacing.none
         }
     }
 }
 
-private enum PreviewText {
-    static let primary = "Primary"
-    static let compact = "Compact"
-    static let secondary = "Secondary"
-    static let plain = "Plain"
-}
 
 #Preview {
     let dependencies = AppDependencies()
 
-    VStack(spacing: 16) {
-        AppButton(PreviewText.primary, systemImage: AppIconName.sparkles) {}
-        AppButton(PreviewText.compact, variant: .compactPrimary) {}
-        AppButton(PreviewText.secondary, variant: .secondary) {}
-        AppButton(PreviewText.plain, variant: .plain) {}
+    VStack(spacing: Spacing.medium) {
+        AppButton("test", systemImage: SystemIconName.sparkles) {}
+        AppButton("test", variant: .compactPrimary) {}
+        AppButton("test", variant: .secondary) {}
+        AppButton("test", variant: .plain) {}
     }
     .padding()
     .environmentObject(dependencies.themeManager)

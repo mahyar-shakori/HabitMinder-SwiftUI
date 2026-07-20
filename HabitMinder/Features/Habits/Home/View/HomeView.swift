@@ -43,9 +43,9 @@ struct HomeView: View {
                 homeViewModel.fetchHabits()
                 selectedTab = .habits
             }
-            .alert(LocalizedStrings.Alert.Habit.deleteTitle, isPresented: $showDeleteAlert) {
-                Button(LocalizedStrings.Shared.yesButton, role: .destructive) { homeViewModel.performDelete() }
-                Button(LocalizedStrings.Shared.cancelButton, role: .cancel) { homeViewModel.cancelDelete() }
+            .alert(L10n.Alert.Habit.deleteTitle, isPresented: $showDeleteAlert) {
+                Button(L10n.Shared.yesButton, role: .destructive) { homeViewModel.performDelete() }
+                Button(L10n.Shared.cancelButton, role: .cancel) { homeViewModel.cancelDelete() }
             } message: {
                 Text(homeViewModel.deleteConfirmationMessage)
             }
@@ -55,19 +55,19 @@ struct HomeView: View {
         TabView(selection: $selectedTab) {
             content
                 .tabItem {
-                    Label(LocalizedStrings.HomePage.tabHabits, systemImage: AppIconName.calendar)
+                    Label(L10n.HomePage.tabHabits, systemImage: SystemIconName.calendar)
                 }
                 .tag(HomeTab.habits)
 
             habitHistoryView
                 .tabItem {
-                    Label(LocalizedStrings.HomePage.tabHistory, systemImage: AppIconName.wandAndStars)
+                    Label(L10n.HomePage.tabHistory, systemImage: SystemIconName.wandAndStars)
                 }
                 .tag(HomeTab.history)
 
-            tabPlaceholder(systemImage: AppIconName.gearshape, title: LocalizedStrings.HomePage.tabSettings)
+            tabPlaceholder(systemImage: SystemIconName.gearshape, title: L10n.HomePage.tabSettings)
                 .tabItem {
-                    Label(LocalizedStrings.HomePage.tabSettings, systemImage: AppIconName.gearshape)
+                    Label(L10n.HomePage.tabSettings, systemImage: SystemIconName.gearshape)
                 }
                 .tag(HomeTab.settings)
         }
@@ -107,24 +107,24 @@ struct HomeView: View {
 
     private var pageHeader: some View {
         AppHeaderView(
-            title: LocalizedStrings.HomePage.headerTitle,
-            systemImage: AppIconName.leaf
+            title: L10n.HomePage.headerTitle,
+            systemImage: SystemIconName.leaf
         )
     }
 
     private var listHeader: some View {
-        VStack(alignment: .leading, spacing: Metrics.listHeaderSpacing) {
-            Text(LocalizedStrings.HomePage.listTitle)
-                .font(.AppFont.rooneySansBold.size(Metrics.listTitleFontSize))
+        VStack(alignment: .leading, spacing: Spacing.x2Small) {
+            Text(L10n.HomePage.listTitle)
+                .font(.AppFont.rooneySansBold.size(FontSize.x8Large))
                 .foregroundStyle(.primary)
 
-            Text(LocalizedStrings.HomePage.listSubtitle)
-                .font(.AppFont.rooneySansRegular.size(Metrics.bodyFontSize))
+            Text(L10n.HomePage.listSubtitle)
+                .font(.AppFont.rooneySansRegular.size(FontSize.xLarge))
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, Metrics.listHeaderHorizontalPadding)
-        .padding(.bottom, Metrics.listHeaderBottomPadding)
+        .padding(.horizontal, Spacing.x4Large)
+        .padding(.bottom, Spacing.large)
     }
 
     private var scrollContent: some View {
@@ -132,7 +132,7 @@ struct HomeView: View {
             if homeViewModel.listItems.isEmpty {
                 CustomEmptyView(
                     image: Image(.emptyView),
-                    text: LocalizedStrings.HomePage.emptyView
+                    text: L10n.HomePage.emptyView
                 )
                 .homeListRowStyle()
             } else {
@@ -159,51 +159,51 @@ struct HomeView: View {
         FloatingActionButton {
             homeViewModel.goToAddHabitPage()
         }
-        .padding(.trailing, Metrics.addButtonTrailingPadding)
-        .padding(.bottom, Metrics.addButtonBottomPadding)
+        .padding(.trailing, Spacing.x3Large)
+        .padding(.bottom, Spacing.x2Large)
     }
 
     private var quoteCard: some View {
-        VStack(alignment: .leading, spacing: Metrics.quoteSpacing) {
-            Label(LocalizedStrings.HomePage.quoteLabel, systemImage: AppIconName.quoteBubble)
-                .font(.AppFont.rooneySansBold.size(Metrics.quoteLabelFontSize))
+        VStack(alignment: .leading, spacing: Spacing.small) {
+            Label(L10n.HomePage.quoteLabel, systemImage: SystemIconName.quoteBubble)
+                .font(.AppFont.rooneySansBold.size(FontSize.small))
                 .foregroundStyle(themeManager.appPrimary)
 
-            Text(LocalizedStrings.HomePage.quoted(homeViewModel.displayedQuote))
-                .font(.AppFont.rooneySansRegular.size(Metrics.bodyFontSize))
+            Text(L10n.HomePage.quoted(homeViewModel.displayedQuote))
+                .font(.AppFont.rooneySansRegular.size(FontSize.xLarge))
                 .italic()
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
 
             if homeViewModel.displayedAuthor.isNotEmpty {
                 Text(homeViewModel.displayedAuthor)
-                    .font(.AppFont.rooneySansRegular.size(Metrics.authorFontSize))
+                    .font(.AppFont.rooneySansRegular.size(FontSize.large))
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity, alignment: .trailing)
             }
         }
-        .padding(Metrics.quotePadding)
+        .padding(Spacing.x2Large)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(themeManager.appSecondary.opacity(Metrics.quoteBackgroundOpacity))
+        .background(themeManager.appSecondary.opacity(Opacity.subtle))
         .overlay {
-            RoundedRectangle(cornerRadius: Metrics.quoteCornerRadius)
+            RoundedRectangle(cornerRadius: CornerRadius.xLarge)
                 .strokeBorder(
-                    themeManager.appPrimary.opacity(Metrics.quoteBorderOpacity),
-                    style: StrokeStyle(lineWidth: LineWidth.thin, dash: Metrics.quoteBorderDash)
+                    themeManager.appPrimary.opacity(Opacity.subtle),
+                    style: StrokeStyle(lineWidth: LineWidth.thin, dash: StrokeDash.subtle)
                 )
         }
-        .clipShape(RoundedRectangle(cornerRadius: Metrics.quoteCornerRadius))
+        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.xLarge))
         .homeListRowStyle()
     }
 
     private func tabPlaceholder(systemImage: String, title: String) -> some View {
-        VStack(spacing: Metrics.placeholderSpacing) {
+        VStack(spacing: Spacing.medium) {
             Image(systemName: systemImage)
-                .font(.system(size: Metrics.placeholderIconSize, weight: .semibold))
+                .font(.system(size: Size.xLarge, weight: .semibold))
                 .foregroundStyle(themeManager.appPrimary)
 
             Text(title)
-                .font(.AppFont.rooneySansBold.size(Metrics.placeholderTitleFontSize))
+                .font(.AppFont.rooneySansBold.size(FontSize.x5Large))
                 .foregroundStyle(.primary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -214,7 +214,7 @@ struct HomeView: View {
         Button {
             homeViewModel.confirmDelete(id: id)
         } label: {
-            Image(systemName: AppIconName.trash)
+            Image(systemName: SystemIconName.trash)
         }
         .tint(.red)
     }
@@ -223,7 +223,7 @@ struct HomeView: View {
         Button {
             homeViewModel.editHabit(id: id)
         } label: {
-            Image(systemName: AppIconName.pencil)
+            Image(systemName: SystemIconName.pencil)
         }
         .tint(.blue)
     }
@@ -235,31 +235,6 @@ private enum HomeTab {
     case settings
 }
 
-private enum Metrics {
-    static let listHeaderSpacing: CGFloat = 4
-    static let listTitleFontSize: CGFloat = 24
-    static let bodyFontSize: CGFloat = 15
-    static let authorFontSize: CGFloat = 14
-    static let listHeaderHorizontalPadding: CGFloat = 22
-    static let listHeaderBottomPadding: CGFloat = 14
-    static let addButtonTrailingPadding: CGFloat = 20
-    static let addButtonBottomPadding: CGFloat = 18
-    static let quoteSpacing: CGFloat = 10
-    static let quoteLabelFontSize: CGFloat = 12
-    static let quotePadding: CGFloat = 18
-    static let quoteBackgroundOpacity: CGFloat = 0.18
-    static let quoteBorderOpacity: CGFloat = 0.18
-    static let quoteCornerRadius: CGFloat = 16
-    static let quoteBorderDash: [CGFloat] = [3, 3]
-    static let placeholderSpacing: CGFloat = 12
-    static let placeholderIconSize: CGFloat = 36
-    static let placeholderTitleFontSize: CGFloat = 20
-}
-
-private enum PreviewData {
-    static let quote = LocalizedStrings.HomePage.defaultQuote
-    static let author = LocalizedStrings.WelcomePage.welcome
-}
 
 private extension View {
     func homeListRowStyle() -> some View {
@@ -279,8 +254,8 @@ private extension View {
     })
     let reminderScheduler = habitDependencies.reminderScheduler
     let viewModel = HomeViewModel(
-        quote: PreviewData.quote,
-        author: PreviewData.author,
+        quote: "test",
+        author: "test",
         dataManager: DataManager(context: context),
         coordinator: fakeCoordinator,
         connectivityService: habitDependencies.connectivityService,

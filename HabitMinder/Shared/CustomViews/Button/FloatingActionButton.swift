@@ -14,7 +14,7 @@ struct FloatingActionButton: View {
     @EnvironmentObject private var themeManager: ThemeManager
 
     init(
-        systemImage: String = "plus",
+        systemImage: String = SystemIconName.plus,
         action: @escaping () -> Void
     ) {
         self.systemImage = systemImage
@@ -24,11 +24,11 @@ struct FloatingActionButton: View {
     var body: some View {
         Button(action: action) {
             Image(systemName: systemImage)
-                .font(.system(size: 26, weight: .medium))
+                .font(.system(size: Size.buttonIcon, weight: .medium))
         }
         .buttonStyle(.plain)
         .foregroundStyle(.appWhite)
-        .frame(width: 60, height: 60)
+        .frame(width: Size.x4Large, height: Size.x4Large)
         .circleBackground(themeManager.appPrimary)
     }
 }

@@ -16,14 +16,14 @@ enum NetworkError: Error, LocalizedError, Equatable, Sendable {
     var errorDescription: String? {
         switch self {
         case .invalidURL:
-            return LocalizedStrings.Alert.Network.invalidURL
+            return L10n.Alert.Network.invalidURL
         case .invalidResponse:
-            return LocalizedStrings.Alert.Network.decodingFailed
+            return L10n.Alert.Network.decodingFailed
         case .unacceptableStatusCode(let code):
             // Should Change
             return "(BAD RESPONSE CODE: \(code))"
         case .decodingFailed:
-            return LocalizedStrings.Alert.Network.invalidMultipartBody
+            return L10n.Alert.Network.invalidMultipartBody
         }
     }
 }

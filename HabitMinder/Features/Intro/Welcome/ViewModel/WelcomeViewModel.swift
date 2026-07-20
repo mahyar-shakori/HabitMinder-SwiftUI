@@ -61,7 +61,7 @@ final class WelcomeViewModel {
     }
     
     private func formattedWelcomeName(from userName: String?) -> String {
-        return userName.map { LocalizedStrings.WelcomePage.welcome + $0 }
-        ?? LocalizedStrings.WelcomePage.guest
+        return userName.map { L10n.WelcomePage.welcome + $0 }
+        ?? L10n.WelcomePage.guest
     }
 }

@@ -18,6 +18,10 @@ final class AddHabitViewModel: ObservableObject {
     private var trimmedHabitTitle: String {
         uiState.habitTitle.trimmingCharacters(in: .whitespacesAndNewlines)
     }
+
+    private var selectedIconName: String {
+        uiState.selectedIconName.isEmpty ? SystemIconName.checkmark : uiState.selectedIconName
+    }
     
     init(
         dataManager: DataManaging,
@@ -148,7 +152,7 @@ final class AddHabitViewModel: ObservableObject {
         let newHabit = HabitModel(
             title: trimmedHabitTitle,
             sortOrder: maxSortOrder + 1,
-            iconName: uiState.selectedIconName,
+            iconName: selectedIconName,
             frequency: uiState.selectedFrequency.rawValue,
             commitmentDays: uiState.commitmentDays,
             reminderTimes: uiState.reminderTimes,
@@ -169,7 +173,7 @@ final class AddHabitViewModel: ObservableObject {
     private func saveFutureHabit() {
         let newHabit = FutureHabitModel(
             title: trimmedHabitTitle,
-            iconName: uiState.selectedIconName,
+            iconName: selectedIconName,
             frequency: uiState.selectedFrequency.rawValue,
             commitmentDays: uiState.commitmentDays,
             reminderTimes: uiState.reminderTimes,

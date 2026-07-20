@@ -57,6 +57,7 @@
 "logoutAlertMessage" = "Weet je zeker dat je wilt uitloggen? Al je gegevens worden permanent verwijderd.";
 "deleteHabitAlertTitle" = "Gewoonte verwijderen";
 "deleteHabitAlertMessage" = "Weet je zeker dat je deze gewoonte wilt verwijderen?";
+"deleteHabitNamedAlertMessage" = "Weet je zeker dat je \"%@\" wilt verwijderen?";
 "editHabitAlertTitle" = "Gewoonte bewerken";
 "editHabitAlertMessage" = "Weet je zeker dat je deze gewoonte opnieuw wilt starten?";
 "dropDownAddNewHabit" = "Nieuwe gewoonte toevoegen";
@@ -73,6 +74,8 @@
 "homeListSubtitle" = "Focus vandaag op je ritueel";
 "homeQuoteLabel" = "QUOTE";
 "homeQuoteFormat" = "\"%@\"";
+"homeDefaultAuthor" = "Edward Corey";
+"homeAuthorFormat" = "- %@";
 "habitNotificationAlertTitle" = "Meldingen staan uit";
 "habitNotificationAlertMessage" = "Schakel meldingen in Instellingen in om gewoonteherinneringen te gebruiken.";
 "habitNotificationSettingsButton" = "Instellingen";
@@ -86,6 +89,9 @@
 "habitReminderSectionTitle" = "Herinnering";
 "habitReminderSubtitle" = "Blijf op koers met een zachte herinnering.";
 "habitStartJourneyButton" = "Start reis";
+"habitFrequencyDaily" = "Dagelijks";
+"habitFrequencyWeekly" = "Wekelijks";
+"habitFrequencyCustom" = "Aangepast";
 "habitCommitmentDaysFormat" = "%d dagen";
 "habitCellJourneyFormat" = "%d-daagse reis";
 "habitCellProgressFormat" = "Dag %d van %d";

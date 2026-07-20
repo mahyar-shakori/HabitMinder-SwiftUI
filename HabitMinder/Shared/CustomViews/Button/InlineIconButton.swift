@@ -25,8 +25,8 @@ struct InlineIconButton: View {
     init(
         systemImage: String,
         variant: Variant = .plain,
-        size: CGFloat = 24,
-        fontSize: CGFloat = 11,
+        size: CGFloat = Size.medium,
+        fontSize: CGFloat = FontSize.xSmall,
         fontWeight: Font.Weight = .bold,
         action: @escaping () -> Void
     ) {
@@ -47,7 +47,7 @@ struct InlineIconButton: View {
                 .overlay {
                     if variant == .outlinedCircle {
                         Circle()
-                            .stroke(themeManager.appPrimary, lineWidth: 1)
+                            .stroke(themeManager.appPrimary, lineWidth: LineWidth.thin)
                     }
                 }
         }
@@ -58,13 +58,13 @@ struct InlineIconButton: View {
 #Preview {
     let dependencies = AppDependencies()
 
-    HStack(spacing: 16) {
-        InlineIconButton(systemImage: AppIconName.xmark) {}
+    HStack(spacing: Spacing.xLarge) {
+        InlineIconButton(systemImage: SystemIconName.xmark) {}
         InlineIconButton(
-            systemImage: AppIconName.plus,
+            systemImage: SystemIconName.plus,
             variant: .outlinedCircle,
-            size: 30,
-            fontSize: 13,
+            size: Size.large,
+            fontSize: FontSize.medium,
             fontWeight: .semibold
         ) {}
     }

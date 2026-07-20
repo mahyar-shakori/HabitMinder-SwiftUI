@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct IntroView: View {
-    @State private var introViewModel: IntroViewModel
+    private var introViewModel: IntroViewModel
     @EnvironmentObject private var themeManager: ThemeManager
     
     init(introViewModel: IntroViewModel) {
-        _introViewModel = State(initialValue: introViewModel)
+        self.introViewModel = introViewModel
     }
     
     var body: some View {
@@ -35,22 +35,22 @@ struct IntroView: View {
         Image(introViewModel.currentState.image)
             .resizable()
             .scaledToFit()
-            .padding(.horizontal, Spacing.medium)
+            .padding(.horizontal, Spacing.xLarge)
     }
     
     private var titleText: some View {
         Text(introViewModel.currentState.title)
-            .font(Fonts.titleLarge)
+            .font(.AppFont.rooneySansBold.size(FontSize.x8Large))
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, Spacing.medium)
-            .padding(.top, Spacing.xLarge)
+            .padding(.horizontal, Spacing.xLarge)
+            .padding(.top, Spacing.x7Large)
     }
     
     private var descriptionText: some View {
         Text(introViewModel.currentState.description)
-            .font(Fonts.bodyLarge)
+            .font(Font.AppFont.rooneySansRegular.size(FontSize.x4Large))
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, Spacing.medium)
+            .padding(.horizontal, Spacing.xLarge)
     }
     
     private var bottomControls: some View {
@@ -66,13 +66,13 @@ struct IntroView: View {
                 nextButton
             }
         }
-        .padding(.horizontal, Spacing.large)
-        .padding(.bottom, Spacing.medium)
+        .padding(.horizontal, Spacing.x5Large)
+        .padding(.bottom, Spacing.xLarge)
     }
     
     private var skipButton: some View {
         AppButton(
-            LocalizedStrings.IntroPage.skipButton,
+            L10n.IntroPage.skipButton,
             variant: .secondary
         ) {
             introViewModel.goToSetNamePage()
@@ -80,22 +80,26 @@ struct IntroView: View {
     }
     
     private var nextButton: some View {
-        AppButton(LocalizedStrings.IntroPage.nextButton) {
+        AppButton(
+            L10n.IntroPage.nextButton,
+            variant: .onboardingNext
+        ) {
             introViewModel.nextState()
         }
+        .padding(.horizontal, Spacing.xSmall)
     }
     
     private var pageIndicator: some View {
-        HStack(spacing: Spacing.xSmall) {
+        HStack(spacing: Spacing.small) {
             Capsule()
                 .fill(themeManager.appPrimary)
-                .frame(width: introViewModel.currentState == .second ? Size.xLarge : Size.large, height: Size.small)
+                .frame(width: introViewModel.currentState == .second ? Size.x6Large : Size.x2Large, height: Size.xSmall)
                 .animation(.easeInOut(duration: Time.short), value: introViewModel.currentState)
 
             if introViewModel.currentState == .first {
                 Capsule()
                     .fill(themeManager.appSecondary)
-                    .frame(width: Size.medium, height: Size.small)
+                    .frame(width: Size.small, height: Size.xSmall)
                     .transition(.opacity)
             }
         }

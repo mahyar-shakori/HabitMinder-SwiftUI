@@ -15,7 +15,7 @@ struct CustomEmptyView: View {
     init(
         image: Image,
         text: String,
-        imageSize: CGFloat = Metrics.defaultImageSize
+        imageSize: CGFloat = Size.largeEmptyImage
     ) {
         self.image = image
         self.text = text
@@ -23,30 +23,24 @@ struct CustomEmptyView: View {
     }
     
     var body: some View {
-        VStack(spacing: Metrics.spacing) {
+        VStack(spacing: Spacing.small) {
             image
                 .resizable()
                 .scaledToFit()
                 .frame(width: imageSize, height: imageSize)
             
             Text(text)
-                .font(.AppFont.rooneySansRegular.size(Metrics.textFontSize))
+                .font(.AppFont.rooneySansRegular.size(FontSize.x3Large))
                 .frame(maxWidth: .infinity, alignment: .center)
-                .padding(.horizontal, Metrics.horizontalPadding)
+                .padding(.horizontal, Spacing.x8Large)
         }
         .padding()
     }
 }
 
-private enum Metrics {
-    static let defaultImageSize: CGFloat = 180
-    static let spacing: CGFloat = 10
-    static let textFontSize: CGFloat = 17
-    static let horizontalPadding: CGFloat = 48
-}
 
 #Preview {
     let image = Image(.emptyView)
-    let text = LocalizedStrings.HomePage.listSubtitle
+    let text = L10n.HomePage.listSubtitle
     CustomEmptyView(image: image, text: text)
 }

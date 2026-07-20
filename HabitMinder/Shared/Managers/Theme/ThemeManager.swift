@@ -17,7 +17,7 @@ final class ThemeManager: ThemeManaging, ObservableObject{
     private let userDefaultsStorage: UserDefaultsStoring
     
     var appSecondary: Color {
-        appPrimary.opacity(0.4)
+        appPrimary.opacity(Opacity.secondaryTint)
     }
     
     init(userDefaultsStorage: UserDefaultsStoring) {

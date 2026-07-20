@@ -34,26 +34,26 @@ struct SettingView: View {
     }
     
     private var titleText: some View {
-        Text(LocalizedStrings.SettingPage.title)
-            .font(.AppFont.rooneySansBold.size(Metrics.titleFontSize))
+        Text(L10n.SettingPage.title)
+            .font(.AppFont.rooneySansBold.size(FontSize.x9Large))
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.top, Metrics.titleTopPadding)
-            .padding(.horizontal, Metrics.horizontalPadding)
+            .padding(.top, Spacing.x7Large)
+            .padding(.horizontal, Spacing.x5Large)
     }
     
     private var settingCustomize: some View {
-        VStack(alignment: .leading, spacing: Metrics.sectionSpacing) {
+        VStack(alignment: .leading, spacing: Spacing.x5Large) {
             userNameSection
             colorSection
         }
-        .padding(.top, Metrics.contentTopPadding)
+        .padding(.top, Spacing.xSmall)
         .padding()
     }
     
     private var userNameSection: some View {
-        VStack(alignment: .leading, spacing: Metrics.fieldSpacing) {
-            Text(LocalizedStrings.SettingPage.userName)
-                .font(.AppFont.rooneySansRegular.size(Metrics.labelFontSize))
+        VStack(alignment: .leading, spacing: Spacing.xSmall) {
+            Text(L10n.SettingPage.userName)
+                .font(.AppFont.rooneySansRegular.size(FontSize.x4Large))
                 .foregroundColor(.gray)
             userNameField
         }
@@ -78,15 +78,15 @@ struct SettingView: View {
         HStack {
             Text(settingViewModel.userName)
             Spacer()
-            Image(systemName: AppIconName.chevronDown)
+            Image(systemName: SystemIconName.chevronDown)
                 .foregroundColor(.gray)
         }
     }
     
     private var colorSection: some View {
-        VStack(alignment: .leading, spacing: Metrics.fieldSpacing) {
-            Text(LocalizedStrings.SettingPage.appColor)
-                .font(.AppFont.rooneySansRegular.size(Metrics.labelFontSize))
+        VStack(alignment: .leading, spacing: Spacing.xSmall) {
+            Text(L10n.SettingPage.appColor)
+                .font(.AppFont.rooneySansRegular.size(FontSize.x4Large))
                 .foregroundColor(.gray)
             colorPickerField
         }
@@ -105,29 +105,19 @@ struct SettingView: View {
     
     private var colorPickerButtonContent: some View {
         HStack {
-            Text(LocalizedStrings.SettingPage.setColor)
+            Text(L10n.SettingPage.setColor)
             Spacer()
             
             Circle()
                 .fill(themeManager.appPrimary)
-                .frame(width: Metrics.colorPreviewSize, height: Metrics.colorPreviewSize)
+                .frame(width: Size.medium, height: Size.medium)
             
-            Image(systemName: AppIconName.chevronDown)
+            Image(systemName: SystemIconName.chevronDown)
                 .foregroundColor(.gray)
         }
     }
 }
 
-private enum Metrics {
-    static let titleFontSize: CGFloat = 28
-    static let titleTopPadding: CGFloat = 32
-    static let horizontalPadding: CGFloat = 24
-    static let sectionSpacing: CGFloat = 24
-    static let fieldSpacing: CGFloat = 8
-    static let contentTopPadding: CGFloat = 8
-    static let labelFontSize: CGFloat = 18
-    static let colorPreviewSize: CGFloat = 24
-}
 
 #Preview {
     let dependencies = AppDependencies()

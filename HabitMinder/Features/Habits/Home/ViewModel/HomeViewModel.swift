@@ -28,25 +28,25 @@ final class HomeViewModel {
     }
 
     var displayedQuote: String {
-        shouldUseDefaultQuote ? LocalizedStrings.HomePage.defaultQuote : quote
+        shouldUseDefaultQuote ? L10n.HomePage.defaultQuote : quote
     }
 
     var displayedAuthor: String {
-        let displayedAuthor = shouldUseDefaultQuote ? "Edward Corey" : author
-        return displayedAuthor.isEmpty ? "" : "- \(displayedAuthor)"
+        let displayedAuthor = shouldUseDefaultQuote ? L10n.HomePage.defaultAuthor : author
+        return displayedAuthor.isEmpty ? String() : L10n.HomePage.author(displayedAuthor)
     }
 
     var deleteConfirmationMessage: String {
         guard let itemToDelete,
               let title = listItems.first(where: { $0.id == itemToDelete })?.title else {
-            return LocalizedStrings.Alert.Habit.deleteMessage
+            return L10n.Alert.Habit.deleteMessage
         }
 
-        return "Are you sure you want to delete \"\(title)\"?"
+        return L10n.Alert.Habit.deleteMessage(title: title)
     }
 
     private var shouldUseDefaultQuote: Bool {
-        quote.count > 100 || quote.isEmpty
+        quote.count > LayoutCount.quoteCharacterLimit || quote.isEmpty
     }
     
     init(

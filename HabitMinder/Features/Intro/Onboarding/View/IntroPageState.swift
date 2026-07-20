@@ -14,30 +14,30 @@ enum IntroPage {
     var image: String {
         switch self {
         case .first:
-            AppImage.HealthyHabit.rawValue
+            IntroImage.HealthyHabit.rawValue
 
         case .second:
-            AppImage.BadHabit.rawValue
+            IntroImage.BadHabit.rawValue
         }
     }
 
     var title: String {
         switch self {
         case .first:
-            LocalizedStrings.IntroPage.firstTitle
+            L10n.IntroPage.firstTitle
 
         case .second:
-            LocalizedStrings.IntroPage.secondTitle
+            L10n.IntroPage.secondTitle
         }
     }
 
     var description: String {
         switch self {
         case .first:
-            LocalizedStrings.IntroPage.firstDescription
+            L10n.IntroPage.firstDescription
 
         case .second:
-            LocalizedStrings.IntroPage.secondDescription
+            L10n.IntroPage.secondDescription
         }
     }
 }

@@ -46,8 +46,8 @@ struct SetNameView: View {
     }
     
     private var hiText: some View {
-        Text(LocalizedStrings.SetNamePage.hiDialog)
-            .font(Fonts.title)
+        Text(L10n.SetNamePage.hiDialog)
+            .font(.AppFont.rooneySansBold.size(FontSize.x6Large))
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, Spacing.xLarge)
             .padding(.top, Spacing.x2Large)
@@ -55,10 +55,10 @@ struct SetNameView: View {
     
     private var userNameTextField: some View {
         TextField(
-            LocalizedStrings.SetNamePage.userNamePlaceholder,
+            L10n.SetNamePage.userNamePlaceholder,
             text: $tempUserName
         )
-        .font(Fonts.body)
+        .font(Font.AppFont.rooneySansRegular.size(FontSize.x2Large))
         .textContentType(.givenName)
         .padding()
         .background(
@@ -76,7 +76,7 @@ struct SetNameView: View {
     
     private var errorText: some View {
         Text(setNameViewModel.errorText.isEmpty ? " " : setNameViewModel.errorText)
-            .font(Fonts.body)
+            .font(Font.AppFont.rooneySansRegular.size(FontSize.x2Large))
             .frame(maxWidth: .infinity, alignment: .leading)
             .foregroundColor(.red)
             .padding(.horizontal, Spacing.xLarge)
@@ -86,15 +86,15 @@ struct SetNameView: View {
     
     private var continueButton: some View {
         AppButton(
-            LocalizedStrings.SetNamePage.continueButton,
+            L10n.SetNamePage.continueButton,
             isEnabled: setNameViewModel.isValid
         ) {
             setNameViewModel.validateAndContinue {
                 setNameViewModel.goToWelcomePage()
             }
         }
-        .padding(.horizontal, 32)
-        .padding(.bottom, 32)
+        .padding(.horizontal, Spacing.xLarge)
+        .padding(.bottom, Spacing.xLarge)
     }
   
     private var borderColor: Color {

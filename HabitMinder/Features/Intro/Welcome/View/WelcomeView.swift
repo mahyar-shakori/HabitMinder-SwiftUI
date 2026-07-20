@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    @State private var welcomeViewModel: WelcomeViewModel
+    private var welcomeViewModel: WelcomeViewModel
     @EnvironmentObject private var themeManager: ThemeManager
     @State private var showAlert = false
     
     init(welcomeViewModel: WelcomeViewModel) {
-        _welcomeViewModel = State(initialValue: welcomeViewModel)
+        self.welcomeViewModel = welcomeViewModel
     }
     
     var body: some View {
@@ -27,12 +27,12 @@ struct WelcomeView: View {
             .onChange(of: welcomeViewModel.errorMessage) { _, newError in
                 showAlert = (newError != nil)
             }
-            .alert(LocalizedStrings.Alert.Network.title, isPresented: $showAlert) {
-                Button(LocalizedStrings.Shared.okButton) {
+            .alert(L10n.Alert.Network.title, isPresented: $showAlert) {
+                Button(L10n.Shared.okButton) {
                     welcomeViewModel.goToHomePage()
                 }
             } message: {
-                Text(welcomeViewModel.errorMessage ?? LocalizedStrings.Alert.Network.unknownError)
+                Text(welcomeViewModel.errorMessage ?? L10n.Alert.Network.unknownError)
             }
     }
     
@@ -43,9 +43,11 @@ struct WelcomeView: View {
             
             VStack {
                 Spacer()
+                
                 welcomeImage
                 welcomeText
                 progressView
+                
                 Spacer()
             }
         }
@@ -55,13 +57,13 @@ struct WelcomeView: View {
         Image(.welcome)
             .resizable()
             .scaledToFit()
-            .padding(.horizontal, Spacing.x3Large)
+            .padding(.horizontal, Spacing.x9Large)
     }
     
     private var welcomeText: some View {
         Text(welcomeViewModel.userName)
-            .font(Fonts.titleLarge)
-            .padding(.top, Spacing.x2Large)
+            .font(.AppFont.rooneySansBold.size(FontSize.x8Large))
+            .padding(.top, Spacing.x8Large)
     }
     
     private var progressView: some View {

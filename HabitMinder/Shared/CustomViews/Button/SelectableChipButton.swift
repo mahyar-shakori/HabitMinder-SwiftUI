@@ -17,10 +17,10 @@ struct SelectableChipButton: View {
     var body: some View {
         Button(action: action) {
             Text(title)
-                .font(.AppFont.rooneySansBold.size(13))
+                .font(.AppFont.rooneySansBold.size(FontSize.medium))
                 .foregroundStyle(isSelected ? .appWhite : themeManager.appPrimary)
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 9)
+                .padding(.vertical, Spacing.xSmall + LineWidth.thin)
                 .background(isSelected ? themeManager.appPrimary : .clear)
                 .clipShape(Capsule())
                 .contentShape(Capsule())
@@ -33,9 +33,9 @@ struct SelectableChipButton: View {
 #Preview {
     let dependencies = AppDependencies()
 
-    HStack(spacing: 0) {
-        SelectableChipButton(title: "Upcoming", isSelected: true) {}
-        SelectableChipButton(title: "Completed", isSelected: false) {}
+    HStack(spacing: Spacing.none) {
+        SelectableChipButton(title: L10n.FutureHabitsPage.upcomingTab, isSelected: true) {}
+        SelectableChipButton(title: L10n.FutureHabitsPage.completedTab, isSelected: false) {}
     }
     .environmentObject(dependencies.themeManager)
 }

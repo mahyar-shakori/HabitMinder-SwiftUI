@@ -27,6 +27,6 @@ final class SettingViewModel: ObservableObject {
     }
     
     func loadUserName() {
-        userName = userDefaultsStorage.fetch(for: UserDefaultKeys.userName) ?? LocalizedStrings.SettingPage.userName
+        userName = userDefaultsStorage.fetch(for: UserDefaultKeys.userName) ?? L10n.SettingPage.userName
     }
 }

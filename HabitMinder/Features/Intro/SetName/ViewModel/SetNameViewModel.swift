@@ -51,7 +51,7 @@ final class SetNameViewModel {
     
     private func applyErrorState() {
         borderState = .error
-        errorText = LocalizedStrings.SetNamePage.error
+        errorText = L10n.SetNamePage.error
     }
     
     private func resetErrorState() {

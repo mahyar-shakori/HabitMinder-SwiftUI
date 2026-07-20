@@ -9,7 +9,7 @@ import Foundation
 
 struct EditHabitUIState {
     var habitTitle = ""
-    var selectedIconName = "book"
+    var selectedIconName = ""
     var selectedFrequency = HabitFrequency.daily
     var selectedCustomWeekdays = [Calendar.current.component(.weekday, from: Date())]
     var commitmentDays = 21

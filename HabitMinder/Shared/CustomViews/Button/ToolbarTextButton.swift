@@ -32,6 +32,6 @@ struct ToolbarTextButton: View {
     }
 
     private var font: Font {
-        weight == .bold ? .AppFont.rooneySansBold.size(18) : .AppFont.rooneySansRegular.size(18)
+        weight == .bold ? .AppFont.rooneySansBold.size(FontSize.x4Large) : .AppFont.rooneySansRegular.size(FontSize.x4Large)
     }
 }

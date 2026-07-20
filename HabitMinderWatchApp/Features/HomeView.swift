@@ -18,7 +18,7 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             habitSection
-                .navigationTitle(LocalizedStrings.HomePage.title)
+                .navigationTitle(L10n.HomePage.title)
         }
     }
     
@@ -31,7 +31,7 @@ struct HomeView: View {
                     .font(.footnote)
                     .foregroundColor(.gray)
             }
-            .padding(.vertical, Metrics.rowVerticalPadding)
+            .padding(.vertical, 8)
         }
     }
     
@@ -47,18 +47,14 @@ struct HomeView: View {
     private var emptyStateView: some View {
         VStack {
             Spacer()
-            Text(LocalizedStrings.HomePage.watchEmptyView)
+            Text(L10n.HomePage.watchEmptyView)
             Spacer()
         }
     }
 
     private func daysLeftText(for habit: HabitData) -> String {
-        habit.daysLeft.description + LocalizedStrings.Cell.Habit.daysLeft
+        habit.daysLeft.description + L10n.Cell.Habit.daysLeft
     }
-}
-
-private enum Metrics {
-    static let rowVerticalPadding: CGFloat = 8
 }
 
 #Preview {

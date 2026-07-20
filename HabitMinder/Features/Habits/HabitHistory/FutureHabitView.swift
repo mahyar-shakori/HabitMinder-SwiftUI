@@ -27,11 +27,11 @@ struct FutureHabitView: View {
             .onChange(of: futureHabitViewModel.uiState.itemToDelete) { _, id in
                 showDeleteAlert = (id != nil)
             }
-            .alert(LocalizedStrings.Alert.Habit.deleteTitle, isPresented: $showDeleteAlert) {
-                Button(LocalizedStrings.Shared.okButton, role: .destructive) {
+            .alert(L10n.Alert.Habit.deleteTitle, isPresented: $showDeleteAlert) {
+                Button(L10n.Shared.okButton, role: .destructive) {
                     futureHabitViewModel.performDelete()
                 }
-                Button(LocalizedStrings.Shared.cancelButton, role: .cancel) {
+                Button(L10n.Shared.cancelButton, role: .cancel) {
                     futureHabitViewModel.cancelDelete()
                 }
             } message: {
@@ -40,7 +40,7 @@ struct FutureHabitView: View {
     }
 
     private var content: some View {
-        VStack(spacing: Metrics.zeroSpacing) {
+        VStack(spacing: Spacing.none) {
             pageHeader
             tabPicker
             scrollContent
@@ -49,20 +49,20 @@ struct FutureHabitView: View {
 
     private var pageHeader: some View {
         AppHeaderView(
-            title: LocalizedStrings.FutureHabitsPage.headerTitle,
-            systemImage: AppIconName.leaf
+            title: L10n.FutureHabitsPage.headerTitle,
+            systemImage: SystemIconName.leaf
         )
     }
 
     private var tabPicker: some View {
-        HStack(spacing: Metrics.zeroSpacing) {
+        HStack(spacing: Spacing.none) {
             tabButton(.upcoming)
             tabButton(.completed)
         }
-        .padding(Metrics.tabPickerPadding)
+        .padding(Spacing.x2Small)
         .segmentedTabBackground(themeManager.appSecondary)
-        .padding(.horizontal, Metrics.pageHorizontalPadding)
-        .padding(.bottom, Metrics.tabPickerBottomPadding)
+        .padding(.horizontal, Spacing.x3Large)
+        .padding(.bottom, Spacing.x6Large)
     }
 
     private func tabButton(_ tab: HabitJourneyTab) -> some View {
@@ -90,24 +90,24 @@ struct FutureHabitView: View {
 
     private var achievementCountText: String {
         let count = futureHabitViewModel.uiState.completedItems.count
-        return LocalizedStrings.FutureHabitsPage.achievementCount(count)
+        return L10n.FutureHabitsPage.achievementCount(count)
     }
 
     private var completedContent: some View {
         Group {
             HStack {
-                Text(LocalizedStrings.FutureHabitsPage.masteryTitle)
-                    .font(.AppFont.rooneySansBold.size(Metrics.sectionTitleFontSize))
+                Text(L10n.FutureHabitsPage.masteryTitle)
+                    .font(.AppFont.rooneySansBold.size(FontSize.x8Large))
                     .foregroundStyle(.primary)
 
                 Spacer()
 
                 Text(achievementCountText)
-                    .font(.AppFont.rooneySansBold.size(Metrics.badgeFontSize))
+                    .font(.AppFont.rooneySansBold.size(FontSize.small))
                     .foregroundStyle(themeManager.appPrimary)
-                    .padding(.horizontal, Metrics.achievementHorizontalPadding)
-                    .padding(.vertical, Metrics.achievementVerticalPadding)
-                    .background(themeManager.appSecondary.opacity(Metrics.achievementBackgroundOpacity))
+                    .padding(.horizontal, Spacing.large)
+                    .padding(.vertical, Spacing.xSmall - LineWidth.thin)
+                    .background(themeManager.appSecondary.opacity(Opacity.badgeBackground))
                     .clipShape(Capsule())
             }
             .historyListRowStyle()
@@ -126,17 +126,17 @@ struct FutureHabitView: View {
 
     private var upcomingContent: some View {
         Group {
-            VStack(alignment: .leading, spacing: Metrics.sectionHeaderSpacing) {
-                Text(LocalizedStrings.FutureHabitsPage.plannedTitle)
-                    .font(.AppFont.rooneySansBold.size(Metrics.sectionTitleFontSize))
+            VStack(alignment: .leading, spacing: Spacing.xSmall) {
+                Text(L10n.FutureHabitsPage.plannedTitle)
+                    .font(.AppFont.rooneySansBold.size(FontSize.x8Large))
                     .foregroundStyle(.primary)
 
-                Text(LocalizedStrings.FutureHabitsPage.plannedSubtitle)
-                    .font(.AppFont.rooneySansRegular.size(Metrics.bodyFontSize))
+                Text(L10n.FutureHabitsPage.plannedSubtitle)
+                    .font(.AppFont.rooneySansRegular.size(FontSize.xLarge))
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
             }
-            .padding(.bottom, Metrics.sectionHeaderBottomPadding)
+            .padding(.bottom, Spacing.x2Small)
             .historyListRowStyle()
 
             ForEach(futureHabitViewModel.uiState.listItems) { item in
@@ -156,93 +156,93 @@ struct FutureHabitView: View {
     }
 
     private func completedCard(_ item: CompletedHabitItem) -> some View {
-        VStack(spacing: Metrics.cardContentSpacing) {
-            HStack(alignment: .top, spacing: Metrics.cardContentSpacing) {
+        VStack(spacing: Spacing.large) {
+            HStack(alignment: .top, spacing: Spacing.large) {
                 ZStack {
-                    RoundedRectangle(cornerRadius: Metrics.iconCornerRadius)
-                        .fill(themeManager.appSecondary.opacity(Metrics.completedIconBackgroundOpacity))
+                    RoundedRectangle(cornerRadius: CornerRadius.medium)
+                        .fill(themeManager.appSecondary.opacity(Opacity.completedIconBackground))
 
                     Image(systemName: item.iconName)
-                        .font(.system(size: Metrics.iconFontSize, weight: .medium))
+                        .font(.system(size: FontSize.x4Large, weight: .medium))
                         .foregroundStyle(themeManager.appPrimary)
                 }
-                .frame(width: Metrics.iconContainerSize, height: Metrics.iconContainerSize)
+                .frame(width: Size.x3Large, height: Size.x3Large)
 
-                VStack(alignment: .leading, spacing: Metrics.completedTextSpacing) {
+                VStack(alignment: .leading, spacing: Spacing.x2Small) {
                     Text(item.title)
-                        .font(.AppFont.rooneySansBold.size(Metrics.cardTitleFontSize))
+                        .font(.AppFont.rooneySansBold.size(FontSize.x3Large))
                         .foregroundStyle(.primary)
 
-                    Text(LocalizedStrings.FutureHabitsPage.finishedDate(item.completedAt.formatted(.dateTime.month(.abbreviated).day().year())))
-                        .font(.AppFont.rooneySansRegular.size(Metrics.captionFontSize))
+                    Text(L10n.FutureHabitsPage.finishedDate(item.completedAt.formatted(.dateTime.month(.abbreviated).day().year())))
+                        .font(.AppFont.rooneySansRegular.size(FontSize.large))
                         .foregroundStyle(.secondary)
                 }
 
                 Spacer()
 
-                Image(systemName: AppIconName.medal)
-                    .font(.system(size: Metrics.medalFontSize, weight: .semibold))
+                Image(systemName: SystemIconName.medal)
+                    .font(.system(size: FontSize.x2Large, weight: .semibold))
                     .foregroundStyle(themeManager.appPrimary)
-                    .padding(Metrics.medalPadding)
+                    .padding(Spacing.xSmall)
                     .background(.appGray)
-                    .clipShape(RoundedRectangle(cornerRadius: Metrics.medalCornerRadius))
+                    .clipShape(RoundedRectangle(cornerRadius: CornerRadius.small))
             }
 
-            ProgressView(value: Metrics.completedProgressValue)
+            ProgressView(value: Scale.normal)
                 .tint(themeManager.appPrimary)
-                .scaleEffect(x: Metrics.progressScaleX, y: Metrics.completedProgressScaleY, anchor: .center)
+                .scaleEffect(x: Scale.normal, y: Scale.progress, anchor: .center)
 
             HStack {
-                Text(LocalizedStrings.FutureHabitsPage.streakDays(item.commitmentDays))
+                Text(L10n.FutureHabitsPage.streakDays(item.commitmentDays))
                 Spacer()
-                Text(LocalizedStrings.FutureHabitsPage.completedStatus)
+                Text(L10n.FutureHabitsPage.completedStatus)
             }
-            .font(.AppFont.rooneySansBold.size(Metrics.statusFontSize))
+            .font(.AppFont.rooneySansBold.size(FontSize.xSmall))
             .foregroundStyle(.secondary)
         }
-        .padding(Metrics.cardPadding)
+        .padding(Spacing.xLarge)
         .background(.appWhite)
-        .clipShape(RoundedRectangle(cornerRadius: Metrics.completedCardCornerRadius))
+        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.x2Large))
     }
 
     private var emptyCompletedCard: some View {
         CustomEmptyView(
             image: Image(.emptyView),
-            text: LocalizedStrings.FutureHabitsPage.emptyCompleted,
-            imageSize: Metrics.emptyImageSize
+            text: L10n.FutureHabitsPage.emptyCompleted,
+            imageSize: Size.emptyImage
         )
     }
 
     private var ritualTip: some View {
-        VStack(alignment: .leading, spacing: Metrics.tipSpacing) {
-            Label(LocalizedStrings.FutureHabitsPage.ritualTipLabel, systemImage: AppIconName.lightbulb)
-                .font(.AppFont.rooneySansBold.size(Metrics.badgeFontSize))
+        VStack(alignment: .leading, spacing: Spacing.small) {
+            Label(L10n.FutureHabitsPage.ritualTipLabel, systemImage: SystemIconName.lightbulb)
+                .font(.AppFont.rooneySansBold.size(FontSize.small))
                 .foregroundStyle(themeManager.appPrimary)
 
-            Text(LocalizedStrings.FutureHabitsPage.ritualTipText)
-                .font(.AppFont.rooneySansRegular.size(15))
+            Text(L10n.FutureHabitsPage.ritualTipText)
+                .font(.AppFont.rooneySansRegular.size(FontSize.xLarge))
                 .italic()
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
         }
-        .padding(Metrics.tipPadding)
+        .padding(Spacing.x2Large)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(themeManager.appSecondary.opacity(Metrics.tipBackgroundOpacity))
+        .background(themeManager.appSecondary.opacity(Opacity.subtle))
         .overlay {
-            RoundedRectangle(cornerRadius: Metrics.tipCornerRadius)
+            RoundedRectangle(cornerRadius: CornerRadius.xLarge)
                 .strokeBorder(
-                    themeManager.appPrimary.opacity(Metrics.tipBorderOpacity),
-                    style: StrokeStyle(lineWidth: LineWidth.thin, dash: Metrics.tipBorderDash)
+                    themeManager.appPrimary.opacity(Opacity.subtle),
+                    style: StrokeStyle(lineWidth: LineWidth.thin, dash: StrokeDash.subtle)
                 )
         }
-        .clipShape(RoundedRectangle(cornerRadius: Metrics.tipCornerRadius))
+        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.xLarge))
     }
 
     private func deleteSwipeButton(for id: UUID) -> some View {
         Button(role: .destructive) {
             futureHabitViewModel.confirmDelete(id: id)
         } label: {
-            Image(systemName: AppIconName.trash)
+            Image(systemName: SystemIconName.trash)
         }
     }
 }
@@ -254,54 +254,13 @@ private enum HabitJourneyTab {
     var title: String {
         switch self {
         case .completed:
-            return LocalizedStrings.FutureHabitsPage.completedTab
+            return L10n.FutureHabitsPage.completedTab
         case .upcoming:
-            return LocalizedStrings.FutureHabitsPage.upcomingTab
+            return L10n.FutureHabitsPage.upcomingTab
         }
     }
 }
 
-private enum Metrics {
-    static let zeroSpacing: CGFloat = 0
-    static let tabPickerPadding: CGFloat = 4
-    static let pageHorizontalPadding: CGFloat = 20
-    static let tabPickerBottomPadding: CGFloat = 28
-    static let sectionHeaderSpacing: CGFloat = 8
-    static let sectionHeaderBottomPadding: CGFloat = 4
-    static let sectionTitleFontSize: CGFloat = 24
-    static let bodyFontSize: CGFloat = 15
-    static let badgeFontSize: CGFloat = 12
-    static let achievementHorizontalPadding: CGFloat = 14
-    static let achievementVerticalPadding: CGFloat = 7
-    static let achievementBackgroundOpacity: CGFloat = 0.6
-    static let cardContentSpacing: CGFloat = 14
-    static let cardPadding: CGFloat = 16
-    static let cardTitleFontSize: CGFloat = 17
-    static let completedTextSpacing: CGFloat = 4
-    static let captionFontSize: CGFloat = 14
-    static let statusFontSize: CGFloat = 11
-    static let iconCornerRadius: CGFloat = 12
-    static let iconFontSize: CGFloat = 18
-    static let iconContainerSize: CGFloat = 48
-    static let completedIconBackgroundOpacity: CGFloat = 0.55
-    static let medalFontSize: CGFloat = 16
-    static let medalPadding: CGFloat = 8
-    static let medalCornerRadius: CGFloat = 8
-    static let completedProgressValue: CGFloat = 1
-    static let progressScaleX: CGFloat = 1
-    static let completedProgressScaleY: CGFloat = 1.7
-    static let completedCardCornerRadius: CGFloat = 18
-    static let emptyImageSize: CGFloat = 150
-    static let tipSpacing: CGFloat = 10
-    static let tipPadding: CGFloat = 18
-    static let tipCornerRadius: CGFloat = 16
-    static let tipBackgroundOpacity: CGFloat = 0.18
-    static let tipBorderOpacity: CGFloat = 0.18
-    static let tipBorderDash: [CGFloat] = [3, 3]
-    static let listRowTopInset: CGFloat = 0
-    static let listRowBottomInset: CGFloat = 16
-    static let segmentedBackgroundOpacity: CGFloat = 0.35
-}
 
 private extension View {
     func historyListRowStyle() -> some View {
@@ -309,10 +268,10 @@ private extension View {
             .listRowSeparator(.hidden)
             .listRowBackground(Color.clear)
             .listRowInsets(EdgeInsets(
-                top: Metrics.listRowTopInset,
-                leading: Metrics.pageHorizontalPadding,
-                bottom: Metrics.listRowBottomInset,
-                trailing: Metrics.pageHorizontalPadding
+                top: Spacing.none,
+                leading: Spacing.x3Large,
+                bottom: Spacing.xLarge,
+                trailing: Spacing.x3Large
             ))
     }
 
@@ -321,7 +280,7 @@ private extension View {
         if #available(iOS 26.0, *) {
             glassEffect(.regular.tint(tint).interactive(), in: Capsule())
         } else {
-            background(tint.opacity(Metrics.segmentedBackgroundOpacity))
+            background(tint.opacity(Opacity.subtleBorder))
                 .clipShape(Capsule())
         }
     }

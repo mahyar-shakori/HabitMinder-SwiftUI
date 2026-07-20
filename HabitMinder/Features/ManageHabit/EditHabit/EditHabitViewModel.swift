@@ -19,6 +19,10 @@ final class EditHabitViewModel: ObservableObject {
     private var trimmedHabitTitle: String {
         uiState.habitTitle.trimmingCharacters(in: .whitespacesAndNewlines)
     }
+
+    private var selectedIconName: String {
+        uiState.selectedIconName.isEmpty ? SystemIconName.checkmark : uiState.selectedIconName
+    }
     
     init(
         dataManager: DataManaging,
@@ -40,7 +44,7 @@ final class EditHabitViewModel: ObservableObject {
         }
 
            uiState.habitTitle = habit.title
-           uiState.selectedIconName = habit.iconName
+           uiState.selectedIconName = habit.iconName.isEmpty ? SystemIconName.checkmark : habit.iconName
            uiState.selectedFrequency =
                HabitFrequency(rawValue: habit.frequency) ?? .daily
 
@@ -154,7 +158,7 @@ final class EditHabitViewModel: ObservableObject {
     func saveAndDismiss() {
         dataManager.update({ habit in
             habit.title = trimmedHabitTitle
-            habit.iconName = uiState.selectedIconName
+            habit.iconName = selectedIconName
             habit.frequency = uiState.selectedFrequency.rawValue
             habit.commitmentDays = uiState.commitmentDays
             habit.reminderTimes = uiState.reminderTimes
