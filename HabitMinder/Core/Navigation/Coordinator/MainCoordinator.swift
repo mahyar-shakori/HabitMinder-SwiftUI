@@ -7,10 +7,11 @@
 
 import SwiftUI
 import SwiftData
+import Observation
 
-final class MainCoordinator: ObservableObject {
-    @Published var path: [NavigationItem] = []
-    
+@Observable
+final class MainCoordinator {
+    var path: [NavigationItem] = []
     private let introRouting: IntroRouting
     private let mainRouting: MainRouting
     private let userDefaultsStorage: UserDefaultsStoring

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RootView: View {
-    @ObservedObject private var mainCoordinator: MainCoordinator
+    @State private var mainCoordinator: MainCoordinator
     @Environment(\.modelContext) private var modelContext
     
     init(mainCoordinator: MainCoordinator) {

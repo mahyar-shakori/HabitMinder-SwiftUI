@@ -8,5 +8,8 @@
 import SwiftUI
 
 protocol IntroRouting {
-    func view(for route: IntroRoute, using coordinator: any MainCoordinating) -> any View
+    func view(
+        for route: IntroRoute,
+        using coordinator: any MainCoordinating
+    ) -> any View
 }

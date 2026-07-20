@@ -1,8 +1,8 @@
 //
 //  HabitMinderApp.swift
-//  HabitMinder SwiftUI
+//  HabitMinder
 //
-//  Created by Mahyar on 29/03/2025.
+//  Created by Mahyar on 19/07/2026.
 //
 
 import SwiftUI
@@ -17,7 +17,12 @@ struct HabitMinderApp: App {
     var body: some Scene {
         WindowGroup {
             RootView(mainCoordinator: AppDependencies.mainCoordinator)
-                .modelContainer(for: [HabitModel.self, FutureHabitModel.self])
+                .modelContainer(
+                    for: [
+                        HabitModel.self,
+                        FutureHabitModel.self
+                    ]
+                )
                 .environmentObject(AppDependencies.themeManager)
         }
     }

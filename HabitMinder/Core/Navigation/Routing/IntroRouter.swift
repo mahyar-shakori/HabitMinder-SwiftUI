@@ -63,7 +63,7 @@ struct IntroRouter: IntroRouting {
 
         let viewModel = WelcomeViewModel(
             coordinator: viewCoordinator,
-            fetchQuoteUseCase: apiFetching,
+            repository: QuoteRepository(apiService: apiFetching),
             userDefaultsStorage: userDefaultsStorage
         )
         return WelcomeView(welcomeViewModel: viewModel)

@@ -19,7 +19,7 @@ struct MainCoordinatorTests {
         let coordinator = MainCoordinator(
             introRouting: IntroRouter(),
             mainRouting: MainRouter(),
-            userDefaultsStoring: userDefaultsStorage
+            userDefaultsStorage: userDefaultsStorage
         )
         coordinator.path = [
             NavigationItem(route: .intro(.onboarding)),
@@ -40,7 +40,7 @@ struct MainCoordinatorTests {
         let coordinator = MainCoordinator(
             introRouting: IntroRouter(),
             mainRouting: MainRouter(),
-            userDefaultsStoring: userDefaultsStorage
+            userDefaultsStorage: userDefaultsStorage
         )
         coordinator.path = []
         
@@ -58,7 +58,7 @@ struct MainCoordinatorTests {
         let coordinator = MainCoordinator(
             introRouting: IntroRouter(),
             mainRouting: MainRouter(),
-            userDefaultsStoring: userDefaultsStorage
+            userDefaultsStorage: userDefaultsStorage
         )
         let firstItem = NavigationItem(route: .intro(.onboarding))
         coordinator.path = [
@@ -82,7 +82,7 @@ struct MainCoordinatorTests {
         let coordinator = MainCoordinator(
             introRouting: IntroRouter(),
             mainRouting: MainRouter(),
-            userDefaultsStoring: userDefaultsStorage
+            userDefaultsStorage: userDefaultsStorage
         )
         coordinator.path = []
         
@@ -101,7 +101,7 @@ struct MainCoordinatorTests {
         let coordinator = MainCoordinator(
             introRouting: IntroRouter(),
             mainRouting: MainRouter(),
-            userDefaultsStoring: userDefaultsStorage
+            userDefaultsStorage: userDefaultsStorage
         )
         
         // Act
@@ -119,7 +119,7 @@ struct MainCoordinatorTests {
         let coordinator = MainCoordinator(
             introRouting: IntroRouter(),
             mainRouting: MainRouter(),
-            userDefaultsStoring: userDefaultsStorage
+            userDefaultsStorage: userDefaultsStorage
         )
         
         // Act
@@ -139,7 +139,7 @@ struct MainCoordinatorTests {
         let coordinator = MainCoordinator(
             introRouting: IntroRouter(),
             mainRouting: MainRouter(),
-            userDefaultsStoring: userDefaultsStorage
+            userDefaultsStorage: userDefaultsStorage
         )
         
         // Act

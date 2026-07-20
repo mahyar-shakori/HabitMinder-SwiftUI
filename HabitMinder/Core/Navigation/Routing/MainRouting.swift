@@ -9,5 +9,9 @@ import SwiftUI
 import SwiftData
 
 protocol MainRouting {
-    func view(for route: MainRoute, using coordinator: any MainCoordinating, modelContext: ModelContext) -> any View
+    func view(
+        for route: MainRoute,
+        using coordinator: any MainCoordinating,
+        modelContext: ModelContext
+    ) -> any View
 }

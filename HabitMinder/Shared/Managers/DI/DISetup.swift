@@ -33,7 +33,7 @@ struct DISetup {
 
     private static func registerScopedDependencies() {
         DIContainer.shared.register(scope: .feature(.welcome)) {
-            APIService(configuration: .init(timeoutInterval: 3)) as APIFetching
+            APIService() as APIFetching
         }
     }
 }

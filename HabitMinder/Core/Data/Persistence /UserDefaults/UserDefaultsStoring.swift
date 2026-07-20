@@ -8,6 +8,10 @@
 import Foundation
 
 protocol UserDefaultsStoring {
-    func save<Value: Codable>(value: Value, for key: any StorageKeyProtocol)
+    func save<Value: Codable>(
+        value: Value,
+        for key: any StorageKeyProtocol
+    )
+    
     func fetch<Value: Codable>(for key: any StorageKeyProtocol) -> Value?
 }
