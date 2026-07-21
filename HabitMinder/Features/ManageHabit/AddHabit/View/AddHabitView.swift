@@ -9,14 +9,15 @@ import SwiftUI
 import UIKit
 
 struct AddHabitView: View {
-    @StateObject private var addHabitViewModel: AddHabitViewModel
+    private var addHabitViewModel: AddHabitViewModel
+    @EnvironmentObject private var themeManager: ThemeManager
     @Environment(\.openURL) private var openURL
     @FocusState private var isFocused: Bool
     @State private var tempHabitTitle = ""
     @State private var newReminderTime = Date()
 
     init(addHabitViewModel: AddHabitViewModel) {
-        _addHabitViewModel = StateObject(wrappedValue: addHabitViewModel)
+        self.addHabitViewModel = addHabitViewModel
     }
 
     var body: some View {
@@ -43,7 +44,7 @@ struct AddHabitView: View {
         .alert(
             L10n.AddHabitPage.notificationAlertTitle,
             isPresented: Binding(
-                get: { addHabitViewModel.uiState.isNotificationSettingsAlertPresented },
+                get: { addHabitViewModel.isNotificationSettingsAlertPresented },
                 set: { isPresented in
                     if isPresented.not {
                         addHabitViewModel.dismissNotificationSettingsAlert()
@@ -112,7 +113,7 @@ struct AddHabitView: View {
     private var habitTypeSection: some View {
         formCard {
             Toggle(L10n.AddHabitPage.futureHabitToggle, isOn: Binding(
-                get: { addHabitViewModel.uiState.isFutureHabit },
+                get: { addHabitViewModel.isFutureHabit },
                 set: { addHabitViewModel.setIsFutureHabit($0) }
             ))
             .font(.AppFont.rooneySansBold.size(FontSize.x2Large - LineWidth.thin))
@@ -135,7 +136,7 @@ struct AddHabitView: View {
                     }
                 }
 
-                if addHabitViewModel.uiState.selectedFrequency == .custom {
+                if addHabitViewModel.selectedFrequency == .custom {
                     customWeekdayPicker
                 }
             }
@@ -166,7 +167,7 @@ struct AddHabitView: View {
                     .foregroundStyle(.primary.opacity(Opacity.formHeader))
 
                 HStack {
-                    Text(L10n.AddHabitPage.commitmentDays(addHabitViewModel.uiState.commitmentDays))
+                    Text(L10n.AddHabitPage.commitmentDays(addHabitViewModel.commitmentDays))
                         .font(.AppFont.rooneySansRegular.size(FontSize.x2Large))
                         .foregroundStyle(.appPrimary)
 
@@ -206,9 +207,9 @@ struct AddHabitView: View {
                     }
                 }
 
-                if addHabitViewModel.uiState.reminderTimes.isNotEmpty {
+                if addHabitViewModel.reminderTimes.isNotEmpty {
                     VStack(spacing: Spacing.xSmall) {
-                        ForEach(addHabitViewModel.uiState.reminderTimes, id: \.self) { time in
+                        ForEach(addHabitViewModel.reminderTimes, id: \.self) { time in
                             reminderRow(time)
                         }
                     }
@@ -219,13 +220,20 @@ struct AddHabitView: View {
     }
 
     private var startButton: some View {
-        AppButton(
-            L10n.AddHabitPage.startJourneyButton,
-            systemImage: SystemIconName.sparkles,
-            isEnabled: addHabitViewModel.uiState.isSaveButtonEnabled
-        ) {
+        Button {
             addHabitViewModel.saveAndDismiss()
+        } label: {
+            Label(L10n.AddHabitPage.startJourneyButton, systemImage: SystemIconName.sparkles)
+                .font(.AppFont.rooneySansBold.size(FontSize.x5Large))
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, Spacing.xLarge)
+                .padding(.vertical, Spacing.xLarge)
+                .foregroundStyle(.appWhite)
+                .background(addHabitViewModel.isSaveButtonEnabled ? themeManager.appPrimary : themeManager.appSecondary)
+                .clipShape(Capsule())
         }
+        .buttonStyle(.plain)
+        .disabled(addHabitViewModel.isSaveButtonEnabled.not)
         .shadow(
             color: .appPrimary.opacity(Opacity.fieldBorder),
             radius: Spacing.small,
@@ -245,30 +253,56 @@ struct AddHabitView: View {
     }
 
     private func iconButton(_ icon: String) -> some View {
-        SelectableIconButton(
-            systemImage: icon,
-            isSelected: addHabitViewModel.uiState.selectedIconName == icon
-        ) {
+        let isSelected = addHabitViewModel.selectedIconName == icon
+
+        return Button {
             addHabitViewModel.setSelectedIconName(icon)
+        } label: {
+            Image(systemName: icon)
+                .font(.system(size: FontSize.x4Large, weight: .medium))
+                .foregroundStyle(isSelected ? .appWhite : themeManager.appPrimary)
+                .frame(maxWidth: .infinity)
+                .frame(height: Size.x4Large)
+                .background(isSelected ? themeManager.appPrimary : themeManager.appPrimary.opacity(Opacity.quiet))
+                .clipShape(RoundedRectangle(cornerRadius: CornerRadius.small))
         }
+        .buttonStyle(.plain)
     }
 
     private func frequencyButton(_ frequency: HabitFrequency) -> some View {
-        SelectableChipButton(
-            title: frequency.title,
-            isSelected: addHabitViewModel.uiState.selectedFrequency == frequency
-        ) {
+        let isSelected = addHabitViewModel.selectedFrequency == frequency
+
+        return Button {
             addHabitViewModel.setSelectedFrequency(frequency)
+        } label: {
+            Text(frequency.title)
+                .font(.AppFont.rooneySansBold.size(FontSize.medium))
+                .foregroundStyle(isSelected ? .appWhite : themeManager.appPrimary)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, Spacing.xSmall + LineWidth.thin)
+                .background(isSelected ? themeManager.appPrimary : .clear)
+                .clipShape(Capsule())
+                .contentShape(Capsule())
         }
+        .buttonStyle(.plain)
     }
 
     private func customWeekdayButton(_ item: HabitWeekdayItem) -> some View {
-        SelectableChipButton(
-            title: item.title,
-            isSelected: addHabitViewModel.uiState.selectedCustomWeekdays.contains(item.weekday)
-        ) {
+        let isSelected = addHabitViewModel.selectedCustomWeekdays.contains(item.weekday)
+
+        return Button {
             addHabitViewModel.toggleCustomWeekday(item.weekday)
+        } label: {
+            Text(item.title)
+                .font(.AppFont.rooneySansBold.size(FontSize.medium))
+                .foregroundStyle(isSelected ? .appWhite : themeManager.appPrimary)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, Spacing.xSmall + LineWidth.thin)
+                .background(isSelected ? themeManager.appPrimary : .clear)
+                .clipShape(Capsule())
+                .contentShape(Capsule())
         }
+        .buttonStyle(.plain)
     }
 
     private func reminderRow(_ time: String) -> some View {
@@ -279,11 +313,17 @@ struct AddHabitView: View {
 
             Spacer()
 
-            InlineIconButton(systemImage: SystemIconName.xmark) {
-                if let index = addHabitViewModel.uiState.reminderTimes.firstIndex(of: time) {
+            Button {
+                if let index = addHabitViewModel.reminderTimes.firstIndex(of: time) {
                     addHabitViewModel.removeReminderTime(at: IndexSet(integer: index))
                 }
+            } label: {
+                Image(systemName: SystemIconName.xmark)
+                    .font(.system(size: FontSize.xSmall, weight: .bold))
+                    .foregroundStyle(themeManager.appPrimary)
+                    .frame(width: Size.medium, height: Size.medium)
             }
+            .buttonStyle(.plain)
         }
         .padding(.horizontal, Spacing.large)
         .padding(.vertical, Spacing.small)
@@ -295,14 +335,17 @@ struct AddHabitView: View {
         systemImage: String,
         action: @escaping () -> Void
     ) -> some View {
-        InlineIconButton(
-            systemImage: systemImage,
-            variant: .outlinedCircle,
-            size: Size.large,
-            fontSize: FontSize.medium,
-            fontWeight: .semibold,
-            action: action
-        )
+        Button(action: action) {
+            Image(systemName: systemImage)
+                .font(.system(size: FontSize.medium, weight: .semibold))
+                .foregroundStyle(themeManager.appPrimary)
+                .frame(width: Size.large, height: Size.large)
+                .overlay {
+                    Circle()
+                        .stroke(themeManager.appPrimary, lineWidth: LineWidth.thin)
+                }
+        }
+        .buttonStyle(.plain)
     }
 
     private func formCard<Content: View>(@ViewBuilder content: () -> Content) -> some View {

@@ -71,21 +71,31 @@ struct IntroView: View {
     }
     
     private var skipButton: some View {
-        AppButton(
-            L10n.IntroPage.skipButton,
-            variant: .secondary
-        ) {
+        Button {
             introViewModel.goToSetNamePage()
+        } label: {
+            Text(L10n.IntroPage.skipButton)
+                .font(.AppFont.rooneySansBold.size(FontSize.x4Large))
+                .foregroundStyle(themeManager.appPrimary)
+                .padding(.horizontal, Spacing.xLarge)
+                .padding(.vertical, Spacing.xSmall)
         }
+        .buttonStyle(.plain)
     }
     
     private var nextButton: some View {
-        AppButton(
-            L10n.IntroPage.nextButton,
-            variant: .onboardingNext
-        ) {
+        Button {
             introViewModel.nextState()
+        } label: {
+            Text(L10n.IntroPage.nextButton)
+                .font(.AppFont.rooneySansBold.size(FontSize.x4Large))
+                .foregroundStyle(.appWhite)
+                .padding(.horizontal, Spacing.xLarge)
+                .padding(.vertical, Spacing.xSmall)
+                .background(themeManager.appPrimary)
+                .clipShape(Capsule())
         }
+        .buttonStyle(.plain)
         .padding(.horizontal, Spacing.xSmall)
     }
     

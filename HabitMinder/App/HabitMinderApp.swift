@@ -17,7 +17,7 @@ struct HabitMinderApp: App {
                 .modelContainer(
                     for: [
                         HabitModel.self,
-                        FutureHabitModel.self
+                        HabitHistoryModel.self
                     ]
                 )
                 .environmentObject(dependencies.themeManager)

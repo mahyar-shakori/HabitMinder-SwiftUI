@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import Observation
 
-final class HomeViewModel: ObservableObject {
-    @Published private(set) var habits: [HabitData] = []
+@Observable
+final class HomeViewModel {
+    private(set) var habits: [HabitData] = []
     
     private let sessionManager: WatchSessionManaging
     

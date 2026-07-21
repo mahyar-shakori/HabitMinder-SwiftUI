@@ -6,7 +6,6 @@
   
 */
 
-"SetLanguageTitle" = "Select your language";
 "introFirstTitle" = "Healthy Habit";
 "introFirstDescription" = "It is estimated that it takes 21 days for people to form a new habit. Introduce a healthy habit in your life with the 21 days app.";
 "introSecondTitle" = "Bad Habit";
@@ -21,14 +20,13 @@
 "guest" = "Welcome, Guest";
 "defaultQuote" = "Everything is possible, given time!";
 "homeTitle" = "My Habits";
-"doneButton" = "Done";
 "emptyView" = "No habit is added yet! Click the menu button to add a habit.";
 "watchEmptyView" = "No habit is added yet!";
 "addHabitTitle" = "Add Habit";
 "editHabitTitle" = "Edit Habit";
 "missHabitToast" = "Your habit started again!";
 "missHabitButton" = "Missed it! Start Again";
-"futureHabitsTitleLabel" = "Future Habits";
+"habitHistoryTitle" = "Habit History";
 "settingTitle" = "Settings";
 "userName" = "Name";
 "Language" = "Language";
@@ -79,6 +77,7 @@
 "habitNotificationAlertTitle" = "Notifications are off";
 "habitNotificationAlertMessage" = "Enable notifications in Settings to use habit reminders.";
 "habitNotificationSettingsButton" = "Settings";
+"habitReminderNotificationBody" = "Time for your ritual.";
 "habitIdentitySectionTitle" = "Ritual Identity";
 "habitTitlePlaceholder" = "E.g., Morning Pages";
 "habitVisualAnchorSectionTitle" = "Visual Anchor";
@@ -96,22 +95,22 @@
 "habitCellJourneyFormat" = "%d-Day Journey";
 "habitCellProgressFormat" = "Day %d of %d";
 "habitCellStreakFormat" = "%d Day Streak";
-"futureHabitsHeaderTitle" = "Rituals";
-"futureHabitStartNowButton" = "Start Now";
-"futureHabitCompletedTab" = "Completed";
-"futureHabitUpcomingTab" = "Upcoming";
-"futureHabitMasteryTitle" = "21-Day Mastery";
-"futureHabitPlannedTitle" = "Planned Journeys";
-"futureHabitPlannedSubtitle" = "Nurture your future self by preparing these restorative habits. Small steps lead to lasting change.";
-"futureHabitCompletedStatus" = "COMPLETED";
-"futureHabitEmptyCompleted" = "No completed journeys yet";
-"futureHabitRitualTipLabel" = "RITUAL TIP";
-"futureHabitRitualTipText" = "\"The secret of your future is hidden in your daily routine.\" Start with just one habit to ensure consistency.";
-"futureHabitStartInDaysFormat" = "In %d Days";
-"futureHabitAchievementSingular" = "%d Achievement";
-"futureHabitAchievementPlural" = "%d Achievements";
-"futureHabitFinishedDateFormat" = "Finished %@";
-"futureHabitStreakDaysFormat" = "STREAK: %d DAYS";
+"habitHistoryHeaderTitle" = "Rituals";
+"habitHistoryStartNowButton" = "Start Now";
+"habitHistoryCompletedTab" = "Completed";
+"habitHistoryFutureTab" = "Future";
+"habitHistoryMasteryTitle" = "21-Day Mastery";
+"habitHistoryPlannedTitle" = "Planned Journeys";
+"habitHistoryPlannedSubtitle" = "Nurture your future self by preparing these restorative habits. Small steps lead to lasting change.";
+"habitHistoryCompletedStatus" = "COMPLETED";
+"habitHistoryEmptyCompleted" = "No completed journeys yet";
+"habitHistoryRitualTipLabel" = "RITUAL TIP";
+"habitHistoryRitualTipText" = "\"The secret of your future is hidden in your daily routine.\" Start with just one habit to ensure consistency.";
+"habitHistoryStartInDaysFormat" = "In %d Days";
+"habitHistoryAchievementSingular" = "%d Achievement";
+"habitHistoryAchievementPlural" = "%d Achievements";
+"habitHistoryFinishedDateFormat" = "Finished %@";
+"habitHistoryStreakDaysFormat" = "STREAK: %d DAYS";
 "weekdaySundayShort" = "Sun";
 "weekdayMondayShort" = "Mon";
 "weekdayTuesdayShort" = "Tue";

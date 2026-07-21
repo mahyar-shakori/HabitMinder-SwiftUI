@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var homeViewModel: HomeViewModel
+    private var homeViewModel: HomeViewModel
     private let reminderScheduler: HabitReminderScheduling
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject private var themeManager: ThemeManager
@@ -19,10 +19,10 @@ struct HomeView: View {
         homeViewModel: HomeViewModel,
         reminderScheduler: HabitReminderScheduling
     ) {
-        _homeViewModel = State(initialValue: homeViewModel)
+        self.homeViewModel = homeViewModel
         self.reminderScheduler = reminderScheduler
     }
-
+   
     var body: some View {
         tabContent
             .navigationBarBackButtonHidden(true)
@@ -78,13 +78,13 @@ struct HomeView: View {
         let coordinator = HabitHistoryCoordinator {
             selectedTab = .habits
         }
-        let viewModel = FutureHabitViewModel(
+        let viewModel = HabitHistoryViewModel(
             dataManager: DataManager(context: modelContext),
             coordinator: coordinator,
             reminderScheduler: reminderScheduler
         )
 
-        return FutureHabitView(futureHabitViewModel: viewModel)
+        return HabitHistoryView(habitHistoryViewModel: viewModel)
             .environmentObject(themeManager)
     }
 
@@ -156,9 +156,16 @@ struct HomeView: View {
     }
     
     private var addHabitButton: some View {
-        FloatingActionButton {
+        Button {
             homeViewModel.goToAddHabitPage()
+        } label: {
+            Image(systemName: SystemIconName.plus)
+                .font(.system(size: Size.buttonIcon, weight: .medium))
+                .foregroundStyle(.appWhite)
+                .frame(width: Size.x4Large, height: Size.x4Large)
+                .circleBackground(themeManager.appPrimary)
         }
+        .buttonStyle(.plain)
         .padding(.trailing, Spacing.x3Large)
         .padding(.bottom, Spacing.x2Large)
     }

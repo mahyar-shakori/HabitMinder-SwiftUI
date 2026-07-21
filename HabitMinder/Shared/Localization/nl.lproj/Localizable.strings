@@ -6,7 +6,6 @@
   
 */
 
-"SetLanguageTitle" = "Selecteer je taal";
 "introFirstTitle" = "Gezonde gewoonte";
 "introFirstDescription" = "Er wordt geschat dat het 21 dagen duurt voordat mensen een nieuwe gewoonte vormen. Introduceer een gezonde gewoonte in je leven met de 21 dagen-app.";
 "introSecondTitle" = "Slechte gewoonte";
@@ -21,14 +20,13 @@
 "guest" = "Welkom, gast";
 "defaultQuote" = "Alles is mogelijk, met genoeg tijd!";
 "homeTitle" = "Mijn gewoontes";
-"doneButton" = "Klaar";
 "emptyView" = "Er is nog geen gewoonte toegevoegd! Klik op de menuknop om een gewoonte toe te voegen.";
 "watchEmptyView" = "Er is nog geen gewoonte toegevoegd!";
 "addHabitTitle" = "Gewoonte toevoegen";
 "editHabitTitle" = "Gewoonte bewerken";
 "missHabitToast" = "Je gewoonte is opnieuw gestart!";
 "missHabitButton" = "Gemist! Opnieuw beginnen";
-"futureHabitsTitleLabel" = "Toekomstige gewoontes";
+"habitHistoryTitle" = "Gewoontegeschiedenis";
 "settingTitle" = "Instellingen";
 "userName" = "Naam";
 "Language" = "Taal";
@@ -79,6 +77,7 @@
 "habitNotificationAlertTitle" = "Meldingen staan uit";
 "habitNotificationAlertMessage" = "Schakel meldingen in Instellingen in om gewoonteherinneringen te gebruiken.";
 "habitNotificationSettingsButton" = "Instellingen";
+"habitReminderNotificationBody" = "Tijd voor je ritueel.";
 "habitIdentitySectionTitle" = "Ritueel identiteit";
 "habitTitlePlaceholder" = "Bijv. ochtendpagina's";
 "habitVisualAnchorSectionTitle" = "Visueel anker";
@@ -96,22 +95,22 @@
 "habitCellJourneyFormat" = "%d-daagse reis";
 "habitCellProgressFormat" = "Dag %d van %d";
 "habitCellStreakFormat" = "%d dagen reeks";
-"futureHabitsHeaderTitle" = "Rituelen";
-"futureHabitStartNowButton" = "Nu starten";
-"futureHabitCompletedTab" = "Voltooid";
-"futureHabitUpcomingTab" = "Aankomend";
-"futureHabitMasteryTitle" = "21 dagen meesterschap";
-"futureHabitPlannedTitle" = "Geplande reizen";
-"futureHabitPlannedSubtitle" = "Zorg voor je toekomstige zelf door deze herstellende gewoontes voor te bereiden. Kleine stappen leiden tot blijvende verandering.";
-"futureHabitCompletedStatus" = "VOLTOOID";
-"futureHabitEmptyCompleted" = "Nog geen voltooide reizen";
-"futureHabitRitualTipLabel" = "RITUEELTIP";
-"futureHabitRitualTipText" = "\"Het geheim van je toekomst ligt verborgen in je dagelijkse routine.\" Begin met slechts één gewoonte voor consistentie.";
-"futureHabitStartInDaysFormat" = "Over %d dagen";
-"futureHabitAchievementSingular" = "%d prestatie";
-"futureHabitAchievementPlural" = "%d prestaties";
-"futureHabitFinishedDateFormat" = "Voltooid op %@";
-"futureHabitStreakDaysFormat" = "REEKS: %d DAGEN";
+"habitHistoryHeaderTitle" = "Rituelen";
+"habitHistoryStartNowButton" = "Nu starten";
+"habitHistoryCompletedTab" = "Voltooid";
+"habitHistoryFutureTab" = "Toekomstig";
+"habitHistoryMasteryTitle" = "21 dagen meesterschap";
+"habitHistoryPlannedTitle" = "Geplande reizen";
+"habitHistoryPlannedSubtitle" = "Zorg voor je toekomstige zelf door deze herstellende gewoontes voor te bereiden. Kleine stappen leiden tot blijvende verandering.";
+"habitHistoryCompletedStatus" = "VOLTOOID";
+"habitHistoryEmptyCompleted" = "Nog geen voltooide reizen";
+"habitHistoryRitualTipLabel" = "RITUEELTIP";
+"habitHistoryRitualTipText" = "\"Het geheim van je toekomst ligt verborgen in je dagelijkse routine.\" Begin met slechts één gewoonte voor consistentie.";
+"habitHistoryStartInDaysFormat" = "Over %d dagen";
+"habitHistoryAchievementSingular" = "%d prestatie";
+"habitHistoryAchievementPlural" = "%d prestaties";
+"habitHistoryFinishedDateFormat" = "Voltooid op %@";
+"habitHistoryStreakDaysFormat" = "REEKS: %d DAGEN";
 "weekdaySundayShort" = "Zo";
 "weekdayMondayShort" = "Ma";
 "weekdayTuesdayShort" = "Di";

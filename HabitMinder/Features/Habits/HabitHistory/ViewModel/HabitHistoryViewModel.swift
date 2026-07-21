@@ -1,15 +1,19 @@
 //
-//  FutureHabitViewModel.swift
+//  HabitHistoryViewModel.swift
 //  HabitMinder SwiftUI
 //
 //  Created by Mahyar on 28/05/2025.
 //
 
 import Foundation
+import Observation
 
-final class FutureHabitViewModel: ObservableObject {
-    @Published private(set) var uiState = FutureHabitUIState()
-    
+@Observable
+final class HabitHistoryViewModel {
+    private var isSaveButtonEnabled = false
+    private(set) var listItems: [FutureHabitItem] = []
+    private(set) var completedItems: [CompletedHabitItem] = []
+    private(set) var itemToDelete: UUID?
     private let dataManager: DataManaging
     private let coordinator: HabitHistoryCoordinating
     private let reminderScheduler: HabitReminderScheduling
@@ -20,8 +24,8 @@ final class FutureHabitViewModel: ObservableObject {
     }
 
     var deleteConfirmationMessage: String {
-        guard let itemToDelete = uiState.itemToDelete,
-              let title = uiState.listItems.first(where: { $0.id == itemToDelete })?.title else {
+        guard let itemToDelete = itemToDelete,
+              let title = listItems.first(where: { $0.id == itemToDelete })?.title else {
             return L10n.Alert.Habit.deleteMessage
         }
 
@@ -45,7 +49,7 @@ final class FutureHabitViewModel: ObservableObject {
     }
    
     func fetchHabits() {
-        let futureHabitModels: [FutureHabitModel] = dataManager.fetchAll(FutureHabitModel.self)
+        let habitHistoryModels: [HabitHistoryModel] = dataManager.fetchAll(HabitHistoryModel.self)
         let completedHabitModels: [HabitModel] = dataManager.fetchAll(HabitModel.self)
             .filter { $0.createdAt.habitDaysCountSinceCreation(for: $0.id, totalDays: $0.commitmentDays) == 0 }
             .sorted { $0.createdAt > $1.createdAt }
@@ -54,7 +58,7 @@ final class FutureHabitViewModel: ObservableObject {
             reminderScheduler.cancelReminders(for: $0.id)
         }
 
-        uiState.listItems = futureHabitModels.map {
+        listItems = habitHistoryModels.map {
             FutureHabitItem(
                 id: $0.id,
                 title: $0.title,
@@ -63,7 +67,7 @@ final class FutureHabitViewModel: ObservableObject {
                 commitmentDays: $0.commitmentDays
             )
         }
-        uiState.completedItems = completedHabitModels.map {
+        completedItems = completedHabitModels.map {
             CompletedHabitItem(
                 id: $0.id,
                 title: $0.title,
@@ -76,18 +80,18 @@ final class FutureHabitViewModel: ObservableObject {
     
     private func updateValidationState() {
         let isValid = trimmedHabitTitle.count > 0
-        uiState.isSaveButtonEnabled = isValid
+        isSaveButtonEnabled = isValid
     }
  
     func save() {
-            let newHabit = FutureHabitModel(title: habitTitle)
+            let newHabit = HabitHistoryModel(title: habitTitle)
             dataManager.save(newHabit)
             habitTitle = ""
             fetchHabits()
         }
     
     func startHabit(id: UUID) {
-        guard let futureHabit = dataManager.fetch(byID: id, FutureHabitModel.self) else {
+        guard let habitHistory = dataManager.fetch(byID: id, HabitHistoryModel.self) else {
             return
         }
 
@@ -96,17 +100,17 @@ final class FutureHabitViewModel: ObservableObject {
             .map(\.sortOrder)
             .max() ?? -1
         let habit = HabitModel(
-            title: futureHabit.title,
+            title: habitHistory.title,
             sortOrder: maxSortOrder + 1,
-            iconName: futureHabit.iconName,
-            frequency: futureHabit.frequency,
-            commitmentDays: futureHabit.commitmentDays,
-            reminderTimes: futureHabit.reminderTimes,
-            customWeekdays: futureHabit.customWeekdays
+            iconName: habitHistory.iconName,
+            frequency: habitHistory.frequency,
+            commitmentDays: habitHistory.commitmentDays,
+            reminderTimes: habitHistory.reminderTimes,
+            customWeekdays: habitHistory.customWeekdays
         )
 
         dataManager.save(habit)
-        dataManager.delete(byID: id, FutureHabitModel.self)
+        dataManager.delete(byID: id, HabitHistoryModel.self)
         reminderScheduler.scheduleReminders(
             for: habit.id,
             title: habit.title,
@@ -119,21 +123,21 @@ final class FutureHabitViewModel: ObservableObject {
     }
 
     func confirmDelete(id: UUID) {
-        uiState.itemToDelete = id
+        itemToDelete = id
     }
     
     func performDelete() {
-        guard let id = uiState.itemToDelete else {
+        guard let id = itemToDelete else {
             return
         }
         reminderScheduler.cancelReminders(for: id)
-        dataManager.delete(byID: id, FutureHabitModel.self)
-        uiState.listItems.removeAll { $0.id == id }
+        dataManager.delete(byID: id, HabitHistoryModel.self)
+        listItems.removeAll { $0.id == id }
         cancelDelete()
     }
     
     func cancelDelete() {
-        uiState.itemToDelete = nil
+        itemToDelete = nil
     }
 
     private func completedDate(for habit: HabitModel) -> Date {

@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct UserNameEditorView: View {
-    @EnvironmentObject private var settingViewModel: SettingViewModel
+    private let settingViewModel: SettingViewModel
     @FocusState private var isFocused: Bool
     @Binding private var isPresented: Bool
     @State private var tempUserName: String
     
     init(
+        settingViewModel: SettingViewModel,
         isPresented: Binding<Bool>,
         currentName: String
     ) {
+        self.settingViewModel = settingViewModel
         self._isPresented = isPresented
         self.tempUserName = currentName
     }
@@ -66,22 +68,44 @@ struct UserNameEditorView: View {
     }
    
     private var toolbarSaveButton: some View {
-        ToolbarTextButton(L10n.Shared.saveButton, weight: .bold) {
+        Button {
             settingViewModel.setUserName(tempUserName)
             isPresented = false
+        } label: {
+            Text(L10n.Shared.saveButton)
+                .font(.AppFont.rooneySansBold.size(FontSize.x4Large))
+                .foregroundStyle(.blue)
         }
+        .buttonStyle(.plain)
     }
    
     private var toolbarCancelButton: some View {
-        ToolbarTextButton(L10n.Shared.cancelButton) {
+        Button {
             isPresented = false
+        } label: {
+            Text(L10n.Shared.cancelButton)
+                .font(.AppFont.rooneySansRegular.size(FontSize.x4Large))
+                .foregroundStyle(.blue)
         }
+        .buttonStyle(.plain)
     }
 }
 
 
 #Preview {
+    let dependencies = AppDependencies()
+    let settingsDependencies = dependencies.destinationDependencies.main.settings
+    let coordinator = SettingCoordinator(dismiss: {})
+    let viewModel = SettingViewModel(
+        coordinator: coordinator,
+        userDefaultsStorage: settingsDependencies.userDefaultsStorage
+    )
     let isPresented = Binding<Bool>.constant(false)
     let currentName = "test"
-    UserNameEditorView(isPresented: isPresented, currentName: currentName)
+
+    UserNameEditorView(
+        settingViewModel: viewModel,
+        isPresented: isPresented,
+        currentName: currentName
+    )
 }

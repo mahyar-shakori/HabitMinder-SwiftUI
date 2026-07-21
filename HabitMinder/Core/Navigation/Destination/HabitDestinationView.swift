@@ -38,12 +38,12 @@ struct HabitDestinationView: View {
             )
         case .history:
             let viewCoordinator = HabitHistoryCoordinator(dismiss: coordinator.pop)
-            let viewModel = FutureHabitViewModel(
+            let viewModel = HabitHistoryViewModel(
                 dataManager: dataManager,
                 coordinator: viewCoordinator,
                 reminderScheduler: dependencies.reminderScheduler
             )
-            FutureHabitView(futureHabitViewModel: viewModel)
+            HabitHistoryView(habitHistoryViewModel: viewModel)
         }
     }
 }

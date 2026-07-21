@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @ObservedObject private var homeViewModel: HomeViewModel
+    private var homeViewModel: HomeViewModel
     
     
     init(homeViewModel: HomeViewModel) {

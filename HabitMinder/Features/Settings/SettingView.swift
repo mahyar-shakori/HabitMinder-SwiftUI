@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct SettingView: View {
-    @StateObject private var settingViewModel: SettingViewModel
+    private var settingViewModel: SettingViewModel
     @EnvironmentObject private var themeManager: ThemeManager
     @State private var isEditingUserName = false
     @State private var isShowingColorPicker = false
     
     init(settingViewModel: SettingViewModel) {
-        _settingViewModel = StateObject(wrappedValue: settingViewModel)
+        self.settingViewModel = settingViewModel
     }
     
     var body: some View {
@@ -60,17 +60,22 @@ struct SettingView: View {
     }
     
     private var userNameField: some View {
-        SettingsRowButton {
+        Button {
             isEditingUserName = true
-        } content: {
+        } label: {
             userNameButtonContent
+                .padding(Spacing.medium)
+                .frame(maxWidth: .infinity)
+                .background(.appWhite)
+                .clipShape(RoundedRectangle(cornerRadius: CornerRadius.medium))
         }
+        .buttonStyle(.plain)
         .sheet(isPresented: $isEditingUserName) {
             UserNameEditorView(
+                settingViewModel: settingViewModel,
                 isPresented: $isEditingUserName,
                 currentName: settingViewModel.userName
             )
-            .environmentObject(settingViewModel)
         }
     }
     
@@ -93,11 +98,16 @@ struct SettingView: View {
     }
     
     private var colorPickerField: some View {
-        SettingsRowButton {
+        Button {
             isShowingColorPicker = true
-        } content: {
+        } label: {
             colorPickerButtonContent
+                .padding(Spacing.medium)
+                .frame(maxWidth: .infinity)
+                .background(.appWhite)
+                .clipShape(RoundedRectangle(cornerRadius: CornerRadius.medium))
         }
+        .buttonStyle(.plain)
         .sheet(isPresented: $isShowingColorPicker) {
             ColorPickerView(isPresented: $isShowingColorPicker)
         }

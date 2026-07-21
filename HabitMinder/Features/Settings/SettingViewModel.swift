@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import Observation
 
-final class SettingViewModel: ObservableObject {
-    @Published private(set) var userName = ""
+@Observable
+final class SettingViewModel {
+    private(set) var userName = ""
     
     private let coordinator: SettingCoordinating
     private let userDefaultsStorage: UserDefaultsStoring

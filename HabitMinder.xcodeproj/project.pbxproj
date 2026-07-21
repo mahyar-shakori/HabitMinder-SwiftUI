@@ -6,37 +6,7 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		3E5D804E2E17F64100BC573B /* MockIntroCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5D804D2E17F63F00BC573B /* MockIntroCoordinator.swift */; };
-		3E6201D62E112C2300E69E28 /* HabitMinderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6201D52E112C2300E69E28 /* HabitMinderUITests.swift */; };
-		3E7A83932E019FA900847B30 /* MainCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7A83922E019FA200847B30 /* MainCoordinatorTests.swift */; };
-		3EA278EB2E1570FC0011CF4A /* IntroViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA278EA2E1570F90011CF4A /* IntroViewModelTests.swift */; };
-		3EA278ED2E1578AA0011CF4A /* IntroViewIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA278EC2E1578A80011CF4A /* IntroViewIntegrationTests.swift */; };
-		3EB305792DF5AA0300AAE9E0 /* WatchSessionManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB305782DF5AA0200AAE9E0 /* WatchSessionManaging.swift */; };
-		3EB88D5F2E78478C00084D25 /* HabitMinderTestPlan.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = 3EB88D5E2E78478C00084D25 /* HabitMinderTestPlan.xctestplan */; };
-		3EEFE3842DAFB2B300F5B0FF /* HabitMinder Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 3EEFE37A2DAFB2B200F5B0FF /* HabitMinder Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		3EEFE3932DAFB2E800F5B0FF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE38C2DAFB2E800F5B0FF /* HomeView.swift */; };
-		3EEFE3942DAFB2E800F5B0FF /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE38D2DAFB2E800F5B0FF /* HomeViewModel.swift */; };
-		3EEFE3952DAFB2E800F5B0FF /* HabitMinderWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE38A2DAFB2E800F5B0FF /* HabitMinderWatchApp.swift */; };
-		3EEFE3962DAFB2E800F5B0FF /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE38F2DAFB2E800F5B0FF /* WatchSessionManager.swift */; };
-		3EEFE3972DAFB2E800F5B0FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EEFE3912DAFB2E800F5B0FF /* Assets.xcassets */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
-		3E6201D92E112C2300E69E28 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E89D6EE2D9869F000E8414C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3E89D6F52D9869F100E8414C;
-			remoteInfo = HabitMinder;
-		};
-		3EB0224B2DF988FD00A3F305 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E89D6EE2D9869F000E8414C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3E89D6F52D9869F100E8414C;
-			remoteInfo = "HabitMinder SwiftUI";
-		};
 		3EEFE3822DAFB2B300F5B0FF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3E89D6EE2D9869F000E8414C /* Project object */;
@@ -53,7 +23,6 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				3EEFE3842DAFB2B300F5B0FF /* HabitMinder Watch App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -62,22 +31,8 @@
 
 /* Begin PBXFileReference section */
 		3E358E8A300D71B600D03AA1 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
-		3E5D804D2E17F63F00BC573B /* MockIntroCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockIntroCoordinator.swift; sourceTree = "<group>"; };
-		3E6201D32E112C2300E69E28 /* HabitMinderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HabitMinderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E6201D52E112C2300E69E28 /* HabitMinderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitMinderUITests.swift; sourceTree = "<group>"; };
-		3E7A83922E019FA200847B30 /* MainCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorTests.swift; sourceTree = "<group>"; };
-		3E89D6F62D9869F100E8414C /* HabitMinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitMinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3EA278EA2E1570F90011CF4A /* IntroViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewModelTests.swift; sourceTree = "<group>"; };
-		3EA278EC2E1578A80011CF4A /* IntroViewIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewIntegrationTests.swift; sourceTree = "<group>"; };
-		3EB022472DF988FD00A3F305 /* HabitMinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HabitMinderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3EB305782DF5AA0200AAE9E0 /* WatchSessionManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManaging.swift; sourceTree = "<group>"; };
-		3EB88D5E2E78478C00084D25 /* HabitMinderTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = HabitMinderTestPlan.xctestplan; path = HabitMinder/App/HabitMinderTestPlan.xctestplan; sourceTree = SOURCE_ROOT; };
-		3EEFE37A2DAFB2B200F5B0FF /* HabitMinder Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HabitMinder Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3EEFE38A2DAFB2E800F5B0FF /* HabitMinderWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitMinderWatchApp.swift; sourceTree = "<group>"; };
-		3EEFE38C2DAFB2E800F5B0FF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		3EEFE38D2DAFB2E800F5B0FF /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		3EEFE38F2DAFB2E800F5B0FF /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
-		3EEFE3912DAFB2E800F5B0FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3E89D6F62D9869F100E8414C /* HabitMinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = HabitMinder.app; path = "/Users/mahyar/Desktop/HabitMinder SwiftUI/build/Debug-iphoneos/HabitMinder.app"; sourceTree = "<absolute>"; };
+		3EEFE37A2DAFB2B200F5B0FF /* HabitMinder Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "HabitMinder Watch App.app"; path = "/Users/mahyar/Desktop/HabitMinder SwiftUI/build/Debug-watchos/HabitMinder Watch App.app"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -93,6 +48,10 @@
 				Core/Data/Network/HTTPSession.swift,
 				Core/Data/Network/NetworkEndpoint.swift,
 				Core/Data/Network/NetworkError.swift,
+				Core/Data/Network/Quote/Quote.swift,
+				Core/Data/Network/Quote/QuoteEndpoint.swift,
+				Core/Data/Network/Quote/QuoteRepository.swift,
+				Core/Data/Network/Quote/QuoteRepositoryProtocol.swift,
 				Core/Data/Network/Secrets.swift,
 				"Core/Data/Persistence /SwiftData/DataManager.swift",
 				"Core/Data/Persistence /SwiftData/DataManaging.swift",
@@ -114,17 +73,17 @@
 				Core/Navigation/Destination/SettingsDestinationView.swift,
 				Features/Habits/HabitHistory/Coordinator/HabitHistoryCoordinating.swift,
 				Features/Habits/HabitHistory/Coordinator/HabitHistoryCoordinator.swift,
-				Features/Habits/HabitHistory/FutureHabitItem.swift,
-				Features/Habits/HabitHistory/FutureHabitListRowView.swift,
-				Features/Habits/HabitHistory/FutureHabitModel.swift,
-				Features/Habits/HabitHistory/FutureHabitUIState.swift,
-				Features/Habits/HabitHistory/FutureHabitView.swift,
-				Features/Habits/HabitHistory/FutureHabitViewModel.swift,
-				Features/Habits/Home/Components/HabitListRowView.swift,
+				Features/Habits/HabitHistory/Models/CompletedHabitItem.swift,
+				Features/Habits/HabitHistory/Models/FutureHabitItem.swift,
+				Features/Habits/HabitHistory/Models/HabitHistoryModel.swift,
+				Features/Habits/HabitHistory/View/Components/HabitHistoryListRowView.swift,
+				Features/Habits/HabitHistory/View/HabitHistoryView.swift,
+				Features/Habits/HabitHistory/ViewModel/HabitHistoryViewModel.swift,
 				Features/Habits/Home/Coordinator/HomeCoordinating.swift,
 				Features/Habits/Home/Coordinator/HomeCoordinator.swift,
 				Features/Habits/Home/Models/HabitItem.swift,
 				Features/Habits/Home/Models/HabitModel.swift,
+				Features/Habits/Home/View/Components/HabitListRowView.swift,
 				Features/Habits/Home/View/HomeView.swift,
 				Features/Habits/Home/ViewModel/HomeViewModel.swift,
 				Features/Intro/Onboarding/Coordinator/IntroCoordinating.swift,
@@ -140,23 +99,17 @@
 				Features/Intro/SetName/ViewModel/SetNameViewModel.swift,
 				Features/Intro/Welcome/Coordinator/WelcomeCoordinating.swift,
 				Features/Intro/Welcome/Coordinator/WelcomeCoordinator.swift,
-				Features/Intro/Welcome/View/WelcomeUIState.swift,
 				Features/Intro/Welcome/View/WelcomeView.swift,
 				Features/Intro/Welcome/ViewModel/WelcomeViewModel.swift,
-				Features/ManageHabit/AddHabit/AddHabitCoordinating.swift,
-				Features/ManageHabit/AddHabit/AddHabitCoordinator.swift,
-				Features/ManageHabit/AddHabit/AddHabitUIState.swift,
-				Features/ManageHabit/AddHabit/AddHabitView.swift,
-				Features/ManageHabit/AddHabit/AddHabitViewModel.swift,
-				Features/ManageHabit/EditHabit/EditHabitCoordinating.swift,
-				Features/ManageHabit/EditHabit/EditHabitCoordinator.swift,
-				Features/ManageHabit/EditHabit/EditHabitUIState.swift,
-				Features/ManageHabit/EditHabit/EditHabitView.swift,
-				Features/ManageHabit/EditHabit/EditHabitViewModel.swift,
-				Features/Quote/Quote.swift,
-				Features/Quote/QuoteEndpoint.swift,
-				Features/Quote/QuoteRepository.swift,
-				Features/Quote/QuoteRepositoryProtocol.swift,
+				Features/ManageHabit/AddHabit/Coordinator/AddHabitCoordinating.swift,
+				Features/ManageHabit/AddHabit/Coordinator/AddHabitCoordinator.swift,
+				Features/ManageHabit/AddHabit/Model/HabitFrequency.swift,
+				Features/ManageHabit/AddHabit/View/AddHabitView.swift,
+				Features/ManageHabit/AddHabit/ViewModel/AddHabitViewModel.swift,
+				Features/ManageHabit/EditHabit/Coordinator/EditHabitCoordinating.swift,
+				Features/ManageHabit/EditHabit/Coordinator/EditHabitCoordinator.swift,
+				Features/ManageHabit/EditHabit/View/EditHabitView.swift,
+				Features/ManageHabit/EditHabit/ViewModel/EditHabitViewModel.swift,
 				Features/Settings/ColorPickerView.swift,
 				Features/Settings/SettingCoordinating.swift,
 				Features/Settings/SettingCoordinator.swift,
@@ -169,13 +122,6 @@
 				Shared/Constants/LayoutStyle.swift,
 				Shared/Constants/Spacing.swift,
 				Shared/Constants/SystemIconName.swift,
-				Shared/CustomViews/Button/AppButton.swift,
-				Shared/CustomViews/Button/FloatingActionButton.swift,
-				Shared/CustomViews/Button/InlineIconButton.swift,
-				Shared/CustomViews/Button/SelectableChipButton.swift,
-				Shared/CustomViews/Button/SelectableIconButton.swift,
-				Shared/CustomViews/Button/SettingsRowButton.swift,
-				Shared/CustomViews/Button/ToolbarTextButton.swift,
 				Shared/CustomViews/EmptyView/CustomEmptyView.swift,
 				Shared/CustomViews/Header/AppHeaderView.swift,
 				"Shared/Extensions/Foundation/Date+DayCounter.swift",
@@ -194,6 +140,10 @@
 				Shared/Managers/DI/DISetup.swift,
 				Shared/Managers/DI/ScopesDependencies.swift,
 				Shared/Managers/Notification/AppNotification.swift,
+				Shared/Managers/Notification/AppNotificationDelegate.swift,
+				Shared/Managers/Notification/HabitNotificationAuthorizationStatus.swift,
+				Shared/Managers/Notification/HabitReminderScheduler.swift,
+				Shared/Managers/Notification/HabitReminderScheduling.swift,
 				Shared/Managers/Theme/ThemeManager.swift,
 				Shared/Managers/Theme/ThemeManaging.swift,
 				Watch/HabitData.swift,
@@ -215,6 +165,18 @@
 			);
 			target = 3EEFE3792DAFB2B200F5B0FF /* HabitMinder Watch App */;
 		};
+		3EA5A52B300FAC3B00FF3F20 /* Exceptions for "HabitMinderWatchApp" folder in "HabitMinder Watch App" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				App/HabitMinderWatchApp.swift,
+				Features/HomeView.swift,
+				Features/HomeViewModel.swift,
+				Resources/Assets.xcassets,
+				WatchConnectivity/WatchSessionManager.swift,
+				WatchConnectivity/WatchSessionManaging.swift,
+			);
+			target = 3EEFE3792DAFB2B200F5B0FF /* HabitMinder Watch App */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -227,24 +189,18 @@
 			path = HabitMinder;
 			sourceTree = "<group>";
 		};
+		3EA5A51A300FAC2500FF3F20 /* HabitMinderWatchApp */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3EA5A52B300FAC3B00FF3F20 /* Exceptions for "HabitMinderWatchApp" folder in "HabitMinder Watch App" target */,
+			);
+			path = HabitMinderWatchApp;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3E6201D02E112C2300E69E28 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3E89D6F32D9869F100E8414C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3EB022442DF988FD00A3F305 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -261,181 +217,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3E5D804C2E17F62F00BC573B /* Mock */ = {
-			isa = PBXGroup;
-			children = (
-				3E5D804D2E17F63F00BC573B /* MockIntroCoordinator.swift */,
-			);
-			path = Mock;
-			sourceTree = "<group>";
-		};
-		3E6201DF2E112C3300E69E28 /* HabitMinderUITests */ = {
-			isa = PBXGroup;
-			children = (
-				3E6201E02E116A5900E69E28 /* Features */,
-			);
-			path = HabitMinderUITests;
-			sourceTree = "<group>";
-		};
-		3E6201E02E116A5900E69E28 /* Features */ = {
-			isa = PBXGroup;
-			children = (
-				3E6201E12E116A6100E69E28 /* Intro */,
-			);
-			path = Features;
-			sourceTree = "<group>";
-		};
-		3E6201E12E116A6100E69E28 /* Intro */ = {
-			isa = PBXGroup;
-			children = (
-				3E6201D52E112C2300E69E28 /* HabitMinderUITests.swift */,
-			);
-			path = Intro;
-			sourceTree = "<group>";
-		};
-		3E7A838B2E0160A600847B30 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				3E7A83902E0160C100847B30 /* Navigation */,
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
-		3E7A83902E0160C100847B30 /* Navigation */ = {
-			isa = PBXGroup;
-			children = (
-				3E7A83912E0160C900847B30 /* Coordinator */,
-			);
-			path = Navigation;
-			sourceTree = "<group>";
-		};
-		3E7A83912E0160C900847B30 /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				3E7A83922E019FA200847B30 /* MainCoordinatorTests.swift */,
-			);
-			path = Coordinator;
-			sourceTree = "<group>";
-		};
 		3E89D6ED2D9869F000E8414C = {
 			isa = PBXGroup;
 			children = (
 				3E358E8A300D71B600D03AA1 /* test.swift */,
 				3E626082300D51950001D5C0 /* HabitMinder */,
-				3EEFE3892DAFB2C600F5B0FF /* HabitMinderWatchApp */,
-				3EB022542DF9CF0300A3F305 /* HabitMinderTests */,
-				3E6201DF2E112C3300E69E28 /* HabitMinderUITests */,
-				3E89D6F72D9869F100E8414C /* Products */,
+				3EA5A51A300FAC2500FF3F20 /* HabitMinderWatchApp */,
 			);
-			sourceTree = "<group>";
-		};
-		3E89D6F72D9869F100E8414C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3E89D6F62D9869F100E8414C /* HabitMinder.app */,
-				3EEFE37A2DAFB2B200F5B0FF /* HabitMinder Watch App.app */,
-				3EB022472DF988FD00A3F305 /* HabitMinderTests.xctest */,
-				3E6201D32E112C2300E69E28 /* HabitMinderUITests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		3EA278E82E1570DC0011CF4A /* Features */ = {
-			isa = PBXGroup;
-			children = (
-				3EA278E92E1570E20011CF4A /* Intro */,
-			);
-			path = Features;
-			sourceTree = "<group>";
-		};
-		3EA278E92E1570E20011CF4A /* Intro */ = {
-			isa = PBXGroup;
-			children = (
-				3EA278EA2E1570F90011CF4A /* IntroViewModelTests.swift */,
-				3EA278EC2E1578A80011CF4A /* IntroViewIntegrationTests.swift */,
-			);
-			path = Intro;
-			sourceTree = "<group>";
-		};
-		3EB022542DF9CF0300A3F305 /* HabitMinderTests */ = {
-			isa = PBXGroup;
-			children = (
-				3EB88D5E2E78478C00084D25 /* HabitMinderTestPlan.xctestplan */,
-				3E5D804C2E17F62F00BC573B /* Mock */,
-				3E7A838B2E0160A600847B30 /* Core */,
-				3EA278E82E1570DC0011CF4A /* Features */,
-			);
-			path = HabitMinderTests;
-			sourceTree = "<group>";
-		};
-		3EEFE3892DAFB2C600F5B0FF /* HabitMinderWatchApp */ = {
-			isa = PBXGroup;
-			children = (
-				3EEFE38B2DAFB2E800F5B0FF /* App */,
-				3EEFE38E2DAFB2E800F5B0FF /* Features */,
-				3EEFE3902DAFB2E800F5B0FF /* WatchConnectivity */,
-				3EEFE3922DAFB2E800F5B0FF /* Resources */,
-			);
-			path = HabitMinderWatchApp;
-			sourceTree = "<group>";
-		};
-		3EEFE38B2DAFB2E800F5B0FF /* App */ = {
-			isa = PBXGroup;
-			children = (
-				3EEFE38A2DAFB2E800F5B0FF /* HabitMinderWatchApp.swift */,
-			);
-			path = App;
-			sourceTree = "<group>";
-		};
-		3EEFE38E2DAFB2E800F5B0FF /* Features */ = {
-			isa = PBXGroup;
-			children = (
-				3EEFE38C2DAFB2E800F5B0FF /* HomeView.swift */,
-				3EEFE38D2DAFB2E800F5B0FF /* HomeViewModel.swift */,
-			);
-			path = Features;
-			sourceTree = "<group>";
-		};
-		3EEFE3902DAFB2E800F5B0FF /* WatchConnectivity */ = {
-			isa = PBXGroup;
-			children = (
-				3EEFE38F2DAFB2E800F5B0FF /* WatchSessionManager.swift */,
-				3EB305782DF5AA0200AAE9E0 /* WatchSessionManaging.swift */,
-			);
-			path = WatchConnectivity;
-			sourceTree = "<group>";
-		};
-		3EEFE3922DAFB2E800F5B0FF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				3EEFE3912DAFB2E800F5B0FF /* Assets.xcassets */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3E6201D22E112C2300E69E28 /* HabitMinderUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3E6201DB2E112C2300E69E28 /* Build configuration list for PBXNativeTarget "HabitMinderUITests" */;
-			buildPhases = (
-				3E6201CF2E112C2300E69E28 /* Sources */,
-				3E6201D02E112C2300E69E28 /* Frameworks */,
-				3E6201D12E112C2300E69E28 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3E6201DA2E112C2300E69E28 /* PBXTargetDependency */,
-			);
-			name = HabitMinderUITests;
-			packageProductDependencies = (
-			);
-			productName = HabitMinderUITests;
-			productReference = 3E6201D32E112C2300E69E28 /* HabitMinderUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		3E89D6F52D9869F100E8414C /* HabitMinder */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3E89D7042D9869F100E8414C /* Build configuration list for PBXNativeTarget "HabitMinder" */;
@@ -456,26 +249,6 @@
 			productName = "HabitMinder SwiftUI";
 			productReference = 3E89D6F62D9869F100E8414C /* HabitMinder.app */;
 			productType = "com.apple.product-type.application";
-		};
-		3EB022462DF988FD00A3F305 /* HabitMinderTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3EB0224F2DF988FD00A3F305 /* Build configuration list for PBXNativeTarget "HabitMinderTests" */;
-			buildPhases = (
-				3EB022432DF988FD00A3F305 /* Sources */,
-				3EB022442DF988FD00A3F305 /* Frameworks */,
-				3EB022452DF988FD00A3F305 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3EB0224C2DF988FD00A3F305 /* PBXTargetDependency */,
-			);
-			name = HabitMinderTests;
-			packageProductDependencies = (
-			);
-			productName = "HabitMinder SwiftUITests";
-			productReference = 3EB022472DF988FD00A3F305 /* HabitMinderTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		3EEFE3792DAFB2B200F5B0FF /* HabitMinder Watch App */ = {
 			isa = PBXNativeTarget;
@@ -506,16 +279,8 @@
 				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 2600;
 				TargetAttributes = {
-					3E6201D22E112C2300E69E28 = {
-						CreatedOnToolsVersion = 16.4;
-						TestTargetID = 3E89D6F52D9869F100E8414C;
-					};
 					3E89D6F52D9869F100E8414C = {
 						CreatedOnToolsVersion = 16.2;
-					};
-					3EB022462DF988FD00A3F305 = {
-						CreatedOnToolsVersion = 16.4;
-						TestTargetID = 3E89D6F52D9869F100E8414C;
 					};
 					3EEFE3792DAFB2B200F5B0FF = {
 						CreatedOnToolsVersion = 16.3;
@@ -533,26 +298,17 @@
 			mainGroup = 3E89D6ED2D9869F000E8414C;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 3E89D6F72D9869F100E8414C /* Products */;
+			productRefGroup = 3E89D6ED2D9869F000E8414C;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				3E89D6F52D9869F100E8414C /* HabitMinder */,
 				3EEFE3792DAFB2B200F5B0FF /* HabitMinder Watch App */,
-				3EB022462DF988FD00A3F305 /* HabitMinderTests */,
-				3E6201D22E112C2300E69E28 /* HabitMinderUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3E6201D12E112C2300E69E28 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3E89D6F42D9869F100E8414C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -560,33 +316,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3EB022452DF988FD00A3F305 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3EB88D5F2E78478C00084D25 /* HabitMinderTestPlan.xctestplan in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3EEFE3782DAFB2B200F5B0FF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EEFE3972DAFB2E800F5B0FF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3E6201CF2E112C2300E69E28 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3E6201D62E112C2300E69E28 /* HabitMinderUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3E89D6F22D9869F100E8414C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -594,42 +333,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3EB022432DF988FD00A3F305 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3E7A83932E019FA900847B30 /* MainCoordinatorTests.swift in Sources */,
-				3EA278ED2E1578AA0011CF4A /* IntroViewIntegrationTests.swift in Sources */,
-				3EA278EB2E1570FC0011CF4A /* IntroViewModelTests.swift in Sources */,
-				3E5D804E2E17F64100BC573B /* MockIntroCoordinator.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3EEFE3762DAFB2B200F5B0FF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EEFE3932DAFB2E800F5B0FF /* HomeView.swift in Sources */,
-				3EB305792DF5AA0300AAE9E0 /* WatchSessionManaging.swift in Sources */,
-				3EEFE3942DAFB2E800F5B0FF /* HomeViewModel.swift in Sources */,
-				3EEFE3952DAFB2E800F5B0FF /* HabitMinderWatchApp.swift in Sources */,
-				3EEFE3962DAFB2E800F5B0FF /* WatchSessionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3E6201DA2E112C2300E69E28 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3E89D6F52D9869F100E8414C /* HabitMinder */;
-			targetProxy = 3E6201D92E112C2300E69E28 /* PBXContainerItemProxy */;
-		};
-		3EB0224C2DF988FD00A3F305 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3E89D6F52D9869F100E8414C /* HabitMinder */;
-			targetProxy = 3EB0224B2DF988FD00A3F305 /* PBXContainerItemProxy */;
-		};
 		3EEFE3832DAFB2B300F5B0FF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3EEFE3792DAFB2B200F5B0FF /* HabitMinder Watch App */;
@@ -638,42 +351,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		3E6201DC2E112C2300E69E28 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = A6WZ8YTJ2Z;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.HabitMinderUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = HabitMinder;
-			};
-			name = Debug;
-		};
-		3E6201DD2E112C2300E69E28 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = A6WZ8YTJ2Z;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.HabitMinderUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = HabitMinder;
-			};
-			name = Release;
-		};
 		3E89D7022D9869F100E8414C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -865,44 +542,6 @@
 			};
 			name = Release;
 		};
-		3EB0224D2DF988FD00A3F305 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = A6WZ8YTJ2Z;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.HabitMinder-SwiftUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HabitMinder.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HabitMinder";
-			};
-			name = Debug;
-		};
-		3EB0224E2DF988FD00A3F305 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = A6WZ8YTJ2Z;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.HabitMinder-SwiftUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HabitMinder.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HabitMinder";
-			};
-			name = Release;
-		};
 		3EEFE3862DAFB2B300F5B0FF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -962,15 +601,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3E6201DB2E112C2300E69E28 /* Build configuration list for PBXNativeTarget "HabitMinderUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3E6201DC2E112C2300E69E28 /* Debug */,
-				3E6201DD2E112C2300E69E28 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		3E89D6F12D9869F000E8414C /* Build configuration list for PBXProject "HabitMinder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -985,15 +615,6 @@
 			buildConfigurations = (
 				3E89D7052D9869F100E8414C /* Debug */,
 				3E89D7062D9869F100E8414C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3EB0224F2DF988FD00A3F305 /* Build configuration list for PBXNativeTarget "HabitMinderTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3EB0224D2DF988FD00A3F305 /* Debug */,
-				3EB0224E2DF988FD00A3F305 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

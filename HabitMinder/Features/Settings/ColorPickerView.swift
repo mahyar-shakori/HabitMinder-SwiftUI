@@ -70,14 +70,16 @@ struct ColorPickerView: View {
     }
     
     private var defaultColorButton: some View {
-        AppButton(
-            L10n.SettingPage.defaultColor,
-            variant: .plain
-        ) {
+        Button {
             let defaultColor = Color.appPrimary
             selectedColor = defaultColor
             themeManager.appPrimary = defaultColor
+        } label: {
+            Text(L10n.SettingPage.defaultColor)
+                .font(.AppFont.rooneySansBold.size(FontSize.x4Large))
+                .foregroundStyle(.blue)
         }
+        .buttonStyle(.plain)
         .padding(Spacing.medium)
         .frame(maxWidth: .infinity)
         .background(.appWhite)
@@ -90,16 +92,26 @@ struct ColorPickerView: View {
     }
     
     private var toolbarSaveButton: some View {
-        ToolbarTextButton(L10n.Shared.saveButton, weight: .bold) {
+        Button {
             themeManager.appPrimary = selectedColor
             isPresented = false
+        } label: {
+            Text(L10n.Shared.saveButton)
+                .font(.AppFont.rooneySansBold.size(FontSize.x4Large))
+                .foregroundStyle(.blue)
         }
+        .buttonStyle(.plain)
     }
    
     private var toolbarCancelButton: some View {
-        ToolbarTextButton(L10n.Shared.cancelButton) {
+        Button {
             isPresented = false
+        } label: {
+            Text(L10n.Shared.cancelButton)
+                .font(.AppFont.rooneySansRegular.size(FontSize.x4Large))
+                .foregroundStyle(.blue)
         }
+        .buttonStyle(.plain)
     }
 }
 

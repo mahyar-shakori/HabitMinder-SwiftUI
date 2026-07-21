@@ -23,11 +23,7 @@ enum L10n {
 
         return result
     }
-
-    enum SetLanguagePage {
-        static let title = localized("SetLanguageTitle")
-    }
-
+    
     enum IntroPage {
         static let firstTitle = localized("introFirstTitle")
         static let firstDescription = localized("introFirstDescription")
@@ -58,7 +54,6 @@ enum L10n {
         static let listTitle = localized("homeListTitle")
         static let listSubtitle = localized("homeListSubtitle")
         static let quoteLabel = localized("homeQuoteLabel")
-        static let doneButton = localized("doneButton")
         static let defaultQuote = localized("defaultQuote")
         static let defaultAuthor = localized("homeDefaultAuthor")
         static let emptyView = localized("emptyView")
@@ -103,35 +98,35 @@ enum L10n {
         static let missHabitButton = localized("missHabitButton")
     }
 
-    enum FutureHabitsPage {
-        static let title = localized("futureHabitsTitleLabel")
-        static let headerTitle = localized("futureHabitsHeaderTitle")
-        static let startNowButton = localized("futureHabitStartNowButton")
-        static let completedTab = localized("futureHabitCompletedTab")
-        static let upcomingTab = localized("futureHabitUpcomingTab")
-        static let masteryTitle = localized("futureHabitMasteryTitle")
-        static let plannedTitle = localized("futureHabitPlannedTitle")
-        static let plannedSubtitle = localized("futureHabitPlannedSubtitle")
-        static let completedStatus = localized("futureHabitCompletedStatus")
-        static let emptyCompleted = localized("futureHabitEmptyCompleted")
-        static let ritualTipLabel = localized("futureHabitRitualTipLabel")
-        static let ritualTipText = localized("futureHabitRitualTipText")
+    enum HabitHistoryPage {
+        static let title = localized("habitHistoryTitle")
+        static let headerTitle = localized("habitHistoryHeaderTitle")
+        static let startNowButton = localized("habitHistoryStartNowButton")
+        static let completedTab = localized("habitHistoryCompletedTab")
+        static let upcomingTab = localized("habitHistoryFutureTab")
+        static let masteryTitle = localized("habitHistoryMasteryTitle")
+        static let plannedTitle = localized("habitHistoryPlannedTitle")
+        static let plannedSubtitle = localized("habitHistoryPlannedSubtitle")
+        static let completedStatus = localized("habitHistoryCompletedStatus")
+        static let emptyCompleted = localized("habitHistoryEmptyCompleted")
+        static let ritualTipLabel = localized("habitHistoryRitualTipLabel")
+        static let ritualTipText = localized("habitHistoryRitualTipText")
 
         static func startInDays(_ days: Int) -> String {
-            L10n.formatted("futureHabitStartInDaysFormat", "\(days)")
+            L10n.formatted("habitHistoryStartInDaysFormat", "\(days)")
         }
 
         static func achievementCount(_ count: Int) -> String {
-            let key = count == 1 ? "futureHabitAchievementSingular" : "futureHabitAchievementPlural"
+            let key = count == 1 ? "habitHistoryAchievementSingular" : "habitHistoryAchievementPlural"
             return L10n.formatted(key, "\(count)")
         }
 
         static func finishedDate(_ date: String) -> String {
-            L10n.formatted("futureHabitFinishedDateFormat", date)
+            L10n.formatted("habitHistoryFinishedDateFormat", date)
         }
 
         static func streakDays(_ days: Int) -> String {
-            L10n.formatted("futureHabitStreakDaysFormat", "\(days)")
+            L10n.formatted("habitHistoryStreakDaysFormat", "\(days)")
         }
     }
 
@@ -147,6 +142,10 @@ enum L10n {
         static let defaultColor = localized("defaultColor")
         static let editUserName = localized("editUserName")
         static let enterNewUserName = localized("enterNewUserName")
+    }
+
+    enum Notification {
+        static let habitReminderBody = localized("habitReminderNotificationBody")
     }
 
     enum Shared {

@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 
 struct EditHabitView: View {
-    @StateObject private var editHabitViewModel: EditHabitViewModel
+    private var editHabitViewModel: EditHabitViewModel
     @EnvironmentObject private var themeManager: ThemeManager
     @Environment(\.openURL) private var openURL
     @FocusState private var isFocused: Bool
@@ -17,7 +17,7 @@ struct EditHabitView: View {
     @State private var newReminderTime = Date()
     
     init(editHabitViewModel: EditHabitViewModel) {
-        _editHabitViewModel = StateObject(wrappedValue: editHabitViewModel)
+        self.editHabitViewModel = editHabitViewModel
     }
     
     var body: some View {
@@ -38,7 +38,7 @@ struct EditHabitView: View {
             }
             .scrollIndicators(.hidden)
 
-            if editHabitViewModel.uiState.showToast {
+            if editHabitViewModel.showToast {
                 toastLabel
             }
 
@@ -48,12 +48,12 @@ struct EditHabitView: View {
         .dismissKeyboard(focus: $isFocused)
 //        .navigationBarBackButtonHidden(true)
         .onAppear {
-            tempHabitTitle = editHabitViewModel.uiState.habitTitle
+            tempHabitTitle = editHabitViewModel.habitTitle
         }
         .alert(
             L10n.AddHabitPage.notificationAlertTitle,
             isPresented: Binding(
-                get: { editHabitViewModel.uiState.isNotificationSettingsAlertPresented },
+                get: { editHabitViewModel.isNotificationSettingsAlertPresented },
                 set: { isPresented in
                     if isPresented.not {
                         editHabitViewModel.dismissNotificationSettingsAlert()
@@ -79,13 +79,20 @@ struct EditHabitView: View {
     }
     
     private var saveButton: some View {
-        AppButton(
-            L10n.Shared.saveButton,
-            variant: .compactPrimary,
-            isEnabled: editHabitViewModel.uiState.isSaveButtonEnabled
-        ) {
+        Button {
             editHabitViewModel.saveAndDismiss()
+        } label: {
+            Text(L10n.Shared.saveButton)
+                .font(.AppFont.rooneySansBold.size(FontSize.medium))
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, Spacing.large)
+                .padding(.vertical, Spacing.xSmall + LineWidth.thin)
+                .foregroundStyle(.appWhite)
+                .background(editHabitViewModel.isSaveButtonEnabled ? themeManager.appPrimary : themeManager.appSecondary)
+                .clipShape(Capsule())
         }
+        .buttonStyle(.plain)
+        .disabled(editHabitViewModel.isSaveButtonEnabled.not)
     }
     
     private var topViews: some View {
@@ -154,7 +161,7 @@ struct EditHabitView: View {
                     .foregroundStyle(.primary.opacity(Opacity.formHeader))
 
                 HStack {
-                    Text(L10n.AddHabitPage.commitmentDays(editHabitViewModel.uiState.commitmentDays))
+                    Text(L10n.AddHabitPage.commitmentDays(editHabitViewModel.commitmentDays))
                         .font(.AppFont.rooneySansRegular.size(FontSize.x2Large))
                         .foregroundStyle(.appPrimary)
 
@@ -186,7 +193,7 @@ struct EditHabitView: View {
                     }
                 }
 
-                if editHabitViewModel.uiState.selectedFrequency == .custom {
+                if editHabitViewModel.selectedFrequency == .custom {
                     customWeekdayPicker
                 }
             }
@@ -230,9 +237,9 @@ struct EditHabitView: View {
                     }
                 }
 
-                if editHabitViewModel.uiState.reminderTimes.isNotEmpty {
+                if editHabitViewModel.reminderTimes.isNotEmpty {
                     VStack(spacing: Spacing.xSmall) {
-                        ForEach(editHabitViewModel.uiState.reminderTimes, id: \.self) { time in
+                        ForEach(editHabitViewModel.reminderTimes, id: \.self) { time in
                             reminderRow(time)
                         }
                     }
@@ -263,14 +270,22 @@ struct EditHabitView: View {
     }
    
     private var missHabitButton: some View {
-        AppButton(
-            L10n.EditHabitPage.missHabitButton,
-            isEnabled: editHabitViewModel.uiState.showToast.not
-        ) {
+        Button {
             withAnimation {
                 editHabitViewModel.missHabitAndShowToast()
             }
+        } label: {
+            Text(L10n.EditHabitPage.missHabitButton)
+                .font(.AppFont.rooneySansBold.size(FontSize.x5Large))
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, Spacing.xLarge)
+                .padding(.vertical, Spacing.xLarge)
+                .foregroundStyle(.appWhite)
+                .background(editHabitViewModel.showToast.not ? themeManager.appPrimary : themeManager.appSecondary)
+                .clipShape(Capsule())
         }
+        .buttonStyle(.plain)
+        .disabled(editHabitViewModel.showToast)
         .padding(.horizontal, Spacing.x7Large)
         .padding(.bottom, Spacing.x7Large)
     }
@@ -283,30 +298,56 @@ struct EditHabitView: View {
     }
 
     private func iconButton(_ icon: String) -> some View {
-        SelectableIconButton(
-            systemImage: icon,
-            isSelected: editHabitViewModel.uiState.selectedIconName == icon
-        ) {
+        let isSelected = editHabitViewModel.selectedIconName == icon
+
+        return Button {
             editHabitViewModel.setSelectedIconName(icon)
+        } label: {
+            Image(systemName: icon)
+                .font(.system(size: FontSize.x4Large, weight: .medium))
+                .foregroundStyle(isSelected ? .appWhite : themeManager.appPrimary)
+                .frame(maxWidth: .infinity)
+                .frame(height: Size.x4Large)
+                .background(isSelected ? themeManager.appPrimary : themeManager.appPrimary.opacity(Opacity.quiet))
+                .clipShape(RoundedRectangle(cornerRadius: CornerRadius.small))
         }
+        .buttonStyle(.plain)
     }
 
     private func frequencyButton(_ frequency: HabitFrequency) -> some View {
-        SelectableChipButton(
-            title: frequency.title,
-            isSelected: editHabitViewModel.uiState.selectedFrequency == frequency
-        ) {
+        let isSelected = editHabitViewModel.selectedFrequency == frequency
+
+        return Button {
             editHabitViewModel.setSelectedFrequency(frequency)
+        } label: {
+            Text(frequency.title)
+                .font(.AppFont.rooneySansBold.size(FontSize.medium))
+                .foregroundStyle(isSelected ? .appWhite : themeManager.appPrimary)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, Spacing.xSmall + LineWidth.thin)
+                .background(isSelected ? themeManager.appPrimary : .clear)
+                .clipShape(Capsule())
+                .contentShape(Capsule())
         }
+        .buttonStyle(.plain)
     }
 
     private func customWeekdayButton(_ item: HabitWeekdayItem) -> some View {
-        SelectableChipButton(
-            title: item.title,
-            isSelected: editHabitViewModel.uiState.selectedCustomWeekdays.contains(item.weekday)
-        ) {
+        let isSelected = editHabitViewModel.selectedCustomWeekdays.contains(item.weekday)
+
+        return Button {
             editHabitViewModel.toggleCustomWeekday(item.weekday)
+        } label: {
+            Text(item.title)
+                .font(.AppFont.rooneySansBold.size(FontSize.medium))
+                .foregroundStyle(isSelected ? .appWhite : themeManager.appPrimary)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, Spacing.xSmall + LineWidth.thin)
+                .background(isSelected ? themeManager.appPrimary : .clear)
+                .clipShape(Capsule())
+                .contentShape(Capsule())
         }
+        .buttonStyle(.plain)
     }
 
     private func reminderRow(_ time: String) -> some View {
@@ -317,11 +358,17 @@ struct EditHabitView: View {
 
             Spacer()
 
-            InlineIconButton(systemImage: SystemIconName.xmark) {
-                if let index = editHabitViewModel.uiState.reminderTimes.firstIndex(of: time) {
+            Button {
+                if let index = editHabitViewModel.reminderTimes.firstIndex(of: time) {
                     editHabitViewModel.removeReminderTime(at: IndexSet(integer: index))
                 }
+            } label: {
+                Image(systemName: SystemIconName.xmark)
+                    .font(.system(size: FontSize.xSmall, weight: .bold))
+                    .foregroundStyle(themeManager.appPrimary)
+                    .frame(width: Size.medium, height: Size.medium)
             }
+            .buttonStyle(.plain)
         }
         .padding(.horizontal, Spacing.large)
         .padding(.vertical, Spacing.small)
@@ -333,14 +380,17 @@ struct EditHabitView: View {
         systemImage: String,
         action: @escaping () -> Void
     ) -> some View {
-        InlineIconButton(
-            systemImage: systemImage,
-            variant: .outlinedCircle,
-            size: Size.large,
-            fontSize: FontSize.medium,
-            fontWeight: .semibold,
-            action: action
-        )
+        Button(action: action) {
+            Image(systemName: systemImage)
+                .font(.system(size: FontSize.medium, weight: .semibold))
+                .foregroundStyle(themeManager.appPrimary)
+                .frame(width: Size.large, height: Size.large)
+                .overlay {
+                    Circle()
+                        .stroke(themeManager.appPrimary, lineWidth: LineWidth.thin)
+                }
+        }
+        .buttonStyle(.plain)
     }
 
     private func formCard<Content: View>(@ViewBuilder content: () -> Content) -> some View {

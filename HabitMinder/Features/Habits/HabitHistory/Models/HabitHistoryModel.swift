@@ -1,5 +1,5 @@
 //
-//  FutureHabitModel.swift
+//  HabitHistoryModel.swift
 //  HabitMinder SwiftUI
 //
 //  Created by Mahyar on 28/05/2025.
@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-final class FutureHabitModel: IdentifiableModel {
+final class HabitHistoryModel: IdentifiableModel {
     @Attribute(.unique) var id: UUID
     var title: String
     var createdAt: Date

@@ -22,7 +22,7 @@ final class HomeCoordinator: HomeCoordinating {
         navigate(.main(.manageHabit(.edit(id: id))))
     }
    
-    func goToFutureHabit() {
+    func goToHabitHistory() {
         navigate(.main(.habits(.history)))
     }
     

@@ -6,21 +6,30 @@
 //
 
 import Foundation
+import Observation
 
+@Observable
 @MainActor
-final class AddHabitViewModel: ObservableObject {
-    @Published private(set) var uiState = AddHabitUIState()
-    
+final class AddHabitViewModel {
+    private var habitTitle = ""
+    private(set) var selectedIconName = ""
+    private(set) var selectedFrequency = HabitFrequency.daily
+    private(set) var selectedCustomWeekdays = [Calendar.current.component(.weekday, from: Date())]
+    private(set) var commitmentDays = 21
+    private(set) var reminderTimes: [String] = []
+    private(set) var isFutureHabit = false
+    private(set) var isSaveButtonEnabled = false
+    private(set) var isNotificationSettingsAlertPresented = false
     private let dataManager: DataManaging
     private let coordinator: AddHabitCoordinating
     private let reminderScheduler: HabitReminderScheduling
     
     private var trimmedHabitTitle: String {
-        uiState.habitTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+        habitTitle.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    private var selectedIconName: String {
-        uiState.selectedIconName.isEmpty ? SystemIconName.checkmark : uiState.selectedIconName
+    private var selectedIconNames: String {
+        selectedIconName.isEmpty ? SystemIconName.checkmark : selectedIconName
     }
     
     init(
@@ -34,37 +43,37 @@ final class AddHabitViewModel: ObservableObject {
     }
     
     func setHabitTitle(_ newValue: String) {
-        uiState.habitTitle = newValue
+        habitTitle = newValue
         updateValidationState()
     }
 
     func setSelectedIconName(_ iconName: String) {
-        uiState.selectedIconName = iconName
+        selectedIconName = iconName
     }
 
     func setSelectedFrequency(_ frequency: HabitFrequency) {
-        uiState.selectedFrequency = frequency
+        selectedFrequency = frequency
     }
 
     func toggleCustomWeekday(_ weekday: Int) {
-        if uiState.selectedCustomWeekdays.contains(weekday) {
-            guard uiState.selectedCustomWeekdays.count > 1 else {
+        if selectedCustomWeekdays.contains(weekday) {
+            guard selectedCustomWeekdays.count > 1 else {
                 return
             }
-            uiState.selectedCustomWeekdays.removeAll { $0 == weekday }
+            selectedCustomWeekdays.removeAll { $0 == weekday }
         } else {
-            uiState.selectedCustomWeekdays.append(weekday)
+            selectedCustomWeekdays.append(weekday)
         }
 
-        uiState.selectedCustomWeekdays.sort()
+        selectedCustomWeekdays.sort()
     }
 
     func incrementCommitmentDays() {
-        uiState.commitmentDays += 1
+        commitmentDays += 1
     }
 
     func decrementCommitmentDays() {
-        uiState.commitmentDays = max(1, uiState.commitmentDays - 1)
+        commitmentDays = max(1, commitmentDays - 1)
     }
 
     func addReminderTime(_ time: String) {
@@ -75,66 +84,58 @@ final class AddHabitViewModel: ObservableObject {
 
             switch status {
             case .allowed:
-                DispatchQueue.main.async {
-                    self.insertReminderTime(time)
-                }
+                self.insertReminderTime(time)
             case .notDetermined:
-                Task { @MainActor in
-                    self.requestNotificationAuthorization(for: time)
-                }
+                self.requestNotificationAuthorization(for: time)
             case .denied:
-                DispatchQueue.main.async {
-                    self.uiState.isNotificationSettingsAlertPresented = true
-                }
+                self.isNotificationSettingsAlertPresented = true
             }
         }
     }
 
     func dismissNotificationSettingsAlert() {
-        uiState.isNotificationSettingsAlertPresented = false
+        isNotificationSettingsAlertPresented = false
     }
 
     func removeReminderTime(at offsets: IndexSet) {
-        uiState.reminderTimes.remove(atOffsets: offsets)
+        reminderTimes.remove(atOffsets: offsets)
     }
 
     func setIsFutureHabit(_ isFutureHabit: Bool) {
-        uiState.isFutureHabit = isFutureHabit
+        self.isFutureHabit = isFutureHabit
     }
     
     private func updateValidationState() {
         let isValid = trimmedHabitTitle.count > 0
-        uiState.isSaveButtonEnabled = isValid
+        isSaveButtonEnabled = isValid
     }
 
     private func requestNotificationAuthorization(for time: String) {
         reminderScheduler.requestAuthorization { [weak self] isAllowed in
-            DispatchQueue.main.async {
-                guard let self else {
-                    return
-                }
+            guard let self else {
+                return
+            }
 
-                if isAllowed {
-                    self.insertReminderTime(time)
-                } else {
-                    self.uiState.isNotificationSettingsAlertPresented = true
-                }
+            if isAllowed {
+                self.insertReminderTime(time)
+            } else {
+                self.isNotificationSettingsAlertPresented = true
             }
         }
     }
 
     private func insertReminderTime(_ time: String) {
-        guard uiState.reminderTimes.count < 10,
-              uiState.reminderTimes.contains(time).not else {
+        guard reminderTimes.count < 10,
+              reminderTimes.contains(time).not else {
             return
         }
 
-        uiState.reminderTimes.append(time)
-        uiState.reminderTimes.sort()
+        reminderTimes.append(time)
+        reminderTimes.sort()
     }
     
     func saveAndDismiss() {
-        if uiState.isFutureHabit {
+        if isFutureHabit {
             saveFutureHabit()
         } else {
             saveCurrentHabit()
@@ -153,10 +154,10 @@ final class AddHabitViewModel: ObservableObject {
             title: trimmedHabitTitle,
             sortOrder: maxSortOrder + 1,
             iconName: selectedIconName,
-            frequency: uiState.selectedFrequency.rawValue,
-            commitmentDays: uiState.commitmentDays,
-            reminderTimes: uiState.reminderTimes,
-            customWeekdays: uiState.selectedCustomWeekdays
+            frequency: selectedFrequency.rawValue,
+            commitmentDays: commitmentDays,
+            reminderTimes: reminderTimes,
+            customWeekdays: selectedCustomWeekdays
         )
 
         dataManager.save(newHabit)
@@ -164,20 +165,20 @@ final class AddHabitViewModel: ObservableObject {
             for: newHabit.id,
             title: newHabit.title,
             times: newHabit.reminderTimes,
-            frequency: uiState.selectedFrequency,
-            customWeekdays: uiState.selectedCustomWeekdays
+            frequency: selectedFrequency,
+            customWeekdays: selectedCustomWeekdays
         )
         NotificationCenter.default.post(name: AppNotification.Habit.added, object: nil)
     }
 
     private func saveFutureHabit() {
-        let newHabit = FutureHabitModel(
+        let newHabit = HabitHistoryModel(
             title: trimmedHabitTitle,
             iconName: selectedIconName,
-            frequency: uiState.selectedFrequency.rawValue,
-            commitmentDays: uiState.commitmentDays,
-            reminderTimes: uiState.reminderTimes,
-            customWeekdays: uiState.selectedCustomWeekdays
+            frequency: selectedFrequency.rawValue,
+            commitmentDays: commitmentDays,
+            reminderTimes: reminderTimes,
+            customWeekdays: selectedCustomWeekdays
         )
         dataManager.save(newHabit)
         NotificationCenter.default.post(name: AppNotification.Habit.futureAdded, object: nil)

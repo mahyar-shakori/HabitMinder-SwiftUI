@@ -10,7 +10,7 @@ import Foundation
 protocol HomeCoordinating {
     func goToAddHabit()
     func goToEditHabit(id: UUID)
-    func goToFutureHabit()
+    func goToHabitHistory()
     func goToSetting()
     func goToIntro()
 }

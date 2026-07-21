@@ -1,5 +1,5 @@
 //
-//  FutureHabitListRowView.swift
+//  HabitHistoryListRowView.swift
 //  HabitMinder SwiftUI
 //
 //  Created by Mahyar on 16/04/2025.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FutureHabitListRowView: View {
+struct HabitHistoryListRowView: View {
     @EnvironmentObject private var themeManager: ThemeManager
 
     let item: FutureHabitItem
@@ -34,9 +34,19 @@ struct FutureHabitListRowView: View {
                 dateBadge
             }
 
-            AppButton(L10n.FutureHabitsPage.startNowButton, variant: .compactPrimary) {
+            Button {
                 onStart()
+            } label: {
+                Text(L10n.HabitHistoryPage.startNowButton)
+                    .font(.AppFont.rooneySansBold.size(FontSize.medium))
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal, Spacing.large)
+                    .padding(.vertical, Spacing.xSmall + LineWidth.thin)
+                    .foregroundStyle(.appWhite)
+                    .background(themeManager.appPrimary)
+                    .clipShape(Capsule())
             }
+            .buttonStyle(.plain)
         }
         .padding(Spacing.xLarge)
         .background(.appWhite)
@@ -70,7 +80,7 @@ struct FutureHabitListRowView: View {
         let daysUntilStart = Calendar.current.dateComponents([.day], from: .now, to: item.dateCreate).day ?? 0
 
         if daysUntilStart > LayoutCount.zero, daysUntilStart <= LayoutCount.nearFutureDayLimit {
-            return L10n.FutureHabitsPage.startInDays(daysUntilStart)
+            return L10n.HabitHistoryPage.startInDays(daysUntilStart)
         }
 
         return item.dateCreate.formatted(.dateTime.month(.abbreviated).day())
@@ -89,7 +99,7 @@ struct FutureHabitListRowView: View {
         commitmentDays: 21
     )
 
-    FutureHabitListRowView(item: item)
+    HabitHistoryListRowView(item: item)
         .environmentObject(dependencies.themeManager)
         .padding()
         .background(.appGray)

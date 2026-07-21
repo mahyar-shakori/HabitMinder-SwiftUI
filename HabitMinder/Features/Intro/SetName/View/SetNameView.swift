@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct SetNameView: View {
-    @State private var setNameViewModel: SetNameViewModel
+    private var setNameViewModel: SetNameViewModel
     @EnvironmentObject private var themeManager: ThemeManager
     @FocusState private var isFocused: Bool
     @State private var tempUserName = ""
     
     init(setNameViewModel: SetNameViewModel) {
-        _setNameViewModel = State(initialValue: setNameViewModel)
+        self.setNameViewModel = setNameViewModel
     }
     
     var body: some View {
@@ -85,14 +85,22 @@ struct SetNameView: View {
     }
     
     private var continueButton: some View {
-        AppButton(
-            L10n.SetNamePage.continueButton,
-            isEnabled: setNameViewModel.isValid
-        ) {
+        Button {
             setNameViewModel.validateAndContinue {
                 setNameViewModel.goToWelcomePage()
             }
+        } label: {
+            Text(L10n.SetNamePage.continueButton)
+                .font(.AppFont.rooneySansBold.size(FontSize.x5Large))
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, Spacing.xLarge)
+                .padding(.vertical, Spacing.xLarge)
+                .foregroundStyle(.appWhite)
+                .background(setNameViewModel.isValid ? themeManager.appPrimary : themeManager.appSecondary)
+                .clipShape(Capsule())
         }
+        .buttonStyle(.plain)
+        .disabled(setNameViewModel.isValid.not)
         .padding(.horizontal, Spacing.xLarge)
         .padding(.bottom, Spacing.xLarge)
     }

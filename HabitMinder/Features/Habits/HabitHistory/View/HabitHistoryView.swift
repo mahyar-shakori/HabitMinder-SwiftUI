@@ -1,5 +1,5 @@
 //
-//  FutureHabitView.swift
+//  HabitHistoryView.swift
 //  HabitMinder SwiftUI
 //
 //  Created by Mahyar on 28/05/2025.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct FutureHabitView: View {
-    @StateObject private var futureHabitViewModel: FutureHabitViewModel
+struct HabitHistoryView: View {
+    private var habitHistoryViewModel: HabitHistoryViewModel
     @EnvironmentObject private var themeManager: ThemeManager
     @State private var selectedTab = HabitJourneyTab.upcoming
     @State private var showDeleteAlert = false
 
-    init(futureHabitViewModel: FutureHabitViewModel) {
-        _futureHabitViewModel = StateObject(wrappedValue: futureHabitViewModel)
+    init(habitHistoryViewModel: HabitHistoryViewModel) {
+        self.habitHistoryViewModel = habitHistoryViewModel
     }
 
     var body: some View {
@@ -22,20 +22,20 @@ struct FutureHabitView: View {
             .background(.appGray)
             .navigationBarBackButtonHidden(true)
             .onAppear {
-                futureHabitViewModel.fetchHabits()
+                habitHistoryViewModel.fetchHabits()
             }
-            .onChange(of: futureHabitViewModel.uiState.itemToDelete) { _, id in
+            .onChange(of: habitHistoryViewModel.itemToDelete) { _, id in
                 showDeleteAlert = (id != nil)
             }
             .alert(L10n.Alert.Habit.deleteTitle, isPresented: $showDeleteAlert) {
                 Button(L10n.Shared.okButton, role: .destructive) {
-                    futureHabitViewModel.performDelete()
+                    habitHistoryViewModel.performDelete()
                 }
                 Button(L10n.Shared.cancelButton, role: .cancel) {
-                    futureHabitViewModel.cancelDelete()
+                    habitHistoryViewModel.cancelDelete()
                 }
             } message: {
-                Text(futureHabitViewModel.deleteConfirmationMessage)
+                Text(habitHistoryViewModel.deleteConfirmationMessage)
             }
     }
 
@@ -49,7 +49,7 @@ struct FutureHabitView: View {
 
     private var pageHeader: some View {
         AppHeaderView(
-            title: L10n.FutureHabitsPage.headerTitle,
+            title: L10n.HabitHistoryPage.headerTitle,
             systemImage: SystemIconName.leaf
         )
     }
@@ -66,12 +66,21 @@ struct FutureHabitView: View {
     }
 
     private func tabButton(_ tab: HabitJourneyTab) -> some View {
-        SelectableChipButton(
-            title: tab.title,
-            isSelected: selectedTab == tab
-        ) {
+        let isSelected = selectedTab == tab
+
+        return Button {
             selectedTab = tab
+        } label: {
+            Text(tab.title)
+                .font(.AppFont.rooneySansBold.size(FontSize.medium))
+                .foregroundStyle(isSelected ? .appWhite : themeManager.appPrimary)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, Spacing.xSmall + LineWidth.thin)
+                .background(isSelected ? themeManager.appPrimary : .clear)
+                .clipShape(Capsule())
+                .contentShape(Capsule())
         }
+        .buttonStyle(.plain)
     }
 
     private var scrollContent: some View {
@@ -89,14 +98,14 @@ struct FutureHabitView: View {
     }
 
     private var achievementCountText: String {
-        let count = futureHabitViewModel.uiState.completedItems.count
-        return L10n.FutureHabitsPage.achievementCount(count)
+        let count = habitHistoryViewModel.completedItems.count
+        return L10n.HabitHistoryPage.achievementCount(count)
     }
 
     private var completedContent: some View {
         Group {
             HStack {
-                Text(L10n.FutureHabitsPage.masteryTitle)
+                Text(L10n.HabitHistoryPage.masteryTitle)
                     .font(.AppFont.rooneySansBold.size(FontSize.x8Large))
                     .foregroundStyle(.primary)
 
@@ -112,11 +121,11 @@ struct FutureHabitView: View {
             }
             .historyListRowStyle()
 
-            if futureHabitViewModel.uiState.completedItems.isEmpty {
+            if habitHistoryViewModel.completedItems.isEmpty {
                 emptyCompletedCard
                     .historyListRowStyle()
             } else {
-                ForEach(futureHabitViewModel.uiState.completedItems) { item in
+                ForEach(habitHistoryViewModel.completedItems) { item in
                     completedCard(item)
                         .historyListRowStyle()
                 }
@@ -127,11 +136,11 @@ struct FutureHabitView: View {
     private var upcomingContent: some View {
         Group {
             VStack(alignment: .leading, spacing: Spacing.xSmall) {
-                Text(L10n.FutureHabitsPage.plannedTitle)
+                Text(L10n.HabitHistoryPage.plannedTitle)
                     .font(.AppFont.rooneySansBold.size(FontSize.x8Large))
                     .foregroundStyle(.primary)
 
-                Text(L10n.FutureHabitsPage.plannedSubtitle)
+                Text(L10n.HabitHistoryPage.plannedSubtitle)
                     .font(.AppFont.rooneySansRegular.size(FontSize.xLarge))
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -139,9 +148,9 @@ struct FutureHabitView: View {
             .padding(.bottom, Spacing.x2Small)
             .historyListRowStyle()
 
-            ForEach(futureHabitViewModel.uiState.listItems) { item in
-                FutureHabitListRowView(item: item) {
-                    futureHabitViewModel.startHabit(id: item.id)
+            ForEach(habitHistoryViewModel.listItems) { item in
+                HabitHistoryListRowView(item: item) {
+                    habitHistoryViewModel.startHabit(id: item.id)
                 }
                 .environmentObject(themeManager)
                 .historyListRowStyle()
@@ -173,7 +182,7 @@ struct FutureHabitView: View {
                         .font(.AppFont.rooneySansBold.size(FontSize.x3Large))
                         .foregroundStyle(.primary)
 
-                    Text(L10n.FutureHabitsPage.finishedDate(item.completedAt.formatted(.dateTime.month(.abbreviated).day().year())))
+                    Text(L10n.HabitHistoryPage.finishedDate(item.completedAt.formatted(.dateTime.month(.abbreviated).day().year())))
                         .font(.AppFont.rooneySansRegular.size(FontSize.large))
                         .foregroundStyle(.secondary)
                 }
@@ -193,9 +202,9 @@ struct FutureHabitView: View {
                 .scaleEffect(x: Scale.normal, y: Scale.progress, anchor: .center)
 
             HStack {
-                Text(L10n.FutureHabitsPage.streakDays(item.commitmentDays))
+                Text(L10n.HabitHistoryPage.streakDays(item.commitmentDays))
                 Spacer()
-                Text(L10n.FutureHabitsPage.completedStatus)
+                Text(L10n.HabitHistoryPage.completedStatus)
             }
             .font(.AppFont.rooneySansBold.size(FontSize.xSmall))
             .foregroundStyle(.secondary)
@@ -208,18 +217,18 @@ struct FutureHabitView: View {
     private var emptyCompletedCard: some View {
         CustomEmptyView(
             image: Image(.emptyView),
-            text: L10n.FutureHabitsPage.emptyCompleted,
+            text: L10n.HabitHistoryPage.emptyCompleted,
             imageSize: Size.emptyImage
         )
     }
 
     private var ritualTip: some View {
         VStack(alignment: .leading, spacing: Spacing.small) {
-            Label(L10n.FutureHabitsPage.ritualTipLabel, systemImage: SystemIconName.lightbulb)
+            Label(L10n.HabitHistoryPage.ritualTipLabel, systemImage: SystemIconName.lightbulb)
                 .font(.AppFont.rooneySansBold.size(FontSize.small))
                 .foregroundStyle(themeManager.appPrimary)
 
-            Text(L10n.FutureHabitsPage.ritualTipText)
+            Text(L10n.HabitHistoryPage.ritualTipText)
                 .font(.AppFont.rooneySansRegular.size(FontSize.xLarge))
                 .italic()
                 .foregroundStyle(.secondary)
@@ -240,7 +249,7 @@ struct FutureHabitView: View {
 
     private func deleteSwipeButton(for id: UUID) -> some View {
         Button(role: .destructive) {
-            futureHabitViewModel.confirmDelete(id: id)
+            habitHistoryViewModel.confirmDelete(id: id)
         } label: {
             Image(systemName: SystemIconName.trash)
         }
@@ -254,9 +263,9 @@ private enum HabitJourneyTab {
     var title: String {
         switch self {
         case .completed:
-            return L10n.FutureHabitsPage.completedTab
+            return L10n.HabitHistoryPage.completedTab
         case .upcoming:
-            return L10n.FutureHabitsPage.upcomingTab
+            return L10n.HabitHistoryPage.upcomingTab
         }
     }
 }
@@ -293,12 +302,12 @@ private extension View {
     let habitDependencies = dependencies.destinationDependencies.main.habits
     let fakeCoordinator = HabitHistoryCoordinator(dismiss: {
     })
-    let viewModel = FutureHabitViewModel(
+    let viewModel = HabitHistoryViewModel(
         dataManager: DataManager(context: context),
         coordinator: fakeCoordinator,
         reminderScheduler: habitDependencies.reminderScheduler
     )
 
-    FutureHabitView(futureHabitViewModel: viewModel)
+    HabitHistoryView(habitHistoryViewModel: viewModel)
         .environmentObject(dependencies.themeManager)
 }

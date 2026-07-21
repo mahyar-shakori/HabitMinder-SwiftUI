@@ -1,5 +1,5 @@
 //
-//  AddHabitUIState.swift
+//  HabitFrequency.swift
 //  HabitMinder SwiftUI
 //
 //  Created by Mahyar on 06/06/2025.
@@ -22,16 +22,4 @@ enum HabitFrequency: String, CaseIterable {
             return L10n.AddHabitPage.frequencyCustom
         }
     }
-}
-
-struct AddHabitUIState {
-    var habitTitle = ""
-    var selectedIconName = ""
-    var selectedFrequency = HabitFrequency.daily
-    var selectedCustomWeekdays = [Calendar.current.component(.weekday, from: Date())]
-    var commitmentDays = 21
-    var reminderTimes: [String] = []
-    var isFutureHabit = false
-    var isSaveButtonEnabled = false
-    var isNotificationSettingsAlertPresented = false
 }
