@@ -9,4 +9,7 @@ import Foundation
 
 protocol SettingCoordinating {
     func goBack()
+    func goToNotificationSettings()
+    func goToAppTheme()
+    func goToSetName()
 }

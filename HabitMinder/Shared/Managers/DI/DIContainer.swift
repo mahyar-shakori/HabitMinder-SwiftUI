@@ -7,26 +7,20 @@
 
 import Foundation
 
+@MainActor
 final class DIContainer {
     private struct Registration {
-        let factory: (DIContainer) -> Any
+        let factory: @MainActor (DIContainer) -> Any
         var instance: Any?
     }
 
     private var registrations: [ObjectIdentifier: Registration] = [:]
-    private let lock = NSRecursiveLock()
 
     func register<Service>(
         _ type: Service.Type = Service.self,
-        factory: @escaping (DIContainer) -> Service
+        factory: @escaping @MainActor (DIContainer) -> Service
     ) {
         let key = ObjectIdentifier(type)
-        lock.lock()
-
-        defer {
-            lock.unlock()
-        }
-
         registrations[key] = Registration(
             factory: { container in
                 factory(container)
@@ -37,12 +31,6 @@ final class DIContainer {
 
     func resolve<Service>(_ type: Service.Type = Service.self) -> Service {
         let key = ObjectIdentifier(type)
-
-        lock.lock()
-
-        defer {
-            lock.unlock()
-        }
 
         guard var registration = registrations[key] else {
             preconditionFailure("No dependency registered for \(type)")

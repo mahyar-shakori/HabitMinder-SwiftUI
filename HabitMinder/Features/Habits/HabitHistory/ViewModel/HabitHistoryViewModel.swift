@@ -9,6 +9,7 @@ import Foundation
 import Observation
 
 @Observable
+@MainActor
 final class HabitHistoryViewModel {
     private var isSaveButtonEnabled = false
     private(set) var listItems: [FutureHabitItem] = []
@@ -56,6 +57,7 @@ final class HabitHistoryViewModel {
 
         completedHabitModels.forEach {
             reminderScheduler.cancelReminders(for: $0.id)
+            reminderScheduler.scheduleJourneyCompletion(for: $0.id, title: $0.title)
         }
 
         listItems = habitHistoryModels.map {
@@ -84,11 +86,11 @@ final class HabitHistoryViewModel {
     }
  
     func save() {
-            let newHabit = HabitHistoryModel(title: habitTitle)
-            dataManager.save(newHabit)
-            habitTitle = ""
-            fetchHabits()
-        }
+        let newHabit = HabitHistoryModel(title: habitTitle)
+        dataManager.save(newHabit)
+        habitTitle = ""
+        fetchHabits()
+    }
     
     func startHabit(id: UUID) {
         guard let habitHistory = dataManager.fetch(byID: id, HabitHistoryModel.self) else {
@@ -130,8 +132,9 @@ final class HabitHistoryViewModel {
         guard let id = itemToDelete else {
             return
         }
-        reminderScheduler.cancelReminders(for: id)
+
         dataManager.delete(byID: id, HabitHistoryModel.self)
+        reminderScheduler.cancelReminders(for: id)
         listItems.removeAll { $0.id == id }
         cancelDelete()
     }

@@ -15,6 +15,7 @@ final class WelcomeViewModel {
     private let userDefaultsStorage: UserDefaultsStoring
     private let coordinator: WelcomeCoordinating
     private let repository: QuoteRepositoryProtocol
+    private var hasFetchedData = false
     
     init(
         coordinator: WelcomeCoordinating,
@@ -40,7 +41,6 @@ final class WelcomeViewModel {
             handleQuoteSuccess(quote)
         } catch {
             handleQuoteFailure(error)
-            
         }
     }
     

@@ -26,7 +26,10 @@ final class DataManager: DataManaging {
         }
     }
 
-    func fetch<T: ModelEntity>(byID id: UUID, _ type: T.Type) -> T? {
+    func fetch<T: ModelEntity>(
+        byID id: UUID,
+        _ type: T.Type
+    ) -> T? {
         let descriptor = FetchDescriptor<T>(
             predicate: #Predicate<T> { $0.id == id }
         )
@@ -51,7 +54,10 @@ final class DataManager: DataManaging {
         }
     }
 
-    func delete<T: ModelEntity>(byID id: UUID, _ type: T.Type) {
+    func delete<T: ModelEntity>(
+        byID id: UUID,
+        _ type: T.Type
+    ) {
         let descriptor = FetchDescriptor<T>(
             predicate: #Predicate<T> { $0.id == id }
         )

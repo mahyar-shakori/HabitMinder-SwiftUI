@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import UIKit
 
 struct AddHabitView: View {
     private var addHabitViewModel: AddHabitViewModel
@@ -21,32 +20,36 @@ struct AddHabitView: View {
     }
 
     var body: some View {
-        VStack(spacing: Spacing.none) {
+        ZStack(alignment: .bottom) {
             ScrollView {
-                HabitFormView(
-                    habitTitle: $tempHabitTitle,
-                    reminderTime: $newReminderTime,
-                    selectedIconName: addHabitViewModel.selectedIconName,
-                    selectedFrequency: addHabitViewModel.selectedFrequency,
-                    selectedCustomWeekdays: addHabitViewModel.selectedCustomWeekdays,
-                    commitmentDays: addHabitViewModel.commitmentDays,
-                    reminderTimes: addHabitViewModel.reminderTimes,
-                    showsFutureHabitToggle: true,
-                    isFutureHabit: addHabitViewModel.isFutureHabit,
-                    focus: $isFocused,
-                    onHabitTitleChange: addHabitViewModel.setHabitTitle,
-                    onIconSelect: addHabitViewModel.setSelectedIconName,
-                    onFrequencySelect: addHabitViewModel.setSelectedFrequency,
-                    onCustomWeekdayToggle: addHabitViewModel.toggleCustomWeekday,
-                    onCommitmentDaysIncrement: addHabitViewModel.incrementCommitmentDays,
-                    onCommitmentDaysDecrement: addHabitViewModel.decrementCommitmentDays,
-                    onReminderTimeAdd: addHabitViewModel.addReminderTime,
-                    onReminderTimeRemove: addHabitViewModel.removeReminderTime,
-                    onFutureHabitChange: addHabitViewModel.setIsFutureHabit
-                )
+                VStack(alignment: .leading, spacing: Spacing.x5Large) {
+                    pageIntro
+
+                    HabitFormView(
+                        habitTitle: $tempHabitTitle,
+                        reminderTime: $newReminderTime,
+                        selectedIconName: addHabitViewModel.selectedIconName,
+                        selectedFrequency: addHabitViewModel.selectedFrequency,
+                        selectedCustomWeekdays: addHabitViewModel.selectedCustomWeekdays,
+                        commitmentDays: addHabitViewModel.commitmentDays,
+                        reminderTimes: addHabitViewModel.reminderTimes,
+                        showsFutureHabitToggle: true,
+                        isFutureHabit: addHabitViewModel.isFutureHabit,
+                        focus: $isFocused,
+                        onHabitTitleChange: addHabitViewModel.setHabitTitle,
+                        onIconSelect: addHabitViewModel.setSelectedIconName,
+                        onFrequencySelect: addHabitViewModel.setSelectedFrequency,
+                        onCustomWeekdayToggle: addHabitViewModel.toggleCustomWeekday,
+                        onCommitmentDaysIncrement: addHabitViewModel.incrementCommitmentDays,
+                        onCommitmentDaysDecrement: addHabitViewModel.decrementCommitmentDays,
+                        onReminderTimeAdd: addHabitViewModel.addReminderTime,
+                        onReminderTimeRemove: addHabitViewModel.removeReminderTime,
+                        onFutureHabitChange: addHabitViewModel.setIsFutureHabit
+                    )
+                }
                 .padding(.horizontal, Spacing.x3Large)
                 .padding(.top, Spacing.x3Large)
-                .padding(.bottom, Spacing.x5Large)
+                .padding(.bottom, Size.x5Large + Spacing.x8Large)
             }
             .scrollIndicators(.hidden)
 
@@ -65,15 +68,40 @@ struct AddHabitView: View {
                 }
             )
         ) {
-            Button(L10n.AddHabitPage.notificationSettingsButton) {
-                addHabitViewModel.dismissNotificationSettingsAlert()
-                openAppSettings()
-            }
-            Button(L10n.Shared.cancelButton, role: .cancel) {
-                addHabitViewModel.dismissNotificationSettingsAlert()
+            if addHabitViewModel.notificationAlertOpensAppSettings {
+                Button(L10n.AddHabitPage.notificationSettingsButton) {
+                    addHabitViewModel.dismissNotificationSettingsAlert()
+                    openAppSettings()
+                }
+                Button(L10n.Shared.cancelButton, role: .cancel) {
+                    addHabitViewModel.dismissNotificationSettingsAlert()
+                }
+            } else {
+                Button(L10n.Shared.okButton) {
+                    addHabitViewModel.dismissNotificationSettingsAlert()
+                }
             }
         } message: {
-            Text(L10n.AddHabitPage.notificationAlertMessage)
+            Text(notificationAlertMessage)
+        }
+    }
+
+    private var notificationAlertMessage: String {
+        addHabitViewModel.notificationAlertOpensAppSettings
+            ? L10n.AddHabitPage.notificationAlertMessage
+            : L10n.AddHabitPage.inAppNotificationAlertMessage
+    }
+
+    private var pageIntro: some View {
+        VStack(alignment: .leading, spacing: Spacing.xSmall) {
+            Text(L10n.AddHabitPage.title)
+                .font(.AppFont.rooneySansBold.size(FontSize.x8Large))
+                .foregroundStyle(.primary)
+
+            Text(L10n.AddHabitPage.introDescription)
+                .font(.AppFont.rooneySansRegular.size(FontSize.x3Large))
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
         }
     }
 
@@ -91,9 +119,7 @@ struct AddHabitView: View {
         .tint(addHabitViewModel.isSaveButtonEnabled ? themeManager.appPrimary : themeManager.appSecondary)
         .disabled(addHabitViewModel.isSaveButtonEnabled.not)
         .padding(.horizontal, Spacing.x3Large)
-        .padding(.top, Spacing.medium)
         .padding(.bottom, Spacing.x5Large)
-        .background(.appGray)
     }
 
     private func openAppSettings() {

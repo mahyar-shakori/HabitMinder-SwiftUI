@@ -20,6 +20,7 @@ final class AddHabitViewModel {
     private(set) var isFutureHabit = false
     private(set) var isSaveButtonEnabled = false
     private(set) var isNotificationSettingsAlertPresented = false
+    private(set) var notificationAlertOpensAppSettings = false
     private let dataManager: DataManaging
     private let coordinator: AddHabitCoordinating
     private let reminderScheduler: HabitReminderScheduling
@@ -77,6 +78,11 @@ final class AddHabitViewModel {
     }
 
     func addReminderTime(_ time: String) {
+        guard reminderScheduler.areDailyRemindersEnabled else {
+            showNotificationAlert(opensAppSettings: false)
+            return
+        }
+
         reminderScheduler.getAuthorizationStatus { [weak self] status in
             guard let self else {
                 return
@@ -88,13 +94,14 @@ final class AddHabitViewModel {
             case .notDetermined:
                 self.requestNotificationAuthorization(for: time)
             case .denied:
-                self.isNotificationSettingsAlertPresented = true
+                self.showNotificationAlert(opensAppSettings: true)
             }
         }
     }
 
     func dismissNotificationSettingsAlert() {
         isNotificationSettingsAlertPresented = false
+        notificationAlertOpensAppSettings = false
     }
 
     func removeReminderTime(at offsets: IndexSet) {
@@ -119,9 +126,14 @@ final class AddHabitViewModel {
             if isAllowed {
                 self.insertReminderTime(time)
             } else {
-                self.isNotificationSettingsAlertPresented = true
+                self.showNotificationAlert(opensAppSettings: true)
             }
         }
+    }
+
+    private func showNotificationAlert(opensAppSettings: Bool) {
+        notificationAlertOpensAppSettings = opensAppSettings
+        isNotificationSettingsAlertPresented = true
     }
 
     private func insertReminderTime(_ time: String) {

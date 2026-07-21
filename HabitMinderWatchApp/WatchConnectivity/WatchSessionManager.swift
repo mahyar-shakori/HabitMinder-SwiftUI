@@ -39,9 +39,7 @@ final class WatchSessionManager: NSObject, WCSessionDelegate, WatchSessionManagi
             }
             return HabitData(title: title, daysLeft: daysLeft)
         }
-//        DispatchQueue.main.async {
-            self.homeViewModel?.updateHabits(parsedHabits)
-//        }
+        self.homeViewModel?.updateHabits(parsedHabits)
     }
     
     func session(

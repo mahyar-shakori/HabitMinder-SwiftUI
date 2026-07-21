@@ -8,117 +8,219 @@
 import SwiftUI
 
 struct ColorPickerView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @EnvironmentObject private var themeManager: ThemeManager
-    @Binding private var isPresented: Bool
-    @State private var selectedColor: Color
-    
-    init(isPresented: Binding<Bool>) {
-        self._isPresented = isPresented
-        self._selectedColor = State(initialValue: .blue)
-    }
-    
-    var body: some View {
-        content
-            .onAppear {
-                selectedColor = themeManager.appPrimary
-            }
-    }
-    
-    private var content: some View {
-        NavigationView {
-            VStack {
-                colorPickerView
-            }
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    toolbarTitle
-                }
-                ToolbarItem(placement: .confirmationAction) {
-                    toolbarSaveButton
-                }
-                ToolbarItem(placement: .cancellationAction) {
-                    toolbarCancelButton
-                }
-            }
-        }
-    }
-    
-    private var colorPickerView: some View {
-        ZStack {
-            Color.appGray
-                .ignoresSafeArea()
+    @State private var selectedColor: Color = .appPrimary
 
-            VStack(spacing: Spacing.xLarge) {
-                colorPickerField
-                defaultColorButton
-                Spacer()
+    private var activePreferredColorScheme: ColorScheme? {
+        switch themeManager.appearanceMode {
+        case .light, .dark:
+            return themeManager.preferredColorScheme
+        case .system:
+            return currentWindowColorScheme ?? colorScheme
+        }
+    }
+
+    private var currentWindowColorScheme: ColorScheme? {
+        UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .first { $0.activationState == .foregroundActive }?
+            .traitCollection
+            .userInterfaceStyle
+            .colorScheme
+    }
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: Spacing.x5Large) {
+                pageIntro
+                appearanceSection
+                accentColorSection
             }
-            .padding()
+            .padding(.horizontal, Spacing.x4Large)
+            .padding(.top, Spacing.x5Large)
+            .padding(.bottom, Spacing.x5Large)
+        }
+        .scrollIndicators(.hidden)
+        .background(.appGray)
+        .navigationTitle(L10n.SettingPage.appTheme)
+        .navigationBarTitleDisplayMode(.inline)
+        .preferredColorScheme(activePreferredColorScheme)
+        .onAppear {
+            selectedColor = themeManager.appPrimary
+        }
+        .onChange(of: selectedColor) { _, newColor in
+            themeManager.appPrimary = newColor
         }
     }
-    
-    private var colorPickerField: some View {
+
+    private var pageIntro: some View {
+        VStack(alignment: .leading, spacing: Spacing.xSmall) {
+            Text(L10n.SettingPage.appThemeIntroTitle)
+                .font(.AppFont.rooneySansBold.size(FontSize.x8Large))
+                .foregroundStyle(.primary)
+
+            Text(L10n.SettingPage.appThemeIntroDescription)
+                .font(.AppFont.rooneySansRegular.size(FontSize.x3Large))
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(.top, Spacing.xSmall)
+    }
+
+    private var appearanceSection: some View {
+        settingsSection(title: L10n.SettingPage.appearanceSection) {
+            VStack(spacing: Spacing.none) {
+                ForEach(AppAppearanceMode.allCases, id: \.self) { mode in
+                    appearanceRow(for: mode)
+
+                    if mode != AppAppearanceMode.allCases.last {
+                        Divider()
+                            .padding(.leading, Size.x3Large + Spacing.x3Large)
+                    }
+                }
+            }
+            .background(.appWhite)
+            .clipShape(RoundedRectangle(cornerRadius: CornerRadius.medium))
+        }
+    }
+
+    private func appearanceRow(for mode: AppAppearanceMode) -> some View {
+        HStack(spacing: Spacing.large) {
+            Text(mode.title)
+                .font(.AppFont.rooneySansBold.size(FontSize.x4Large))
+                .foregroundStyle(.primary)
+
+            Spacer()
+
+            Button {
+                themeManager.appearanceMode = mode
+            } label: {
+                Image(systemName: themeManager.appearanceMode == mode ? SystemIconName.checkmarkCircleFill : SystemIconName.circle)
+                    .font(.system(size: FontSize.x7Large, weight: .semibold))
+                    .foregroundStyle(themeManager.appearanceMode == mode ? themeManager.appPrimary : .secondary.opacity(Opacity.subtleBorder))
+                    .frame(width: Size.x2Large + Spacing.xSmall, height: Size.x2Large + Spacing.xSmall)
+            }
+            .buttonStyle(.plain)
+            .contentShape(Circle())
+            .accessibilityLabel(mode.title)
+        }
+        .padding(.horizontal, Spacing.large)
+        .padding(.vertical, Spacing.large)
+    }
+
+    private var accentColorSection: some View {
+        settingsSection(title: L10n.SettingPage.accentColorSection) {
+            VStack(spacing: Spacing.none) {
+                colorPickerRow
+
+                Divider()
+                    .padding(.leading, Size.x3Large + Spacing.x3Large)
+
+                defaultColorRow
+            }
+            .background(.appWhite)
+            .clipShape(RoundedRectangle(cornerRadius: CornerRadius.medium))
+        }
+    }
+
+    private var colorPickerRow: some View {
         ColorPicker(selection: $selectedColor, supportsOpacity: false) {
-            Text(L10n.SettingPage.pickColor)
-                .font(.AppFont.rooneySansRegular.size(FontSize.x4Large))
+            HStack(spacing: Spacing.large) {
+                rowIcon(SystemIconName.paintpalette)
+
+                VStack(alignment: .leading, spacing: Spacing.x3Small) {
+                    Text(L10n.SettingPage.customColor)
+                        .font(.AppFont.rooneySansBold.size(FontSize.x4Large))
+                        .foregroundStyle(.primary)
+
+                    Text(L10n.SettingPage.customColorSubtitle)
+                        .font(.AppFont.rooneySansRegular.size(FontSize.medium))
+                        .foregroundStyle(.secondary)
+                }
+            }
         }
-        .padding(Spacing.medium)
-        .background(
-            RoundedRectangle(cornerRadius: CornerRadius.medium)
-                .fill(.appWhite)
-        )
+        .tint(themeManager.appPrimary)
+        .padding(.horizontal, Spacing.large)
+        .padding(.vertical, Spacing.large)
     }
-    
-    private var defaultColorButton: some View {
+
+    private var defaultColorRow: some View {
         Button {
-            let defaultColor = Color.appPrimary
-            selectedColor = defaultColor
-            themeManager.appPrimary = defaultColor
+            selectedColor = .appPrimary
+            themeManager.resetAppColorToDefault()
         } label: {
-            Text(L10n.SettingPage.defaultColor)
-                .font(.AppFont.rooneySansBold.size(FontSize.x4Large))
-                .foregroundStyle(.blue)
+            HStack(spacing: Spacing.large) {
+                rowIcon(SystemIconName.arrowCounterclockwise)
+
+                VStack(alignment: .leading, spacing: Spacing.x3Small) {
+                    Text(L10n.SettingPage.defaultColor)
+                        .font(.AppFont.rooneySansBold.size(FontSize.x4Large))
+                        .foregroundStyle(.primary)
+
+                    Text(L10n.SettingPage.defaultColorSubtitle)
+                        .font(.AppFont.rooneySansRegular.size(FontSize.medium))
+                        .foregroundStyle(.secondary)
+                }
+
+                Spacer()
+
+                Circle()
+                    .fill(Color.appPrimary)
+                    .frame(width: Size.medium, height: Size.medium)
+            }
+            .padding(.horizontal, Spacing.large)
+            .padding(.vertical, Spacing.large)
         }
         .buttonStyle(.plain)
-        .padding(Spacing.medium)
-        .frame(maxWidth: .infinity)
-        .background(.appWhite)
-        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.medium))
     }
-    
-    private var toolbarTitle: some View {
-        Text(L10n.SettingPage.chooseColor)
-            .font(.AppFont.rooneySansBold.size(FontSize.x4Large))
-    }
-    
-    private var toolbarSaveButton: some View {
-        Button {
-            themeManager.appPrimary = selectedColor
-            isPresented = false
-        } label: {
-            Text(L10n.Shared.saveButton)
-                .font(.AppFont.rooneySansBold.size(FontSize.x4Large))
-                .foregroundStyle(.blue)
+
+    private func settingsSection<Content: View>(
+        title: String,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        VStack(alignment: .leading, spacing: Spacing.xSmall) {
+            Text(title.uppercased())
+                .font(.AppFont.rooneySansBold.size(FontSize.x3Large))
+                .foregroundStyle(.secondary)
+                .padding(.horizontal, Spacing.large)
+
+            content()
         }
-        .buttonStyle(.plain)
     }
-   
-    private var toolbarCancelButton: some View {
-        Button {
-            isPresented = false
-        } label: {
-            Text(L10n.Shared.cancelButton)
-                .font(.AppFont.rooneySansRegular.size(FontSize.x4Large))
-                .foregroundStyle(.blue)
+
+    private func rowIcon(_ iconName: String) -> some View {
+        ZStack {
+            Circle()
+                .fill(themeManager.appSecondary.opacity(Opacity.badgeBackground))
+
+            Image(systemName: iconName)
+                .font(.system(size: FontSize.x5Large, weight: .medium))
+                .foregroundStyle(themeManager.appPrimary)
         }
-        .buttonStyle(.plain)
+        .frame(width: Size.x2Large, height: Size.x2Large)
     }
 }
 
+private extension UIUserInterfaceStyle {
+    var colorScheme: ColorScheme? {
+        switch self {
+        case .light:
+            return .light
+        case .dark:
+            return .dark
+        case .unspecified:
+            return nil
+        @unknown default:
+            return nil
+        }
+    }
+}
 
 #Preview {
     let dependencies = AppDependencies()
-    let isPresented = Binding<Bool>.constant(false)
-    ColorPickerView(isPresented: isPresented)
-        .environmentObject(dependencies.themeManager)
+    NavigationStack {
+        ColorPickerView()
+            .environmentObject(dependencies.themeManager)
+    }
 }

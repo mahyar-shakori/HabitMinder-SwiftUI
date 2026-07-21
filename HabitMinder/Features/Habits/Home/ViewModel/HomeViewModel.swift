@@ -9,6 +9,7 @@ import Foundation
 import Observation
 
 @Observable
+@MainActor
 final class HomeViewModel {
     private(set) var isEditingList = false
     private(set) var itemToDelete: UUID?
@@ -46,7 +47,7 @@ final class HomeViewModel {
     }
 
     private var shouldUseDefaultQuote: Bool {
-        quote.count > LayoutCount.quoteCharacterLimit || quote.isEmpty
+        quote.isEmpty
     }
     
     init(
@@ -73,7 +74,10 @@ final class HomeViewModel {
         let allHabits: [HabitModel] = dataManager.fetchAll(HabitModel.self)
         allHabits
             .filter { $0.createdAt.habitDaysCountSinceCreation(for: $0.id, totalDays: $0.commitmentDays) == 0 }
-            .forEach { reminderScheduler.cancelReminders(for: $0.id) }
+            .forEach {
+                reminderScheduler.cancelReminders(for: $0.id)
+                reminderScheduler.scheduleJourneyCompletion(for: $0.id, title: $0.title)
+            }
 
         let habits = allHabits
             .filter { $0.createdAt.habitDaysCountSinceCreation(for: $0.id, totalDays: $0.commitmentDays) > 0 }
@@ -88,10 +92,9 @@ final class HomeViewModel {
         listItems.move(fromOffsets: source, toOffset: destination)
         
         for (index, item) in listItems.enumerated() {
-            if let habit = dataManager.fetch(byID: item.id, HabitModel.self) {
+            dataManager.update({ habit in
                 habit.sortOrder = index
-                dataManager.save(habit)
-            }
+            }, forID: item.id, HabitModel.self)
         }
     }
     
@@ -103,8 +106,9 @@ final class HomeViewModel {
         guard let id = itemToDelete else {
             return
         }
-        reminderScheduler.cancelReminders(for: id)
+
         dataManager.delete(byID: id, HabitModel.self)
+        reminderScheduler.cancelReminders(for: id)
         listItems.removeAll { $0.id == id }
         cancelDelete()
     }

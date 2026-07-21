@@ -35,4 +35,7 @@ struct ManageHabitDestinationDependencies {
 
 struct SettingsDestinationDependencies {
     let userDefaultsStorage: UserDefaultsStoring
+    let reminderScheduler: HabitReminderScheduling
+    let themeManager: ThemeManaging
+    let profileImageStorage: ProfileImageStoring
 }

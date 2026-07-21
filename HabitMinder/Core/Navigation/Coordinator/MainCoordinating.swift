@@ -12,5 +12,6 @@ protocol MainCoordinating {
     func navigate(to route: AppRoute)
     func pop()
     func popToRoot()
+    func reset(to route: AppRoute)
     func start()
 }

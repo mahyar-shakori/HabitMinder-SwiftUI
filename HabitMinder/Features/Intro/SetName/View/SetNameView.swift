@@ -12,22 +12,22 @@ struct SetNameView: View {
     @EnvironmentObject private var themeManager: ThemeManager
     @FocusState private var isFocused: Bool
     @State private var tempUserName = ""
-    
+
     init(setNameViewModel: SetNameViewModel) {
         self.setNameViewModel = setNameViewModel
     }
-    
+
     var body: some View {
         VStack {
             Spacer()
-            
+
             headerImage
             hiText
             userNameTextField
             errorText
-            
+
             Spacer()
-            
+
             continueButton
         }
         .background(.appGray)
@@ -37,14 +37,14 @@ struct SetNameView: View {
             tempUserName = setNameViewModel.userName
         }
     }
-    
+
     private var headerImage: some View {
         Image(.setName)
             .resizable()
             .scaledToFit()
             .padding(.horizontal, Spacing.medium)
     }
-    
+
     private var hiText: some View {
         Text(L10n.SetNamePage.hiDialog)
             .font(.AppFont.rooneySansBold.size(FontSize.x6Large))
@@ -52,7 +52,7 @@ struct SetNameView: View {
             .padding(.horizontal, Spacing.xLarge)
             .padding(.top, Spacing.x2Large)
     }
-    
+
     private var userNameTextField: some View {
         TextField(
             L10n.SetNamePage.userNamePlaceholder,
@@ -73,7 +73,7 @@ struct SetNameView: View {
             setNameViewModel.setUserName(newValue)
         }
     }
-    
+
     private var errorText: some View {
         Text(setNameViewModel.errorText.isEmpty ? " " : setNameViewModel.errorText)
             .font(Font.AppFont.rooneySansRegular.size(FontSize.x2Large))
@@ -83,7 +83,7 @@ struct SetNameView: View {
             .padding(.top, Spacing.xSmall)
             .animation(.easeInOut, value: setNameViewModel.errorText)
     }
-    
+
     private var continueButton: some View {
         Button {
             setNameViewModel.validateAndContinue {
@@ -104,11 +104,11 @@ struct SetNameView: View {
         .padding(.horizontal, Spacing.xLarge)
         .padding(.bottom, Spacing.xLarge)
     }
-  
+
     private var borderColor: Color {
         setNameViewModel.borderState == .error ? .red : themeManager.appPrimary
     }
-    
+
     private var borderWidth: CGFloat {
         setNameViewModel.borderState == .error ? LineWidth.medium : LineWidth.thin
     }

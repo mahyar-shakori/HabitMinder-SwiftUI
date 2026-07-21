@@ -70,8 +70,10 @@ enum L10n {
 
     enum AddHabitPage {
         static let title = localized("addHabitTitle")
+        static let introDescription = localized("addHabitIntroDescription")
         static let notificationAlertTitle = localized("habitNotificationAlertTitle")
         static let notificationAlertMessage = localized("habitNotificationAlertMessage")
+        static let inAppNotificationAlertMessage = localized("habitInAppNotificationAlertMessage")
         static let notificationSettingsButton = localized("habitNotificationSettingsButton")
         static let identitySectionTitle = localized("habitIdentitySectionTitle")
         static let titlePlaceholder = localized("habitTitlePlaceholder")
@@ -94,6 +96,7 @@ enum L10n {
 
     enum EditHabitPage {
         static let title = localized("editHabitTitle")
+        static let introDescription = localized("editHabitIntroDescription")
         static let missHabitToast = localized("missHabitToast")
         static let missHabitButton = localized("missHabitButton")
     }
@@ -142,10 +145,67 @@ enum L10n {
         static let defaultColor = localized("defaultColor")
         static let editUserName = localized("editUserName")
         static let enterNewUserName = localized("enterNewUserName")
+        static let profilePhoto = localized("profilePhoto")
+        static let changePhoto = localized("changePhoto")
+        static func memberSince(_ date: String) -> String {
+            L10n.formatted("memberSinceFormat", date)
+        }
+        static let preferences = localized("preferences")
+        static let support = localized("support")
+        static let appSection = localized("settingsAppSection")
+        static let notifications = localized("notifications")
+        static let notificationsSubtitle = localized("notificationsSubtitle")
+        static let appTheme = localized("appTheme")
+        static let appThemeSubtitle = localized("appThemeSubtitle")
+        static let appThemeIntroTitle = localized("appThemeIntroTitle")
+        static let appThemeIntroDescription = localized("appThemeIntroDescription")
+        static let appearanceSection = localized("appearanceSection")
+        static let appearanceLight = localized("appearanceLight")
+        static let appearanceDark = localized("appearanceDark")
+        static let appearanceSystem = localized("appearanceSystem")
+        static let accentColorSection = localized("accentColorSection")
+        static let customColor = localized("customColor")
+        static let customColorSubtitle = localized("customColorSubtitle")
+        static let defaultColorSubtitle = localized("defaultColorSubtitle")
+        static let helpSupport = localized("helpSupport")
+        static let helpSupportSubtitle = localized("helpSupportSubtitle")
+        static let rateUs = localized("rateUs")
+        static let rateUsSubtitle = localized("rateUsSubtitle")
+        static let logoutSubtitle = localized("logoutSubtitle")
+        static let versionTagline = localized("versionTagline")
+
+        static func appVersion(_ version: String) -> String {
+            L10n.formatted("appVersionFormat", version)
+        }
+    }
+
+    enum NotificationSettings {
+        static let introTitle = localized("notificationSettingsIntroTitle")
+        static let introDescription = localized("notificationSettingsIntroDescription")
+        static let general = localized("notificationSettingsGeneral")
+        static let allowNotifications = localized("notificationSettingsAllowNotifications")
+        static let allowNotificationsDescription = localized("notificationSettingsAllowDescription")
+        static let ritualReminders = localized("notificationSettingsRitualReminders")
+        static let dailyReminders = localized("notificationSettingsDailyReminders")
+        static let reminderTime = localized("notificationSettingsReminderTime")
+        static let motivation = localized("notificationSettingsMotivation")
+        static let dailyQuotes = localized("notificationSettingsDailyQuotes")
+        static let dailyQuotesDescription = localized("notificationSettingsDailyQuotesDescription")
+        static let journeyCompletion = localized("notificationSettingsJourneyCompletion")
+        static let journeyCompletionDescription = localized("notificationSettingsJourneyCompletionDescription")
     }
 
     enum Notification {
-        static let habitReminderBody = localized("habitReminderNotificationBody")
+        static let habitReminderTitle = localized("habitReminderNotificationTitle")
+        static let journeyCompletionTitle = localized("journeyCompletionNotificationTitle")
+
+        static func habitReminderBody(_ title: String) -> String {
+            L10n.formatted("habitReminderNotificationBodyFormat", title)
+        }
+
+        static func journeyCompletionBody(_ title: String) -> String {
+            L10n.formatted("journeyCompletionNotificationBodyFormat", title)
+        }
     }
 
     enum Shared {

@@ -34,7 +34,8 @@ struct MainDestinationView: View {
             SettingsDestinationView(
                 route: settingsRoute,
                 dependencies: dependencies.settings,
-                coordinator: coordinator
+                coordinator: coordinator,
+                modelContext: modelContext
             )
         }
     }

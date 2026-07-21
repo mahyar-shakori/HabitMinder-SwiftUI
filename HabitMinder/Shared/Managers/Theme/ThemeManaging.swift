@@ -10,4 +10,9 @@ import SwiftUI
 protocol ThemeManaging {
     var appPrimary: Color { get set }
     var appSecondary: Color { get }
+    var appearanceMode: AppAppearanceMode { get set }
+    var preferredColorScheme: ColorScheme? { get }
+
+    func resetAppColorToDefault()
+    func resetToDefault()
 }

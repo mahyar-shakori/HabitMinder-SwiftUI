@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import UIKit
 
 struct EditHabitView: View {
     private var editHabitViewModel: EditHabitViewModel
@@ -21,42 +20,40 @@ struct EditHabitView: View {
     }
     
     var body: some View {
-        VStack(spacing: Spacing.none) {
-            topViews
-
+        ZStack(alignment: .bottom) {
             ScrollView {
-                HabitFormView(
-                    habitTitle: $tempHabitTitle,
-                    reminderTime: $newReminderTime,
-                    selectedIconName: editHabitViewModel.selectedIconName,
-                    selectedFrequency: editHabitViewModel.selectedFrequency,
-                    selectedCustomWeekdays: editHabitViewModel.selectedCustomWeekdays,
-                    commitmentDays: editHabitViewModel.commitmentDays,
-                    reminderTimes: editHabitViewModel.reminderTimes,
-                    showsFutureHabitToggle: false,
-                    isFutureHabit: false,
-                    focus: $isFocused,
-                    onHabitTitleChange: editHabitViewModel.setHabitTitle,
-                    onIconSelect: editHabitViewModel.setSelectedIconName,
-                    onFrequencySelect: editHabitViewModel.setSelectedFrequency,
-                    onCustomWeekdayToggle: editHabitViewModel.toggleCustomWeekday,
-                    onCommitmentDaysIncrement: editHabitViewModel.incrementCommitmentDays,
-                    onCommitmentDaysDecrement: editHabitViewModel.decrementCommitmentDays,
-                    onReminderTimeAdd: editHabitViewModel.addReminderTime,
-                    onReminderTimeRemove: editHabitViewModel.removeReminderTime,
-                    onFutureHabitChange: { _ in }
-                )
+                VStack(alignment: .leading, spacing: Spacing.x5Large) {
+                    pageIntro
+
+                    HabitFormView(
+                        habitTitle: $tempHabitTitle,
+                        reminderTime: $newReminderTime,
+                        selectedIconName: editHabitViewModel.selectedIconName,
+                        selectedFrequency: editHabitViewModel.selectedFrequency,
+                        selectedCustomWeekdays: editHabitViewModel.selectedCustomWeekdays,
+                        commitmentDays: editHabitViewModel.commitmentDays,
+                        reminderTimes: editHabitViewModel.reminderTimes,
+                        showsFutureHabitToggle: false,
+                        isFutureHabit: false,
+                        focus: $isFocused,
+                        onHabitTitleChange: editHabitViewModel.setHabitTitle,
+                        onIconSelect: editHabitViewModel.setSelectedIconName,
+                        onFrequencySelect: editHabitViewModel.setSelectedFrequency,
+                        onCustomWeekdayToggle: editHabitViewModel.toggleCustomWeekday,
+                        onCommitmentDaysIncrement: editHabitViewModel.incrementCommitmentDays,
+                        onCommitmentDaysDecrement: editHabitViewModel.decrementCommitmentDays,
+                        onReminderTimeAdd: editHabitViewModel.addReminderTime,
+                        onReminderTimeRemove: editHabitViewModel.removeReminderTime,
+                        onFutureHabitChange: { _ in }
+                    )
+                }
                 .padding(.horizontal, Spacing.x3Large)
                 .padding(.top, Spacing.x3Large)
-                .padding(.bottom, Spacing.x5Large)
+                .padding(.bottom, Size.x5Large + Spacing.x8Large)
             }
             .scrollIndicators(.hidden)
 
-            if editHabitViewModel.showToast {
-                toastLabel
-            }
-
-            bottomButtons
+            floatingBottomControls
         }
         .background(.appGray)
         .dismissKeyboard(focus: $isFocused)
@@ -74,23 +71,49 @@ struct EditHabitView: View {
                 }
             )
         ) {
-            Button(L10n.AddHabitPage.notificationSettingsButton) {
-                editHabitViewModel.dismissNotificationSettingsAlert()
-                openAppSettings()
-            }
-            Button(L10n.Shared.cancelButton, role: .cancel) {
-                editHabitViewModel.dismissNotificationSettingsAlert()
+            if editHabitViewModel.notificationAlertOpensAppSettings {
+                Button(L10n.AddHabitPage.notificationSettingsButton) {
+                    editHabitViewModel.dismissNotificationSettingsAlert()
+                    openAppSettings()
+                }
+                Button(L10n.Shared.cancelButton, role: .cancel) {
+                    editHabitViewModel.dismissNotificationSettingsAlert()
+                }
+            } else {
+                Button(L10n.Shared.okButton) {
+                    editHabitViewModel.dismissNotificationSettingsAlert()
+                }
             }
         } message: {
-            Text(L10n.AddHabitPage.notificationAlertMessage)
+            Text(notificationAlertMessage)
         }
     }
     
-    private var titleText: some View {
-        Text(L10n.EditHabitPage.title)
-            .font(.AppFont.rooneySansBold.size(FontSize.x9Large))
+    private var notificationAlertMessage: String {
+        editHabitViewModel.notificationAlertOpensAppSettings
+            ? L10n.AddHabitPage.notificationAlertMessage
+            : L10n.AddHabitPage.inAppNotificationAlertMessage
     }
-    
+
+    private var pageIntro: some View {
+        VStack(alignment: .leading, spacing: Spacing.xSmall) {
+            HStack(spacing: Spacing.medium) {
+                Text(L10n.EditHabitPage.title)
+                    .font(.AppFont.rooneySansBold.size(FontSize.x8Large))
+                    .foregroundStyle(.primary)
+
+                Spacer()
+
+                saveButton
+            }
+
+            Text(L10n.EditHabitPage.introDescription)
+                .font(.AppFont.rooneySansRegular.size(FontSize.x3Large))
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+
     private var saveButton: some View {
         Button(L10n.Shared.saveButton) {
             editHabitViewModel.saveAndDismiss()
@@ -101,16 +124,6 @@ struct EditHabitView: View {
         .buttonBorderShape(.capsule)
         .tint(editHabitViewModel.isSaveButtonEnabled ? themeManager.appPrimary : themeManager.appSecondary)
         .disabled(editHabitViewModel.isSaveButtonEnabled.not)
-    }
-    
-    private var topViews: some View {
-        HStack(spacing: Spacing.medium) {
-            titleText
-            Spacer()
-            saveButton
-        }
-        .padding(.horizontal, Spacing.x3Large)
-        .padding(.top, Spacing.x7Large)
     }
     
     private var toastLabel: some View {
@@ -125,12 +138,16 @@ struct EditHabitView: View {
             .padding(.bottom, Spacing.xSmall)
     }
 
-    private var bottomButtons: some View {
+    private var floatingBottomControls: some View {
         VStack(spacing: Spacing.small) {
+            if editHabitViewModel.showToast {
+                toastLabel
+            }
+
             missHabitButton
         }
-        .padding(.bottom, Spacing.x2Large)
-        .background(.appGray)
+        .padding(.horizontal, Spacing.x7Large)
+        .padding(.bottom, Spacing.x5Large)
     }
    
     private var missHabitButton: some View {
@@ -148,8 +165,6 @@ struct EditHabitView: View {
         .buttonBorderShape(.capsule)
         .tint(editHabitViewModel.showToast.not ? themeManager.appPrimary : themeManager.appSecondary)
         .disabled(editHabitViewModel.showToast)
-        .padding(.horizontal, Spacing.x7Large)
-        .padding(.bottom, Spacing.x7Large)
     }
 
     private func openAppSettings() {

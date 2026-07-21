@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 struct AppDependencies {
     private let container: DIContainer
 
@@ -60,7 +61,10 @@ struct AppDependencies {
 
     private var settingsDependencies: SettingsDestinationDependencies {
         SettingsDestinationDependencies(
-            userDefaultsStorage: container.resolve(UserDefaultsStoring.self)
+            userDefaultsStorage: container.resolve(UserDefaultsStoring.self),
+            reminderScheduler: container.resolve(HabitReminderScheduling.self),
+            themeManager: container.resolve(ThemeManager.self),
+            profileImageStorage: container.resolve(ProfileImageStoring.self)
         )
     }
 }

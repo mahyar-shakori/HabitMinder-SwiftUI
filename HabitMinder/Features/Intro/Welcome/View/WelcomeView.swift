@@ -19,10 +19,8 @@ struct WelcomeView: View {
     var body: some View {
         content
             .navigationBarBackButtonHidden(true)
-            .onAppear {
-                Task {
-                    await welcomeViewModel.fetchData()
-                }
+            .task {
+                await welcomeViewModel.fetchData()
             }
             .onChange(of: welcomeViewModel.errorMessage) { _, newError in
                 showAlert = (newError != nil)

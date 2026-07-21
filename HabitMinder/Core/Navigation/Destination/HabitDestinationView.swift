@@ -34,7 +34,10 @@ struct HabitDestinationView: View {
             )
             HomeView(
                 homeViewModel: viewModel,
-                reminderScheduler: reminderScheduler
+                reminderScheduler: reminderScheduler,
+                userDefaultsStorage: dependencies.userDefaultsStorage,
+                navigateToSettingsRoute: { coordinator.navigate(to: .main(.settings($0))) },
+                resetToSetName: { coordinator.reset(to: .intro(.setName)) }
             )
         case .history:
             let viewCoordinator = HabitHistoryCoordinator(dismiss: coordinator.pop)

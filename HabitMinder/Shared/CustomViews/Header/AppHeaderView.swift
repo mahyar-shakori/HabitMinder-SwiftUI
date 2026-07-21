@@ -10,14 +10,18 @@ import SwiftUI
 struct AppHeaderView: View {
     private let title: String
     private let systemImage: String
+    private let profileImageStorage: ProfileImageStoring
+    @AppStorage(UserDefaultKeys.profileImageFileName.rawValue) private var profileImageFileName = ""
     @EnvironmentObject private var themeManager: ThemeManager
 
     init(
         title: String,
-        systemImage: String
+        systemImage: String,
+        profileImageStorage: ProfileImageStoring = ProfileImageStorage()
     ) {
         self.title = title
         self.systemImage = systemImage
+        self.profileImageStorage = profileImageStorage
     }
 
     var body: some View {
@@ -40,9 +44,28 @@ struct AppHeaderView: View {
     }
 
     private var profileIcon: some View {
-        Image(systemName: SystemIconName.profile)
-            .font(.system(size: Size.xLarge))
-            .symbolRenderingMode(.palette)
-            .foregroundStyle(.appWhite, themeManager.appPrimary.opacity(Opacity.iconBackground))
+        Group {
+            if let uiImage = profileImage {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: Size.x3Large, height: Size.x3Large)
+            } else {
+                Image(systemName: SystemIconName.profile)
+                    .font(.system(size: Size.xLarge))
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(.appWhite, themeManager.appPrimary.opacity(Opacity.iconBackground))
+                    .frame(width: Size.xLarge, height: Size.xLarge)
+            }
+        }
+        .clipShape(Circle())
+    }
+
+    private var profileImage: UIImage? {
+        guard let data = profileImageStorage.loadProfileImage(named: profileImageFileName) else {
+            return nil
+        }
+
+        return UIImage(data: data)
     }
 }

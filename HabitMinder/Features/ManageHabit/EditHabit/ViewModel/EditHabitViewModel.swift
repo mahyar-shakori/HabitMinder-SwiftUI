@@ -19,6 +19,7 @@ final class EditHabitViewModel {
     private(set) var reminderTimes: [String] = []
     private(set) var isSaveButtonEnabled = false
     private(set) var isNotificationSettingsAlertPresented = false
+    private(set) var notificationAlertOpensAppSettings = false
     private(set) var showToast = false
     private let habitID: UUID
     private let dataManager: DataManaging
@@ -52,20 +53,19 @@ final class EditHabitViewModel {
             return
         }
 
-           habitTitle = habit.title
-           selectedIconName = habit.iconName.isEmpty ? SystemIconName.checkmark : habit.iconName
-           selectedFrequency =
-               HabitFrequency(rawValue: habit.frequency) ?? .daily
+        habitTitle = habit.title
+        selectedIconName = habit.iconName.isEmpty ? SystemIconName.checkmark : habit.iconName
+        selectedFrequency = HabitFrequency(rawValue: habit.frequency) ?? .daily
 
-           selectedCustomWeekdays = habit.customWeekdays.isEmpty
-               ? [Calendar.current.component(.weekday, from: Date())]
-               : habit.customWeekdays
+        selectedCustomWeekdays = habit.customWeekdays.isEmpty
+            ? [Calendar.current.component(.weekday, from: Date())]
+            : habit.customWeekdays
 
-           commitmentDays = habit.commitmentDays
-           reminderTimes = habit.reminderTimes.sorted()
+        commitmentDays = habit.commitmentDays
+        reminderTimes = habit.reminderTimes.sorted()
 
-           updateValidationState()
-       }
+        updateValidationState()
+    }
     
     func setHabitTitle(_ newValue: String) {
         habitTitle = newValue
@@ -102,6 +102,11 @@ final class EditHabitViewModel {
     }
 
     func addReminderTime(_ time: String) {
+        guard reminderScheduler.areDailyRemindersEnabled else {
+            showNotificationAlert(opensAppSettings: false)
+            return
+        }
+
         reminderScheduler.getAuthorizationStatus { [weak self] status in
             guard let self else {
                 return
@@ -113,13 +118,14 @@ final class EditHabitViewModel {
             case .notDetermined:
                 self.requestNotificationAuthorization(for: time)
             case .denied:
-                self.isNotificationSettingsAlertPresented = true
+                self.showNotificationAlert(opensAppSettings: true)
             }
         }
     }
 
     func dismissNotificationSettingsAlert() {
         isNotificationSettingsAlertPresented = false
+        notificationAlertOpensAppSettings = false
     }
 
     func removeReminderTime(at offsets: IndexSet) {
@@ -140,9 +146,14 @@ final class EditHabitViewModel {
             if isAllowed {
                 self.insertReminderTime(time)
             } else {
-                self.isNotificationSettingsAlertPresented = true
+                self.showNotificationAlert(opensAppSettings: true)
             }
         }
+    }
+
+    private func showNotificationAlert(opensAppSettings: Bool) {
+        notificationAlertOpensAppSettings = opensAppSettings
+        isNotificationSettingsAlertPresented = true
     }
 
     private func insertReminderTime(_ time: String) {
@@ -185,8 +196,9 @@ final class EditHabitViewModel {
         missHabit()
         showToast = true
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-            self?.showToast = false
+        Task {
+            await Task.delay()
+            showToast = false
         }
     }
 }

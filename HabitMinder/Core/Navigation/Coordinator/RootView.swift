@@ -12,6 +12,7 @@ struct RootView: View {
     private let dependencies: AppDependencies
     @State private var mainCoordinator: MainCoordinator
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject private var themeManager: ThemeManager
 
     init(dependencies: AppDependencies) {
         self.dependencies = dependencies
@@ -30,6 +31,7 @@ struct RootView: View {
                     )
                 }
         }
+        .preferredColorScheme(themeManager.preferredColorScheme)
         .task {
             mainCoordinator.start()
         }

@@ -13,16 +13,43 @@ final class ThemeManager: ThemeManaging, ObservableObject{
             saveColorToDefaults(appPrimary)
         }
     }
+
+    @Published var appearanceMode: AppAppearanceMode {
+        didSet {
+            userDefaultsStorage.save(value: appearanceMode.rawValue, for: UserDefaultKeys.appAppearanceMode)
+        }
+    }
     
     private let userDefaultsStorage: UserDefaultsStoring
     
     var appSecondary: Color {
         appPrimary.opacity(Opacity.secondaryTint)
     }
+
+    var preferredColorScheme: ColorScheme? {
+        appearanceMode.colorScheme
+    }
     
     init(userDefaultsStorage: UserDefaultsStoring) {
         self.userDefaultsStorage = userDefaultsStorage
         self.appPrimary = Self.loadColorFromDefaults(storage: userDefaultsStorage) ?? .appPrimary
+        self.appearanceMode = Self.loadAppearanceMode(from: userDefaultsStorage)
+    }
+
+    func resetAppColorToDefault() {
+        appPrimary = .appPrimary
+        userDefaultsStorage.removeValue(for: UserDefaultKeys.appPrimaryColor)
+    }
+
+    func resetToDefault() {
+        resetAppColorToDefault()
+        appearanceMode = .system
+        userDefaultsStorage.removeValue(for: UserDefaultKeys.appAppearanceMode)
+    }
+    
+    private static func loadAppearanceMode(from storage: UserDefaultsStoring) -> AppAppearanceMode {
+        let rawValue: String? = storage.fetch(for: UserDefaultKeys.appAppearanceMode)
+        return rawValue.flatMap(AppAppearanceMode.init(rawValue:)) ?? .system
     }
     
     private func saveColorToDefaults(_ color: Color) {
