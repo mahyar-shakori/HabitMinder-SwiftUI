@@ -153,7 +153,7 @@ final class AddHabitViewModel {
         let newHabit = HabitModel(
             title: trimmedHabitTitle,
             sortOrder: maxSortOrder + 1,
-            iconName: selectedIconName,
+            iconName: selectedIconNames,
             frequency: selectedFrequency.rawValue,
             commitmentDays: commitmentDays,
             reminderTimes: reminderTimes,
@@ -174,7 +174,7 @@ final class AddHabitViewModel {
     private func saveFutureHabit() {
         let newHabit = HabitHistoryModel(
             title: trimmedHabitTitle,
-            iconName: selectedIconName,
+            iconName: selectedIconNames,
             frequency: selectedFrequency.rawValue,
             commitmentDays: commitmentDays,
             reminderTimes: reminderTimes,

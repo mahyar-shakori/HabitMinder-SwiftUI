@@ -46,4 +46,3 @@ struct AppHeaderView: View {
             .foregroundStyle(.appWhite, themeManager.appPrimary.opacity(Opacity.iconBackground))
     }
 }
-

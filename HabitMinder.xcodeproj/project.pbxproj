@@ -123,6 +123,7 @@
 				Shared/Constants/Spacing.swift,
 				Shared/Constants/SystemIconName.swift,
 				Shared/CustomViews/EmptyView/CustomEmptyView.swift,
+				Shared/CustomViews/HabitForm/HabitFromView.swift,
 				Shared/CustomViews/Header/AppHeaderView.swift,
 				"Shared/Extensions/Foundation/Date+DayCounter.swift",
 				"Shared/Extensions/Foundation/Task+Delay.swift",
