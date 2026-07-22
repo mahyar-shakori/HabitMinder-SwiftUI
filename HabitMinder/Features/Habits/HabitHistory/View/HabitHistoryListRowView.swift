@@ -37,7 +37,7 @@ struct HabitHistoryListRowView: View {
             habitIcon
 
             Text(item.title)
-                .font(.AppFont.rooneySansBold.size(FontSize.x3Large))
+                .font(.AppFont.rooneySansRegular.size(FontSize.x4Large))
                 .foregroundStyle(.primary)
                 .frame(maxWidth: .infinity, alignment: .leading)
 

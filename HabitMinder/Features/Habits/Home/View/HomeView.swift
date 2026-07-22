@@ -62,12 +62,13 @@ struct HomeView: View {
 
     private var listHeader: some View {
         VStack(alignment: .leading, spacing: Spacing.x2Small) {
-            Text(L10n.HomePage.listTitle)
-                .font(.AppFont.rooneySansBold.size(FontSize.x8Large))
-                .foregroundStyle(.primary)
+            Text(L10n.HomePage.listTitle.uppercased())
+                .font(.AppFont.rooneySansBold.size(FontSize.small))
+                .foregroundStyle(themeManager.appPrimary)
+                .tracking(1.2)
 
             Text(L10n.HomePage.listSubtitle)
-                .font(.AppFont.rooneySansRegular.size(FontSize.xLarge))
+                .font(.AppFont.rooneySansRegular.size(FontSize.medium))
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -139,14 +140,14 @@ struct HomeView: View {
                 .foregroundStyle(themeManager.appPrimary)
 
             Text(L10n.HomePage.quoted(homeViewModel.displayedQuote))
-                .font(.AppFont.rooneySansRegular.size(FontSize.xLarge))
+                .font(.AppFont.rooneySansRegular.size(FontSize.medium))
                 .italic()
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
 
             if homeViewModel.displayedAuthor.isNotEmpty {
                 Text(homeViewModel.displayedAuthor)
-                    .font(.AppFont.rooneySansRegular.size(FontSize.large))
+                    .font(.AppFont.rooneySansRegular.size(FontSize.medium))
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity, alignment: .trailing)
             }

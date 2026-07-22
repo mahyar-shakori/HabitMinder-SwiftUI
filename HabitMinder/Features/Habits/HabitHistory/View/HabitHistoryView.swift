@@ -82,7 +82,7 @@ struct HabitHistoryView: View {
             selectedTab = tab
         } label: {
             Text(tab.title)
-                .font(.AppFont.rooneySansBold.size(FontSize.medium))
+                .font(.AppFont.rooneySansRegular.size(FontSize.medium))
                 .foregroundStyle(isSelected ? .appWhite : themeManager.appPrimary)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, Spacing.xSmall + LineWidth.thin)
@@ -184,7 +184,7 @@ struct HabitHistoryView: View {
                 .foregroundStyle(themeManager.appPrimary)
 
             Text(L10n.HabitHistoryPage.ritualTipText)
-                .font(.AppFont.rooneySansRegular.size(FontSize.xLarge))
+                .font(.AppFont.rooneySansRegular.size(FontSize.medium))
                 .italic()
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)

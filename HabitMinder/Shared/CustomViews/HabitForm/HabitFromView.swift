@@ -52,7 +52,7 @@ struct HabitFormView: View {
             formRow(systemImage: selectedDisplayIconName) {
                 VStack(alignment: .leading, spacing: Spacing.x2Small) {
                     TextField(L10n.AddHabitPage.titlePlaceholder, text: $habitTitle)
-                        .font(.AppFont.rooneySansRegular.size(FontSize.x2Large))
+                        .font(.AppFont.rooneySansRegular.size(FontSize.x4Large))
                         .foregroundStyle(.primary)
                         .textInputAutocapitalization(.words)
                         .focused(focus)
@@ -71,8 +71,8 @@ struct HabitFormView: View {
 
             VStack(alignment: .leading, spacing: Spacing.medium) {
                 Text(L10n.AddHabitPage.selectIconHint)
-                    .font(.AppFont.rooneySansRegular.size(FontSize.large))
-                    .foregroundStyle(.secondary)
+                    .font(.AppFont.rooneySansRegular.size(FontSize.x4Large))
+                    .foregroundStyle(.primary)
 
                 ScrollView(.horizontal) {
                     HStack(spacing: Spacing.small) {
@@ -100,7 +100,7 @@ struct HabitFormView: View {
                 Stepper(value: commitmentDaysBinding, in: 1...365) {
                     VStack(alignment: .leading, spacing: Spacing.x2Small) {
                         Text(L10n.AddHabitPage.commitmentSectionTitle)
-                            .font(.AppFont.rooneySansBold.size(FontSize.large))
+                            .font(.AppFont.rooneySansRegular.size(FontSize.x4Large))
                             .foregroundStyle(.primary)
 
                         Text(L10n.AddHabitPage.commitmentDays(commitmentDays))
@@ -120,7 +120,7 @@ struct HabitFormView: View {
                 Toggle(isOn: futureHabitBinding) {
                     VStack(alignment: .leading, spacing: Spacing.x2Small) {
                         Text(L10n.AddHabitPage.futureHabitToggle)
-                            .font(.AppFont.rooneySansBold.size(FontSize.large))
+                            .font(.AppFont.rooneySansRegular.size(FontSize.x4Large))
                             .foregroundStyle(.primary)
 
                         Text(selectedFrequency.title)
@@ -140,7 +140,7 @@ struct HabitFormView: View {
             formRow(systemImage: SystemIconName.calendar) {
                 VStack(alignment: .leading, spacing: Spacing.medium) {
                     Text(L10n.AddHabitPage.frequencySectionTitle)
-                        .font(.AppFont.rooneySansBold.size(FontSize.large))
+                        .font(.AppFont.rooneySansRegular.size(FontSize.x4Large))
                         .foregroundStyle(.primary)
 
                     Picker(L10n.AddHabitPage.frequencySectionTitle, selection: frequencyBinding) {
@@ -174,7 +174,7 @@ struct HabitFormView: View {
             formRow(systemImage: SystemIconName.bell) {
                 VStack(alignment: .leading, spacing: Spacing.medium) {
                     Text(L10n.AddHabitPage.reminderSectionTitle)
-                        .font(.AppFont.rooneySansBold.size(FontSize.large))
+                        .font(.AppFont.rooneySansRegular.size(FontSize.x4Large))
                         .foregroundStyle(.primary)
 
                     Text(L10n.AddHabitPage.reminderSubtitle)
@@ -215,9 +215,8 @@ struct HabitFormView: View {
     private func sectionTitle(_ title: String) -> some View {
         Text(title.uppercased())
             .font(.AppFont.rooneySansBold.size(FontSize.small))
-            .tracking(Spacing.x3Small)
-            .foregroundStyle(themeManager.appPrimary.opacity(Opacity.sectionTitle))
-            .padding(.leading, Spacing.xSmall)
+            .foregroundStyle(themeManager.appPrimary)
+            .tracking(1.2)
     }
 
     private func formRow<Content: View>(
@@ -277,7 +276,7 @@ struct HabitFormView: View {
     private func reminderRow(_ time: String) -> some View {
         HStack(spacing: Spacing.medium) {
             Text(HabitReminderTimeFormatter.displayTime(from: time))
-                .font(.AppFont.rooneySansRegular.size(FontSize.x2Large - LineWidth.thin))
+                .font(.AppFont.rooneySansRegular.size(FontSize.x4Large))
                 .foregroundStyle(.primary)
 
             Spacer()

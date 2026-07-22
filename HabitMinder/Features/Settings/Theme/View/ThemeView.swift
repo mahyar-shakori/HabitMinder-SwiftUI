@@ -49,7 +49,7 @@ struct ThemeView: View {
     }
 
     private var appearanceSection: some View {
-        SettingsSection(title: L10n.SettingPage.appearanceSection) {
+        SettingsSection(title: L10n.SettingPage.appearanceSection, style: .primary) {
             VStack(spacing: Spacing.none) {
                 ForEach(AppAppearanceMode.allCases, id: \.self) { mode in
                     appearanceRow(for: mode)
@@ -68,7 +68,7 @@ struct ThemeView: View {
     private func appearanceRow(for mode: AppAppearanceMode) -> some View {
         HStack(spacing: Spacing.large) {
             Text(mode.title)
-                .font(.AppFont.rooneySansBold.size(FontSize.x4Large))
+                .font(.AppFont.rooneySansRegular.size(FontSize.x4Large))
                 .foregroundStyle(.primary)
 
             Spacer()
@@ -90,7 +90,7 @@ struct ThemeView: View {
     }
 
     private var accentColorSection: some View {
-        SettingsSection(title: L10n.SettingPage.accentColorSection) {
+        SettingsSection(title: L10n.SettingPage.accentColorSection, style: .primary) {
             VStack(spacing: Spacing.none) {
                 colorPickerRow
 
@@ -111,7 +111,7 @@ struct ThemeView: View {
 
                 VStack(alignment: .leading, spacing: Spacing.x3Small) {
                     Text(L10n.SettingPage.customColor)
-                        .font(.AppFont.rooneySansBold.size(FontSize.x4Large))
+                        .font(.AppFont.rooneySansRegular.size(FontSize.x4Large))
                         .foregroundStyle(.primary)
 
                     Text(L10n.SettingPage.customColorSubtitle)
@@ -130,6 +130,7 @@ struct ThemeView: View {
             iconName: SystemIconName.arrowCounterclockwise,
             title: L10n.SettingPage.defaultColor,
             subtitle: L10n.SettingPage.defaultColorSubtitle,
+            isTitleBold: false,
             action: resetDefaultColor
         ) {
             Circle()

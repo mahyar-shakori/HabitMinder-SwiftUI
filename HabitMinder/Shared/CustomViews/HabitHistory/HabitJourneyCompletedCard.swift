@@ -49,11 +49,11 @@ struct HabitJourneyCompletedCard: View {
     private var habitInfo: some View {
         VStack(alignment: .leading, spacing: Spacing.x2Small) {
             Text(item.title)
-                .font(.AppFont.rooneySansBold.size(FontSize.x3Large))
+                .font(.AppFont.rooneySansRegular.size(FontSize.x4Large))
                 .foregroundStyle(.primary)
 
             Text(L10n.HabitHistoryPage.finishedDate(item.completedAt.formatted(.dateTime.month(.abbreviated).day().year())))
-                .font(.AppFont.rooneySansRegular.size(FontSize.large))
+                .font(.AppFont.rooneySansRegular.size(FontSize.medium))
                 .foregroundStyle(.secondary)
         }
     }
@@ -79,7 +79,7 @@ struct HabitJourneyCompletedCard: View {
             Spacer()
             Text(L10n.HabitHistoryPage.completedStatus)
         }
-        .font(.AppFont.rooneySansBold.size(FontSize.xSmall))
+        .font(.AppFont.rooneySansRegular.size(FontSize.medium))
         .foregroundStyle(.secondary)
     }
 }

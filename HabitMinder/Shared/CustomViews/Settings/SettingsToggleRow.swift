@@ -21,7 +21,7 @@ struct SettingsToggleRow: View {
             SettingsRowIcon(iconName: iconName, isEnabled: isEnabled)
 
             Text(title)
-                .font(.AppFont.rooneySansBold.size(FontSize.x4Large))
+                .font(.AppFont.rooneySansRegular.size(FontSize.x4Large))
                 .foregroundStyle(.primary)
 
             Spacer()

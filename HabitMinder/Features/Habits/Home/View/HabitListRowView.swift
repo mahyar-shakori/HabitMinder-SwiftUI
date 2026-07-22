@@ -46,7 +46,7 @@ struct HabitListRowView: View {
 
     private var habitTitle: some View {
         Text(item.title)
-            .font(.AppFont.rooneySansBold.size(FontSize.x4Large))
+            .font(.AppFont.rooneySansRegular.size(FontSize.x4Large))
             .foregroundStyle(.primary)
             .lineLimit(1)
     }
@@ -61,15 +61,15 @@ struct HabitListRowView: View {
     private var progressHeader: some View {
         HStack {
             Text(L10n.Cell.Habit.journey(item.commitmentDays))
-                .font(.AppFont.rooneySansBold.size(FontSize.xLarge))
+                .font(.AppFont.rooneySansRegular.size(FontSize.medium))
                 .textCase(.uppercase)
                 .foregroundStyle(.secondary)
 
             Spacer()
 
             Text(L10n.Cell.Habit.progressDay(completed: completedDays, total: item.commitmentDays))
-                .font(.AppFont.rooneySansBold.size(FontSize.xLarge))
-                .foregroundStyle(themeManager.appPrimary)
+                .font(.AppFont.rooneySansRegular.size(FontSize.medium))
+                .foregroundStyle(.secondary)
         }
     }
 
@@ -97,8 +97,8 @@ struct HabitListRowView: View {
 
             Text(L10n.Cell.Habit.streak(completedDays))
         }
-        .font(.AppFont.rooneySansRegular.size(FontSize.xLarge))
-        .foregroundStyle(themeManager.appPrimary)
+        .font(.AppFont.rooneySansRegular.size(FontSize.medium))
+        .foregroundStyle(.secondary)
         .lineLimit(1)
         .minimumScaleFactor(Scale.minimumText)
     }

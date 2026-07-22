@@ -72,12 +72,13 @@ struct ProfileSettingsView: View {
     }
 
     private var profileDetailsSection: some View {
-        SettingsSection(title: L10n.SettingPage.profile) {
+        SettingsSection(title: L10n.SettingPage.profile, style: .primary) {
             SettingsActionRow(
                 iconName: SystemIconName.pencil,
                 title: L10n.SettingPage.editUserName,
                 subtitle: viewModel.userName,
                 showsChevron: true,
+                isTitleBold: false,
                 action: startEditingUserName
             )
         }

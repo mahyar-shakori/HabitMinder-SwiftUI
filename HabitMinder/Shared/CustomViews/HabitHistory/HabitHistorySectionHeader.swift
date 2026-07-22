@@ -28,7 +28,7 @@ struct HabitHistorySectionHeader: View {
 
                     if let subtitle {
                         Text(subtitle)
-                            .font(.AppFont.rooneySansRegular.size(FontSize.xLarge))
+                            .font(.AppFont.rooneySansRegular.size(FontSize.medium))
                             .foregroundStyle(.secondary)
                             .fixedSize(horizontal: false, vertical: true)
                     }
@@ -39,9 +39,10 @@ struct HabitHistorySectionHeader: View {
     }
 
     private var titleText: some View {
-        Text(title)
-            .font(.AppFont.rooneySansBold.size(FontSize.x8Large))
-            .foregroundStyle(.primary)
+        Text(title.uppercased())
+            .font(.AppFont.rooneySansBold.size(FontSize.small))
+            .foregroundStyle(themeManager.appPrimary)
+            .tracking(1.2)
     }
 
     private func badge(_ text: String) -> some View {

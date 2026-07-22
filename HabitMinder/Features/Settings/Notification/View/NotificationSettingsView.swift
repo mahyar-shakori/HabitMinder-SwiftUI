@@ -68,7 +68,7 @@ struct NotificationSettingsView: View {
     }
 
     private var generalSection: some View {
-        SettingsSection(title: L10n.NotificationSettings.general) {
+        SettingsSection(title: L10n.NotificationSettings.general, style: .primary) {
             SettingsToggleRow(
                 iconName: SystemIconName.bell,
                 title: L10n.NotificationSettings.allowNotifications,
@@ -81,7 +81,7 @@ struct NotificationSettingsView: View {
     }
 
     private var ritualRemindersSection: some View {
-        SettingsSection(title: L10n.NotificationSettings.ritualReminders) {
+        SettingsSection(title: L10n.NotificationSettings.ritualReminders, style: .primary) {
             VStack(spacing: Spacing.none) {
                 SettingsToggleRow(
                     iconName: SystemIconName.calendar,
@@ -111,7 +111,7 @@ struct NotificationSettingsView: View {
     }
 
     private var motivationSection: some View {
-        SettingsSection(title: L10n.NotificationSettings.motivation) {
+        SettingsSection(title: L10n.NotificationSettings.motivation, style: .primary) {
             SettingsToggleRow(
                 iconName: SystemIconName.quoteBubble,
                 title: L10n.NotificationSettings.dailyQuotes,
@@ -127,7 +127,7 @@ struct NotificationSettingsView: View {
 private extension View {
     func sectionDescriptionStyle() -> some View {
         self
-            .font(.AppFont.rooneySansBold.size(FontSize.xLarge))
+            .font(.AppFont.rooneySansRegular.size(FontSize.medium))
             .foregroundStyle(.secondary)
             .fixedSize(horizontal: false, vertical: true)
             .padding(.horizontal, Spacing.large)
