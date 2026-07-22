@@ -39,33 +39,13 @@ struct EditHabitView: View {
         .onAppear {
             tempHabitTitle = editHabitViewModel.habitTitle
         }
-        .alert(
-            L10n.AddHabitPage.notificationAlertTitle,
-            isPresented: Binding(
-                get: { editHabitViewModel.isNotificationSettingsAlertPresented },
-                set: { isPresented in
-                    if isPresented.not {
-                        editHabitViewModel.dismissNotificationSettingsAlert()
-                    }
-                }
-            )
-        ) {
-            if editHabitViewModel.notificationAlertOpensAppSettings {
-                Button(L10n.AddHabitPage.notificationSettingsButton) {
-                    editHabitViewModel.dismissNotificationSettingsAlert()
-                    openAppSettings()
-                }
-                Button(L10n.Shared.cancelButton, role: .cancel) {
-                    editHabitViewModel.dismissNotificationSettingsAlert()
-                }
-            } else {
-                Button(L10n.Shared.okButton) {
-                    editHabitViewModel.dismissNotificationSettingsAlert()
-                }
-            }
-        } message: {
-            Text(notificationAlertMessage)
-        }
+        .notificationPermissionAlert(
+            isPresented: notificationAlertBinding,
+            opensAppSettings: editHabitViewModel.notificationAlertOpensAppSettings,
+            message: notificationAlertMessage,
+            onDismiss: editHabitViewModel.dismissNotificationSettingsAlert,
+            onOpenAppSettings: openAppSettings
+        )
     }
     
     private var content: some View {
@@ -92,6 +72,17 @@ struct EditHabitView: View {
         )
     }
     
+    private var notificationAlertBinding: Binding<Bool> {
+        Binding(
+            get: { editHabitViewModel.isNotificationSettingsAlertPresented },
+            set: { isPresented in
+                if isPresented.not {
+                    editHabitViewModel.dismissNotificationSettingsAlert()
+                }
+            }
+        )
+    }
+
     private var notificationAlertMessage: String {
         editHabitViewModel.notificationAlertOpensAppSettings
             ? L10n.AddHabitPage.notificationAlertMessage
@@ -99,21 +90,13 @@ struct EditHabitView: View {
     }
 
     private var pageIntro: some View {
-        VStack(alignment: .leading, spacing: Spacing.xSmall) {
-            HStack(spacing: Spacing.medium) {
-                Text(L10n.EditHabitPage.title)
-                    .font(.AppFont.rooneySansBold.size(FontSize.x8Large))
-                    .foregroundStyle(.primary)
-
-                Spacer()
-
-                saveButton
-            }
-
-            Text(L10n.EditHabitPage.introDescription)
-                .font(.AppFont.rooneySansRegular.size(FontSize.x3Large))
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
+        PageIntroView(
+            title: L10n.EditHabitPage.title,
+            description: L10n.EditHabitPage.introDescription,
+            topPadding: Spacing.none
+        ) {
+            Spacer()
+            saveButton
         }
     }
 
@@ -127,22 +110,10 @@ struct EditHabitView: View {
         )
     }
     
-    private var toastLabel: some View {
-        Text(L10n.EditHabitPage.missHabitToast)
-            .font(.AppFont.rooneySansBold.size(FontSize.x2Large))
-            .foregroundColor(.appWhite)
-            .padding(.vertical, Spacing.xSmall)
-            .padding(.horizontal, Spacing.xLarge)
-            .background(.primary.opacity(Opacity.toastBackground))
-            .cornerRadius(CornerRadius.medium)
-            .transition(.opacity.combined(with: .scale))
-            .padding(.bottom, Spacing.xSmall)
-    }
-
     private var floatingBottomControls: some View {
         VStack(spacing: Spacing.small) {
             if editHabitViewModel.showToast {
-                toastLabel
+                ToastLabel(text: L10n.EditHabitPage.missHabitToast)
             }
             missHabitButton
         }

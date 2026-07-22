@@ -122,7 +122,8 @@ struct HabitHistoryView: View {
                     .historyListRowStyle()
             } else {
                 ForEach(habitHistoryViewModel.completedItems) { item in
-                    completedCard(item)
+                    HabitJourneyCompletedCard(item: item)
+                        .environmentObject(themeManager)
                         .historyListRowStyle()
                 }
             }
@@ -130,21 +131,11 @@ struct HabitHistoryView: View {
     }
     
     private var completedSectionHeader: some View {
-        HStack {
-            Text(L10n.HabitHistoryPage.masteryTitle)
-                .font(.AppFont.rooneySansBold.size(FontSize.x8Large))
-                .foregroundStyle(.primary)
-
-            Spacer()
-
-            Text(achievementCountText)
-                .font(.AppFont.rooneySansBold.size(FontSize.small))
-                .foregroundStyle(themeManager.appPrimary)
-                .padding(.horizontal, Spacing.large)
-                .padding(.vertical, Spacing.xSmall - LineWidth.thin)
-                .background(themeManager.appSecondary.opacity(Opacity.badgeBackground))
-                .clipShape(Capsule())
-        }
+        HabitHistorySectionHeader(
+            title: L10n.HabitHistoryPage.masteryTitle,
+            badgeText: achievementCountText
+        )
+        .environmentObject(themeManager)
         .historyListRowStyle()
     }
 
@@ -171,89 +162,11 @@ struct HabitHistoryView: View {
     }
     
     private var upcomingSectionHeader: some View {
-        VStack(alignment: .leading, spacing: Spacing.xSmall) {
-            Text(L10n.HabitHistoryPage.plannedTitle)
-                .font(.AppFont.rooneySansBold.size(FontSize.x8Large))
-                .foregroundStyle(.primary)
-
-            Text(L10n.HabitHistoryPage.plannedSubtitle)
-                .font(.AppFont.rooneySansRegular.size(FontSize.xLarge))
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .padding(.bottom, Spacing.x2Small)
+        HabitHistorySectionHeader(
+            title: L10n.HabitHistoryPage.plannedTitle,
+            subtitle: L10n.HabitHistoryPage.plannedSubtitle
+        )
         .historyListRowStyle()
-    }
-
-    private func completedCard(_ item: CompletedHabitItem) -> some View {
-        VStack(spacing: Spacing.large) {
-            completedCardHeader(item)
-            completedProgressView
-            completedStatusRow(item)
-        }
-        .padding(Spacing.xLarge)
-        .background(.appWhite)
-        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.x2Large))
-    }
-
-    private func completedCardHeader(_ item: CompletedHabitItem) -> some View {
-        HStack(alignment: .top, spacing: Spacing.large) {
-            completedHabitIcon(item.iconName)
-            completedHabitInfo(item)
-
-            Spacer()
-
-            completionMedalIcon
-        }
-    }
-
-    private func completedHabitIcon(_ iconName: String) -> some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: CornerRadius.medium)
-                .fill(themeManager.appSecondary.opacity(Opacity.completedIconBackground))
-
-            Image(systemName: iconName)
-                .font(.system(size: FontSize.x4Large, weight: .medium))
-                .foregroundStyle(themeManager.appPrimary)
-        }
-        .frame(width: Size.x3Large, height: Size.x3Large)
-    }
-
-    private func completedHabitInfo(_ item: CompletedHabitItem) -> some View {
-        VStack(alignment: .leading, spacing: Spacing.x2Small) {
-            Text(item.title)
-                .font(.AppFont.rooneySansBold.size(FontSize.x3Large))
-                .foregroundStyle(.primary)
-
-            Text(L10n.HabitHistoryPage.finishedDate(item.completedAt.formatted(.dateTime.month(.abbreviated).day().year())))
-                .font(.AppFont.rooneySansRegular.size(FontSize.large))
-                .foregroundStyle(.secondary)
-        }
-    }
-
-    private var completionMedalIcon: some View {
-        Image(systemName: SystemIconName.medal)
-            .font(.system(size: FontSize.x2Large, weight: .semibold))
-            .foregroundStyle(themeManager.appPrimary)
-            .padding(Spacing.xSmall)
-            .background(.appGray)
-            .clipShape(RoundedRectangle(cornerRadius: CornerRadius.small))
-    }
-
-    private var completedProgressView: some View {
-        ProgressView(value: Scale.normal)
-            .tint(themeManager.appPrimary)
-            .scaleEffect(x: Scale.normal, y: Scale.progress, anchor: .center)
-    }
-
-    private func completedStatusRow(_ item: CompletedHabitItem) -> some View {
-        HStack {
-            Text(L10n.HabitHistoryPage.streakDays(item.commitmentDays))
-            Spacer()
-            Text(L10n.HabitHistoryPage.completedStatus)
-        }
-        .font(.AppFont.rooneySansBold.size(FontSize.xSmall))
-        .foregroundStyle(.secondary)
     }
 
     private var emptyCompletedCard: some View {

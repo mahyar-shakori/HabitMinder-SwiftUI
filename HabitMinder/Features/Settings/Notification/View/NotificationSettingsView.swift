@@ -9,7 +9,6 @@ import SwiftUI
 
 struct NotificationSettingsView: View {
     private var viewModel: NotificationSettingsViewModel
-    @EnvironmentObject private var themeManager: ThemeManager
 
     init(viewModel: NotificationSettingsViewModel) {
         self.viewModel = viewModel
@@ -50,7 +49,10 @@ struct NotificationSettingsView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: Spacing.x5Large) {
-                pageIntro
+                PageIntroView(
+                    title: L10n.NotificationSettings.introTitle,
+                    description: L10n.NotificationSettings.introDescription
+                )
                 generalSection
                 ritualRemindersSection
                 motivationSection
@@ -65,23 +67,9 @@ struct NotificationSettingsView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 
-    private var pageIntro: some View {
-        VStack(alignment: .leading, spacing: Spacing.xSmall) {
-            Text(L10n.NotificationSettings.introTitle)
-                .font(.AppFont.rooneySansBold.size(FontSize.x8Large))
-                .foregroundStyle(.primary)
-
-            Text(L10n.NotificationSettings.introDescription)
-                .font(.AppFont.rooneySansRegular.size(FontSize.x3Large))
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .padding(.top, Spacing.xSmall)
-    }
-
     private var generalSection: some View {
-        settingsSection(title: L10n.NotificationSettings.general) {
-            toggleRow(
+        SettingsSection(title: L10n.NotificationSettings.general) {
+            SettingsToggleRow(
                 iconName: SystemIconName.bell,
                 title: L10n.NotificationSettings.allowNotifications,
                 isOn: allowNotificationsBinding
@@ -93,9 +81,9 @@ struct NotificationSettingsView: View {
     }
 
     private var ritualRemindersSection: some View {
-        settingsSection(title: L10n.NotificationSettings.ritualReminders) {
+        SettingsSection(title: L10n.NotificationSettings.ritualReminders) {
             VStack(spacing: Spacing.none) {
-                toggleRow(
+                SettingsToggleRow(
                     iconName: SystemIconName.calendar,
                     title: L10n.NotificationSettings.dailyReminders,
                     isOn: dailyRemindersBinding,
@@ -106,7 +94,7 @@ struct NotificationSettingsView: View {
                 Divider()
                     .padding(.leading, Size.x3Large + Spacing.x3Large)
 
-                toggleRow(
+                SettingsToggleRow(
                     iconName: SystemIconName.sparkles,
                     title: L10n.NotificationSettings.journeyCompletion,
                     isOn: journeyCompletionBinding,
@@ -123,8 +111,8 @@ struct NotificationSettingsView: View {
     }
 
     private var motivationSection: some View {
-        settingsSection(title: L10n.NotificationSettings.motivation) {
-            toggleRow(
+        SettingsSection(title: L10n.NotificationSettings.motivation) {
+            SettingsToggleRow(
                 iconName: SystemIconName.quoteBubble,
                 title: L10n.NotificationSettings.dailyQuotes,
                 isOn: dailyQuotesBinding
@@ -133,60 +121,6 @@ struct NotificationSettingsView: View {
             Text(L10n.NotificationSettings.dailyQuotesDescription)
                 .sectionDescriptionStyle()
         }
-    }
-
-    private func settingsSection<Content: View>(
-        title: String,
-        @ViewBuilder content: () -> Content
-    ) -> some View {
-        VStack(alignment: .leading, spacing: Spacing.xSmall) {
-            Text(title.uppercased())
-                .font(.AppFont.rooneySansBold.size(FontSize.x3Large))
-                .foregroundStyle(.secondary)
-                .padding(.horizontal, Spacing.large)
-
-            content()
-        }
-    }
-
-    private func toggleRow(
-        iconName: String,
-        title: String,
-        isOn: Binding<Bool>,
-        isEnabled: Bool = true,
-        clipsBackground: Bool = true
-    ) -> some View {
-        HStack(spacing: Spacing.large) {
-            rowIcon(iconName, isEnabled: isEnabled)
-
-            Text(title)
-                .font(.AppFont.rooneySansBold.size(FontSize.x4Large))
-                .foregroundStyle(.primary)
-
-            Spacer()
-
-            Toggle("", isOn: isOn)
-                .labelsHidden()
-                .tint(themeManager.appPrimary)
-                .disabled(isEnabled.not)
-        }
-        .padding(.horizontal, Spacing.large)
-        .padding(.vertical, Spacing.large)
-        .background(.appWhite)
-        .clipShape(RoundedRectangle(cornerRadius: clipsBackground ? CornerRadius.medium : 0))
-        .opacity(isEnabled ? 1 : Opacity.secondaryTint)
-    }
-
-    private func rowIcon(_ iconName: String, isEnabled: Bool) -> some View {
-        ZStack {
-            Circle()
-                .fill(isEnabled ? themeManager.appSecondary.opacity(Opacity.badgeBackground) : .gray.opacity(Opacity.subtle))
-
-            Image(systemName: iconName)
-                .font(.system(size: FontSize.x5Large, weight: .medium))
-                .foregroundStyle(isEnabled ? themeManager.appPrimary : .secondary)
-        }
-        .frame(width: Size.x2Large, height: Size.x2Large)
     }
 }
 

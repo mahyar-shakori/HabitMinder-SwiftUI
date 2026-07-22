@@ -36,33 +36,13 @@ struct AddHabitView: View {
         }
         .background(.appGray)
         .dismissKeyboard(focus: $isFocused)
-        .alert(
-            L10n.AddHabitPage.notificationAlertTitle,
-            isPresented: Binding(
-                get: { addHabitViewModel.isNotificationSettingsAlertPresented },
-                set: { isPresented in
-                    if isPresented.not {
-                        addHabitViewModel.dismissNotificationSettingsAlert()
-                    }
-                }
-            )
-        ) {
-            if addHabitViewModel.notificationAlertOpensAppSettings {
-                Button(L10n.AddHabitPage.notificationSettingsButton) {
-                    addHabitViewModel.dismissNotificationSettingsAlert()
-                    openAppSettings()
-                }
-                Button(L10n.Shared.cancelButton, role: .cancel) {
-                    addHabitViewModel.dismissNotificationSettingsAlert()
-                }
-            } else {
-                Button(L10n.Shared.okButton) {
-                    addHabitViewModel.dismissNotificationSettingsAlert()
-                }
-            }
-        } message: {
-            Text(notificationAlertMessage)
-        }
+        .notificationPermissionAlert(
+            isPresented: notificationAlertBinding,
+            opensAppSettings: addHabitViewModel.notificationAlertOpensAppSettings,
+            message: notificationAlertMessage,
+            onDismiss: addHabitViewModel.dismissNotificationSettingsAlert,
+            onOpenAppSettings: openAppSettings
+        )
     }
     
     private var content: some View {
@@ -89,6 +69,17 @@ struct AddHabitView: View {
         )
     }
 
+    private var notificationAlertBinding: Binding<Bool> {
+        Binding(
+            get: { addHabitViewModel.isNotificationSettingsAlertPresented },
+            set: { isPresented in
+                if isPresented.not {
+                    addHabitViewModel.dismissNotificationSettingsAlert()
+                }
+            }
+        )
+    }
+
     private var notificationAlertMessage: String {
         addHabitViewModel.notificationAlertOpensAppSettings
             ? L10n.AddHabitPage.notificationAlertMessage
@@ -96,16 +87,11 @@ struct AddHabitView: View {
     }
 
     private var pageIntro: some View {
-        VStack(alignment: .leading, spacing: Spacing.xSmall) {
-            Text(L10n.AddHabitPage.title)
-                .font(.AppFont.rooneySansBold.size(FontSize.x8Large))
-                .foregroundStyle(.primary)
-
-            Text(L10n.AddHabitPage.introDescription)
-                .font(.AppFont.rooneySansRegular.size(FontSize.x3Large))
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
-        }
+        PageIntroView(
+            title: L10n.AddHabitPage.title,
+            description: L10n.AddHabitPage.introDescription,
+            topPadding: Spacing.none
+        )
     }
 
     private var startButton: some View {

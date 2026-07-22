@@ -66,7 +66,7 @@ struct HabitHistoryListRowView: View {
     }
 
     private var dateBadge: some View {
-        Text(dateText)
+        Text(item.dateText)
             .font(.AppFont.rooneySansBold.size(FontSize.xSmall))
             .textCase(.uppercase)
             .foregroundStyle(themeManager.appPrimary)
@@ -74,16 +74,6 @@ struct HabitHistoryListRowView: View {
             .padding(.vertical, Spacing.x2Small + LineWidth.thin)
             .background(themeManager.appSecondary.opacity(Opacity.iconBackground))
             .clipShape(Capsule())
-    }
-
-    private var dateText: String {
-        let daysUntilStart = Calendar.current.dateComponents([.day], from: .now, to: item.dateCreate).day ?? 0
-
-        if daysUntilStart > LayoutCount.zero, daysUntilStart <= LayoutCount.nearFutureDayLimit {
-            return L10n.HabitHistoryPage.startInDays(daysUntilStart)
-        }
-
-        return item.dateCreate.formatted(.dateTime.month(.abbreviated).day())
     }
 }
 

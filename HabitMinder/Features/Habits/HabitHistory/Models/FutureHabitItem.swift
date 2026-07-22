@@ -13,4 +13,14 @@ struct FutureHabitItem: Identifiable {
     let dateCreate: Date
     let iconName: String
     let commitmentDays: Int
+
+    var dateText: String {
+        let daysUntilStart = Calendar.current.dateComponents([.day], from: .now, to: dateCreate).day ?? 0
+
+        if daysUntilStart > LayoutCount.zero, daysUntilStart <= LayoutCount.nearFutureDayLimit {
+            return L10n.HabitHistoryPage.startInDays(daysUntilStart)
+        }
+
+        return dateCreate.formatted(.dateTime.month(.abbreviated).day())
+    }
 }

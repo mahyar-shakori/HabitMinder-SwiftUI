@@ -188,7 +188,7 @@ struct HabitFormView: View {
                         Spacer()
 
                         Button {
-                            onReminderTimeAdd(formattedReminderTime(reminderTime))
+                            onReminderTimeAdd(HabitReminderTimeFormatter.storageTime(from: reminderTime))
                         } label: {
                             Image(systemName: SystemIconName.plus)
                                 .font(.system(size: FontSize.medium, weight: .semibold))
@@ -276,7 +276,7 @@ struct HabitFormView: View {
 
     private func reminderRow(_ time: String) -> some View {
         HStack(spacing: Spacing.medium) {
-            Text(displayReminderTime(time))
+            Text(HabitReminderTimeFormatter.displayTime(from: time))
                 .font(.AppFont.rooneySansRegular.size(FontSize.x2Large - LineWidth.thin))
                 .foregroundStyle(.primary)
 
@@ -331,35 +331,6 @@ struct HabitFormView: View {
         )
     }
 
-    private func formattedReminderTime(_ date: Date) -> String {
-        let components = Calendar.current.dateComponents([.hour, .minute], from: date)
-        let hour = components.hour ?? 0
-        let minute = components.minute ?? 0
-        let hourText = paddedTimeComponent(hour)
-        let minuteText = paddedTimeComponent(minute)
-        return [hourText, minuteText].joined(separator: HabitFormConstants.DateFormat.separator)
-    }
-
-    private func paddedTimeComponent(_ value: Int) -> String {
-        let valueText = value.description
-        guard value < HabitFormConstants.DateFormat.paddedComponentThreshold else {
-            return valueText
-        }
-
-        return HabitFormConstants.DateFormat.zeroPrefix + valueText
-    }
-
-    private func displayReminderTime(_ time: String) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = HabitFormConstants.DateFormat.storageTime
-
-        guard let date = formatter.date(from: time) else {
-            return time
-        }
-
-        formatter.dateFormat = HabitFormConstants.DateFormat.displayTime
-        return formatter.string(from: date)
-    }
 
     private var selectedDisplayIconName: String {
         selectedIconName.isEmpty ? SystemIconName.checkmark : selectedIconName

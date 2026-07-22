@@ -17,23 +17,17 @@ struct ThemeView: View {
         case .light, .dark:
             return themeManager.preferredColorScheme
         case .system:
-            return currentWindowColorScheme ?? colorScheme
+            return ColorScheme.currentWindow ?? colorScheme
         }
-    }
-
-    private var currentWindowColorScheme: ColorScheme? {
-        UIApplication.shared.connectedScenes
-            .compactMap { $0 as? UIWindowScene }
-            .first { $0.activationState == .foregroundActive }?
-            .traitCollection
-            .userInterfaceStyle
-            .colorScheme
     }
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: Spacing.x5Large) {
-                pageIntro
+                PageIntroView(
+                    title: L10n.SettingPage.appThemeIntroTitle,
+                    description: L10n.SettingPage.appThemeIntroDescription
+                )
                 appearanceSection
                 accentColorSection
             }
@@ -54,22 +48,8 @@ struct ThemeView: View {
         }
     }
 
-    private var pageIntro: some View {
-        VStack(alignment: .leading, spacing: Spacing.xSmall) {
-            Text(L10n.SettingPage.appThemeIntroTitle)
-                .font(.AppFont.rooneySansBold.size(FontSize.x8Large))
-                .foregroundStyle(.primary)
-
-            Text(L10n.SettingPage.appThemeIntroDescription)
-                .font(.AppFont.rooneySansRegular.size(FontSize.x3Large))
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .padding(.top, Spacing.xSmall)
-    }
-
     private var appearanceSection: some View {
-        settingsSection(title: L10n.SettingPage.appearanceSection) {
+        SettingsSection(title: L10n.SettingPage.appearanceSection) {
             VStack(spacing: Spacing.none) {
                 ForEach(AppAppearanceMode.allCases, id: \.self) { mode in
                     appearanceRow(for: mode)
@@ -110,7 +90,7 @@ struct ThemeView: View {
     }
 
     private var accentColorSection: some View {
-        settingsSection(title: L10n.SettingPage.accentColorSection) {
+        SettingsSection(title: L10n.SettingPage.accentColorSection) {
             VStack(spacing: Spacing.none) {
                 colorPickerRow
 
@@ -127,7 +107,7 @@ struct ThemeView: View {
     private var colorPickerRow: some View {
         ColorPicker(selection: $selectedColor, supportsOpacity: false) {
             HStack(spacing: Spacing.large) {
-                rowIcon(SystemIconName.paintpalette)
+                SettingsRowIcon(iconName: SystemIconName.paintpalette)
 
                 VStack(alignment: .leading, spacing: Spacing.x3Small) {
                     Text(L10n.SettingPage.customColor)
@@ -146,76 +126,24 @@ struct ThemeView: View {
     }
 
     private var defaultColorRow: some View {
-        Button {
-            selectedColor = .appPrimary
-            themeManager.resetAppColorToDefault()
-        } label: {
-            HStack(spacing: Spacing.large) {
-                rowIcon(SystemIconName.arrowCounterclockwise)
-
-                VStack(alignment: .leading, spacing: Spacing.x3Small) {
-                    Text(L10n.SettingPage.defaultColor)
-                        .font(.AppFont.rooneySansBold.size(FontSize.x4Large))
-                        .foregroundStyle(.primary)
-
-                    Text(L10n.SettingPage.defaultColorSubtitle)
-                        .font(.AppFont.rooneySansRegular.size(FontSize.medium))
-                        .foregroundStyle(.secondary)
-                }
-
-                Spacer()
-
-                Circle()
-                    .fill(Color.appPrimary)
-                    .frame(width: Size.medium, height: Size.medium)
-            }
-            .padding(.horizontal, Spacing.large)
-            .padding(.vertical, Spacing.large)
-        }
-        .buttonStyle(.plain)
-    }
-
-    private func settingsSection<Content: View>(
-        title: String,
-        @ViewBuilder content: () -> Content
-    ) -> some View {
-        VStack(alignment: .leading, spacing: Spacing.xSmall) {
-            Text(title.uppercased())
-                .font(.AppFont.rooneySansBold.size(FontSize.x3Large))
-                .foregroundStyle(.secondary)
-                .padding(.horizontal, Spacing.large)
-
-            content()
-        }
-    }
-
-    private func rowIcon(_ iconName: String) -> some View {
-        ZStack {
+        SettingsActionRow(
+            iconName: SystemIconName.arrowCounterclockwise,
+            title: L10n.SettingPage.defaultColor,
+            subtitle: L10n.SettingPage.defaultColorSubtitle,
+            action: resetDefaultColor
+        ) {
             Circle()
-                .fill(themeManager.appSecondary.opacity(Opacity.badgeBackground))
-
-            Image(systemName: iconName)
-                .font(.system(size: FontSize.x5Large, weight: .medium))
-                .foregroundStyle(themeManager.appPrimary)
+                .fill(Color.appPrimary)
+                .frame(width: Size.medium, height: Size.medium)
         }
-        .frame(width: Size.x2Large, height: Size.x2Large)
+    }
+
+    private func resetDefaultColor() {
+        selectedColor = .appPrimary
+        themeManager.resetAppColorToDefault()
     }
 }
 
-private extension UIUserInterfaceStyle {
-    var colorScheme: ColorScheme? {
-        switch self {
-        case .light:
-            return .light
-        case .dark:
-            return .dark
-        case .unspecified:
-            return nil
-        @unknown default:
-            return nil
-        }
-    }
-}
 
 #Preview {
     let dependencies = AppDependencies()

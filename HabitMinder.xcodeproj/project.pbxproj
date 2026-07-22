@@ -30,8 +30,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3E10AC0F30109FE70051CCB8 /* HabitMinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitMinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E10AC1030109FE70051CCB8 /* HabitMinder Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HabitMinder Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E10AC0F30109FE70051CCB8 /* HabitMinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = HabitMinder.app; path = "/Users/mahyar/Desktop/HabitMinder SwiftUI/build/Debug-iphoneos/HabitMinder.app"; sourceTree = "<absolute>"; };
+		3E10AC1030109FE70051CCB8 /* HabitMinder Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "HabitMinder Watch App.app"; path = "/Users/mahyar/Desktop/HabitMinder SwiftUI/build/Debug-watchos/HabitMinder Watch App.app"; sourceTree = "<absolute>"; };
 		3E358E8A300D71B600D03AA1 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,14 +79,14 @@
 				Features/Habits/HabitHistory/Models/CompletedHabitItem.swift,
 				Features/Habits/HabitHistory/Models/FutureHabitItem.swift,
 				Features/Habits/HabitHistory/Models/HabitHistoryModel.swift,
-				Features/Habits/HabitHistory/View/Components/HabitHistoryListRowView.swift,
+				Features/Habits/HabitHistory/View/HabitHistoryListRowView.swift,
 				Features/Habits/HabitHistory/View/HabitHistoryView.swift,
 				Features/Habits/HabitHistory/ViewModel/HabitHistoryViewModel.swift,
 				Features/Habits/Home/Coordinator/HomeCoordinating.swift,
 				Features/Habits/Home/Coordinator/HomeCoordinator.swift,
 				Features/Habits/Home/Models/HabitItem.swift,
 				Features/Habits/Home/Models/HabitModel.swift,
-				Features/Habits/Home/View/Components/HabitListRowView.swift,
+				Features/Habits/Home/View/HabitListRowView.swift,
 				Features/Habits/Home/View/HomeView.swift,
 				Features/Habits/Home/ViewModel/HomeViewModel.swift,
 				Features/Intro/Onboarding/Coordinator/IntroCoordinating.swift,
@@ -134,11 +134,23 @@
 				Shared/CustomViews/Button/AppProfileButton.swift,
 				Shared/CustomViews/EmptyView/CustomEmptyView.swift,
 				Shared/CustomViews/HabitForm/HabitFromView.swift,
+				Shared/CustomViews/HabitForm/HabitReminderTimeFormatter.swift,
+				Shared/CustomViews/HabitHistory/HabitHistorySectionHeader.swift,
+				Shared/CustomViews/HabitHistory/HabitJourneyCompletedCard.swift,
 				Shared/CustomViews/Header/AppHeaderView.swift,
+				Shared/CustomViews/Settings/NotificationPermissionAlertModifier.swift,
+				Shared/CustomViews/Settings/PageIntroView.swift,
+				Shared/CustomViews/Settings/ProfilePhotoPickerButton.swift,
+				Shared/CustomViews/Settings/SettingsActionRow.swift,
+				Shared/CustomViews/Settings/SettingsRowIcon.swift,
+				Shared/CustomViews/Settings/SettingsSection.swift,
+				Shared/CustomViews/Settings/SettingsToggleRow.swift,
+				Shared/CustomViews/Toast/ToastLabel.swift,
 				"Shared/Extensions/Foundation/Date+DayCounter.swift",
 				"Shared/Extensions/Foundation/Task+Delay.swift",
 				"Shared/Extensions/Foundation/Types+Helpers.swift",
 				"Shared/Extensions/SwiftUI/Color+RGBA.swift",
+				"Shared/Extensions/SwiftUI/ColorScheme+CurrentWindow.swift",
 				"Shared/Extensions/SwiftUI/Font+AppFont.swift",
 				"Shared/Extensions/SwiftUI/View+DismissKeyboard.swift",
 				"Shared/Extensions/SwiftUI/View+liquidGlass.swift",
@@ -236,8 +248,6 @@
 				3E358E8A300D71B600D03AA1 /* test.swift */,
 				3E626082300D51950001D5C0 /* HabitMinder */,
 				3EA5A51A300FAC2500FF3F20 /* HabitMinderWatchApp */,
-				3E10AC0F30109FE70051CCB8 /* HabitMinder.app */,
-				3E10AC1030109FE70051CCB8 /* HabitMinder Watch App.app */,
 			);
 			sourceTree = "<group>";
 		};

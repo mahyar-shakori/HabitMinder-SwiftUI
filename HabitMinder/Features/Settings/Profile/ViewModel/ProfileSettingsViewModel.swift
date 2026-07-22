@@ -29,6 +29,16 @@ final class ProfileSettingsViewModel {
         loadProfileImage()
     }
 
+    func updateUserName(_ newName: String) -> String? {
+        let trimmedName = newName.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard trimmedName.isNotEmpty else {
+            return nil
+        }
+
+        setUserName(trimmedName)
+        return trimmedName
+    }
+
     func setUserName(_ newName: String) {
         userDefaultsStorage.save(value: newName, for: UserDefaultKeys.userName)
         userName = newName
