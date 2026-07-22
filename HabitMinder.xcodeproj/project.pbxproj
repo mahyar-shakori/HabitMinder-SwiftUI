@@ -183,6 +183,7 @@
 		3E6260D7300D51E00001D5C0 /* Exceptions for "HabitMinder" folder in "HabitMinder Watch App" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				"/Localized: Shared/Resources/Localization/Localizable.strings",
 				Shared/Constants/AppLogger.swift,
 				Shared/Resources/Localization/L10n.swift,
 				Watch/HabitData.swift,
@@ -603,7 +604,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 11.4;
+				WATCHOS_DEPLOYMENT_TARGET = 11;
 			};
 			name = Debug;
 		};
@@ -631,7 +632,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 11.4;
+				WATCHOS_DEPLOYMENT_TARGET = 11;
 			};
 			name = Release;
 		};

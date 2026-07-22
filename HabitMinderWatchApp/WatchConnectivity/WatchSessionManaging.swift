@@ -9,4 +9,5 @@ import Foundation
 
 protocol WatchSessionManaging {
     func configure(with homeViewModel: HomeViewModel)
+    func requestCurrentHabits()
 }

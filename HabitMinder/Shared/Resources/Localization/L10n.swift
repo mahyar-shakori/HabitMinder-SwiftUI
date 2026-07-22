@@ -46,7 +46,6 @@ enum L10n {
     }
 
     enum HomePage {
-        static let title = localized("homeTitle")
         static let tabHabits = localized("homeTabHabits")
         static let tabHistory = localized("homeTabHistory")
         static let tabSettings = localized("homeTabSettings")

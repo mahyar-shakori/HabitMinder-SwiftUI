@@ -17,7 +17,7 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             habitSection
-                .navigationTitle(L10n.HomePage.title)
+                .navigationTitle(L10n.HomePage.listTitle)
         }
     }
     

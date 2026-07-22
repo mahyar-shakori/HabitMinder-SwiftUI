@@ -31,6 +31,8 @@ struct HomeView: View {
             .onReceive(
                 NotificationCenter.default.publisher(for: AppNotification.Habit.added)
                     .merge(with: NotificationCenter.default.publisher(for: AppNotification.Habit.edited))
+                    .merge(with: NotificationCenter.default.publisher(for: AppNotification.Habit.futureAdded))
+                    .merge(with: NotificationCenter.default.publisher(for: AppNotification.Habit.futureStarted))
                     .merge(with: NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification))
             ) { _ in
                 homeViewModel.fetchHabits()
