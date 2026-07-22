@@ -65,9 +65,8 @@ struct HomeView: View {
     private var listHeader: some View {
         VStack(alignment: .leading, spacing: Spacing.x2Small) {
             Text(L10n.HomePage.listTitle.uppercased())
-                .font(.AppFont.rooneySansBold.size(FontSize.small))
-                .foregroundStyle(themeManager.appPrimary)
-                .tracking(1.2)
+                .font(.AppFont.rooneySansBold.size(FontSize.x8Large))
+                .foregroundStyle(.primary)
 
             Text(L10n.HomePage.listSubtitle)
                 .font(.AppFont.rooneySansRegular.size(FontSize.medium))
