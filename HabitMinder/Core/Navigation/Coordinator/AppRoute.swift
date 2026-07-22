@@ -36,6 +36,7 @@ enum ManageHabitRoute: Hashable {
 
 enum SettingsRoute: Hashable {
     case settings
+    case profile
     case notifications
     case appTheme
 }

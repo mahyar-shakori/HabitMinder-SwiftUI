@@ -19,6 +19,10 @@ struct AppDependencies {
         container.resolve(ThemeManager.self)
     }
 
+    var reminderScheduler: HabitReminderScheduling {
+        container.resolve(HabitReminderScheduling.self)
+    }
+
     var mainCoordinator: MainCoordinator {
         container.resolve(MainCoordinator.self)
     }

@@ -10,6 +10,7 @@ import SwiftData
 
 struct RootView: View {
     private let dependencies: AppDependencies
+    @State private var didRequestNotificationAuthorization = false
     @State private var mainCoordinator: MainCoordinator
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject private var themeManager: ThemeManager
@@ -34,7 +35,17 @@ struct RootView: View {
         .preferredColorScheme(themeManager.preferredColorScheme)
         .task {
             mainCoordinator.start()
+            requestNotificationAuthorizationIfNeeded()
         }
+    }
+
+    private func requestNotificationAuthorizationIfNeeded() {
+        guard didRequestNotificationAuthorization.not else {
+            return
+        }
+
+        didRequestNotificationAuthorization = true
+        dependencies.reminderScheduler.requestAuthorization { _ in }
     }
 }
 

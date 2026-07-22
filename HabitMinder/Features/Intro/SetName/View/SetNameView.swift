@@ -85,22 +85,16 @@ struct SetNameView: View {
     }
 
     private var continueButton: some View {
-        Button {
+        AppPrimaryButton(
+            title: L10n.SetNamePage.continueButton,
+            isEnabled: setNameViewModel.isValid,
+            disablesWhenInvalid: false,
+            size: .large
+        ) {
             setNameViewModel.validateAndContinue {
                 setNameViewModel.goToWelcomePage()
             }
-        } label: {
-            Text(L10n.SetNamePage.continueButton)
-                .font(.AppFont.rooneySansBold.size(FontSize.x5Large))
-                .frame(maxWidth: .infinity)
-                .padding(.horizontal, Spacing.xLarge)
-                .padding(.vertical, Spacing.xLarge)
-                .foregroundStyle(.appWhite)
-                .background(setNameViewModel.isValid ? themeManager.appPrimary : themeManager.appSecondary)
-                .clipShape(Capsule())
         }
-        .buttonStyle(.plain)
-        .disabled(setNameViewModel.isValid.not)
         .padding(.horizontal, Spacing.xLarge)
         .padding(.bottom, Spacing.xLarge)
     }

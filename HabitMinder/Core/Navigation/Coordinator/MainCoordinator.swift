@@ -29,7 +29,9 @@ extension MainCoordinator: MainCoordinating {
     }
     
     func pop() {
-        guard path.isNotEmpty else { return }
+        guard path.isNotEmpty else {
+            return
+        }
         path.removeLast()
     }
     

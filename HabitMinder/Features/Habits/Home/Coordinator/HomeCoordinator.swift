@@ -21,16 +21,4 @@ final class HomeCoordinator: HomeCoordinating {
     func goToEditHabit(id: UUID) {
         navigate(.main(.manageHabit(.edit(id: id))))
     }
-   
-    func goToHabitHistory() {
-        navigate(.main(.habits(.history)))
-    }
-    
-    func goToSetting() {
-        navigate(.main(.settings(.settings)))
-    }
-    
-    func goToIntro() {
-        navigate(.intro(.onboarding))
-    }
 }

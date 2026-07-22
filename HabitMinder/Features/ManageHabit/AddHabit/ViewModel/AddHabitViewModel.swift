@@ -92,7 +92,7 @@ final class AddHabitViewModel {
             case .allowed:
                 self.insertReminderTime(time)
             case .notDetermined:
-                self.requestNotificationAuthorization(for: time)
+                self.showNotificationAlert(opensAppSettings: false)
             case .denied:
                 self.showNotificationAlert(opensAppSettings: true)
             }
@@ -117,19 +117,6 @@ final class AddHabitViewModel {
         isSaveButtonEnabled = isValid
     }
 
-    private func requestNotificationAuthorization(for time: String) {
-        reminderScheduler.requestAuthorization { [weak self] isAllowed in
-            guard let self else {
-                return
-            }
-
-            if isAllowed {
-                self.insertReminderTime(time)
-            } else {
-                self.showNotificationAlert(opensAppSettings: true)
-            }
-        }
-    }
 
     private func showNotificationAlert(opensAppSettings: Bool) {
         notificationAlertOpensAppSettings = opensAppSettings

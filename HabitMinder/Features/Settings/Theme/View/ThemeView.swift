@@ -1,5 +1,5 @@
 //
-//  ColorPickerView.swift
+//  ThemeView.swift
 //  HabitMinder SwiftUI
 //
 //  Created by Mahyar on 29/05/2025.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ColorPickerView: View {
+struct ThemeView: View {
     @Environment(\.colorScheme) private var colorScheme
     @EnvironmentObject private var themeManager: ThemeManager
     @State private var selectedColor: Color = .appPrimary
@@ -220,7 +220,7 @@ private extension UIUserInterfaceStyle {
 #Preview {
     let dependencies = AppDependencies()
     NavigationStack {
-        ColorPickerView()
+        ThemeView()
             .environmentObject(dependencies.themeManager)
     }
 }

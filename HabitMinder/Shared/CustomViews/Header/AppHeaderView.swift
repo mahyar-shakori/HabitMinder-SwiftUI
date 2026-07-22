@@ -11,17 +11,20 @@ struct AppHeaderView: View {
     private let title: String
     private let systemImage: String
     private let profileImageStorage: ProfileImageStoring
+    private let onProfileTap: (() -> Void)?
     @AppStorage(UserDefaultKeys.profileImageFileName.rawValue) private var profileImageFileName = ""
     @EnvironmentObject private var themeManager: ThemeManager
 
     init(
         title: String,
         systemImage: String,
-        profileImageStorage: ProfileImageStoring = ProfileImageStorage()
+        profileImageStorage: ProfileImageStoring = ProfileImageStorage(),
+        onProfileTap: (() -> Void)? = nil
     ) {
         self.title = title
         self.systemImage = systemImage
         self.profileImageStorage = profileImageStorage
+        self.onProfileTap = onProfileTap
     }
 
     var body: some View {
@@ -36,11 +39,23 @@ struct AppHeaderView: View {
 
             Spacer()
 
-            profileIcon
+            profileAction
         }
         .padding(.horizontal, Spacing.x4Large)
         .padding(.top, Spacing.medium)
         .padding(.bottom, Spacing.x6Large)
+    }
+
+    private var profileAction: some View {
+        Group {
+            if let onProfileTap {
+                AppProfileButton(action: onProfileTap) {
+                    profileIcon
+                }
+            } else {
+                profileIcon
+            }
+        }
     }
 
     private var profileIcon: some View {

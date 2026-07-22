@@ -17,57 +17,66 @@ struct HabitListRowView: View {
     }
 
     var body: some View {
-        rowBackground
-    }
-
-    @ViewBuilder
-    private var rowBackground: some View {
-        if #available(iOS 26.0, *) {
-            content
-                .padding(Spacing.x2Large)
-                .glassEffect(.regular, in: .rect(cornerRadius: CornerRadius.x3Large))
-        } else {
-            content
-                .padding(Spacing.x2Large)
-                .background(.appWhite)
-                .clipShape(RoundedRectangle(cornerRadius: CornerRadius.x3Large))
-        }
+        content
+            .padding(Spacing.x2Large)
+            .liquidGlass(
+                in: .rect(cornerRadius: CornerRadius.x3Large),
+                interactive: false,
+                fallback: .appWhite
+            )
     }
 
     private var content: some View {
         VStack(alignment: .leading, spacing: Spacing.x4Large) {
-            HStack(alignment: .center, spacing: Spacing.large) {
-                habitIcon
-
-                Text(item.title)
-                    .font(.AppFont.rooneySansBold.size(FontSize.x4Large))
-                    .foregroundStyle(.primary)
-                    .lineLimit(1)
-
-                Spacer(minLength: Spacing.medium)
-
-                streakLabel
-            }
-
-            VStack(alignment: .leading, spacing: Spacing.small) {
-                HStack {
-                    Text(L10n.Cell.Habit.journey(item.commitmentDays))
-                        .font(.AppFont.rooneySansBold.size(FontSize.xLarge))
-                        .textCase(.uppercase)
-                        .foregroundStyle(.secondary)
-
-                    Spacer()
-
-                    Text(L10n.Cell.Habit.progressDay(completed: completedDays, total: item.commitmentDays))
-                        .font(.AppFont.rooneySansBold.size(FontSize.xLarge))
-                        .foregroundStyle(themeManager.appPrimary)
-                }
-
-                ProgressView(value: min(max(item.progress, 0), 1))
-                    .tint(themeManager.appPrimary)
-                    .scaleEffect(x: Scale.normal, y: Scale.emphasizedProgress, anchor: .center)
-            }
+            habitSummaryRow
+            habitProgressSection
         }
+    }
+
+    private var habitSummaryRow: some View {
+        HStack(alignment: .center, spacing: Spacing.large) {
+            habitIcon
+            habitTitle
+
+            Spacer(minLength: Spacing.medium)
+
+            streakLabel
+        }
+    }
+
+    private var habitTitle: some View {
+        Text(item.title)
+            .font(.AppFont.rooneySansBold.size(FontSize.x4Large))
+            .foregroundStyle(.primary)
+            .lineLimit(1)
+    }
+
+    private var habitProgressSection: some View {
+        VStack(alignment: .leading, spacing: Spacing.small) {
+            progressHeader
+            progressBar
+        }
+    }
+
+    private var progressHeader: some View {
+        HStack {
+            Text(L10n.Cell.Habit.journey(item.commitmentDays))
+                .font(.AppFont.rooneySansBold.size(FontSize.xLarge))
+                .textCase(.uppercase)
+                .foregroundStyle(.secondary)
+
+            Spacer()
+
+            Text(L10n.Cell.Habit.progressDay(completed: completedDays, total: item.commitmentDays))
+                .font(.AppFont.rooneySansBold.size(FontSize.xLarge))
+                .foregroundStyle(themeManager.appPrimary)
+        }
+    }
+
+    private var progressBar: some View {
+        ProgressView(value: min(max(item.progress, 0), 1))
+            .tint(themeManager.appPrimary)
+            .scaleEffect(x: Scale.normal, y: Scale.emphasizedProgress, anchor: .center)
     }
 
     private var habitIcon: some View {

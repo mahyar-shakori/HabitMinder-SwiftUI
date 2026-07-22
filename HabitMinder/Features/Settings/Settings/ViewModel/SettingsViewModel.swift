@@ -8,68 +8,24 @@
 import Foundation
 import Observation
 
-@MainActor
-protocol LogoutUseCasing {
-    func logout()
-}
-
-@MainActor
-final class LogoutUseCase: LogoutUseCasing {
-    private let dataManager: DataManaging
-    private let reminderScheduler: HabitReminderScheduling
-    private let userDefaultsStorage: UserDefaultsStoring
-    private let themeManager: ThemeManaging
-    private let profileImageStorage: ProfileImageStoring
-
-    init(
-        dataManager: DataManaging,
-        reminderScheduler: HabitReminderScheduling,
-        userDefaultsStorage: UserDefaultsStoring,
-        themeManager: ThemeManaging,
-        profileImageStorage: ProfileImageStoring
-    ) {
-        self.dataManager = dataManager
-        self.reminderScheduler = reminderScheduler
-        self.userDefaultsStorage = userDefaultsStorage
-        self.themeManager = themeManager
-        self.profileImageStorage = profileImageStorage
-    }
-
-    func logout() {
-        reminderScheduler.cancelAllNotifications()
-
-        dataManager.deleteAll(HabitModel.self)
-        dataManager.deleteAll(HabitHistoryModel.self)
-
-        profileImageStorage.deleteAllProfileImages()
-        userDefaultsStorage.removeAllAppValues()
-        themeManager.resetToDefault()
-    }
-}
-
 @Observable
 @MainActor
-final class SettingViewModel {
+final class SettingsViewModel {
     private(set) var userName = ""
     private(set) var profileImageData: Data?
     private(set) var memberSinceText = ""
 
-    private let coordinator: SettingCoordinating
+    private let coordinator: SettingsCoordinating
     private let userDefaultsStorage: UserDefaultsStoring
     private let profileImageStorage: ProfileImageStoring
     private let logoutUseCase: LogoutUseCasing
 
     var appVersion: String {
-        guard let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
-              version.isNotEmpty else {
-            return "-"
-        }
-
-        return version
+        AppInfo.version
     }
 
     init(
-        coordinator: SettingCoordinating,
+        coordinator: SettingsCoordinating,
         userDefaultsStorage: UserDefaultsStoring,
         profileImageStorage: ProfileImageStoring,
         logoutUseCase: LogoutUseCasing
@@ -117,6 +73,10 @@ final class SettingViewModel {
             AppLogger.data.error("Failed to save profile image: \(error.localizedDescription)")
 #endif
         }
+    }
+
+    func showProfileSettings() {
+        coordinator.goToProfileSettings()
     }
 
     func showNotificationSettings() {

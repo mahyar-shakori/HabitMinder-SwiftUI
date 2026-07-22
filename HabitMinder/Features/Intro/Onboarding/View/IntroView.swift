@@ -84,18 +84,12 @@ struct IntroView: View {
     }
     
     private var nextButton: some View {
-        Button {
-            introViewModel.nextState()
-        } label: {
-            Text(L10n.IntroPage.nextButton)
-                .font(.AppFont.rooneySansBold.size(FontSize.x4Large))
-                .foregroundStyle(.appWhite)
-                .padding(.horizontal, Spacing.xLarge)
-                .padding(.vertical, Spacing.xSmall)
-                .background(themeManager.appPrimary)
-                .clipShape(Capsule())
-        }
-        .buttonStyle(.plain)
+        AppPrimaryButton(
+            title: L10n.IntroPage.nextButton,
+            fillsWidth: false,
+            size: .large,
+            action: introViewModel.nextState
+        )
         .padding(.horizontal, Spacing.xSmall)
     }
     

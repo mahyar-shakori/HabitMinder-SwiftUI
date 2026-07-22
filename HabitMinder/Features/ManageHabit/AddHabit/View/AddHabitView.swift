@@ -24,28 +24,7 @@ struct AddHabitView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: Spacing.x5Large) {
                     pageIntro
-
-                    HabitFormView(
-                        habitTitle: $tempHabitTitle,
-                        reminderTime: $newReminderTime,
-                        selectedIconName: addHabitViewModel.selectedIconName,
-                        selectedFrequency: addHabitViewModel.selectedFrequency,
-                        selectedCustomWeekdays: addHabitViewModel.selectedCustomWeekdays,
-                        commitmentDays: addHabitViewModel.commitmentDays,
-                        reminderTimes: addHabitViewModel.reminderTimes,
-                        showsFutureHabitToggle: true,
-                        isFutureHabit: addHabitViewModel.isFutureHabit,
-                        focus: $isFocused,
-                        onHabitTitleChange: addHabitViewModel.setHabitTitle,
-                        onIconSelect: addHabitViewModel.setSelectedIconName,
-                        onFrequencySelect: addHabitViewModel.setSelectedFrequency,
-                        onCustomWeekdayToggle: addHabitViewModel.toggleCustomWeekday,
-                        onCommitmentDaysIncrement: addHabitViewModel.incrementCommitmentDays,
-                        onCommitmentDaysDecrement: addHabitViewModel.decrementCommitmentDays,
-                        onReminderTimeAdd: addHabitViewModel.addReminderTime,
-                        onReminderTimeRemove: addHabitViewModel.removeReminderTime,
-                        onFutureHabitChange: addHabitViewModel.setIsFutureHabit
-                    )
+                    content
                 }
                 .padding(.horizontal, Spacing.x3Large)
                 .padding(.top, Spacing.x3Large)
@@ -85,6 +64,30 @@ struct AddHabitView: View {
             Text(notificationAlertMessage)
         }
     }
+    
+    private var content: some View {
+        HabitFormView(
+            habitTitle: $tempHabitTitle,
+            reminderTime: $newReminderTime,
+            selectedIconName: addHabitViewModel.selectedIconName,
+            selectedFrequency: addHabitViewModel.selectedFrequency,
+            selectedCustomWeekdays: addHabitViewModel.selectedCustomWeekdays,
+            commitmentDays: addHabitViewModel.commitmentDays,
+            reminderTimes: addHabitViewModel.reminderTimes,
+            showsFutureHabitToggle: true,
+            isFutureHabit: addHabitViewModel.isFutureHabit,
+            focus: $isFocused,
+            onHabitTitleChange: addHabitViewModel.setHabitTitle,
+            onIconSelect: addHabitViewModel.setSelectedIconName,
+            onFrequencySelect: addHabitViewModel.setSelectedFrequency,
+            onCustomWeekdayToggle: addHabitViewModel.toggleCustomWeekday,
+            onCommitmentDaysIncrement: addHabitViewModel.incrementCommitmentDays,
+            onCommitmentDaysDecrement: addHabitViewModel.decrementCommitmentDays,
+            onReminderTimeAdd: addHabitViewModel.addReminderTime,
+            onReminderTimeRemove: addHabitViewModel.removeReminderTime,
+            onFutureHabitChange: addHabitViewModel.setIsFutureHabit
+        )
+    }
 
     private var notificationAlertMessage: String {
         addHabitViewModel.notificationAlertOpensAppSettings
@@ -106,18 +109,13 @@ struct AddHabitView: View {
     }
 
     private var startButton: some View {
-        Button {
-            addHabitViewModel.saveAndDismiss()
-        } label: {
-            Label(L10n.AddHabitPage.startJourneyButton, systemImage: SystemIconName.sparkles)
-                .font(.AppFont.rooneySansBold.size(FontSize.x3Large))
-                .frame(maxWidth: .infinity)
-        }
-        .buttonStyle(.borderedProminent)
-        .controlSize(.large)
-        .buttonBorderShape(.capsule)
-        .tint(addHabitViewModel.isSaveButtonEnabled ? themeManager.appPrimary : themeManager.appSecondary)
-        .disabled(addHabitViewModel.isSaveButtonEnabled.not)
+        AppPrimaryButton(
+            title: L10n.AddHabitPage.startJourneyButton,
+            systemImage: SystemIconName.sparkles,
+            isEnabled: addHabitViewModel.isSaveButtonEnabled,
+            size: .large,
+            action: addHabitViewModel.saveAndDismiss
+        )
         .padding(.horizontal, Spacing.x3Large)
         .padding(.bottom, Spacing.x5Large)
     }

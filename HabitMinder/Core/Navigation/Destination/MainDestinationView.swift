@@ -16,6 +16,14 @@ struct MainDestinationView: View {
 
     var body: some View {
         switch route {
+        case .habits(.home(let quote, let author)):
+            MainTabView(
+                quote: quote,
+                author: author,
+                dependencies: dependencies,
+                coordinator: coordinator,
+                modelContext: modelContext
+            )
         case .habits(let habitRoute):
             HabitDestinationView(
                 route: habitRoute,

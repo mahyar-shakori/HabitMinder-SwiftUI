@@ -47,7 +47,6 @@ struct NotificationSettingsView: View {
         }
     }
 
-
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: Spacing.x5Large) {
@@ -135,7 +134,6 @@ struct NotificationSettingsView: View {
                 .sectionDescriptionStyle()
         }
     }
-
 
     private func settingsSection<Content: View>(
         title: String,

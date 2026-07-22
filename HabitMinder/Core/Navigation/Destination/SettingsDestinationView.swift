@@ -18,7 +18,7 @@ struct SettingsDestinationView: View {
         switch route {
         case .settings:
             let dataManager = DataManager(context: modelContext)
-            let viewCoordinator = SettingCoordinator(
+            let viewCoordinator = SettingsCoordinator(
                 dismiss: coordinator.pop,
                 navigateToSettingsRoute: { coordinator.navigate(to: .main(.settings($0))) },
                 resetToSetName: { coordinator.reset(to: .intro(.setName)) }
@@ -30,13 +30,19 @@ struct SettingsDestinationView: View {
                 themeManager: dependencies.themeManager,
                 profileImageStorage: dependencies.profileImageStorage
             )
-            let viewModel = SettingViewModel(
+            let viewModel = SettingsViewModel(
                 coordinator: viewCoordinator,
                 userDefaultsStorage: dependencies.userDefaultsStorage,
                 profileImageStorage: dependencies.profileImageStorage,
                 logoutUseCase: logoutUseCase
             )
-            SettingView(settingViewModel: viewModel)
+            SettingsView(settingsViewModel: viewModel)
+        case .profile:
+            let viewModel = ProfileSettingsViewModel(
+                userDefaultsStorage: dependencies.userDefaultsStorage,
+                profileImageStorage: dependencies.profileImageStorage
+            )
+            ProfileSettingsView(viewModel: viewModel)
         case .notifications:
             let viewModel = NotificationSettingsViewModel(
                 dataManager: DataManager(context: modelContext),
@@ -45,7 +51,7 @@ struct SettingsDestinationView: View {
             )
             NotificationSettingsView(viewModel: viewModel)
         case .appTheme:
-            ColorPickerView()
+            ThemeView()
         }
     }
 }

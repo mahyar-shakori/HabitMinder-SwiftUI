@@ -9,34 +9,21 @@ import SwiftUI
 
 struct HomeView: View {
     private var homeViewModel: HomeViewModel
-    private let reminderScheduler: HabitReminderScheduling
-    private let userDefaultsStorage: UserDefaultsStoring
-    private let navigateToSettingsRoute: (SettingsRoute) -> Void
-    private let resetToSetName: () -> Void
-    @Environment(\.modelContext) private var modelContext
+    private let navigateToProfileSettings: () -> Void
     @EnvironmentObject private var themeManager: ThemeManager
     @AppStorage(UserDefaultKeys.dailyQuotes.rawValue) private var dailyQuotes = true
     @State private var showDeleteAlert = false
-    @State private var selectedTab = HomeTab.habits
-    @State private var habitHistoryViewModel: HabitHistoryViewModel?
-    @State private var settingViewModel: SettingViewModel?
 
     init(
         homeViewModel: HomeViewModel,
-        reminderScheduler: HabitReminderScheduling,
-        userDefaultsStorage: UserDefaultsStoring,
-        navigateToSettingsRoute: @escaping (SettingsRoute) -> Void,
-        resetToSetName: @escaping () -> Void
+        navigateToProfileSettings: @escaping () -> Void
     ) {
         self.homeViewModel = homeViewModel
-        self.reminderScheduler = reminderScheduler
-        self.userDefaultsStorage = userDefaultsStorage
-        self.navigateToSettingsRoute = navigateToSettingsRoute
-        self.resetToSetName = resetToSetName
+        self.navigateToProfileSettings = navigateToProfileSettings
     }
    
     var body: some View {
-        tabContent
+        content
             .navigationBarBackButtonHidden(true)
             .onChange(of: homeViewModel.itemToDelete) { _, id in
                 showDeleteAlert = (id != nil)
@@ -48,104 +35,12 @@ struct HomeView: View {
             ) { _ in
                 homeViewModel.fetchHabits()
             }
-            .onReceive(NotificationCenter.default.publisher(for: AppNotification.Habit.futureAdded)) { _ in
-                selectedTab = .history
-            }
-            .onReceive(NotificationCenter.default.publisher(for: AppNotification.Habit.futureStarted)) { _ in
-                homeViewModel.fetchHabits()
-                selectedTab = .habits
-            }
-            .onAppear {
-                prepareTabViewModelsIfNeeded()
-            }
             .alert(L10n.Alert.Habit.deleteTitle, isPresented: $showDeleteAlert) {
                 Button(L10n.Shared.yesButton, role: .destructive) { homeViewModel.performDelete() }
                 Button(L10n.Shared.cancelButton, role: .cancel) { homeViewModel.cancelDelete() }
             } message: {
                 Text(homeViewModel.deleteConfirmationMessage)
             }
-    }
-
-    private var tabContent: some View {
-        TabView(selection: $selectedTab) {
-            content
-                .tabItem {
-                    Label(L10n.HomePage.tabHabits, systemImage: SystemIconName.calendar)
-                }
-                .tag(HomeTab.habits)
-
-            habitHistoryView
-                .tabItem {
-                    Label(L10n.HomePage.tabHistory, systemImage: SystemIconName.wandAndStars)
-                }
-                .tag(HomeTab.history)
-
-            settingsView
-                .tabItem {
-                    Label(L10n.HomePage.tabSettings, systemImage: SystemIconName.gearshape)
-                }
-                .tag(HomeTab.settings)
-        }
-        .tint(themeManager.appPrimary)
-    }
-    
-    private var habitHistoryView: some View {
-        Group {
-            if let habitHistoryViewModel {
-                HabitHistoryView(habitHistoryViewModel: habitHistoryViewModel)
-                    .environmentObject(themeManager)
-            }
-        }
-    }
-
-    private var settingsView: some View {
-        Group {
-            if let settingViewModel {
-                SettingView(settingViewModel: settingViewModel)
-                    .environmentObject(themeManager)
-            }
-        }
-    }
-
-    private func prepareTabViewModelsIfNeeded() {
-        guard habitHistoryViewModel == nil || settingViewModel == nil else {
-            return
-        }
-
-        let dataManager = DataManager(context: modelContext)
-        let habitHistoryCoordinator = HabitHistoryCoordinator {
-            selectedTab = .habits
-        }
-        let settingCoordinator = SettingCoordinator(
-            dismiss: { selectedTab = .habits },
-            navigateToSettingsRoute: navigateToSettingsRoute,
-            resetToSetName: resetToSetName
-        )
-
-        if habitHistoryViewModel == nil {
-            habitHistoryViewModel = HabitHistoryViewModel(
-                dataManager: dataManager,
-                coordinator: habitHistoryCoordinator,
-                reminderScheduler: reminderScheduler
-            )
-        }
-
-        if settingViewModel == nil {
-            let profileImageStorage = ProfileImageStorage()
-            let logoutUseCase = LogoutUseCase(
-                dataManager: dataManager,
-                reminderScheduler: reminderScheduler,
-                userDefaultsStorage: userDefaultsStorage,
-                themeManager: themeManager,
-                profileImageStorage: profileImageStorage
-            )
-            settingViewModel = SettingViewModel(
-                coordinator: settingCoordinator,
-                userDefaultsStorage: userDefaultsStorage,
-                profileImageStorage: profileImageStorage,
-                logoutUseCase: logoutUseCase
-            )
-        }
     }
 
     private var content: some View {
@@ -160,7 +55,8 @@ struct HomeView: View {
     private var pageHeader: some View {
         AppHeaderView(
             title: L10n.HomePage.headerTitle,
-            systemImage: SystemIconName.leaf
+            systemImage: SystemIconName.leaf,
+            onProfileTap: navigateToProfileSettings
         )
     }
 
@@ -225,7 +121,11 @@ struct HomeView: View {
                 .font(.system(size: Size.buttonIcon, weight: .medium))
                 .foregroundStyle(.appWhite)
                 .frame(width: Size.x4Large, height: Size.x4Large)
-                .circleBackground(themeManager.appPrimary)
+                .liquidGlass(
+                    tint: themeManager.appPrimary,
+                    in: Circle(),
+                    fallback: themeManager.appPrimary
+                )
         }
         .buttonStyle(.plain)
         .padding(.trailing, Spacing.x3Large)
@@ -234,7 +134,7 @@ struct HomeView: View {
 
     private var quoteCard: some View {
         VStack(alignment: .leading, spacing: Spacing.small) {
-            Label(L10n.HomePage.quoteLabel, systemImage: SystemIconName.quoteBubble)
+            Image(systemName: SystemIconName.quoteBubble)
                 .font(.AppFont.rooneySansBold.size(FontSize.small))
                 .foregroundStyle(themeManager.appPrimary)
 
@@ -265,20 +165,6 @@ struct HomeView: View {
         .homeListRowStyle()
     }
 
-    private func tabPlaceholder(systemImage: String, title: String) -> some View {
-        VStack(spacing: Spacing.medium) {
-            Image(systemName: systemImage)
-                .font(.system(size: Size.xLarge, weight: .semibold))
-                .foregroundStyle(themeManager.appPrimary)
-
-            Text(title)
-                .font(.AppFont.rooneySansBold.size(FontSize.x5Large))
-                .foregroundStyle(.primary)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.appGray)
-    }
-
     private func deleteSwipeButton(for id: UUID) -> some View {
         Button {
             homeViewModel.confirmDelete(id: id)
@@ -297,13 +183,6 @@ struct HomeView: View {
         .tint(.blue)
     }
 }
-
-private enum HomeTab {
-    case habits
-    case history
-    case settings
-}
-
 
 private extension View {
     func homeListRowStyle() -> some View {
@@ -327,7 +206,6 @@ private extension View {
     let habitDependencies = dependencies.destinationDependencies.main.habits
     let fakeCoordinator = HomeCoordinator(navigate: { _ in
     })
-    let reminderScheduler = habitDependencies.reminderScheduler
     let viewModel = HomeViewModel(
         quote: "test",
         author: "test",
@@ -335,14 +213,11 @@ private extension View {
         coordinator: fakeCoordinator,
         connectivityService: habitDependencies.connectivityService,
         userDefaultsStorage: habitDependencies.userDefaultsStorage,
-        reminderScheduler: reminderScheduler
+        reminderScheduler: habitDependencies.reminderScheduler
     )
     HomeView(
         homeViewModel: viewModel,
-        reminderScheduler: reminderScheduler,
-        userDefaultsStorage: habitDependencies.userDefaultsStorage,
-        navigateToSettingsRoute: { _ in },
-        resetToSetName: {}
+        navigateToProfileSettings: {}
     )
     .environmentObject(dependencies.themeManager)
 }

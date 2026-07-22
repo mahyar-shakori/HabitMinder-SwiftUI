@@ -38,6 +38,7 @@
 "chooseColor" = "Choose Color";
 "pickColor" = "Pick a color";
 "defaultColor" = "Default Color";
+"profile" = "Profile";
 "editUserName" = "Edit Name";
 "enterNewUserName" = "Enter new name";
 "profilePhoto" = "Profile Photo";
@@ -99,7 +100,6 @@
 "homeHeaderTitle" = "Rituals";
 "homeListTitle" = "Daily Habits";
 "homeListSubtitle" = "Focus on your ritual for today";
-"homeQuoteLabel" = "QUOTE";
 "homeQuoteFormat" = "\"%@\"";
 "homeDefaultAuthor" = "Edward Corey";
 "homeAuthorFormat" = "- %@";

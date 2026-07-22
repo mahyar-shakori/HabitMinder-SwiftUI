@@ -1,5 +1,5 @@
 //
-//  SettingView.swift
+//  SettingsView.swift
 //  HabitMinder SwiftUI
 //
 //  Created by Mahyar on 29/05/2025.
@@ -9,17 +9,16 @@ import PhotosUI
 import StoreKit
 import SwiftUI
 
-struct SettingView: View {
-    private var settingViewModel: SettingViewModel
+struct SettingsView: View {
+    private var settingsViewModel: SettingsViewModel
     @Environment(\.requestReview) private var requestReview
     @EnvironmentObject private var themeManager: ThemeManager
-    @State private var isEditingUserName = false
+    @State private var showLogoutAlert = false
     @State private var isShowingPhotoPicker = false
     @State private var selectedProfilePhoto: PhotosPickerItem?
-    @State private var showLogoutAlert = false
 
-    init(settingViewModel: SettingViewModel) {
-        self.settingViewModel = settingViewModel
+    init(settingsViewModel: SettingsViewModel) {
+        self.settingsViewModel = settingsViewModel
     }
 
     var body: some View {
@@ -39,9 +38,9 @@ struct SettingView: View {
         .background(.appGray)
         .navigationBarBackButtonHidden(true)
         .onAppear {
-            settingViewModel.loadUserName()
-            settingViewModel.loadProfileImage()
-            settingViewModel.loadMemberSince()
+            settingsViewModel.loadUserName()
+            settingsViewModel.loadProfileImage()
+            settingsViewModel.loadMemberSince()
         }
         .onChange(of: selectedProfilePhoto) { _, newItem in
             loadProfilePhoto(from: newItem)
@@ -53,7 +52,7 @@ struct SettingView: View {
         )
         .alert(L10n.Alert.Logout.title, isPresented: $showLogoutAlert) {
             Button(L10n.Shared.yesButton, role: .destructive) {
-                settingViewModel.logout()
+                settingsViewModel.logout()
             }
             Button(L10n.Shared.cancelButton, role: .cancel) {
             }
@@ -65,46 +64,51 @@ struct SettingView: View {
     private var pageHeader: some View {
         AppHeaderView(
             title: L10n.HabitHistoryPage.headerTitle,
-            systemImage: SystemIconName.leaf
+            systemImage: SystemIconName.leaf,
+            onProfileTap: { settingsViewModel.showProfileSettings() }
         )
     }
 
     private var profileHero: some View {
         VStack(spacing: Spacing.small) {
-            Button {
-                isShowingPhotoPicker = true
-            } label: {
-                ZStack(alignment: .bottomTrailing) {
-                    largeProfileImage
+            profilePhotoButton
 
-                    Image(systemName: SystemIconName.pencil)
-                        .font(.system(size: FontSize.large, weight: .bold))
-                        .foregroundStyle(.appWhite)
-                        .frame(width: Size.large, height: Size.large)
-                        .circleBackground(themeManager.appPrimary)
-                }
-            }
-            .buttonStyle(.plain)
+            Text(settingsViewModel.userName)
+                .font(.AppFont.rooneySansBold.size(FontSize.x8Large))
+                .foregroundStyle(.primary)
 
-            Button {
-                isEditingUserName = true
-            } label: {
-                Text(settingViewModel.userName)
-                    .font(.AppFont.rooneySansBold.size(FontSize.x8Large))
-                    .foregroundStyle(.primary)
-            }
-            .buttonStyle(.plain)
-
-            Text(settingViewModel.memberSinceText)
+            Text(settingsViewModel.memberSinceText)
                 .font(.AppFont.rooneySansRegular.size(FontSize.xLarge))
                 .foregroundStyle(.secondary)
         }
         .padding(.top, Spacing.small)
     }
 
+    private var profilePhotoButton: some View {
+        Button {
+            isShowingPhotoPicker = true
+        } label: {
+            ZStack(alignment: .bottomTrailing) {
+                largeProfileImage
+
+                Image(systemName: SystemIconName.pencil)
+                    .font(.system(size: FontSize.small, weight: .bold))
+                    .foregroundStyle(.appWhite)
+                    .frame(width: Size.large, height: Size.large)
+                    .liquidGlass(
+                        tint: themeManager.appPrimary,
+                        in: Circle(),
+                        fallback: themeManager.appPrimary
+                    )
+                    .offset(x: Spacing.x2Small, y: Spacing.x2Small)
+            }
+        }
+        .buttonStyle(.plain)
+    }
+
     private var largeProfileImage: some View {
         Group {
-            if let data = settingViewModel.profileImageData,
+            if let data = settingsViewModel.profileImageData,
                let uiImage = UIImage(data: data) {
                 Image(uiImage: uiImage)
                     .resizable()
@@ -119,7 +123,7 @@ struct SettingView: View {
                     .background(themeManager.appSecondary.opacity(Opacity.subtle))
             }
         }
-        .frame(width: Size.emptyImage - Spacing.x8Large, height: Size.emptyImage - Spacing.x8Large)
+        .frame(width: Size.x6Large, height: Size.x6Large)
         .clipShape(Circle())
         .overlay {
             Circle()
@@ -129,6 +133,17 @@ struct SettingView: View {
 
     private var settingsContent: some View {
         VStack(alignment: .leading, spacing: Spacing.x5Large) {
+            settingsSection(title: L10n.SettingPage.profile) {
+                settingsRow(
+                    iconName: SystemIconName.profile,
+                    title: L10n.SettingPage.profile,
+                    subtitle: settingsViewModel.userName,
+                    showsChevron: true
+                ) {
+                    settingsViewModel.showProfileSettings()
+                }
+            }
+
             settingsSection(title: L10n.SettingPage.preferences) {
                 settingsRow(
                     iconName: SystemIconName.bell,
@@ -136,7 +151,7 @@ struct SettingView: View {
                     subtitle: L10n.SettingPage.notificationsSubtitle,
                     showsChevron: true
                 ) {
-                    settingViewModel.showNotificationSettings()
+                    settingsViewModel.showNotificationSettings()
                 }
 
                 settingsRow(
@@ -145,7 +160,7 @@ struct SettingView: View {
                     subtitle: L10n.SettingPage.appThemeSubtitle,
                     showsChevron: true
                 ) {
-                    settingViewModel.showAppTheme()
+                    settingsViewModel.showAppTheme()
                 }
             }
 
@@ -171,6 +186,7 @@ struct SettingView: View {
             }
         }
     }
+
 
     private func settingsSection<Content: View>(
         title: String,
@@ -251,19 +267,6 @@ struct SettingView: View {
         .clipShape(RoundedRectangle(cornerRadius: CornerRadius.medium))
     }
 
-    private var versionFooter: some View {
-        VStack(spacing: Spacing.x2Small) {
-            Text(L10n.SettingPage.appVersion(settingViewModel.appVersion))
-                .font(.AppFont.rooneySansRegular.size(FontSize.small))
-                .foregroundStyle(.secondary)
-
-            Text(L10n.SettingPage.versionTagline)
-                .font(.AppFont.rooneySansBold.size(FontSize.xSmall))
-                .foregroundStyle(.secondary.opacity(Opacity.sectionTitle))
-        }
-        .padding(.top, Spacing.medium)
-    }
-
     private func loadProfilePhoto(from item: PhotosPickerItem?) {
         guard let item else {
             return
@@ -275,10 +278,24 @@ struct SettingView: View {
             }
 
             await MainActor.run {
-                settingViewModel.setProfileImage(data: data)
+                settingsViewModel.setProfileImage(data: data)
             }
         }
     }
+
+    private var versionFooter: some View {
+        VStack(spacing: Spacing.x2Small) {
+            Text(L10n.SettingPage.appVersion(settingsViewModel.appVersion))
+                .font(.AppFont.rooneySansRegular.size(FontSize.small))
+                .foregroundStyle(.secondary)
+
+            Text(L10n.SettingPage.versionTagline)
+                .font(.AppFont.rooneySansBold.size(FontSize.xSmall))
+                .foregroundStyle(.secondary.opacity(Opacity.sectionTitle))
+        }
+        .padding(.top, Spacing.medium)
+    }
+
 }
 
 #Preview {
@@ -286,7 +303,7 @@ struct SettingView: View {
 
     let dependencies = AppDependencies()
     let settingsDependencies = dependencies.destinationDependencies.main.settings
-    let fakeCoordinator = SettingCoordinator(dismiss: {
+    let fakeCoordinator = SettingsCoordinator(dismiss: {
     }, navigateToSettingsRoute: { _ in
     }, resetToSetName: {
     })
@@ -298,12 +315,12 @@ struct SettingView: View {
         themeManager: settingsDependencies.themeManager,
         profileImageStorage: settingsDependencies.profileImageStorage
     )
-    let viewModel = SettingViewModel(
+    let viewModel = SettingsViewModel(
         coordinator: fakeCoordinator,
         userDefaultsStorage: settingsDependencies.userDefaultsStorage,
         profileImageStorage: settingsDependencies.profileImageStorage,
         logoutUseCase: logoutUseCase
     )
-    SettingView(settingViewModel: viewModel)
+    SettingsView(settingsViewModel: viewModel)
     .environmentObject(dependencies.themeManager)
 }

@@ -23,34 +23,34 @@ struct HabitHistoryListRowView: View {
 
     var body: some View {
         VStack(spacing: Spacing.large) {
-            HStack(alignment: .center, spacing: Spacing.large) {
-                habitIcon
-
-                Text(item.title)
-                    .font(.AppFont.rooneySansBold.size(FontSize.x3Large))
-                    .foregroundStyle(.primary)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-
-                dateBadge
-            }
-
-            Button {
-                onStart()
-            } label: {
-                Text(L10n.HabitHistoryPage.startNowButton)
-                    .font(.AppFont.rooneySansBold.size(FontSize.medium))
-                    .frame(maxWidth: .infinity)
-                    .padding(.horizontal, Spacing.large)
-                    .padding(.vertical, Spacing.xSmall + LineWidth.thin)
-                    .foregroundStyle(.appWhite)
-                    .background(themeManager.appPrimary)
-                    .clipShape(Capsule())
-            }
-            .buttonStyle(.plain)
+            
+            habitSummaryRow
+            startOverButton
         }
         .padding(Spacing.xLarge)
         .background(.appWhite)
         .clipShape(RoundedRectangle(cornerRadius: CornerRadius.large))
+    }
+    
+    private var habitSummaryRow: some View {
+        HStack(alignment: .center, spacing: Spacing.large) {
+            habitIcon
+
+            Text(item.title)
+                .font(.AppFont.rooneySansBold.size(FontSize.x3Large))
+                .foregroundStyle(.primary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+            dateBadge
+        }
+    }
+    
+    private var startOverButton: some View {
+        AppPrimaryButton(
+            title: L10n.HabitHistoryPage.startNowButton,
+            size: .regular,
+            action: onStart
+        )
     }
 
     private var habitIcon: some View {
@@ -85,7 +85,6 @@ struct HabitHistoryListRowView: View {
 
         return item.dateCreate.formatted(.dateTime.month(.abbreviated).day())
     }
-
 }
 
 

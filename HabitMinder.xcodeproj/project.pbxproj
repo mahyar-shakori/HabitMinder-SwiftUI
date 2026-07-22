@@ -30,8 +30,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3E10A844300FC7BC0051CCB8 /* HabitMinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = HabitMinder.app; path = "/Users/mahyar/Desktop/HabitMinder SwiftUI/build/Debug-iphoneos/HabitMinder.app"; sourceTree = "<absolute>"; };
-		3E10A845300FC7BC0051CCB8 /* HabitMinder Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "HabitMinder Watch App.app"; path = "/Users/mahyar/Desktop/HabitMinder SwiftUI/build/Debug-watchos/HabitMinder Watch App.app"; sourceTree = "<absolute>"; };
+		3E10AC0F30109FE70051CCB8 /* HabitMinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitMinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E10AC1030109FE70051CCB8 /* HabitMinder Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HabitMinder Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E358E8A300D71B600D03AA1 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,6 +71,7 @@
 				Core/Navigation/Destination/HabitDestinationView.swift,
 				Core/Navigation/Destination/IntroDestinationView.swift,
 				Core/Navigation/Destination/MainDestinationView.swift,
+				Core/Navigation/Destination/MainTabView.swift,
 				Core/Navigation/Destination/ManageHabitDestinationView.swift,
 				Core/Navigation/Destination/SettingsDestinationView.swift,
 				Features/Habits/HabitHistory/Coordinator/HabitHistoryCoordinating.swift,
@@ -112,18 +113,25 @@
 				Features/ManageHabit/EditHabit/Coordinator/EditHabitCoordinator.swift,
 				Features/ManageHabit/EditHabit/View/EditHabitView.swift,
 				Features/ManageHabit/EditHabit/ViewModel/EditHabitViewModel.swift,
-				Features/Settings/ColorPickerView.swift,
-				Features/Settings/NotificationSettingsView.swift,
-				Features/Settings/NotificationSettingsViewModel.swift,
-				Features/Settings/SettingCoordinating.swift,
-				Features/Settings/SettingCoordinator.swift,
-				Features/Settings/SettingView.swift,
-				Features/Settings/SettingViewModel.swift,
+				Features/Settings/Notification/View/NotificationSettingsView.swift,
+				Features/Settings/Notification/ViewModel/NotificationSettingsViewModel.swift,
+				Features/Settings/Profile/View/ProfileSettingsView.swift,
+				Features/Settings/Profile/ViewModel/ProfileSettingsViewModel.swift,
+				Features/Settings/Settings/Coordinator/SettingsCoordinating.swift,
+				Features/Settings/Settings/Coordinator/SettingsCoordinator.swift,
+				Features/Settings/Settings/UseCase/LogoutUseCase.swift,
+				Features/Settings/Settings/View/SettingsView.swift,
+				Features/Settings/Settings/ViewModel/SettingsViewModel.swift,
+				Features/Settings/Theme/View/ThemeView.swift,
+				Shared/Constants/AppInfo.swift,
 				Shared/Constants/AppLogger.swift,
 				Shared/Constants/HabitFormConstants.swift,
 				Shared/Constants/LayoutStyle.swift,
 				Shared/Constants/Spacing.swift,
 				Shared/Constants/SystemIconName.swift,
+				Shared/CustomViews/Button/AppPrimaryButton.swift,
+				Shared/CustomViews/Button/AppPrimaryButtonSize.swift,
+				Shared/CustomViews/Button/AppProfileButton.swift,
 				Shared/CustomViews/EmptyView/CustomEmptyView.swift,
 				Shared/CustomViews/HabitForm/HabitFromView.swift,
 				Shared/CustomViews/Header/AppHeaderView.swift,
@@ -132,8 +140,8 @@
 				"Shared/Extensions/Foundation/Types+Helpers.swift",
 				"Shared/Extensions/SwiftUI/Color+RGBA.swift",
 				"Shared/Extensions/SwiftUI/Font+AppFont.swift",
-				"Shared/Extensions/SwiftUI/View+CircleBackground.swift",
 				"Shared/Extensions/SwiftUI/View+DismissKeyboard.swift",
+				"Shared/Extensions/SwiftUI/View+liquidGlass.swift",
 				Shared/Managers/DI/AppDependencies.swift,
 				Shared/Managers/DI/DIContainer.swift,
 				Shared/Managers/DI/DISetup.swift,
@@ -228,6 +236,8 @@
 				3E358E8A300D71B600D03AA1 /* test.swift */,
 				3E626082300D51950001D5C0 /* HabitMinder */,
 				3EA5A51A300FAC2500FF3F20 /* HabitMinderWatchApp */,
+				3E10AC0F30109FE70051CCB8 /* HabitMinder.app */,
+				3E10AC1030109FE70051CCB8 /* HabitMinder Watch App.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -252,7 +262,7 @@
 			packageProductDependencies = (
 			);
 			productName = "HabitMinder SwiftUI";
-			productReference = 3E10A844300FC7BC0051CCB8 /* HabitMinder.app */;
+			productReference = 3E10AC0F30109FE70051CCB8 /* HabitMinder.app */;
 			productType = "com.apple.product-type.application";
 		};
 		3EEFE3792DAFB2B200F5B0FF /* HabitMinder Watch App */ = {
@@ -271,7 +281,7 @@
 			packageProductDependencies = (
 			);
 			productName = "HabitMinder Watch App";
-			productReference = 3E10A845300FC7BC0051CCB8 /* HabitMinder Watch App.app */;
+			productReference = 3E10AC1030109FE70051CCB8 /* HabitMinder Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -505,7 +515,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.HabitMinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -541,7 +551,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.HabitMinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

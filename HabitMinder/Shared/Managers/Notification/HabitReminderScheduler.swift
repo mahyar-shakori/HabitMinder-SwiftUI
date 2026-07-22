@@ -86,8 +86,8 @@ final class HabitReminderScheduler: HabitReminderScheduling {
             )
         }
 
-        requestAuthorization { isAllowed in
-            guard isAllowed else {
+        getAuthorizationStatus { status in
+            guard status == .allowed else {
                 return
             }
 
@@ -115,8 +115,8 @@ final class HabitReminderScheduler: HabitReminderScheduling {
         }
 
         let center = center
-        requestAuthorization { [weak self] isAllowed in
-            guard isAllowed else {
+        getAuthorizationStatus { [weak self] status in
+            guard status == .allowed else {
                 return
             }
 

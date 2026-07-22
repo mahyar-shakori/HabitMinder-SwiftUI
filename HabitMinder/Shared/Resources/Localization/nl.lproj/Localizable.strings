@@ -38,6 +38,7 @@
 "chooseColor" = "Kies kleur";
 "pickColor" = "Kies een kleur";
 "defaultColor" = "Standaardkleur";
+"profile" = "Profiel";
 "editUserName" = "Naam bewerken";
 "enterNewUserName" = "Voer een nieuwe naam in";
 "profilePhoto" = "Profielfoto";
@@ -99,7 +100,6 @@
 "homeHeaderTitle" = "Rituelen";
 "homeListTitle" = "Dagelijkse gewoontes";
 "homeListSubtitle" = "Focus vandaag op je ritueel";
-"homeQuoteLabel" = "QUOTE";
 "homeQuoteFormat" = "\"%@\"";
 "homeDefaultAuthor" = "Edward Corey";
 "homeAuthorFormat" = "- %@";

@@ -1,5 +1,5 @@
 //
-//  SettingCoordinator.swift
+//  SettingsCoordinator.swift
 //  HabitMinder SwiftUI
 //
 //  Created by Mahyar on 31/05/2025.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class SettingCoordinator: SettingCoordinating {
+final class SettingsCoordinator: SettingsCoordinating {
     private let dismiss: () -> Void
     private let navigateToSettingsRoute: (SettingsRoute) -> Void
     private let resetToSetName: () -> Void
@@ -21,9 +21,9 @@ final class SettingCoordinator: SettingCoordinating {
         self.navigateToSettingsRoute = navigateToSettingsRoute
         self.resetToSetName = resetToSetName
     }
-    
-    func goBack() {
-        dismiss()
+
+    func goToProfileSettings() {
+        navigateToSettingsRoute(.profile)
     }
 
     func goToNotificationSettings() {

@@ -17,6 +17,7 @@ final class EditHabitViewModel {
     private(set) var selectedCustomWeekdays = [Calendar.current.component(.weekday, from: Date())]
     private(set) var commitmentDays = 21
     private(set) var reminderTimes: [String] = []
+    private(set) var isFutureHabit = false
     private(set) var isSaveButtonEnabled = false
     private(set) var isNotificationSettingsAlertPresented = false
     private(set) var notificationAlertOpensAppSettings = false
@@ -116,7 +117,7 @@ final class EditHabitViewModel {
             case .allowed:
                 self.insertReminderTime(time)
             case .notDetermined:
-                self.requestNotificationAuthorization(for: time)
+                self.showNotificationAlert(opensAppSettings: false)
             case .denied:
                 self.showNotificationAlert(opensAppSettings: true)
             }
@@ -131,24 +132,14 @@ final class EditHabitViewModel {
     func removeReminderTime(at offsets: IndexSet) {
         reminderTimes.remove(atOffsets: offsets)
     }
+
+    func setIsFutureHabit(_ isFutureHabit: Bool) {
+        self.isFutureHabit = isFutureHabit
+    }
     
     private func updateValidationState() {
         let isValid = trimmedHabitTitle.count > 0
         isSaveButtonEnabled = isValid
-    }
-
-    private func requestNotificationAuthorization(for time: String) {
-        reminderScheduler.requestAuthorization { [weak self] isAllowed in
-            guard let self else {
-                return
-            }
-
-            if isAllowed {
-                self.insertReminderTime(time)
-            } else {
-                self.showNotificationAlert(opensAppSettings: true)
-            }
-        }
     }
 
     private func showNotificationAlert(opensAppSettings: Bool) {
@@ -161,16 +152,23 @@ final class EditHabitViewModel {
               reminderTimes.contains(time).not else {
             return
         }
-
         reminderTimes.append(time)
         reminderTimes.sort()
     }
 
-    
     func saveAndDismiss() {
+        if isFutureHabit {
+            moveHabitToFuture()
+        } else {
+            updateCurrentHabit()
+        }
+        coordinator.goBack()
+    }
+
+    private func updateCurrentHabit() {
         dataManager.update({ habit in
             habit.title = trimmedHabitTitle
-            habit.iconName = selectedIconName
+            habit.iconName = selectedIconNames
             habit.frequency = selectedFrequency.rawValue
             habit.commitmentDays = commitmentDays
             habit.reminderTimes = reminderTimes
@@ -185,7 +183,22 @@ final class EditHabitViewModel {
             customWeekdays: selectedCustomWeekdays
         )
         NotificationCenter.default.post(name: AppNotification.Habit.edited, object: nil)
-        coordinator.goBack()
+    }
+
+    private func moveHabitToFuture() {
+        let futureHabit = HabitHistoryModel(
+            title: trimmedHabitTitle,
+            iconName: selectedIconNames,
+            frequency: selectedFrequency.rawValue,
+            commitmentDays: commitmentDays,
+            reminderTimes: reminderTimes,
+            customWeekdays: selectedCustomWeekdays
+        )
+
+        dataManager.save(futureHabit)
+        dataManager.delete(byID: habitID, HabitModel.self)
+        reminderScheduler.cancelReminders(for: habitID)
+        NotificationCenter.default.post(name: AppNotification.Habit.futureAdded, object: nil)
     }
     
     func missHabit() {
