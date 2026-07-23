@@ -28,6 +28,10 @@ enum L10n {
         static let errorTitle = localized("appStartupErrorTitle")
         static let errorMessage = localized("appStartupErrorMessage")
     }
+    
+    enum header {
+        static let title = localized("headerTitle")
+    }
 
     enum IntroPage {
         static let firstTitle = localized("introFirstTitle")
@@ -38,8 +42,10 @@ enum L10n {
         static let nextButton = localized("nextButton")
     }
 
-    enum SetNamePage {
+    enum SignInPage {
         static let hiDialog = localized("hiDialog")
+        static let signIn = localized("signIn")
+        static let or = localized("or")
         static let userNamePlaceholder = localized("userNamePlaceholder")
         static let continueButton = localized("continueButton")
         static let error = localized("error")
@@ -49,26 +55,20 @@ enum L10n {
         static let welcome = localized("welcome")
         static let guest = localized("guest")
     }
+    
+    enum TabView {
+        static let habitsTab = localized("habitsTab")
+        static let historyTab = localized("historyTab")
+        static let settingsTab = localized("settingsTab")
+    }
 
     enum HomePage {
-        static let tabHabits = localized("homeTabHabits")
-        static let tabHistory = localized("homeTabHistory")
-        static let tabSettings = localized("homeTabSettings")
-        static let headerTitle = localized("homeHeaderTitle")
         static let listTitle = localized("homeListTitle")
         static let listSubtitle = localized("homeListSubtitle")
         static let defaultQuote = localized("defaultQuote")
         static let defaultAuthor = localized("homeDefaultAuthor")
         static let emptyView = localized("emptyView")
         static let watchEmptyView = localized("watchEmptyView")
-
-        static func quoted(_ quote: String) -> String {
-            L10n.formatted("homeQuoteFormat", quote)
-        }
-
-        static func author(_ author: String) -> String {
-            L10n.formatted("homeAuthorFormat", author)
-        }
     }
 
     enum AddHabitPage {
@@ -105,8 +105,6 @@ enum L10n {
     }
 
     enum HabitHistoryPage {
-        static let title = localized("habitHistoryTitle")
-        static let headerTitle = localized("habitHistoryHeaderTitle")
         static let startNowButton = localized("habitHistoryStartNowButton")
         static let completedTab = localized("habitHistoryCompletedTab")
         static let upcomingTab = localized("habitHistoryFutureTab")
@@ -136,31 +134,38 @@ enum L10n {
         }
     }
 
-    enum SettingPage {
-        static let title = localized("settingTitle")
+    enum SettingsPage {
         static let userName = localized("userName")
-        static let language = localized("Language")
-        static let appColor = localized("appColor")
-        static let setColor = localized("setColor")
-        static let selectLanguage = localized("selectLanguage")
-        static let chooseColor = localized("chooseColor")
-        static let pickColor = localized("pickColor")
-        static let defaultColor = localized("defaultColor")
         static let profile = localized("profile")
-        static let editUserName = localized("editUserName")
-        static let enterNewUserName = localized("enterNewUserName")
-        static let profilePhoto = localized("profilePhoto")
-        static let changePhoto = localized("changePhoto")
-        static func memberSince(_ date: String) -> String {
-            L10n.formatted("memberSinceFormat", date)
-        }
         static let preferences = localized("preferences")
-        static let support = localized("support")
         static let appSection = localized("settingsAppSection")
         static let notifications = localized("notifications")
         static let notificationsSubtitle = localized("notificationsSubtitle")
         static let appTheme = localized("appTheme")
         static let appThemeSubtitle = localized("appThemeSubtitle")
+        static let rateUs = localized("rateUs")
+        static let rateUsSubtitle = localized("rateUsSubtitle")
+        static let versionTagline = localized("versionTagline")
+
+        static func appVersion(_ version: String) -> String {
+            L10n.formatted("appVersionFormat", version)
+        }
+        
+        static func memberSince(_ date: String) -> String {
+            L10n.formatted("memberSinceFormat", date)
+        }
+    }
+    
+    enum ProfilePage {
+        static let userName = localized("userName")
+        static let editUserName = localized("editUserName")
+        static let enterNewUserName = localized("enterNewUserName")
+        static let changePhoto = localized("changePhoto")
+        static let email = localized("email")
+    }
+    
+    enum ThemePage {
+        static let defaultColor = localized("defaultColor")
         static let appThemeIntroTitle = localized("appThemeIntroTitle")
         static let appThemeIntroDescription = localized("appThemeIntroDescription")
         static let appearanceSection = localized("appearanceSection")
@@ -171,19 +176,9 @@ enum L10n {
         static let customColor = localized("customColor")
         static let customColorSubtitle = localized("customColorSubtitle")
         static let defaultColorSubtitle = localized("defaultColorSubtitle")
-        static let helpSupport = localized("helpSupport")
-        static let helpSupportSubtitle = localized("helpSupportSubtitle")
-        static let rateUs = localized("rateUs")
-        static let rateUsSubtitle = localized("rateUsSubtitle")
-        static let logoutSubtitle = localized("logoutSubtitle")
-        static let versionTagline = localized("versionTagline")
-
-        static func appVersion(_ version: String) -> String {
-            L10n.formatted("appVersionFormat", version)
-        }
     }
-
-    enum NotificationSettings {
+    
+    enum NotificationPage {
         static let introTitle = localized("notificationSettingsIntroTitle")
         static let introDescription = localized("notificationSettingsIntroDescription")
         static let general = localized("notificationSettingsGeneral")
@@ -191,7 +186,6 @@ enum L10n {
         static let allowNotificationsDescription = localized("notificationSettingsAllowDescription")
         static let ritualReminders = localized("notificationSettingsRitualReminders")
         static let dailyReminders = localized("notificationSettingsDailyReminders")
-        static let reminderTime = localized("notificationSettingsReminderTime")
         static let motivation = localized("notificationSettingsMotivation")
         static let dailyQuotes = localized("notificationSettingsDailyQuotes")
         static let dailyQuotesDescription = localized("notificationSettingsDailyQuotesDescription")
@@ -213,13 +207,10 @@ enum L10n {
     }
 
     enum Shared {
-        static let habitPlaceholder = localized("habitPlaceholder")
         static let saveButton = localized("saveButton")
         static let cancelButton = localized("cancelButton")
         static let okButton = localized("okButton")
         static let yesButton = localized("yesButton")
-        static let noButton = localized("noButton")
-        static let backButton = localized("backButton")
 
         enum Weekday {
             static let sundayShort = localized("weekdaySundayShort")
@@ -235,18 +226,19 @@ enum L10n {
     enum Alert {
         enum Network {
             static let title = localized("networkAlertTitle")
-            static let unknownError = localized("networkAlertUnknownError")
-            static let invalidURL = localized("networkAlertInvalidURL")
-            static let decodingFailed = localized("networkAlertDecodingFailed")
-            static let badResponse = localized("networkAlertBadResponse")
-            static let invalidMultipartBody = localized("networkAlertInvalidMultipartBody")
+            static let unknownError = localized("networkUnknownError")
+            static let invalidURL = localized("networkInvalidURL")
+            static let decodingFailed = localized("networkDecodingFailed")
+            static let invalidResponse = localized("networkInvalidResponse")
+            
+            static func unacceptableStatusCode(_ code: Int) -> String {
+                L10n.formatted("networkUnacceptableStatusCode", String(code))
+            }
         }
-
+    
         enum Habit {
             static let deleteTitle = localized("deleteHabitAlertTitle")
             static let deleteMessage = localized("deleteHabitAlertMessage")
-            static let editTitle = localized("editHabitAlertTitle")
-            static let editMessage = localized("editHabitAlertMessage")
 
             static func deleteMessage(title: String) -> String {
                 L10n.formatted("deleteHabitNamedAlertMessage", title)
@@ -255,33 +247,23 @@ enum L10n {
 
         enum Logout {
             static let title = localized("logoutAlertTitle")
-            static let message = localized("logoutAlertMessage")
+            static let logoutButton = localized("logoutButton")
         }
     }
 
     enum Cell {
-        enum DropDown {
-            static let addNewHabit = localized("dropDownAddNewHabit")
-            static let futureHabit = localized("dropDownFutureHabit")
-            static let editHabitList = localized("dropDownEditHabitList")
-            static let setting = localized("dropDownSetting")
-            static let logout = localized("dropDownLogout")
+        static let daysLeft = localized("habitCellDaysLeft")
+        
+        static func journey(_ days: Int) -> String {
+            L10n.formatted("habitCellJourneyFormat", "\(days)")
         }
-
-        enum Habit {
-            static let daysLeft = localized("HabitCellDaysLeft")
-
-            static func journey(_ days: Int) -> String {
-                L10n.formatted("habitCellJourneyFormat", "\(days)")
-            }
-
-            static func progressDay(completed: Int, total: Int) -> String {
-                L10n.formatted("habitCellProgressFormat", "\(completed)", "\(total)")
-            }
-
-            static func streak(_ days: Int) -> String {
-                L10n.formatted("habitCellStreakFormat", "\(days)")
-            }
+        
+        static func progressDay(completed: Int, total: Int) -> String {
+            L10n.formatted("habitCellProgressFormat", "\(completed)", "\(total)")
+        }
+        
+        static func streak(_ days: Int) -> String {
+            L10n.formatted("habitCellStreakFormat", "\(days)")
         }
     }
 }

@@ -20,11 +20,11 @@ struct IntroDestinationView: View {
             IntroView(introViewModel: viewModel)
         case .setName:
             let viewCoordinator = SetNameCoordinator(navigate: coordinator.navigate)
-            let viewModel = SetNameViewModel(
+            let viewModel = SignInViewModel(
                 coordinator: viewCoordinator,
                 userDefaultsStorage: dependencies.userDefaultsStorage
             )
-            SetNameView(setNameViewModel: viewModel)
+            SignInView(signInViewModel: viewModel)
         case .welcome:
             let viewCoordinator = WelcomeCoordinator(navigate: coordinator.navigate)
             let viewModel = WelcomeViewModel(

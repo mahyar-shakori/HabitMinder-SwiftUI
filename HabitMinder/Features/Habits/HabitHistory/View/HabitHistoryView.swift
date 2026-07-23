@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HabitHistoryView: View {
-    private var habitHistoryViewModel: HabitHistoryViewModel
+    private let habitHistoryViewModel: HabitHistoryViewModel
     private let navigateToProfileSettings: () -> Void
     @EnvironmentObject private var themeManager: ThemeManager
     @State private var selectedTab = HabitJourneyTab.upcoming
@@ -54,7 +54,7 @@ struct HabitHistoryView: View {
 
     private var pageHeader: some View {
         AppHeaderView(
-            title: L10n.HabitHistoryPage.headerTitle,
+            title: L10n.header.title,
             systemImage: SystemIconName.leaf,
             onProfileTap: navigateToProfileSettings
         )

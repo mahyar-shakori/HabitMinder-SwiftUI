@@ -39,7 +39,7 @@ final class SettingsViewModel {
     }
 
     func loadUserName() {
-        userName = userDefaultsStorage.fetch(for: UserDefaultKeys.userName) ?? L10n.SettingPage.userName
+        userName = userDefaultsStorage.fetch(for: UserDefaultKeys.userName) ?? L10n.SettingsPage.userName
     }
 
     func loadProfileImage() {
@@ -54,7 +54,7 @@ final class SettingsViewModel {
             userDefaultsStorage.save(value: createdAt, for: UserDefaultKeys.userCreatedAt)
         }
 
-        memberSinceText = L10n.SettingPage.memberSince(formattedMonthYear(from: createdAt))
+        memberSinceText = L10n.SettingsPage.memberSince(formattedMonthYear(from: createdAt))
     }
 
     func setProfileImage(data: Data) {

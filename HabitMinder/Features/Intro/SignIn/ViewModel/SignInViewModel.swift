@@ -1,5 +1,5 @@
 //
-//  SetNameViewModel.swift
+//  SignInViewModel.swift
 //  HabitMinder SwiftUI
 //
 //  Created by Mahyar on 01/04/2025.
@@ -11,7 +11,7 @@ import Observation
 
 @MainActor
 @Observable
-final class SetNameViewModel {
+final class SignInViewModel {
     private(set) var userName = ""
     private(set) var borderState: BorderState = .normal
     private(set) var errorText = ""
@@ -51,16 +51,7 @@ final class SetNameViewModel {
         onSuccess()
     }
 
-    func handleAppleSignInRequestStarted() {
-#if DEBUG
-        AppLogger.auth.notice("Apple sign in request started")
-#endif
-    }
-
     func handleAppleSignInResult(_ result: Result<ASAuthorization, Error>, onSuccess: () -> Void) {
-#if DEBUG
-        AppLogger.auth.notice("Apple sign in completed")
-#endif
         switch result {
         case .success(let authorization):
             guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential else {
@@ -68,24 +59,25 @@ final class SetNameViewModel {
                 return
             }
 
-#if DEBUG
-            AppLogger.auth.notice("Apple credential email: \(credential.email ?? "nil", privacy: .public)")
-#endif
+            let account = AppleSignInAccount(
+                credential: credential,
+                fallbackUserName: nonEmptyUserName()
+            )
             saveAppleLogin(
-                accountID: appleAccountID(from: credential),
-                userName: appleDisplayName(from: credential) ?? nonEmptyUserName() ?? "Apple User",
-                email: nonEmptyEmail(from: credential)
+                accountID: account.accountID,
+                userName: account.userName,
+                email: account.email
             )
             onSuccess()
         case .failure(let error):
-            guard isAppleSignInCancellation(error).not else { return }
+            guard AppleSignInAccount.isCancellation(error).not else { return }
             applyAppleSignInError(error)
         }
     }
 
     private func applyErrorState() {
         borderState = .error
-        errorText = L10n.SetNamePage.error
+        errorText = L10n.SignInPage.error
     }
 
     private func resetErrorState() {
@@ -95,46 +87,15 @@ final class SetNameViewModel {
 
     private func applyAppleSignInError(_ error: Error? = nil) {
         borderState = .error
-        errorText = appleSignInErrorMessage(for: error)
-    }
-
-    private func appleDisplayName(from credential: ASAuthorizationAppleIDCredential) -> String? {
-        let displayName = PersonNameComponentsFormatter().string(from: credential.fullName ?? PersonNameComponents())
-        let trimmedDisplayName = displayName.trimmingCharacters(in: .whitespacesAndNewlines)
-
-        return trimmedDisplayName.isEmpty ? nil : trimmedDisplayName
+        errorText = AppleSignInAccount.errorMessage(for: error)
     }
 
     private func nonEmptyUserName() -> String? {
         trimmedUserName.isEmpty ? nil : trimmedUserName
     }
 
-    private func nonEmptyEmail(from credential: ASAuthorizationAppleIDCredential) -> String? {
-        let email = credential.email?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        return email.isEmpty ? nil : email
-    }
-
-    private func appleAccountID(from credential: ASAuthorizationAppleIDCredential) -> String {
-        "apple:\(credential.user)"
-    }
-
     private func localAccountID() -> String {
         "local:\(UUID().uuidString)"
-    }
-
-    private func appleSignInErrorMessage(for error: Error?) -> String {
-        guard let error else { return L10n.Alert.Network.unknownError }
-
-        #if DEBUG
-        return "Apple Sign In failed: \(error.localizedDescription)"
-        #else
-        return L10n.Alert.Network.unknownError
-        #endif
-    }
-
-    private func isAppleSignInCancellation(_ error: Error) -> Bool {
-        guard let authorizationError = error as? ASAuthorizationError else { return false }
-        return authorizationError.code == .canceled
     }
 
     private func saveUserName(_ name: String) {

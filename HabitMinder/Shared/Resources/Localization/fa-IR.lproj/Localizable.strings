@@ -1,0 +1,184 @@
+/* 
+  Localizable.strings
+  HabitMinder SwiftUI
+
+  Created by Mahyar on 31/03/2025.
+  
+*/
+
+/* AppStartupError */
+"appStartupErrorTitle" = "امکان اجرای Rituals وجود ندارد";
+"appStartupErrorMessage" = "آماده‌سازی فضای ذخیره‌سازی انجام نشد. لطفاً برنامه را دوباره باز کنید.";
+
+/* Header */
+"headerTitle" = "آیین‌ها";
+
+/* Intro Screen */
+"introFirstTitle" = "عادت سالم";
+"introFirstDescription" = "تخمین زده می‌شود که شکل‌گیری یک عادت جدید برای افراد ۲۱ روز زمان می‌برد. با برنامه ۲۱ روزه یک عادت سالم را وارد زندگی خود کنید.";
+"introSecondTitle" = "عادت بد";
+"introSecondDescription" = "فراموش نکنید از بدن خود مراقبت کنید. می‌توانید یک عادت بد را با جایگزین کردن آن با یک عادت خوب تغییر دهید. با این برنامه ۲۱ روزه می‌توانید این کار را انجام دهید.";
+"skipButton" = "رد کردن";
+"nextButton" = "بعدی";
+
+/* SignIn Screen */
+"hiDialog" = "سلام، دوست دارید شما را چه صدا کنیم؟";
+"signIn" = "نام خود را وارد کنید یا با Apple وارد شوید";
+"or" = "یا";
+"userNamePlaceholder" = "نام خود را وارد کنید";
+"continueButton" = "ادامه";
+"error" = "بیا! می‌توانید نامتان را به ما بگویید :)";
+
+/* Welcome Screen */
+"welcome" = "خوش آمدید، ";
+"guest" = "خوش آمدید، مهمان";
+
+/* Tabs */
+"habitsTab" = "عادت‌ها";
+"historyTab" = "تاریخچه";
+"settingsTab" = "تنظیمات";
+
+/* Home Screen */
+"homeListTitle" = "عادت‌های روزانه";
+"homeListSubtitle" = "روی آیین امروز خود تمرکز کنید";
+"defaultQuote" = "همه چیز با گذشت زمان امکان‌پذیر است!";
+"homeDefaultAuthor" = "ادوارد کوری";
+"emptyView" = "هنوز عادتی اضافه نشده است! برای افزودن عادت روی دکمه منو بزنید.";
+"watchEmptyView" = "هنوز عادتی اضافه نشده است!";
+
+/* AddHabit Screen */
+"addHabitTitle" = "افزودن عادت";
+"addHabitIntroDescription" = "یک آیین آگاهانه با ریتم مشخص، یادآوری و تعهد ایجاد کنید.";
+"habitNotificationAlertTitle" = "اعلان‌ها خاموش هستند";
+"habitNotificationAlertMessage" = "برای استفاده از یادآوری عادت‌ها، اعلان‌ها را از تنظیمات فعال کنید.";
+"habitInAppNotificationAlertMessage" = "برای اضافه کردن زمان‌های یادآوری، گزینه اجازه اعلان‌ها و یادآوری‌های روزانه را در تنظیمات Rituals فعال کنید.";
+"habitNotificationSettingsButton" = "تنظیمات";
+"habitIdentitySectionTitle" = "هویت آیین";
+"habitTitlePlaceholder" = "مثلاً نوشتن صبحگاهی";
+"habitVisualAnchorSectionTitle" = "نشانه بصری";
+"habitSelectIconHint" = "انتخاب آیکون";
+"habitFutureToggle" = "عادت آینده";
+"habitFrequencySectionTitle" = "تکرار";
+"habitCommitmentSectionTitle" = "تعهد";
+"habitReminderSectionTitle" = "یادآوری";
+"habitReminderSubtitle" = "با یک یادآوری ملایم در مسیر بمانید.";
+"habitStartJourneyButton" = "شروع مسیر";
+"habitFrequencyDaily" = "روزانه";
+"habitFrequencyWeekly" = "هفتگی";
+"habitFrequencyCustom" = "سفارشی";
+"habitCommitmentDaysFormat" = "%d روز";
+
+/* EditHabit Screen */
+"editHabitTitle" = "ویرایش عادت";
+"editHabitIntroDescription" = "جزئیات آیین خود را بهبود دهید و در عین حال پیشرفت خود را متمرکز و هدفمند نگه دارید.";
+"missHabitToast" = "عادت شما دوباره شروع شد!";
+"missHabitButton" = "از دست رفت! دوباره شروع کن";
+
+/* HabitHistory Screen */
+"habitHistoryStartNowButton" = "شروع کنید";
+"habitHistoryCompletedTab" = "تکمیل‌شده";
+"habitHistoryFutureTab" = "آینده";
+"habitHistoryMasteryTitle" = "تسلط ۲۱ روزه";
+"habitHistoryPlannedTitle" = "مسیرهای برنامه‌ریزی‌شده";
+"habitHistoryPlannedSubtitle" = "با آماده کردن این عادت‌های آرامش‌بخش، به خودِ آینده‌تان اهمیت دهید. قدم‌های کوچک به تغییرات ماندگار منجر می‌شوند.";
+"habitHistoryCompletedStatus" = "تکمیل شد";
+"habitHistoryEmptyCompleted" = "هنوز هیچ مسیری تکمیل نشده است";
+"habitHistoryRitualTipLabel" = "نکته آیینی";
+"habitHistoryRitualTipText" = "\"راز آینده شما در برنامه روزانه‌تان پنهان است.\" برای حفظ استمرار، فقط با یک عادت شروع کنید.";
+"habitHistoryStartInDaysFormat" = "تا %d روز دیگر";
+"habitHistoryAchievementSingular" = "%d دستاورد";
+"habitHistoryAchievementPlural" = "%d دستاورد";
+"habitHistoryFinishedDateFormat" = "تکمیل شده در %@";
+"habitHistoryStreakDaysFormat" = "زنجیره: %d روز";
+
+/* Settings Screen */
+"userName" = "نام";
+"profile" = "پروفایل";
+"preferences" = "ترجیحات";
+"settingsAppSection" = "برنامه";
+"notifications" = "اعلان‌ها";
+"notificationsSubtitle" = "مدیریت یادآوری‌های روزانه";
+"appTheme" = "تم برنامه";
+"appThemeSubtitle" = "ظاهر برنامه را شخصی‌سازی کنید";
+"rateUs" = "امتیاز دهید";
+"rateUsSubtitle" = "به Rituals در App Store امتیاز دهید";
+"versionTagline" = "طراحی‌شده برای پیشرفت آگاهانه";
+"appVersionFormat" = "نسخه Rituals %@";
+"memberSinceFormat" = "عضو از %@";
+
+/* Profile Screen */
+"userName" = "نام";
+"editUserName" = "ویرایش نام";
+"enterNewUserName" = "نام جدید را وارد کنید";
+"changePhoto" = "تغییر عکس";
+"email" = "ایمیل";
+
+/* Theme Screen */
+"defaultColor" = "رنگ پیش‌فرض";
+"appThemeIntroTitle" = "شخصی‌سازی Rituals";
+"appThemeIntroDescription" = "تجربه آیین آگاهانه خود را با رنگ‌ها و ظاهری که با شما هماهنگ است شخصی‌سازی کنید.";
+"appearanceSection" = "ظاهر";
+"appearanceLight" = "روشن";
+"appearanceDark" = "تیره";
+"appearanceSystem" = "سیستم (خودکار)";
+"accentColorSection" = "رنگ";
+"customColor" = "رنگ سفارشی";
+"customColorSubtitle" = "هر رنگی که دوست دارید انتخاب کنید";
+"defaultColorSubtitle" = "بازگشت به رنگ پیش‌فرض Rituals";
+
+/* Notification Screen */
+"notificationSettingsIntroTitle" = "تنظیم Rituals";
+"notificationSettingsIntroDescription" = "بدون احساس فشار، با مسیر خود در ارتباط بمانید. لحظه‌هایی را انتخاب کنید که برای شما اهمیت بیشتری دارند.";
+"notificationSettingsAllowNotifications" = "اجازه اعلان‌ها";
+"notificationSettingsAllowDescription" = "فعال کنید تا یادآوری‌ها و به‌روزرسانی‌های Rituals را دریافت کنید.";
+"notificationSettingsRitualReminders" = "یادآوری‌های آیین";
+"notificationSettingsDailyReminders" = "یادآوری‌های روزانه";
+"notificationSettingsMotivation" = "انگیزه";
+"notificationSettingsDailyQuotes" = "نقل‌قول‌های روزانه";
+"notificationSettingsDailyQuotesDescription" = "یک جمله الهام‌بخش دریافت کنید تا صبح خود را با هدف و آگاهی آغاز کنید.";
+"notificationSettingsJourneyCompletion" = "تکمیل مسیر";
+"notificationSettingsJourneyCompletionDescription" = "زمانی که یک چالش ۲۱ روزه را به پایان می‌رسانید";
+
+/* Notification */
+"habitReminderNotificationTitle" = "یادآوری عادت";
+"journeyCompletionNotificationTitle" = "مسیر تکمیل شد";
+"habitReminderNotificationBodyFormat" = "%@ خود را فراموش نکنید.";
+"journeyCompletionNotificationBodyFormat" = "چالش ۲۱ روزه %@ را به پایان رساندید.";
+
+/* Shared */
+"saveButton" = "ذخیره";
+"cancelButton" = "لغو";
+"okButton" = "تأیید";
+"yesButton" = "بله";
+
+/* Shared - Weekday */
+"weekdaySundayShort" = "یک";
+"weekdayMondayShort" = "دو";
+"weekdayTuesdayShort" = "سه";
+"weekdayWednesdayShort" = "چهار";
+"weekdayThursdayShort" = "پنج";
+"weekdayFridayShort" = "جمعه";
+"weekdaySaturdayShort" = "شنبه";
+
+/* Shared - Alert - Network */
+"networkAlertTitle" = "خطای شبکه";
+"networkInvalidURL" = "آدرس درخواست نامعتبر است.";
+"networkUnknownError" = "یک خطای ناشناخته رخ داده است.";
+"networkInvalidResponse" = "پاسخ نامعتبری از سرور دریافت شد.";
+"networkUnacceptableStatusCode" = "سرور خطایی برگرداند (%d).";
+"networkDecodingFailed" = "پردازش پاسخ سرور امکان‌پذیر نیست.";
+
+/* Shared - Alert - Habit */
+"deleteHabitAlertTitle" = "حذف عادت";
+"deleteHabitAlertMessage" = "آیا مطمئن هستید که می‌خواهید این عادت را حذف کنید؟";
+"deleteHabitNamedAlertMessage" = "آیا مطمئن هستید که می‌خواهید \"%@\" را حذف کنید؟";
+
+/* Shared - Alert - Logout */
+"logoutAlertTitle" = "خروج؟";
+"logoutButton" = "خروج";
+
+/* Cell */
+"habitCellDaysLeft" = " روز باقی مانده";
+"habitCellJourneyFormat" = "مسیر %d روزه";
+"habitCellProgressFormat" = "روز %d از %d";
+"habitCellStreakFormat" = "زنجیره %d روزه";

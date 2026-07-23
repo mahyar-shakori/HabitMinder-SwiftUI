@@ -1,0 +1,184 @@
+/* 
+  Localizable.strings
+  HabitMinder SwiftUI
+
+  Created by Mahyar on 31/03/2025.
+  
+*/
+
+/* AppStartupError */
+"appStartupErrorTitle" = "Impossible de démarrer Rituals";
+"appStartupErrorMessage" = "Le stockage n'a pas pu être préparé. Veuillez redémarrer l'application.";
+
+/* Header */
+"headerTitle" = "Rituels";
+
+/* Intro Screen */
+"introFirstTitle" = "Habitude saine";
+"introFirstDescription" = "On estime qu'il faut 21 jours pour créer une nouvelle habitude. Introduisez une habitude saine dans votre vie avec l'application 21 Days.";
+"introSecondTitle" = "Mauvaise habitude";
+"introSecondDescription" = "N'oubliez pas de prendre soin de votre corps. Vous pouvez changer une mauvaise habitude en la remplaçant par une bonne. Vous pouvez le faire avec cette application 21 Days.";
+"skipButton" = "Passer";
+"nextButton" = "Suivant";
+
+/* SignIn Screen */
+"hiDialog" = "Bonjour, comment devons-nous vous appeler ?";
+"signIn" = "Entrez votre nom ou connectez-vous avec Apple";
+"or" = "ou";
+"userNamePlaceholder" = "Entrez votre nom";
+"continueButton" = "Continuer";
+"error" = "Allez ! Vous pouvez nous donner votre nom :)";
+
+/* Welcome Screen */
+"welcome" = "Bienvenue, ";
+"guest" = "Bienvenue, invité";
+
+/* Tabs */
+"habitsTab" = "Habitudes";
+"historyTab" = "Historique";
+"settingsTab" = "Réglages";
+
+/* Home Screen */
+"homeListTitle" = "Habitudes quotidiennes";
+"homeListSubtitle" = "Concentrez-vous sur votre rituel du jour";
+"defaultQuote" = "Tout est possible avec le temps !";
+"homeDefaultAuthor" = "Edward Corey";
+"emptyView" = "Aucune habitude n'a encore été ajoutée ! Appuyez sur le bouton de menu pour ajouter une habitude.";
+"watchEmptyView" = "Aucune habitude n'a encore été ajoutée !";
+
+/* AddHabit Screen */
+"addHabitTitle" = "Ajouter une habitude";
+"addHabitIntroDescription" = "Créez un rituel conscient avec un rythme clair, un rappel et un engagement.";
+"habitNotificationAlertTitle" = "Les notifications sont désactivées";
+"habitNotificationAlertMessage" = "Activez les notifications dans les réglages pour utiliser les rappels d'habitudes.";
+"habitInAppNotificationAlertMessage" = "Activez Autoriser les notifications et les rappels quotidiens dans les réglages de Rituals pour ajouter des horaires de rappel.";
+"habitNotificationSettingsButton" = "Réglages";
+"habitIdentitySectionTitle" = "Identité du rituel";
+"habitTitlePlaceholder" = "Ex. Écrire le matin";
+"habitVisualAnchorSectionTitle" = "Ancrage visuel";
+"habitSelectIconHint" = "Sélectionner une icône";
+"habitFutureToggle" = "Habitude future";
+"habitFrequencySectionTitle" = "Fréquence";
+"habitCommitmentSectionTitle" = "Engagement";
+"habitReminderSectionTitle" = "Rappel";
+"habitReminderSubtitle" = "Restez sur la bonne voie avec un petit rappel.";
+"habitStartJourneyButton" = "Commencer le parcours";
+"habitFrequencyDaily" = "Quotidien";
+"habitFrequencyWeekly" = "Hebdomadaire";
+"habitFrequencyCustom" = "Personnalisé";
+"habitCommitmentDaysFormat" = "%d jours";
+
+/* EditHabit Screen */
+"editHabitTitle" = "Modifier l'habitude";
+"editHabitIntroDescription" = "Affinez les détails de votre rituel tout en gardant votre progression ciblée et intentionnelle.";
+"missHabitToast" = "Votre habitude recommence !";
+"missHabitButton" = "Manqué ! Recommencer";
+
+/* HabitHistory Screen */
+"habitHistoryStartNowButton" = "Commencer maintenant";
+"habitHistoryCompletedTab" = "Terminés";
+"habitHistoryFutureTab" = "Futurs";
+"habitHistoryMasteryTitle" = "Maîtrise des 21 jours";
+"habitHistoryPlannedTitle" = "Parcours planifiés";
+"habitHistoryPlannedSubtitle" = "Prenez soin de votre futur vous en préparant ces habitudes réparatrices. Les petits pas mènent à un changement durable.";
+"habitHistoryCompletedStatus" = "TERMINÉ";
+"habitHistoryEmptyCompleted" = "Aucun parcours terminé pour le moment";
+"habitHistoryRitualTipLabel" = "CONSEIL RITUEL";
+"habitHistoryRitualTipText" = "\"Le secret de votre avenir se cache dans votre routine quotidienne.\" Commencez par une seule habitude pour rester constant.";
+"habitHistoryStartInDaysFormat" = "Dans %d jours";
+"habitHistoryAchievementSingular" = "%d réussite";
+"habitHistoryAchievementPlural" = "%d réussites";
+"habitHistoryFinishedDateFormat" = "Terminé %@";
+"habitHistoryStreakDaysFormat" = "SÉRIE : %d JOURS";
+
+/* Settings Screen */
+"userName" = "Nom";
+"profile" = "Profil";
+"preferences" = "Préférences";
+"settingsAppSection" = "Application";
+"notifications" = "Notifications";
+"notificationsSubtitle" = "Gérer les rappels quotidiens";
+"appTheme" = "Thème de l'application";
+"appThemeSubtitle" = "Personnaliser l'apparence";
+"rateUs" = "Nous noter";
+"rateUsSubtitle" = "Notez Rituals sur l'App Store";
+"versionTagline" = "CONÇU POUR UNE PROGRESSION CONSCIENTE";
+"appVersionFormat" = "Version Rituals %@";
+"memberSinceFormat" = "Membre depuis %@";
+
+/* Profile Screen */
+"userName" = "Nom";
+"editUserName" = "Modifier le nom";
+"enterNewUserName" = "Entrez un nouveau nom";
+"changePhoto" = "Modifier la photo";
+"email" = "E-mail";
+
+/* Theme Screen */
+"defaultColor" = "Couleur par défaut";
+"appThemeIntroTitle" = "Personnalisez Rituals";
+"appThemeIntroDescription" = "Personnalisez votre expérience de rituel conscient avec des couleurs et une apparence qui vous correspondent.";
+"appearanceSection" = "Apparence";
+"appearanceLight" = "Clair";
+"appearanceDark" = "Sombre";
+"appearanceSystem" = "Système (Automatique)";
+"accentColorSection" = "Couleur";
+"customColor" = "Couleur personnalisée";
+"customColorSubtitle" = "Choisissez la couleur de votre choix";
+"defaultColorSubtitle" = "Revenir à la couleur par défaut de Rituals";
+
+/* Notification Screen */
+"notificationSettingsIntroTitle" = "Configurer Rituals";
+"notificationSettingsIntroDescription" = "Restez connecté à votre parcours sans vous sentir dépassé. Choisissez les moments qui comptent le plus pour vous.";
+"notificationSettingsAllowNotifications" = "Autoriser les notifications";
+"notificationSettingsAllowDescription" = "Activez cette option pour recevoir des rappels et des mises à jour de Rituals.";
+"notificationSettingsRitualReminders" = "Rappels de rituel";
+"notificationSettingsDailyReminders" = "Rappels quotidiens";
+"notificationSettingsMotivation" = "Motivation";
+"notificationSettingsDailyQuotes" = "Citations quotidiennes";
+"notificationSettingsDailyQuotesDescription" = "Recevez une citation consciente pour commencer votre matinée avec intention.";
+"notificationSettingsJourneyCompletion" = "Fin du parcours";
+"notificationSettingsJourneyCompletionDescription" = "Lorsque vous terminez un défi de 21 jours";
+
+/* Notification */
+"habitReminderNotificationTitle" = "Rappel d'habitude";
+"journeyCompletionNotificationTitle" = "Parcours terminé";
+"habitReminderNotificationBodyFormat" = "N'oubliez pas votre %@.";
+"journeyCompletionNotificationBodyFormat" = "Vous avez terminé votre défi de 21 jours %@.";
+
+/* Shared */
+"saveButton" = "Enregistrer";
+"cancelButton" = "Annuler";
+"okButton" = "OK";
+"yesButton" = "Oui";
+
+/* Shared - Weekday */
+"weekdaySundayShort" = "Dim";
+"weekdayMondayShort" = "Lun";
+"weekdayTuesdayShort" = "Mar";
+"weekdayWednesdayShort" = "Mer";
+"weekdayThursdayShort" = "Jeu";
+"weekdayFridayShort" = "Ven";
+"weekdaySaturdayShort" = "Sam";
+
+/* Shared - Alert - Network */
+"networkAlertTitle" = "Erreur réseau";
+"networkInvalidURL" = "L'URL de la requête est invalide.";
+"networkUnknownError" = "Une erreur inconnue s'est produite.";
+"networkInvalidResponse" = "Une réponse invalide du serveur a été reçue.";
+"networkUnacceptableStatusCode" = "Le serveur a renvoyé une erreur (%d).";
+"networkDecodingFailed" = "Impossible de traiter la réponse du serveur.";
+
+/* Shared - Alert - Habit */
+"deleteHabitAlertTitle" = "Supprimer l'habitude";
+"deleteHabitAlertMessage" = "Êtes-vous sûr de vouloir supprimer cette habitude ?";
+"deleteHabitNamedAlertMessage" = "Êtes-vous sûr de vouloir supprimer \"%@\" ?";
+
+/* Shared - Alert - Logout */
+"logoutAlertTitle" = "Se déconnecter ?";
+"logoutButton" = "Se déconnecter";
+
+/* Cell */
+"habitCellDaysLeft" = " jours restants";
+"habitCellJourneyFormat" = "Parcours de %d jours";
+"habitCellProgressFormat" = "Jour %d sur %d";
+"habitCellStreakFormat" = "Série de %d jours";

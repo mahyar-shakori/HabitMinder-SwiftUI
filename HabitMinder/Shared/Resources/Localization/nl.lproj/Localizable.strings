@@ -6,129 +6,57 @@
   
 */
 
-"appStartupErrorTitle" = "HabitMinder kan niet worden gestart";
-"appStartupErrorMessage" = "Opslag kon niet worden voorbereid. Start de app opnieuw.";
+/* AppStartupError */
+"appStartupErrorTitle" = "Kan Rituals niet starten";
+"appStartupErrorMessage" = "De opslag kon niet worden voorbereid. Start de app opnieuw.";
+
+/* Header */
+"headerTitle" = "Rituelen";
+
+/* Intro Screen */
 "introFirstTitle" = "Gezonde gewoonte";
-"introFirstDescription" = "Er wordt geschat dat het 21 dagen duurt voordat mensen een nieuwe gewoonte vormen. Introduceer een gezonde gewoonte in je leven met de 21 dagen-app.";
+"introFirstDescription" = "Er wordt geschat dat mensen 21 dagen nodig hebben om een nieuwe gewoonte te vormen. Introduceer een gezonde gewoonte in je leven met de 21 Days-app.";
 "introSecondTitle" = "Slechte gewoonte";
-"introSecondDescription" = "Vergeet niet voor je lichaam te zorgen. Je kunt een slechte gewoonte veranderen door deze te vervangen door een goede. Dat kun je doen met deze 21 dagen-app.";
+"introSecondDescription" = "Vergeet niet goed voor je lichaam te zorgen. Je kunt een slechte gewoonte veranderen door deze te vervangen door een goede gewoonte. Met deze 21 Days-app kun je het.";
 "skipButton" = "Overslaan";
 "nextButton" = "Volgende";
+
+/* SignIn Screen */
 "hiDialog" = "Hoi, hoe mogen we je noemen?";
-"userNamePlaceholder" = "Vul je naam in";
+"signIn" = "Voer je naam in of log in met Apple";
+"or" = "of";
+"userNamePlaceholder" = "Voer je naam in";
 "continueButton" = "Doorgaan";
-"error" = "Kom op! Je kunt ons je naam wel vertellen :)";
+"error" = "Kom op! Je kunt ons je naam vertellen :)";
+
+/* Welcome Screen */
 "welcome" = "Welkom, ";
-"guest" = "Welkom, gast";
-"defaultQuote" = "Alles is mogelijk, met genoeg tijd!";
-"emptyView" = "Er is nog geen gewoonte toegevoegd! Klik op de menuknop om een gewoonte toe te voegen.";
-"watchEmptyView" = "Er is nog geen gewoonte toegevoegd!";
-"addHabitTitle" = "Gewoonte toevoegen";
-"addHabitIntroDescription" = "Maak een bewust ritueel met een duidelijk ritme, herinnering en toewijding.";
-"editHabitTitle" = "Gewoonte bewerken";
-"editHabitIntroDescription" = "Verfijn je ritueeldetails terwijl je voortgang gericht en bewust blijft.";
-"missHabitToast" = "Je gewoonte is opnieuw gestart!";
-"missHabitButton" = "Gemist! Opnieuw beginnen";
-"habitHistoryTitle" = "Gewoontegeschiedenis";
-"settingTitle" = "Instellingen";
-"userName" = "Naam";
-"Language" = "Taal";
-"appColor" = "App-kleur";
-"setColor" = "Kleur instellen";
-"selectLanguage" = "Taal selecteren";
-"chooseColor" = "Kies kleur";
-"pickColor" = "Kies een kleur";
-"defaultColor" = "Standaardkleur";
-"profile" = "Profiel";
-"editUserName" = "Naam bewerken";
-"enterNewUserName" = "Voer een nieuwe naam in";
-"profilePhoto" = "Profielfoto";
-"changePhoto" = "Foto wijzigen";
-"memberSinceFormat" = "Lid sinds %@";
-"preferences" = "Voorkeuren";
-"support" = "Ondersteuning";
-"settingsAppSection" = "App";
-"notifications" = "Meldingen";
-"notificationsSubtitle" = "Beheer dagelijkse herinneringen";
-"appTheme" = "App-thema";
-"appThemeSubtitle" = "Weergave aanpassen";
-"appThemeIntroTitle" = "Personaliseer rituelen";
-"appThemeIntroDescription" = "Personaliseer je bewuste ritueelervaring met kleuren en weergave die bij je passen.";
-"appearanceSection" = "Weergave";
-"appearanceLight" = "Licht";
-"appearanceDark" = "Donker";
-"appearanceSystem" = "Systeem (Auto)";
-"accentColorSection" = "Kleur";
-"customColor" = "Aangepaste kleur";
-"customColorSubtitle" = "Kies elke kleur die je wilt";
-"defaultColorSubtitle" = "Terug naar de Ritual-standaard";
-"helpSupport" = "Help & ondersteuning";
-"helpSupportSubtitle" = "FAQs en contact";
-"rateUs" = "Beoordeel ons";
-"rateUsSubtitle" = "Beoordeel Rituals in de App Store";
-"logoutSubtitle" = "Veilig uitloggen";
-"appVersionFormat" = "Rituals versie %@";
-"versionTagline" = "ONTWORPEN VOOR BEWUSTE VOORUITGANG";
-"habitPlaceholder" = "Titel van de gewoonte";
-"saveButton" = "Opslaan";
-"cancelButton" = "Annuleren";
-"okButton" = "OK";
-"yesButton" = "Ja";
-"noButton" = "Nee";
-"backButton" = "Terug";
-"networkAlertTitle" = "Netwerkfout";
-"networkAlertUnknownError" = "Onbekende fout opgetreden.";
-"networkAlertInvalidURL" = "Ongeldige URL";
-"networkAlertDecodingFailed" = "Kan reactie niet decoderen.";
-"networkAlertBadResponse" = "Ongeldige reactie of fout van de server.";
-"networkAlertInvalidMultipartBody" = "Kan multipart body niet opbouwen.";
-"logoutAlertTitle" = "Uitloggen";
-"logoutAlertMessage" = "Weet je zeker dat je wilt uitloggen? Al je gegevens worden permanent verwijderd.";
-"deleteHabitAlertTitle" = "Gewoonte verwijderen";
-"deleteHabitAlertMessage" = "Weet je zeker dat je deze gewoonte wilt verwijderen?";
-"deleteHabitNamedAlertMessage" = "Weet je zeker dat je \"%@\" wilt verwijderen?";
-"editHabitAlertTitle" = "Gewoonte bewerken";
-"editHabitAlertMessage" = "Weet je zeker dat je deze gewoonte opnieuw wilt starten?";
-"dropDownAddNewHabit" = "Nieuwe gewoonte toevoegen";
-"dropDownFutureHabit" = "Toekomstige gewoonte";
-"dropDownEditHabitList" = "Herorden Gewoontes";
-"dropDownSetting" = "Instellingen";
-"dropDownLogout" = "Uitloggen";
-"HabitCellDaysLeft" = " dagen resterend";
-"homeTabHabits" = "Gewoontes";
-"homeTabHistory" = "Geschiedenis";
-"homeTabSettings" = "Instellingen";
-"homeHeaderTitle" = "Rituelen";
+"guest" = "Welkom, Gast";
+
+/* Tabs */
+"habitsTab" = "Gewoontes";
+"historyTab" = "Geschiedenis";
+"settingsTab" = "Instellingen";
+
+/* Home Screen */
 "homeListTitle" = "Dagelijkse gewoontes";
-"homeListSubtitle" = "Focus vandaag op je ritueel";
-"homeQuoteFormat" = "\"%@\"";
+"homeListSubtitle" = "Richt je op je ritueel voor vandaag";
+"defaultQuote" = "Alles is mogelijk, met genoeg tijd!";
 "homeDefaultAuthor" = "Edward Corey";
-"homeAuthorFormat" = "- %@";
+"emptyView" = "Er zijn nog geen gewoontes toegevoegd! Tik op de menuknop om een gewoonte toe te voegen.";
+"watchEmptyView" = "Er zijn nog geen gewoontes toegevoegd!";
+
+/* AddHabit Screen */
+"addHabitTitle" = "Gewoonte toevoegen";
+"addHabitIntroDescription" = "Creëer een bewust ritueel met een duidelijk ritme, herinnering en toewijding.";
 "habitNotificationAlertTitle" = "Meldingen staan uit";
-"habitNotificationAlertMessage" = "Schakel meldingen in Instellingen in om gewoonteherinneringen te gebruiken.";
-"habitInAppNotificationAlertMessage" = "Schakel Meldingen toestaan en Dagelijkse herinneringen in de Rituals-instellingen in om herinneringstijden toe te voegen.";
+"habitNotificationAlertMessage" = "Schakel meldingen in via Instellingen om herinneringen voor gewoontes te gebruiken.";
+"habitInAppNotificationAlertMessage" = "Schakel 'Sta meldingen toe' en dagelijkse herinneringen in via de Rituals-instellingen om herinneringstijden toe te voegen.";
 "habitNotificationSettingsButton" = "Instellingen";
-"habitReminderNotificationTitle" = "Ritueelherinnering";
-"habitReminderNotificationBodyFormat" = "Vergeet je %@ niet.";
-"journeyCompletionNotificationTitle" = "Reis voltooid";
-"journeyCompletionNotificationBodyFormat" = "Je hebt je 21-daagse %@-uitdaging voltooid.";
-"notificationSettingsIntroTitle" = "Rituelen instellen";
-"notificationSettingsIntroDescription" = "Blijf verbonden met je reis zonder overweldigd te raken. Kies de momenten die voor jou het belangrijkst zijn.";
-"notificationSettingsGeneral" = "Algemeen";
-"notificationSettingsAllowNotifications" = "Meldingen toestaan";
-"notificationSettingsAllowDescription" = "Schakel in om herinneringen en updates van Rituals te ontvangen.";
-"notificationSettingsRitualReminders" = "Ritueelherinneringen";
-"notificationSettingsDailyReminders" = "Dagelijkse herinneringen";
-"notificationSettingsReminderTime" = "Herinneringstijd";
-"notificationSettingsMotivation" = "Motivatie";
-"notificationSettingsDailyQuotes" = "Dagelijkse quotes";
-"notificationSettingsDailyQuotesDescription" = "Ontvang een bewuste quote om je ochtend met intentie te beginnen.";
-"notificationSettingsJourneyCompletion" = "Reis voltooid";
-"notificationSettingsJourneyCompletionDescription" = "Wanneer je een 21-daagse uitdaging afrondt";
 "habitIdentitySectionTitle" = "Ritueel identiteit";
-"habitTitlePlaceholder" = "Bijv. ochtendpagina's";
+"habitTitlePlaceholder" = "Bijv. Ochtendpagina's";
 "habitVisualAnchorSectionTitle" = "Visueel anker";
-"habitSelectIconHint" = "Kies een icoon";
+"habitSelectIconHint" = "Selecteer een pictogram";
 "habitFutureToggle" = "Toekomstige gewoonte";
 "habitFrequencySectionTitle" = "Frequentie";
 "habitCommitmentSectionTitle" = "Toewijding";
@@ -139,25 +67,91 @@
 "habitFrequencyWeekly" = "Wekelijks";
 "habitFrequencyCustom" = "Aangepast";
 "habitCommitmentDaysFormat" = "%d dagen";
-"habitCellJourneyFormat" = "%d-daagse reis";
-"habitCellProgressFormat" = "Dag %d van %d";
-"habitCellStreakFormat" = "%d dagen reeks";
-"habitHistoryHeaderTitle" = "Rituelen";
+
+/* EditHabit Screen */
+"editHabitTitle" = "Gewoonte bewerken";
+"editHabitIntroDescription" = "Verfijn je ritueel terwijl je voortgang gefocust en bewust blijft.";
+"missHabitToast" = "Je gewoonte begint opnieuw!";
+"missHabitButton" = "Gemist! Opnieuw starten";
+
+/* HabitHistory Screen */
 "habitHistoryStartNowButton" = "Nu starten";
 "habitHistoryCompletedTab" = "Voltooid";
-"habitHistoryFutureTab" = "Toekomstig";
-"habitHistoryMasteryTitle" = "21 dagen meesterschap";
+"habitHistoryFutureTab" = "Toekomst";
+"habitHistoryMasteryTitle" = "21-dagen beheersing";
 "habitHistoryPlannedTitle" = "Geplande reizen";
 "habitHistoryPlannedSubtitle" = "Zorg voor je toekomstige zelf door deze herstellende gewoontes voor te bereiden. Kleine stappen leiden tot blijvende verandering.";
 "habitHistoryCompletedStatus" = "VOLTOOID";
 "habitHistoryEmptyCompleted" = "Nog geen voltooide reizen";
 "habitHistoryRitualTipLabel" = "RITUEELTIP";
-"habitHistoryRitualTipText" = "\"Het geheim van je toekomst ligt verborgen in je dagelijkse routine.\" Begin met slechts één gewoonte voor consistentie.";
+"habitHistoryRitualTipText" = "\"Het geheim van je toekomst ligt verborgen in je dagelijkse routine.\" Begin met één gewoonte om consistentie te behouden.";
 "habitHistoryStartInDaysFormat" = "Over %d dagen";
 "habitHistoryAchievementSingular" = "%d prestatie";
 "habitHistoryAchievementPlural" = "%d prestaties";
 "habitHistoryFinishedDateFormat" = "Voltooid op %@";
 "habitHistoryStreakDaysFormat" = "REEKS: %d DAGEN";
+
+/* Settings Screen */
+"userName" = "Naam";
+"profile" = "Profiel";
+"preferences" = "Voorkeuren";
+"settingsAppSection" = "App";
+"notifications" = "Meldingen";
+"notificationsSubtitle" = "Beheer dagelijkse herinneringen";
+"appTheme" = "App-thema";
+"appThemeSubtitle" = "Pas het uiterlijk aan";
+"rateUs" = "Beoordeel ons";
+"rateUsSubtitle" = "Beoordeel Rituals in de App Store";
+"versionTagline" = "ONTWORPEN VOOR BEWUSTE VOORUITGANG";
+"appVersionFormat" = "Rituals-versie %@";
+"memberSinceFormat" = "Lid sinds %@";
+
+/* Profile Screen */
+"userName" = "Naam";
+"editUserName" = "Naam bewerken";
+"enterNewUserName" = "Nieuwe naam invoeren";
+"changePhoto" = "Foto wijzigen";
+"email" = "E-mail";
+
+/* Theme Screen */
+"defaultColor" = "Standaardkleur";
+"appThemeIntroTitle" = "Personaliseer Rituals";
+"appThemeIntroDescription" = "Personaliseer je bewuste ritueelervaring met kleuren en een weergave die bij je passen.";
+"appearanceSection" = "Weergave";
+"appearanceLight" = "Licht";
+"appearanceDark" = "Donker";
+"appearanceSystem" = "Systeem (Automatisch)";
+"accentColorSection" = "Kleur";
+"customColor" = "Aangepaste kleur";
+"customColorSubtitle" = "Kies elke kleur die je wilt";
+"defaultColorSubtitle" = "Keer terug naar de standaardkleur van Rituals";
+
+/* Notification Screen */
+"notificationSettingsIntroTitle" = "Rituals configureren";
+"notificationSettingsIntroDescription" = "Blijf verbonden met je reis zonder je overweldigd te voelen. Kies de momenten die voor jou het belangrijkst zijn.";
+"notificationSettingsAllowNotifications" = "Sta meldingen toe";
+"notificationSettingsAllowDescription" = "Schakel in om herinneringen en updates van Rituals te ontvangen.";
+"notificationSettingsRitualReminders" = "Ritueelherinneringen";
+"notificationSettingsDailyReminders" = "Dagelijkse herinneringen";
+"notificationSettingsMotivation" = "Motivatie";
+"notificationSettingsDailyQuotes" = "Dagelijkse citaten";
+"notificationSettingsDailyQuotesDescription" = "Ontvang een bewuste quote om je ochtend doelgericht te beginnen.";
+"notificationSettingsJourneyCompletion" = "Voltooien van reis";
+"notificationSettingsJourneyCompletionDescription" = "Wanneer je een uitdaging van 21 dagen voltooit";
+
+/* Notification */
+"habitReminderNotificationTitle" = "Gewoonteherinnering";
+"journeyCompletionNotificationTitle" = "Reis voltooid";
+"habitReminderNotificationBodyFormat" = "Vergeet je %@ niet.";
+"journeyCompletionNotificationBodyFormat" = "Je hebt je 21-daagse %@-uitdaging voltooid.";
+
+/* Shared */
+"saveButton" = "Opslaan";
+"cancelButton" = "Annuleren";
+"okButton" = "OK";
+"yesButton" = "Ja";
+
+/* Shared - Weekday */
 "weekdaySundayShort" = "Zo";
 "weekdayMondayShort" = "Ma";
 "weekdayTuesdayShort" = "Di";
@@ -165,3 +159,26 @@
 "weekdayThursdayShort" = "Do";
 "weekdayFridayShort" = "Vr";
 "weekdaySaturdayShort" = "Za";
+
+/* Shared - Alert - Network */
+"networkAlertTitle" = "Netwerkfout";
+"networkInvalidURL" = "De URL van het verzoek is ongeldig.";
+"networkUnknownError" = "Er is een onbekende fout opgetreden.";
+"networkInvalidResponse" = "Een ongeldig antwoord van de server ontvangen.";
+"networkUnacceptableStatusCode" = "De server heeft een fout geretourneerd (%d).";
+"networkDecodingFailed" = "Het antwoord van de server kon niet worden verwerkt.";
+
+/* Shared - Alert - Habit */
+"deleteHabitAlertTitle" = "Gewoonte verwijderen";
+"deleteHabitAlertMessage" = "Weet je zeker dat je deze gewoonte wilt verwijderen?";
+"deleteHabitNamedAlertMessage" = "Weet je zeker dat je \"%@\" wilt verwijderen?";
+
+/* Shared - Alert - Logout */
+"logoutAlertTitle" = "Uitloggen?";
+"logoutButton" = "Uitloggen";
+
+/* Cell */
+"habitCellDaysLeft" = " dagen resterend";
+"habitCellJourneyFormat" = "%d-daagse reis";
+"habitCellProgressFormat" = "Dag %d van %d";
+"habitCellStreakFormat" = "%d dagen reeks";

@@ -52,7 +52,7 @@ struct HomeView: View {
     }
 
     private func daysLeftText(for habit: HabitData) -> String {
-        habit.daysLeft.description + L10n.Cell.Habit.daysLeft
+        habit.daysLeft.description + L10n.Cell.daysLeft
     }
 }
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    private var homeViewModel: HomeViewModel
+    private let homeViewModel: HomeViewModel
     private let navigateToProfileSettings: () -> Void
     @EnvironmentObject private var themeManager: ThemeManager
     @State private var showDeleteAlert = false
@@ -60,7 +60,7 @@ struct HomeView: View {
 
     private var pageHeader: some View {
         AppHeaderView(
-            title: L10n.HomePage.headerTitle,
+            title: L10n.header.title,
             systemImage: SystemIconName.leaf,
             onProfileTap: navigateToProfileSettings
         )
@@ -144,14 +144,14 @@ struct HomeView: View {
                 .font(.AppFont.rooneySansBold.size(FontSize.small))
                 .foregroundStyle(themeManager.appPrimary)
 
-            Text(L10n.HomePage.quoted(homeViewModel.displayedQuote))
+            Text(homeViewModel.displayedQuote.quoted())
                 .font(.AppFont.rooneySansRegular.size(FontSize.medium))
                 .italic()
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
 
             if homeViewModel.displayedAuthor.isNotEmpty {
-                Text(homeViewModel.displayedAuthor)
+                Text(homeViewModel.displayedAuthor.asAuthor())
                     .font(.AppFont.rooneySansRegular.size(FontSize.medium))
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity, alignment: .trailing)

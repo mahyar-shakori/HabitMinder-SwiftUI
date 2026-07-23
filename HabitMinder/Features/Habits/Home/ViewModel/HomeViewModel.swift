@@ -30,12 +30,11 @@ final class HomeViewModel {
     }
 
     var displayedQuote: String {
-        shouldUseDefaultQuote ? L10n.HomePage.defaultQuote : quote
+        quote
     }
 
     var displayedAuthor: String {
-        let displayedAuthor = shouldUseDefaultQuote ? L10n.HomePage.defaultAuthor : author
-        return displayedAuthor.isEmpty ? String() : L10n.HomePage.author(displayedAuthor)
+        author
     }
 
     var deleteConfirmationMessage: String {

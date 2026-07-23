@@ -42,7 +42,7 @@ struct SettingsView: View {
 
     private var pageHeader: some View {
         AppHeaderView(
-            title: L10n.HabitHistoryPage.headerTitle,
+            title: L10n.header.title,
             systemImage: SystemIconName.leaf,
             onProfileTap: { settingsViewModel.showProfileSettings() }
         )
@@ -71,11 +71,11 @@ struct SettingsView: View {
 
     private var settingsContent: some View {
         VStack(alignment: .leading, spacing: Spacing.x5Large) {
-            SettingsSection(title: L10n.SettingPage.profile, style: .primary) {
+            SettingsSection(title: L10n.SettingsPage.profile, style: .primary) {
                 VStack(spacing: Spacing.medium) {
                     SettingsActionRow(
                         iconName: SystemIconName.profile,
-                        title: L10n.SettingPage.profile,
+                        title: L10n.SettingsPage.profile,
                         subtitle: settingsViewModel.userName,
                         iconBackgroundColor: themeManager.appSecondary.opacity(Opacity.subtle),
                         showsChevron: true,
@@ -85,12 +85,12 @@ struct SettingsView: View {
                 }
             }
 
-            SettingsSection(title: L10n.SettingPage.preferences, style: .primary) {
+            SettingsSection(title: L10n.SettingsPage.preferences, style: .primary) {
                 VStack(spacing: Spacing.medium) {
                     SettingsActionRow(
                         iconName: SystemIconName.bell,
-                        title: L10n.SettingPage.notifications,
-                        subtitle: L10n.SettingPage.notificationsSubtitle,
+                        title: L10n.SettingsPage.notifications,
+                        subtitle: L10n.SettingsPage.notificationsSubtitle,
                         iconBackgroundColor: themeManager.appSecondary.opacity(Opacity.subtle),
                         showsChevron: true,
                         isTitleBold: false,
@@ -99,8 +99,8 @@ struct SettingsView: View {
 
                     SettingsActionRow(
                         iconName: SystemIconName.paintpalette,
-                        title: L10n.SettingPage.appTheme,
-                        subtitle: L10n.SettingPage.appThemeSubtitle,
+                        title: L10n.SettingsPage.appTheme,
+                        subtitle: L10n.SettingsPage.appThemeSubtitle,
                         iconBackgroundColor: themeManager.appSecondary.opacity(Opacity.subtle),
                         showsChevron: true,
                         isTitleBold: false,
@@ -109,12 +109,12 @@ struct SettingsView: View {
                 }
             }
 
-            SettingsSection(title: L10n.SettingPage.appSection, style: .primary) {
+            SettingsSection(title: L10n.SettingsPage.appSection, style: .primary) {
                 VStack(spacing: Spacing.medium) {
                     SettingsActionRow(
                         iconName: SystemIconName.star,
-                        title: L10n.SettingPage.rateUs,
-                        subtitle: L10n.SettingPage.rateUsSubtitle,
+                        title: L10n.SettingsPage.rateUs,
+                        subtitle: L10n.SettingsPage.rateUsSubtitle,
                         iconBackgroundColor: themeManager.appSecondary.opacity(Opacity.subtle),
                         isTitleBold: false
                     ) {
@@ -129,11 +129,11 @@ struct SettingsView: View {
 
     private var versionFooter: some View {
         VStack(spacing: Spacing.x2Small) {
-            Text(L10n.SettingPage.appVersion(settingsViewModel.appVersion))
+            Text(L10n.SettingsPage.appVersion(settingsViewModel.appVersion))
                 .font(.AppFont.rooneySansRegular.size(FontSize.small))
                 .foregroundStyle(.secondary)
 
-            Text(L10n.SettingPage.versionTagline)
+            Text(L10n.SettingsPage.versionTagline)
                 .font(.AppFont.rooneySansBold.size(FontSize.xSmall))
                 .foregroundStyle(.secondary.opacity(Opacity.sectionTitle))
         }

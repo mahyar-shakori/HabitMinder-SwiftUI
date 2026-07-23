@@ -39,19 +39,19 @@ struct MainTabView: View {
         TabView(selection: $selectedTab) {
             habitsTab
                 .tabItem {
-                    Label(L10n.HomePage.tabHabits, systemImage: SystemIconName.calendar)
+                    Label(L10n.TabView.habitsTab, systemImage: SystemIconName.calendar)
                 }
                 .tag(MainTab.habits)
 
             historyTab
                 .tabItem {
-                    Label(L10n.HomePage.tabHistory, systemImage: SystemIconName.wandAndStars)
+                    Label(L10n.TabView.historyTab, systemImage: SystemIconName.wandAndStars)
                 }
                 .tag(MainTab.history)
 
             settingsTab
                 .tabItem {
-                    Label(L10n.HomePage.tabSettings, systemImage: SystemIconName.gearshape)
+                    Label(L10n.TabView.settingsTab, systemImage: SystemIconName.gearshape)
                 }
                 .tag(MainTab.settings)
         }

@@ -18,12 +18,11 @@ enum NetworkError: Error, LocalizedError, Equatable, Sendable {
         case .invalidURL:
             return L10n.Alert.Network.invalidURL
         case .invalidResponse:
-            return L10n.Alert.Network.decodingFailed
+            return L10n.Alert.Network.invalidResponse
         case .unacceptableStatusCode(let code):
-            // Should Change
-            return "(BAD RESPONSE CODE: \(code))"
+            return L10n.Alert.Network.unacceptableStatusCode(code)
         case .decodingFailed:
-            return L10n.Alert.Network.invalidMultipartBody
+            return L10n.Alert.Network.decodingFailed
         }
     }
 }

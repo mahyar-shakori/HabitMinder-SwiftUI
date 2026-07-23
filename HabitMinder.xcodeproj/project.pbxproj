@@ -99,11 +99,12 @@
 				Features/Intro/Onboarding/View/IntroPageState.swift,
 				Features/Intro/Onboarding/View/IntroView.swift,
 				Features/Intro/Onboarding/ViewModel/IntroViewModel.swift,
-				Features/Intro/SetName/Coordinator/SetNameCoordinating.swift,
-				Features/Intro/SetName/Coordinator/SetNameCoordinator.swift,
-				Features/Intro/SetName/View/BorderState.swift,
-				Features/Intro/SetName/View/SetNameView.swift,
-				Features/Intro/SetName/ViewModel/SetNameViewModel.swift,
+				Features/Intro/SignIn/Coordinator/SetNameCoordinating.swift,
+				Features/Intro/SignIn/Coordinator/SetNameCoordinator.swift,
+				Features/Intro/SignIn/Model/AppleSignInAccount.swift,
+				Features/Intro/SignIn/View/BorderState.swift,
+				Features/Intro/SignIn/View/SignInView.swift,
+				Features/Intro/SignIn/ViewModel/SignInViewModel.swift,
 				Features/Intro/Welcome/Coordinator/WelcomeCoordinating.swift,
 				Features/Intro/Welcome/Coordinator/WelcomeCoordinator.swift,
 				Features/Intro/Welcome/View/WelcomeView.swift,
@@ -119,8 +120,8 @@
 				Features/ManageHabit/EditHabit/ViewModel/EditHabitViewModel.swift,
 				Features/Settings/Notification/View/NotificationSettingsView.swift,
 				Features/Settings/Notification/ViewModel/NotificationSettingsViewModel.swift,
-				Features/Settings/Profile/View/ProfileSettingsView.swift,
-				Features/Settings/Profile/ViewModel/ProfileSettingsViewModel.swift,
+				Features/Settings/Profile/View/ProfileView.swift,
+				Features/Settings/Profile/ViewModel/ProfileViewModel.swift,
 				Features/Settings/Settings/Coordinator/SettingsCoordinating.swift,
 				Features/Settings/Settings/Coordinator/SettingsCoordinator.swift,
 				Features/Settings/Settings/UseCase/LogoutUseCase.swift,
@@ -152,6 +153,7 @@
 				Shared/CustomViews/Settings/SettingsToggleRow.swift,
 				Shared/CustomViews/Toast/ToastLabel.swift,
 				"Shared/Extensions/Foundation/Date+DayCounter.swift",
+				"Shared/Extensions/Foundation/String+Formatting.swift",
 				"Shared/Extensions/Foundation/Task+Delay.swift",
 				"Shared/Extensions/Foundation/Types+Helpers.swift",
 				"Shared/Extensions/SwiftUI/Color+RGBA.swift",
@@ -329,6 +331,11 @@
 				en,
 				Base,
 				nl,
+				de,
+				fr,
+				es,
+				"fa-IR",
+				it,
 			);
 			mainGroup = 3E89D6ED2D9869F000E8414C;
 			minimizedProjectReferenceProxies = 1;
@@ -448,6 +455,7 @@
 				SDKROOT = iphoneos;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -508,6 +516,7 @@
 				SDKROOT = iphoneos;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};

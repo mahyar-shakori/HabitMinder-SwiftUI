@@ -60,14 +60,14 @@ struct HabitListRowView: View {
 
     private var progressHeader: some View {
         HStack {
-            Text(L10n.Cell.Habit.journey(item.commitmentDays))
+            Text(L10n.Cell.journey(item.commitmentDays))
                 .font(.AppFont.rooneySansRegular.size(FontSize.medium))
                 .textCase(.uppercase)
                 .foregroundStyle(.secondary)
 
             Spacer()
 
-            Text(L10n.Cell.Habit.progressDay(completed: completedDays, total: item.commitmentDays))
+            Text(L10n.Cell.progressDay(completed: completedDays, total: item.commitmentDays))
                 .font(.AppFont.rooneySansRegular.size(FontSize.medium))
                 .foregroundStyle(.secondary)
         }
@@ -95,7 +95,7 @@ struct HabitListRowView: View {
         HStack(spacing: Spacing.x2Small) {
             Image(systemName: SystemIconName.flameFill)
 
-            Text(L10n.Cell.Habit.streak(completedDays))
+            Text(L10n.Cell.streak(completedDays))
         }
         .font(.AppFont.rooneySansRegular.size(FontSize.medium))
         .foregroundStyle(.secondary)

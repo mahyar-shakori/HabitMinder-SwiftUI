@@ -15,11 +15,11 @@ enum AppAppearanceMode: String, CaseIterable {
     var title: String {
         switch self {
         case .light:
-            return L10n.SettingPage.appearanceLight
+            return L10n.ThemePage.appearanceLight
         case .dark:
-            return L10n.SettingPage.appearanceDark
+            return L10n.ThemePage.appearanceDark
         case .system:
-            return L10n.SettingPage.appearanceSystem
+            return L10n.ThemePage.appearanceSystem
         }
     }
 

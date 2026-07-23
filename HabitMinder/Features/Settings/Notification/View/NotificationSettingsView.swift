@@ -50,8 +50,8 @@ struct NotificationSettingsView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: Spacing.x5Large) {
                 PageIntroView(
-                    title: L10n.NotificationSettings.introTitle,
-                    description: L10n.NotificationSettings.introDescription
+                    title: L10n.NotificationPage.introTitle,
+                    description: L10n.NotificationPage.introDescription
                 )
                 generalSection
                 ritualRemindersSection
@@ -63,29 +63,29 @@ struct NotificationSettingsView: View {
         }
         .scrollIndicators(.hidden)
         .background(.appGray)
-        .navigationTitle(L10n.SettingPage.notifications)
+        .navigationTitle(L10n.SettingsPage.notifications)
         .navigationBarTitleDisplayMode(.inline)
     }
 
     private var generalSection: some View {
-        SettingsSection(title: L10n.NotificationSettings.general, style: .primary) {
+        SettingsSection(title: L10n.NotificationPage.general, style: .primary) {
             SettingsToggleRow(
                 iconName: SystemIconName.bell,
-                title: L10n.NotificationSettings.allowNotifications,
+                title: L10n.NotificationPage.allowNotifications,
                 isOn: allowNotificationsBinding
             )
 
-            Text(L10n.NotificationSettings.allowNotificationsDescription)
+            Text(L10n.NotificationPage.allowNotificationsDescription)
                 .sectionDescriptionStyle()
         }
     }
 
     private var ritualRemindersSection: some View {
-        SettingsSection(title: L10n.NotificationSettings.ritualReminders, style: .primary) {
+        SettingsSection(title: L10n.NotificationPage.ritualReminders, style: .primary) {
             VStack(spacing: Spacing.none) {
                 SettingsToggleRow(
                     iconName: SystemIconName.calendar,
-                    title: L10n.NotificationSettings.dailyReminders,
+                    title: L10n.NotificationPage.dailyReminders,
                     isOn: dailyRemindersBinding,
                     isEnabled: viewModel.allowNotifications,
                     clipsBackground: false
@@ -96,7 +96,7 @@ struct NotificationSettingsView: View {
 
                 SettingsToggleRow(
                     iconName: SystemIconName.sparkles,
-                    title: L10n.NotificationSettings.journeyCompletion,
+                    title: L10n.NotificationPage.journeyCompletion,
                     isOn: journeyCompletionBinding,
                     isEnabled: viewModel.allowNotifications,
                     clipsBackground: false
@@ -105,20 +105,20 @@ struct NotificationSettingsView: View {
             .background(.appWhite)
             .clipShape(RoundedRectangle(cornerRadius: CornerRadius.medium))
 
-            Text(L10n.NotificationSettings.journeyCompletionDescription)
+            Text(L10n.NotificationPage.journeyCompletionDescription)
                 .sectionDescriptionStyle()
         }
     }
 
     private var motivationSection: some View {
-        SettingsSection(title: L10n.NotificationSettings.motivation, style: .primary) {
+        SettingsSection(title: L10n.NotificationPage.motivation, style: .primary) {
             SettingsToggleRow(
                 iconName: SystemIconName.quoteBubble,
-                title: L10n.NotificationSettings.dailyQuotes,
+                title: L10n.NotificationPage.dailyQuotes,
                 isOn: dailyQuotesBinding
             )
 
-            Text(L10n.NotificationSettings.dailyQuotesDescription)
+            Text(L10n.NotificationPage.dailyQuotesDescription)
                 .sectionDescriptionStyle()
         }
     }

@@ -8,15 +8,15 @@
 import SwiftData
 import SwiftUI
 
-struct ProfileSettingsView: View {
-    private var viewModel: ProfileSettingsViewModel
+struct ProfileView: View {
+    private let profileViewModel: ProfileViewModel
     @EnvironmentObject private var themeManager: ThemeManager
     @State private var isEditingUserName = false
     @State private var showLogoutAlert = false
     @State private var editedUserName = ""
 
-    init(viewModel: ProfileSettingsViewModel) {
-        self.viewModel = viewModel
+    init(profileViewModel: ProfileViewModel) {
+        self.profileViewModel = profileViewModel
     }
 
     var body: some View {
@@ -35,26 +35,26 @@ struct ProfileSettingsView: View {
             logoutSection
         }
         .background(.appGray)
-        .navigationTitle(L10n.SettingPage.profile)
+        .navigationTitle(L10n.SettingsPage.profile)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            viewModel.loadProfile()
-            editedUserName = viewModel.userName
+            profileViewModel.loadProfile()
+            editedUserName = profileViewModel.userName
         }
-        .alert(L10n.SettingPage.editUserName, isPresented: $isEditingUserName) {
-            TextField(L10n.SettingPage.enterNewUserName, text: $editedUserName)
+        .alert(L10n.ProfilePage.editUserName, isPresented: $isEditingUserName) {
+            TextField(L10n.ProfilePage.enterNewUserName, text: $editedUserName)
 
             Button(L10n.Shared.saveButton) {
                 saveEditedUserName()
             }
 
             Button(L10n.Shared.cancelButton, role: .cancel) {
-                editedUserName = viewModel.userName
+                editedUserName = profileViewModel.userName
             }
         }
-        .alert("Log out?", isPresented: $showLogoutAlert) {
-            Button("Log out", role: .destructive) {
-                viewModel.logout()
+        .alert(L10n.Alert.Logout.title, isPresented: $showLogoutAlert) {
+            Button(L10n.Alert.Logout.logoutButton, role: .destructive) {
+                profileViewModel.logout()
             }
 
             Button(L10n.Shared.cancelButton, role: .cancel) {
@@ -67,17 +67,17 @@ struct ProfileSettingsView: View {
     private var profilePhotoSection: some View {
         VStack(spacing: Spacing.medium) {
             ProfilePhotoPickerButton(
-                imageData: viewModel.profileImageData,
+                imageData: profileViewModel.profileImageData,
                 imageSize: Size.emptyImage,
                 placeholderPadding: Spacing.x5Large,
                 borderColor: themeManager.appPrimary.opacity(Opacity.subtleBorder),
                 editIconSize: FontSize.x5Large,
                 editBadgeSize: Size.x2Large,
                 editBadgeOffset: Spacing.none,
-                onImagePicked: viewModel.setProfileImage
+                onImagePicked: profileViewModel.setProfileImage
             )
 
-            Text(L10n.SettingPage.changePhoto)
+            Text(L10n.ProfilePage.changePhoto)
                 .font(.AppFont.rooneySansBold.size(FontSize.x4Large))
                 .foregroundStyle(themeManager.appPrimary)
         }
@@ -88,12 +88,12 @@ struct ProfileSettingsView: View {
     }
 
     private var profileDetailsSection: some View {
-        SettingsSection(title: L10n.SettingPage.profile, style: .primary) {
+        SettingsSection(title: L10n.SettingsPage.profile, style: .primary) {
             VStack(spacing: Spacing.medium) {
                 SettingsActionRow(
                     iconName: SystemIconName.pencil,
-                    title: L10n.SettingPage.editUserName,
-                    subtitle: viewModel.userName,
+                    title: L10n.ProfilePage.editUserName,
+                    subtitle: profileViewModel.userName,
                     showsChevron: true,
                     isTitleBold: false,
                     action: startEditingUserName
@@ -114,7 +114,7 @@ struct ProfileSettingsView: View {
             )
 
             VStack(alignment: .leading, spacing: Spacing.x3Small) {
-                Text("Email")
+                Text(L10n.ProfilePage.email)
                     .font(.AppFont.rooneySansRegular.size(FontSize.x4Large))
                     .foregroundStyle(.secondary)
 
@@ -151,29 +151,29 @@ struct ProfileSettingsView: View {
     }
 
     private var profileEmailText: String {
-        viewModel.userEmail.isEmpty ? "No email saved" : viewModel.userEmail
+        profileViewModel.userEmail.isEmpty ? "No email saved" : profileViewModel.userEmail
     }
 
     private var logoutSubtitle: String {
-        viewModel.isSignedInWithApple
+        profileViewModel.isSignedInWithApple
         ? "Your iCloud data will stay available"
         : "Local account data is not synced to iCloud"
     }
 
     private var logoutAlertMessage: String {
-        viewModel.isSignedInWithApple
+        profileViewModel.isSignedInWithApple
         ? "Your habits and account settings stay synced with iCloud and will be available when you log in again."
         : "This account is local. If you delete the app or switch devices, this account data may be lost."
     }
 
     private func startEditingUserName() {
-        editedUserName = viewModel.userName
+        editedUserName = profileViewModel.userName
         isEditingUserName = true
     }
 
     private func saveEditedUserName() {
-        guard let updatedName = viewModel.updateUserName(editedUserName) else {
-            editedUserName = viewModel.userName
+        guard let updatedName = profileViewModel.updateUserName(editedUserName) else {
+            editedUserName = profileViewModel.userName
             return
         }
 
@@ -197,7 +197,7 @@ struct ProfileSettingsView: View {
         themeManager: settingsDependencies.themeManager,
         profileImageStorage: settingsDependencies.profileImageStorage
     )
-    let viewModel = ProfileSettingsViewModel(
+    let viewModel = ProfileViewModel(
         userDefaultsStorage: settingsDependencies.userDefaultsStorage,
         profileImageUseCase: settingsDependencies.profileImageUseCase,
         logoutUseCase: logoutUseCase,
@@ -205,7 +205,7 @@ struct ProfileSettingsView: View {
     )
 
     NavigationStack {
-        ProfileSettingsView(viewModel: viewModel)
+        ProfileView(profileViewModel: viewModel)
             .environmentObject(dependencies.themeManager)
     }
 }

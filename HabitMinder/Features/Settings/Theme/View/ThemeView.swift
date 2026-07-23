@@ -25,8 +25,8 @@ struct ThemeView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: Spacing.x5Large) {
                 PageIntroView(
-                    title: L10n.SettingPage.appThemeIntroTitle,
-                    description: L10n.SettingPage.appThemeIntroDescription
+                    title: L10n.ThemePage.appThemeIntroTitle,
+                    description: L10n.ThemePage.appThemeIntroDescription
                 )
                 appearanceSection
                 accentColorSection
@@ -37,7 +37,7 @@ struct ThemeView: View {
         }
         .scrollIndicators(.hidden)
         .background(.appGray)
-        .navigationTitle(L10n.SettingPage.appTheme)
+        .navigationTitle(L10n.SettingsPage.appTheme)
         .navigationBarTitleDisplayMode(.inline)
         .preferredColorScheme(activePreferredColorScheme)
         .onAppear {
@@ -49,7 +49,7 @@ struct ThemeView: View {
     }
 
     private var appearanceSection: some View {
-        SettingsSection(title: L10n.SettingPage.appearanceSection, style: .primary) {
+        SettingsSection(title: L10n.ThemePage.appearanceSection, style: .primary) {
             VStack(spacing: Spacing.none) {
                 ForEach(AppAppearanceMode.allCases, id: \.self) { mode in
                     appearanceRow(for: mode)
@@ -90,7 +90,7 @@ struct ThemeView: View {
     }
 
     private var accentColorSection: some View {
-        SettingsSection(title: L10n.SettingPage.accentColorSection, style: .primary) {
+        SettingsSection(title: L10n.ThemePage.accentColorSection, style: .primary) {
             VStack(spacing: Spacing.none) {
                 colorPickerRow
 
@@ -110,11 +110,11 @@ struct ThemeView: View {
                 SettingsRowIcon(iconName: SystemIconName.paintpalette)
 
                 VStack(alignment: .leading, spacing: Spacing.x3Small) {
-                    Text(L10n.SettingPage.customColor)
+                    Text(L10n.ThemePage.customColor)
                         .font(.AppFont.rooneySansRegular.size(FontSize.x4Large))
                         .foregroundStyle(.primary)
 
-                    Text(L10n.SettingPage.customColorSubtitle)
+                    Text(L10n.ThemePage.customColorSubtitle)
                         .font(.AppFont.rooneySansRegular.size(FontSize.medium))
                         .foregroundStyle(.secondary)
                 }
@@ -128,8 +128,8 @@ struct ThemeView: View {
     private var defaultColorRow: some View {
         SettingsActionRow(
             iconName: SystemIconName.arrowCounterclockwise,
-            title: L10n.SettingPage.defaultColor,
-            subtitle: L10n.SettingPage.defaultColorSubtitle,
+            title: L10n.ThemePage.defaultColor,
+            subtitle: L10n.ThemePage.defaultColorSubtitle,
             isTitleBold: false,
             action: resetDefaultColor
         ) {

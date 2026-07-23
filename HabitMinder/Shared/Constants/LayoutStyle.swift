@@ -20,6 +20,7 @@ enum Opacity {
     static let quiet: CGFloat = 0.08
     static let subtle: CGFloat = 0.18
     static let fieldBorder: CGFloat = 0.22
+    static let seprator: CGFloat = 0.25
     static let subtleBorder: CGFloat = 0.35
     static let secondaryTint: CGFloat = 0.4
     static let iconBackground: CGFloat = 0.45

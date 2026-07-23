@@ -10,7 +10,7 @@ import Observation
 
 @Observable
 @MainActor
-final class ProfileSettingsViewModel {
+final class ProfileViewModel {
     private(set) var userName = ""
     private(set) var userEmail = ""
     private(set) var profileImageData: Data?
@@ -70,7 +70,7 @@ final class ProfileSettingsViewModel {
     }
 
     private func loadUserName() {
-        userName = userDefaultsStorage.fetch(for: UserDefaultKeys.userName) ?? L10n.SettingPage.userName
+        userName = userDefaultsStorage.fetch(for: UserDefaultKeys.userName) ?? L10n.ProfilePage.userName
     }
 
     private func loadUserEmail() {

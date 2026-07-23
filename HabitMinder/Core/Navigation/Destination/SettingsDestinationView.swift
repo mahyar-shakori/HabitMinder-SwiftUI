@@ -41,13 +41,13 @@ struct SettingsDestinationView: View {
                 themeManager: dependencies.themeManager,
                 profileImageStorage: dependencies.profileImageStorage
             )
-            let viewModel = ProfileSettingsViewModel(
+            let viewModel = ProfileViewModel(
                 userDefaultsStorage: dependencies.userDefaultsStorage,
                 profileImageUseCase: dependencies.profileImageUseCase,
                 logoutUseCase: logoutUseCase,
                 coordinator: viewCoordinator
             )
-            ProfileSettingsView(viewModel: viewModel)
+            ProfileView(profileViewModel: viewModel)
         case .notifications:
             let viewModel = NotificationSettingsViewModel(
                 dataManager: DataManager(context: modelContext),

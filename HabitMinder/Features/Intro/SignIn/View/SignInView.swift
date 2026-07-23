@@ -1,5 +1,5 @@
 //
-//  SetNameView.swift
+//  SignIn.swift
 //  HabitMinder SwiftUI
 //
 //  Created by Mahyar on 01/04/2025.
@@ -8,18 +8,18 @@
 import AuthenticationServices
 import SwiftUI
 
-struct SetNameView: View {
-    private var setNameViewModel: SetNameViewModel
+struct SignInView: View {
+    private let signInViewModel: SignInViewModel
     @EnvironmentObject private var themeManager: ThemeManager
     @FocusState private var isFocused: Bool
     @State private var tempUserName = ""
 
-    init(setNameViewModel: SetNameViewModel) {
-        self.setNameViewModel = setNameViewModel
+    init(signInViewModel: SignInViewModel) {
+        self.signInViewModel = signInViewModel
     }
 
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(spacing: Spacing.none) {
             Spacer()
 
             headerImage
@@ -43,7 +43,7 @@ struct SetNameView: View {
         }
         .navigationBarBackButtonHidden(true)
         .onAppear {
-            tempUserName = setNameViewModel.userName
+            tempUserName = signInViewModel.userName
         }
     }
 
@@ -55,7 +55,7 @@ struct SetNameView: View {
     }
 
     private var hiText: some View {
-        Text(L10n.SetNamePage.hiDialog)
+        Text(L10n.SignInPage.hiDialog)
             .font(.AppFont.rooneySansBold.size(FontSize.x6Large))
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, Spacing.xLarge)
@@ -63,7 +63,7 @@ struct SetNameView: View {
     }
 
     private var signInChoiceText: some View {
-        Text("Enter your name, or sign in with Apple")
+        Text(L10n.SignInPage.signIn)
             .font(Font.AppFont.rooneySansRegular.size(FontSize.x2Large))
             .foregroundStyle(.secondary)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -73,7 +73,7 @@ struct SetNameView: View {
 
     private var userNameTextField: some View {
         TextField(
-            L10n.SetNamePage.userNamePlaceholder,
+            L10n.SignInPage.userNamePlaceholder,
             text: $tempUserName
         )
         .font(Font.AppFont.rooneySansRegular.size(FontSize.x2Large))
@@ -88,30 +88,30 @@ struct SetNameView: View {
         .focused($isFocused)
         .submitLabel(.done)
         .onChange(of: tempUserName) { _, newValue in
-            setNameViewModel.setUserName(newValue)
+            signInViewModel.setUserName(newValue)
         }
     }
 
     private var errorText: some View {
-        Text(setNameViewModel.errorText.isEmpty ? " " : setNameViewModel.errorText)
+        Text(signInViewModel.errorText.isEmpty ? " " : signInViewModel.errorText)
             .font(Font.AppFont.rooneySansRegular.size(FontSize.x2Large))
             .frame(maxWidth: .infinity, alignment: .leading)
             .foregroundColor(.red)
             .padding(.horizontal, Spacing.xLarge)
             .padding(.top, Spacing.xSmall)
-            .animation(.easeInOut, value: setNameViewModel.errorText)
+            .animation(.easeInOut, value: signInViewModel.errorText)
     }
 
     private var continueButton: some View {
         AppPrimaryButton(
-            title: L10n.SetNamePage.continueButton,
-            isEnabled: setNameViewModel.isValid,
+            title: L10n.SignInPage.continueButton,
+            isEnabled: signInViewModel.isValid,
             disablesWhenInvalid: false,
             size: .large
         ) {
             isFocused = false
-            setNameViewModel.validateAndContinue {
-                setNameViewModel.goToWelcomePage()
+            signInViewModel.validateAndContinue {
+                signInViewModel.goToWelcomePage()
             }
         }
         .padding(.horizontal, Spacing.xLarge)
@@ -121,15 +121,15 @@ struct SetNameView: View {
     private var signInSeparator: some View {
         HStack(spacing: Spacing.medium) {
             Rectangle()
-                .fill(Color.secondary.opacity(0.25))
+                .fill(Color.secondary.opacity(Opacity.seprator))
                 .frame(height: LineWidth.thin)
 
-            Text("or")
+            Text(L10n.SignInPage.or)
                 .font(Font.AppFont.rooneySansRegular.size(FontSize.large))
                 .foregroundStyle(.secondary)
 
             Rectangle()
-                .fill(Color.secondary.opacity(0.25))
+                .fill(Color.secondary.opacity(Opacity.seprator))
                 .frame(height: LineWidth.thin)
         }
         .padding(.horizontal, Spacing.xLarge)
@@ -139,25 +139,26 @@ struct SetNameView: View {
     private var appleSignInButton: some View {
         SignInWithAppleButton(.signIn) { request in
             isFocused = false
-            setNameViewModel.handleAppleSignInRequestStarted()
             request.requestedScopes = [.fullName, .email]
         } onCompletion: { result in
-            setNameViewModel.handleAppleSignInResult(result) {
-                setNameViewModel.goToWelcomePage()
+            signInViewModel.handleAppleSignInResult(result) {
+                signInViewModel.goToWelcomePage()
             }
         }
         .signInWithAppleButtonStyle(.black)
-        .frame(maxWidth: .infinity, minHeight: Size.x4Large, maxHeight: Size.x4Large)
+        .frame(maxWidth: .infinity)
+        .frame(height: Size.x4Large)
+        .clipShape(Capsule())
         .padding(.horizontal, Spacing.xLarge)
         .padding(.bottom, Spacing.xLarge)
     }
 
     private var borderColor: Color {
-        setNameViewModel.borderState == .error ? .red : themeManager.appPrimary
+        signInViewModel.borderState == .error ? .red : themeManager.appPrimary
     }
 
     private var borderWidth: CGFloat {
-        setNameViewModel.borderState == .error ? LineWidth.medium : LineWidth.thin
+        signInViewModel.borderState == .error ? LineWidth.medium : LineWidth.thin
     }
 }
 
@@ -166,10 +167,10 @@ struct SetNameView: View {
     let introDependencies = dependencies.destinationDependencies.intro
     let fakeCoordinator = SetNameCoordinator(navigate: { _ in
     })
-    let viewModel = SetNameViewModel(
+    let viewModel = SignInViewModel(
         coordinator: fakeCoordinator,
         userDefaultsStorage: introDependencies.userDefaultsStorage
     )
-    SetNameView(setNameViewModel: viewModel)
+    SignInView(signInViewModel: viewModel)
         .environmentObject(dependencies.themeManager)
 }
