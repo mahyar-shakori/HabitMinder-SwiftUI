@@ -9,4 +9,5 @@ import Foundation
 
 protocol IdentifiableModel {
     var id: UUID { get }
+    var ownerID: String { get set }
 }

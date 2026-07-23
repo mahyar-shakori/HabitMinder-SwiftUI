@@ -141,18 +141,10 @@ struct MainTabView: View {
                 navigateToSettingsRoute: { coordinator.navigate(to: .main(.settings($0))) },
                 resetToSetName: { coordinator.reset(to: .intro(.setName)) }
             )
-            let logoutUseCase = LogoutUseCase(
-                dataManager: dataManager,
-                reminderScheduler: dependencies.settings.reminderScheduler,
-                userDefaultsStorage: dependencies.settings.userDefaultsStorage,
-                themeManager: dependencies.settings.themeManager,
-                profileImageStorage: dependencies.settings.profileImageStorage
-            )
             settingsViewModel = SettingsViewModel(
                 coordinator: settingCoordinator,
                 userDefaultsStorage: dependencies.settings.userDefaultsStorage,
-                profileImageStorage: dependencies.settings.profileImageStorage,
-                logoutUseCase: logoutUseCase
+                profileImageUseCase: dependencies.settings.profileImageUseCase
             )
         }
     }

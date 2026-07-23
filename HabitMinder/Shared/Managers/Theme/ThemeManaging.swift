@@ -15,4 +15,5 @@ protocol ThemeManaging {
 
     func resetAppColorToDefault()
     func resetToDefault()
+    func loadStoredTheme()
 }

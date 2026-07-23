@@ -75,6 +75,7 @@ final class NotificationSettingsViewModel {
     func setDailyQuotes(_ isEnabled: Bool) {
         dailyQuotes = isEnabled
         userDefaultsStorage.save(value: isEnabled, for: UserDefaultKeys.dailyQuotes)
+        NotificationCenter.default.post(name: AppNotification.Settings.updated, object: nil)
     }
 
     private func setDailyRemindersValue(_ isEnabled: Bool) {

@@ -50,9 +50,16 @@ extension MainCoordinator: MainCoordinating {
         guard path.isEmpty else {
             return
         }
-        let isLoggedIn = userDefaultsStorage.fetch(for: UserDefaultKeys.isLogin) ?? false
-        let initialRoute: AppRoute = isLoggedIn ? .intro(.welcome) : .intro(.onboarding)
+        let initialRoute: AppRoute = hasValidSession ? .intro(.welcome) : .intro(.onboarding)
         path = [NavigationItem(route: initialRoute)]
+    }
+
+    private var hasValidSession: Bool {
+        let isLoggedIn = userDefaultsStorage.fetch(for: UserDefaultKeys.isLogin) ?? false
+        let currentAccountID: String? = userDefaultsStorage.fetch(for: UserDefaultKeys.currentAccountID)
+        let hasAccountID = currentAccountID?.isEmpty == false
+
+        return isLoggedIn && hasAccountID
     }
 
     private func canNavigate(to route: AppRoute) -> Bool {
@@ -60,8 +67,7 @@ extension MainCoordinator: MainCoordinating {
         case .intro:
             return true
         case .main:
-            let isLoggedIn = userDefaultsStorage.fetch(for: UserDefaultKeys.isLogin) ?? false
-            return isLoggedIn
+            return hasValidSession
         }
     }
 }

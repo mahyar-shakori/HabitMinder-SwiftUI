@@ -32,8 +32,12 @@ final class ThemeManager: ThemeManaging, ObservableObject{
     
     init(userDefaultsStorage: UserDefaultsStoring) {
         self.userDefaultsStorage = userDefaultsStorage
-        self.appPrimary = Self.loadColorFromDefaults(storage: userDefaultsStorage) ?? .appPrimary
-        self.appearanceMode = Self.loadAppearanceMode(from: userDefaultsStorage)
+        self.appPrimary = Self.hasActiveAccount(in: userDefaultsStorage)
+            ? Self.loadColorFromDefaults(storage: userDefaultsStorage) ?? .appPrimary
+            : .appPrimary
+        self.appearanceMode = Self.hasActiveAccount(in: userDefaultsStorage)
+            ? Self.loadAppearanceMode(from: userDefaultsStorage)
+            : .system
     }
 
     func resetAppColorToDefault() {
@@ -45,6 +49,22 @@ final class ThemeManager: ThemeManaging, ObservableObject{
         resetAppColorToDefault()
         appearanceMode = .system
         userDefaultsStorage.removeValue(for: UserDefaultKeys.appAppearanceMode)
+    }
+
+    func loadStoredTheme() {
+        guard Self.hasActiveAccount(in: userDefaultsStorage) else {
+            appPrimary = .appPrimary
+            appearanceMode = .system
+            return
+        }
+
+        appPrimary = Self.loadColorFromDefaults(storage: userDefaultsStorage) ?? .appPrimary
+        appearanceMode = Self.loadAppearanceMode(from: userDefaultsStorage)
+    }
+
+    private static func hasActiveAccount(in storage: UserDefaultsStoring) -> Bool {
+        let currentAccountID: String? = storage.fetch(for: UserDefaultKeys.currentAccountID)
+        return currentAccountID?.isEmpty == false
     }
     
     private static func loadAppearanceMode(from storage: UserDefaultsStoring) -> AppAppearanceMode {

@@ -64,11 +64,18 @@ struct AppDependencies {
     }
 
     private var settingsDependencies: SettingsDestinationDependencies {
-        SettingsDestinationDependencies(
-            userDefaultsStorage: container.resolve(UserDefaultsStoring.self),
+        let userDefaultsStorage = container.resolve(UserDefaultsStoring.self)
+        let profileImageStorage = container.resolve(ProfileImageStoring.self)
+
+        return SettingsDestinationDependencies(
+            userDefaultsStorage: userDefaultsStorage,
             reminderScheduler: container.resolve(HabitReminderScheduling.self),
             themeManager: container.resolve(ThemeManager.self),
-            profileImageStorage: container.resolve(ProfileImageStoring.self)
+            profileImageStorage: profileImageStorage,
+            profileImageUseCase: ProfileImageUseCase(
+                userDefaultsStorage: userDefaultsStorage,
+                profileImageStorage: profileImageStorage
+            )
         )
     }
 }

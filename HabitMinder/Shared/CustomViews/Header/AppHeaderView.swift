@@ -11,19 +11,23 @@ struct AppHeaderView: View {
     private let title: String
     private let systemImage: String
     private let profileImageStorage: ProfileImageStoring
+    private let userDefaultsStorage: UserDefaultsStoring
     private let onProfileTap: (() -> Void)?
-    @AppStorage(UserDefaultKeys.profileImageFileName.rawValue) private var profileImageFileName = ""
+    @AppStorage(UserDefaultKeys.currentAccountID.rawValue) private var currentAccountID = ""
+    @State private var profileImageFileName = ""
     @EnvironmentObject private var themeManager: ThemeManager
 
     init(
         title: String,
         systemImage: String,
         profileImageStorage: ProfileImageStoring = ProfileImageStorage(),
+        userDefaultsStorage: UserDefaultsStoring = UserDefaultsStorage(),
         onProfileTap: (() -> Void)? = nil
     ) {
         self.title = title
         self.systemImage = systemImage
         self.profileImageStorage = profileImageStorage
+        self.userDefaultsStorage = userDefaultsStorage
         self.onProfileTap = onProfileTap
     }
 
@@ -44,6 +48,13 @@ struct AppHeaderView: View {
         .padding(.horizontal, Spacing.x4Large)
         .padding(.top, Spacing.medium)
         .padding(.bottom, Spacing.x6Large)
+        .onAppear(perform: loadProfileImageFileName)
+        .onChange(of: currentAccountID) { _, _ in
+            loadProfileImageFileName()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: AppNotification.Profile.updated)) { _ in
+            loadProfileImageFileName()
+        }
     }
 
     private var profileAction: some View {
@@ -82,5 +93,10 @@ struct AppHeaderView: View {
         }
 
         return UIImage(data: data)
+    }
+
+    private func loadProfileImageFileName() {
+        let fileName: String? = userDefaultsStorage.fetch(for: UserDefaultKeys.profileImageFileName)
+        profileImageFileName = fileName ?? ""
     }
 }

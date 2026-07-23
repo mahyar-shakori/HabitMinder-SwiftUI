@@ -28,6 +28,7 @@ struct SystemIconName {
     static let medal = "medal"
     static let lightbulb = "lightbulb"
     static let profile = "person.crop.circle.fill"
+    static let envelope = "envelope"
     static let drop = "drop"
     static let book = "book"
     static let checkmark = "checkmark.circle"
@@ -39,4 +40,5 @@ struct SystemIconName {
     static let arrowRightSquare = "rectangle.portrait.and.arrow.right"
     static let clock = "clock"
     static let arrowCounterclockwise = "arrow.counterclockwise"
+    static let exclamationmarkTriangle = "exclamationmark.triangle"
 }

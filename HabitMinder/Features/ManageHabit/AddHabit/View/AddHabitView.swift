@@ -99,9 +99,11 @@ struct AddHabitView: View {
             title: L10n.AddHabitPage.startJourneyButton,
             systemImage: SystemIconName.sparkles,
             isEnabled: addHabitViewModel.isSaveButtonEnabled,
-            size: .large,
-            action: addHabitViewModel.saveAndDismiss
-        )
+            size: .large
+        ) {
+            isFocused = false
+            addHabitViewModel.saveAndDismiss()
+        }
         .padding(.horizontal, Spacing.x3Large)
         .padding(.bottom, Spacing.x5Large)
     }

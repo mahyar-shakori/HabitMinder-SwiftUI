@@ -17,30 +17,35 @@ struct SettingsDestinationView: View {
     var body: some View {
         switch route {
         case .settings:
-            let dataManager = DataManager(context: modelContext)
+            let viewCoordinator = SettingsCoordinator(
+                dismiss: coordinator.pop,
+                navigateToSettingsRoute: { coordinator.navigate(to: .main(.settings($0))) },
+                resetToSetName: { coordinator.reset(to: .intro(.setName)) }
+            )
+            let viewModel = SettingsViewModel(
+                coordinator: viewCoordinator,
+                userDefaultsStorage: dependencies.userDefaultsStorage,
+                profileImageUseCase: dependencies.profileImageUseCase
+            )
+            SettingsView(settingsViewModel: viewModel)
+        case .profile:
             let viewCoordinator = SettingsCoordinator(
                 dismiss: coordinator.pop,
                 navigateToSettingsRoute: { coordinator.navigate(to: .main(.settings($0))) },
                 resetToSetName: { coordinator.reset(to: .intro(.setName)) }
             )
             let logoutUseCase = LogoutUseCase(
-                dataManager: dataManager,
+                dataManager: DataManager(context: modelContext),
                 reminderScheduler: dependencies.reminderScheduler,
                 userDefaultsStorage: dependencies.userDefaultsStorage,
                 themeManager: dependencies.themeManager,
                 profileImageStorage: dependencies.profileImageStorage
             )
-            let viewModel = SettingsViewModel(
-                coordinator: viewCoordinator,
-                userDefaultsStorage: dependencies.userDefaultsStorage,
-                profileImageStorage: dependencies.profileImageStorage,
-                logoutUseCase: logoutUseCase
-            )
-            SettingsView(settingsViewModel: viewModel)
-        case .profile:
             let viewModel = ProfileSettingsViewModel(
                 userDefaultsStorage: dependencies.userDefaultsStorage,
-                profileImageStorage: dependencies.profileImageStorage
+                profileImageUseCase: dependencies.profileImageUseCase,
+                logoutUseCase: logoutUseCase,
+                coordinator: viewCoordinator
             )
             ProfileSettingsView(viewModel: viewModel)
         case .notifications:

@@ -5,6 +5,7 @@
 //  Created by Mahyar on 01/04/2025.
 //
 
+import AuthenticationServices
 import SwiftUI
 
 struct SetNameView: View {
@@ -18,20 +19,28 @@ struct SetNameView: View {
     }
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             Spacer()
 
             headerImage
             hiText
+            signInChoiceText
             userNameTextField
             errorText
 
             Spacer()
 
             continueButton
+            signInSeparator
+            appleSignInButton
         }
-        .background(.appGray)
-        .dismissKeyboard(focus: $isFocused)
+        .background {
+            Color.appGray
+                .ignoresSafeArea()
+                .onTapGesture {
+                    isFocused = false
+                }
+        }
         .navigationBarBackButtonHidden(true)
         .onAppear {
             tempUserName = setNameViewModel.userName
@@ -51,6 +60,15 @@ struct SetNameView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, Spacing.xLarge)
             .padding(.top, Spacing.x2Large)
+    }
+
+    private var signInChoiceText: some View {
+        Text("Enter your name, or sign in with Apple")
+            .font(Font.AppFont.rooneySansRegular.size(FontSize.x2Large))
+            .foregroundStyle(.secondary)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, Spacing.xLarge)
+            .padding(.top, Spacing.small)
     }
 
     private var userNameTextField: some View {
@@ -91,10 +109,45 @@ struct SetNameView: View {
             disablesWhenInvalid: false,
             size: .large
         ) {
+            isFocused = false
             setNameViewModel.validateAndContinue {
                 setNameViewModel.goToWelcomePage()
             }
         }
+        .padding(.horizontal, Spacing.xLarge)
+        .padding(.bottom, Spacing.medium)
+    }
+
+    private var signInSeparator: some View {
+        HStack(spacing: Spacing.medium) {
+            Rectangle()
+                .fill(Color.secondary.opacity(0.25))
+                .frame(height: LineWidth.thin)
+
+            Text("or")
+                .font(Font.AppFont.rooneySansRegular.size(FontSize.large))
+                .foregroundStyle(.secondary)
+
+            Rectangle()
+                .fill(Color.secondary.opacity(0.25))
+                .frame(height: LineWidth.thin)
+        }
+        .padding(.horizontal, Spacing.xLarge)
+        .padding(.bottom, Spacing.medium)
+    }
+
+    private var appleSignInButton: some View {
+        SignInWithAppleButton(.signIn) { request in
+            isFocused = false
+            setNameViewModel.handleAppleSignInRequestStarted()
+            request.requestedScopes = [.fullName, .email]
+        } onCompletion: { result in
+            setNameViewModel.handleAppleSignInResult(result) {
+                setNameViewModel.goToWelcomePage()
+            }
+        }
+        .signInWithAppleButtonStyle(.black)
+        .frame(maxWidth: .infinity, minHeight: Size.x4Large, maxHeight: Size.x4Large)
         .padding(.horizontal, Spacing.xLarge)
         .padding(.bottom, Spacing.xLarge)
     }

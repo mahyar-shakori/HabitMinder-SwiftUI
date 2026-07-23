@@ -6,6 +6,8 @@
   
 */
 
+"appStartupErrorTitle" = "HabitMinder kan niet worden gestart";
+"appStartupErrorMessage" = "Opslag kon niet worden voorbereid. Start de app opnieuw.";
 "introFirstTitle" = "Gezonde gewoonte";
 "introFirstDescription" = "Er wordt geschat dat het 21 dagen duurt voordat mensen een nieuwe gewoonte vormen. Introduceer een gezonde gewoonte in je leven met de 21 dagen-app.";
 "introSecondTitle" = "Slechte gewoonte";

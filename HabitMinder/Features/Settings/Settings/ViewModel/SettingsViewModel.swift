@@ -17,8 +17,7 @@ final class SettingsViewModel {
 
     private let coordinator: SettingsCoordinating
     private let userDefaultsStorage: UserDefaultsStoring
-    private let profileImageStorage: ProfileImageStoring
-    private let logoutUseCase: LogoutUseCasing
+    private let profileImageUseCase: ProfileImageUseCasing
 
     var appVersion: String {
         AppInfo.version
@@ -27,13 +26,11 @@ final class SettingsViewModel {
     init(
         coordinator: SettingsCoordinating,
         userDefaultsStorage: UserDefaultsStoring,
-        profileImageStorage: ProfileImageStoring,
-        logoutUseCase: LogoutUseCasing
+        profileImageUseCase: ProfileImageUseCasing
     ) {
         self.coordinator = coordinator
         self.userDefaultsStorage = userDefaultsStorage
-        self.profileImageStorage = profileImageStorage
-        self.logoutUseCase = logoutUseCase
+        self.profileImageUseCase = profileImageUseCase
     }
 
     func setUserName(_ newName: String) {
@@ -46,8 +43,7 @@ final class SettingsViewModel {
     }
 
     func loadProfileImage() {
-        let fileName: String? = userDefaultsStorage.fetch(for: UserDefaultKeys.profileImageFileName)
-        profileImageData = fileName.flatMap { profileImageStorage.loadProfileImage(named: $0) }
+        profileImageData = profileImageUseCase.loadProfileImage()
     }
 
     func loadMemberSince() {
@@ -62,17 +58,7 @@ final class SettingsViewModel {
     }
 
     func setProfileImage(data: Data) {
-        let oldFileName: String? = userDefaultsStorage.fetch(for: UserDefaultKeys.profileImageFileName)
-
-        do {
-            let fileName = try profileImageStorage.saveProfileImage(data: data, replacing: oldFileName)
-            userDefaultsStorage.save(value: fileName, for: UserDefaultKeys.profileImageFileName)
-            profileImageData = data
-        } catch {
-#if DEBUG
-            AppLogger.data.error("Failed to save profile image: \(error.localizedDescription)")
-#endif
-        }
+        profileImageData = profileImageUseCase.setProfileImage(data: data) ?? profileImageData
     }
 
     func showProfileSettings() {
@@ -85,11 +71,6 @@ final class SettingsViewModel {
 
     func showAppTheme() {
         coordinator.goToAppTheme()
-    }
-
-    func logout() {
-        logoutUseCase.logout()
-        coordinator.goToSetName()
     }
 
     private func formattedMonthYear(from date: Date) -> String {

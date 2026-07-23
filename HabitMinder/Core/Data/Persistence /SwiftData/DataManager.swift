@@ -15,12 +15,21 @@ final class DataManager: DataManaging {
         self.context = context
     }
 
+    private var currentOwnerID: String {
+        UserDefaults.standard.string(forKey: UserDefaultKeys.currentAccountID.rawValue) ?? ""
+    }
+
     func fetchAll<T: ModelEntity>(_ type: T.Type) -> [T] {
+        let ownerID = currentOwnerID
+        let descriptor = FetchDescriptor<T>(
+            predicate: #Predicate<T> { $0.ownerID == ownerID }
+        )
         do {
-            return try context.fetch(FetchDescriptor<T>())
+            let items = try context.fetch(descriptor)
+            return items
         } catch {
 #if DEBUG
-            AppLogger.data.error("Failed to fetch all \(String(describing: T.self)): \(error.localizedDescription)")
+            AppLogger.data.error("Failed to fetch all \(String(describing: T.self)) for ownerID=\(ownerID, privacy: .public): \(error.localizedDescription)")
 #endif
             return []
         }
@@ -30,8 +39,9 @@ final class DataManager: DataManaging {
         byID id: UUID,
         _ type: T.Type
     ) -> T? {
+        let ownerID = currentOwnerID
         let descriptor = FetchDescriptor<T>(
-            predicate: #Predicate<T> { $0.id == id }
+            predicate: #Predicate<T> { $0.id == id && $0.ownerID == ownerID }
         )
         do {
             return try context.fetch(descriptor).first
@@ -44,12 +54,22 @@ final class DataManager: DataManaging {
     }
 
     func save<T: ModelEntity>(_ item: T) {
+        let ownerID = currentOwnerID
+        guard ownerID.isEmpty.not else {
+#if DEBUG
+            AppLogger.data.error("Skipped saving \(String(describing: T.self)) because currentAccountID is empty")
+#endif
+            return
+        }
+
+        var item = item
+        item.ownerID = ownerID
         context.insert(item)
         do {
             try context.save()
         } catch {
 #if DEBUG
-            AppLogger.data.error("Failed to save \(String(describing: T.self)): \(error.localizedDescription)")
+            AppLogger.data.error("Failed to save \(String(describing: T.self)) for ownerID=\(ownerID, privacy: .public): \(error.localizedDescription)")
 #endif
         }
     }
@@ -58,8 +78,9 @@ final class DataManager: DataManaging {
         byID id: UUID,
         _ type: T.Type
     ) {
+        let ownerID = currentOwnerID
         let descriptor = FetchDescriptor<T>(
-            predicate: #Predicate<T> { $0.id == id }
+            predicate: #Predicate<T> { $0.id == id && $0.ownerID == ownerID }
         )
         do {
             let results = try context.fetch(descriptor)
@@ -73,8 +94,12 @@ final class DataManager: DataManaging {
     }
 
     func deleteAll<T: ModelEntity>(_ type: T.Type) {
+        let ownerID = currentOwnerID
+        let descriptor = FetchDescriptor<T>(
+            predicate: #Predicate<T> { $0.ownerID == ownerID }
+        )
         do {
-            let allItems = try context.fetch(FetchDescriptor<T>())
+            let allItems = try context.fetch(descriptor)
             allItems.forEach { context.delete($0) }
             try context.save()
         } catch {
@@ -89,8 +114,9 @@ final class DataManager: DataManaging {
         forID id: UUID,
         _ type: T.Type
     ) {
+        let ownerID = currentOwnerID
         let descriptor = FetchDescriptor<T>(
-            predicate: #Predicate<T> { $0.id == id }
+            predicate: #Predicate<T> { $0.id == id && $0.ownerID == ownerID }
         )
         do {
             guard let item = try context.fetch(descriptor).first else {

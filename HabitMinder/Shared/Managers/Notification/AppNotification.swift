@@ -8,6 +8,14 @@
 import Foundation
 
 struct AppNotification {
+    struct Settings {
+        static let updated = Notification.Name("settingsUpdated")
+    }
+
+    struct Profile {
+        static let updated = Notification.Name("profileUpdated")
+    }
+
     struct Habit {
         static let added = Notification.Name("habitAdded")
         static let futureAdded = Notification.Name("futureHabitAdded")

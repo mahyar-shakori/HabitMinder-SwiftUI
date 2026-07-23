@@ -105,9 +105,11 @@ struct EditHabitView: View {
             title: L10n.Shared.saveButton,
             isEnabled: editHabitViewModel.isSaveButtonEnabled,
             fillsWidth: false,
-            size: .regular,
-            action: editHabitViewModel.saveAndDismiss
-        )
+            size: .regular
+        ) {
+            isFocused = false
+            editHabitViewModel.saveAndDismiss()
+        }
     }
     
     private var floatingBottomControls: some View {

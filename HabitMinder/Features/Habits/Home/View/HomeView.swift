@@ -11,7 +11,6 @@ struct HomeView: View {
     private var homeViewModel: HomeViewModel
     private let navigateToProfileSettings: () -> Void
     @EnvironmentObject private var themeManager: ThemeManager
-    @AppStorage(UserDefaultKeys.dailyQuotes.rawValue) private var dailyQuotes = true
     @State private var showDeleteAlert = false
 
     init(
@@ -25,6 +24,9 @@ struct HomeView: View {
     var body: some View {
         content
             .navigationBarBackButtonHidden(true)
+            .onAppear {
+                homeViewModel.loadDailyQuotesPreference()
+            }
             .onChange(of: homeViewModel.itemToDelete) { _, id in
                 showDeleteAlert = (id != nil)
             }
@@ -33,8 +35,10 @@ struct HomeView: View {
                     .merge(with: NotificationCenter.default.publisher(for: AppNotification.Habit.edited))
                     .merge(with: NotificationCenter.default.publisher(for: AppNotification.Habit.futureAdded))
                     .merge(with: NotificationCenter.default.publisher(for: AppNotification.Habit.futureStarted))
+                    .merge(with: NotificationCenter.default.publisher(for: AppNotification.Settings.updated))
                     .merge(with: NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification))
             ) { _ in
+                homeViewModel.loadDailyQuotesPreference()
                 homeViewModel.fetchHabits()
             }
             .alert(L10n.Alert.Habit.deleteTitle, isPresented: $showDeleteAlert) {
@@ -104,7 +108,7 @@ struct HomeView: View {
                 }
                 .onMove(perform: homeViewModel.moveItem)
 
-                if dailyQuotes {
+                if homeViewModel.dailyQuotes {
                     quoteCard
                 }
             }

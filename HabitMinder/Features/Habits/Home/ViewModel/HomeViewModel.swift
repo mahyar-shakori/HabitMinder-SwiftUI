@@ -13,6 +13,7 @@ import Observation
 final class HomeViewModel {
     private(set) var isEditingList = false
     private(set) var itemToDelete: UUID?
+    private(set) var dailyQuotes = true
     private let connectivityService: WatchConnectivityProviding
     private let reminderScheduler: HabitReminderScheduling
     private var quote: String
@@ -67,7 +68,12 @@ final class HomeViewModel {
         self.userDefaultsStorage = userDefaultsStorage
         self.reminderScheduler = reminderScheduler
 
+        loadDailyQuotesPreference()
         fetchHabits()
+    }
+
+    func loadDailyQuotesPreference() {
+        dailyQuotes = userDefaultsStorage.fetch(for: UserDefaultKeys.dailyQuotes) ?? true
     }
     
     func fetchHabits() {

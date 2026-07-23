@@ -12,7 +12,6 @@ struct SettingsView: View {
     private var settingsViewModel: SettingsViewModel
     @Environment(\.requestReview) private var requestReview
     @EnvironmentObject private var themeManager: ThemeManager
-    @State private var showLogoutAlert = false
 
     init(settingsViewModel: SettingsViewModel) {
         self.settingsViewModel = settingsViewModel
@@ -38,15 +37,6 @@ struct SettingsView: View {
             settingsViewModel.loadUserName()
             settingsViewModel.loadProfileImage()
             settingsViewModel.loadMemberSince()
-        }
-        .alert(L10n.Alert.Logout.title, isPresented: $showLogoutAlert) {
-            Button(L10n.Shared.yesButton, role: .destructive) {
-                settingsViewModel.logout()
-            }
-            Button(L10n.Shared.cancelButton, role: .cancel) {
-            }
-        } message: {
-            Text(L10n.Alert.Logout.message)
         }
     }
 
@@ -131,18 +121,6 @@ struct SettingsView: View {
                         requestReview()
                     }
 
-                    SettingsActionRow(
-                        iconName: SystemIconName.arrowRightSquare,
-                        title: L10n.Cell.DropDown.logout,
-                        subtitle: L10n.SettingPage.logoutSubtitle,
-                        foregroundColor: .red,
-                        iconForegroundColor: .red,
-                        iconBackgroundColor: themeManager.appSecondary.opacity(Opacity.subtle),
-                        isTitleBold: false
-                    ) {
-                        showLogoutAlert = true
-                    }
-
                     versionFooter
                 }
             }
@@ -164,27 +142,16 @@ struct SettingsView: View {
 }
 
 #Preview {
-    @Previewable @Environment(\.modelContext) var context
-
     let dependencies = AppDependencies()
     let settingsDependencies = dependencies.destinationDependencies.main.settings
     let fakeCoordinator = SettingsCoordinator(dismiss: {
     }, navigateToSettingsRoute: { _ in
     }, resetToSetName: {
     })
-    let dataManager = DataManager(context: context)
-    let logoutUseCase = LogoutUseCase(
-        dataManager: dataManager,
-        reminderScheduler: settingsDependencies.reminderScheduler,
-        userDefaultsStorage: settingsDependencies.userDefaultsStorage,
-        themeManager: settingsDependencies.themeManager,
-        profileImageStorage: settingsDependencies.profileImageStorage
-    )
     let viewModel = SettingsViewModel(
         coordinator: fakeCoordinator,
         userDefaultsStorage: settingsDependencies.userDefaultsStorage,
-        profileImageStorage: settingsDependencies.profileImageStorage,
-        logoutUseCase: logoutUseCase
+        profileImageUseCase: settingsDependencies.profileImageUseCase
     )
     SettingsView(settingsViewModel: viewModel)
         .environmentObject(dependencies.themeManager)

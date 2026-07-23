@@ -6,6 +6,8 @@
   
 */
 
+"appStartupErrorTitle" = "Unable to Start HabitMinder";
+"appStartupErrorMessage" = "Storage could not be prepared. Please restart the app.";
 "introFirstTitle" = "Healthy Habit";
 "introFirstDescription" = "It is estimated that it takes 21 days for people to form a new habit. Introduce a healthy habit in your life with the 21 days app.";
 "introSecondTitle" = "Bad Habit";

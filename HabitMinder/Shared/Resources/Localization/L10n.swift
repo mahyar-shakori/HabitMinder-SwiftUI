@@ -24,6 +24,11 @@ enum L10n {
         return result
     }
     
+    enum AppStartup {
+        static let errorTitle = localized("appStartupErrorTitle")
+        static let errorMessage = localized("appStartupErrorMessage")
+    }
+
     enum IntroPage {
         static let firstTitle = localized("introFirstTitle")
         static let firstDescription = localized("introFirstDescription")

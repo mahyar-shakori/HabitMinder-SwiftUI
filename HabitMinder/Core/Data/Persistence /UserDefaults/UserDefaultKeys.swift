@@ -10,6 +10,8 @@ import Foundation
 enum UserDefaultKeys: String, StorageKeyProtocol, CaseIterable {
     case language = "userDefaultsStorage_Language"
     case userName = "userDefaultsStorage_UserName"
+    case userEmail = "userDefaultsStorage_UserEmail"
+    case currentAccountID = "userDefaultsStorage_CurrentAccountID"
     case isLogin = "userDefaultsStorage_IsLogin"
     case userCreatedAt = "userDefaultsStorage_UserCreatedAt"
     case profileImageFileName = "userDefaultsStorage_ProfileImageFileName"

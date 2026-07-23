@@ -1,14 +1,13 @@
 //
-//  RootView.swift
-//  HabitMinder SwiftUI
+//  RootNavigationView.swift
+//  HabitMinder
 //
-//  Created by Mahyar on 26/05/2025.
+//  Created by Mahyar on 23/07/2026.
 //
 
 import SwiftUI
-import SwiftData
 
-struct RootView: View {
+struct RootNavigationView: View {
     private let dependencies: AppDependencies
     @State private var didRequestNotificationAuthorization = false
     @State private var mainCoordinator: MainCoordinator
@@ -47,11 +46,4 @@ struct RootView: View {
         didRequestNotificationAuthorization = true
         dependencies.reminderScheduler.requestAuthorization { _ in }
     }
-}
-
-#Preview {
-    let dependencies = AppDependencies()
-
-    RootView(dependencies: dependencies)
-        .environmentObject(dependencies.themeManager)
 }

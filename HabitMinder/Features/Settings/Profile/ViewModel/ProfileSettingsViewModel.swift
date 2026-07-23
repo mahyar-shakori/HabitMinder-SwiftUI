@@ -12,20 +12,36 @@ import Observation
 @MainActor
 final class ProfileSettingsViewModel {
     private(set) var userName = ""
+    private(set) var userEmail = ""
     private(set) var profileImageData: Data?
     private let userDefaultsStorage: UserDefaultsStoring
-    private let profileImageStorage: ProfileImageStoring
+    private let profileImageUseCase: ProfileImageUseCasing
+    private let logoutUseCase: LogoutUseCasing
+    private let coordinator: SettingsCoordinating
+
+    var isSignedInWithApple: Bool {
+        currentAccountID.hasPrefix("apple:")
+    }
+
+    private var currentAccountID: String {
+        userDefaultsStorage.fetch(for: UserDefaultKeys.currentAccountID) ?? ""
+    }
 
     init(
         userDefaultsStorage: UserDefaultsStoring,
-        profileImageStorage: ProfileImageStoring
+        profileImageUseCase: ProfileImageUseCasing,
+        logoutUseCase: LogoutUseCasing,
+        coordinator: SettingsCoordinating
     ) {
         self.userDefaultsStorage = userDefaultsStorage
-        self.profileImageStorage = profileImageStorage
+        self.profileImageUseCase = profileImageUseCase
+        self.logoutUseCase = logoutUseCase
+        self.coordinator = coordinator
     }
 
     func loadProfile() {
         loadUserName()
+        loadUserEmail()
         loadProfileImage()
     }
 
@@ -44,26 +60,24 @@ final class ProfileSettingsViewModel {
         userName = newName
     }
 
-    func setProfileImage(data: Data) {
-        let oldFileName: String? = userDefaultsStorage.fetch(for: UserDefaultKeys.profileImageFileName)
+    func logout() {
+        logoutUseCase.logout()
+        coordinator.goToSetName()
+    }
 
-        do {
-            let fileName = try profileImageStorage.saveProfileImage(data: data, replacing: oldFileName)
-            userDefaultsStorage.save(value: fileName, for: UserDefaultKeys.profileImageFileName)
-            profileImageData = data
-        } catch {
-#if DEBUG
-            AppLogger.data.error("Failed to save profile image: \(error.localizedDescription)")
-#endif
-        }
+    func setProfileImage(data: Data) {
+        profileImageData = profileImageUseCase.setProfileImage(data: data) ?? profileImageData
     }
 
     private func loadUserName() {
         userName = userDefaultsStorage.fetch(for: UserDefaultKeys.userName) ?? L10n.SettingPage.userName
     }
 
+    private func loadUserEmail() {
+        userEmail = userDefaultsStorage.fetch(for: UserDefaultKeys.userEmail) ?? ""
+    }
+
     private func loadProfileImage() {
-        let fileName: String? = userDefaultsStorage.fetch(for: UserDefaultKeys.profileImageFileName)
-        profileImageData = fileName.flatMap { profileImageStorage.loadProfileImage(named: $0) }
+        profileImageData = profileImageUseCase.loadProfileImage()
     }
 }

@@ -14,11 +14,9 @@ protocol LogoutUseCasing {
 
 @MainActor
 final class LogoutUseCase: LogoutUseCasing {
-    private let dataManager: DataManaging
     private let reminderScheduler: HabitReminderScheduling
     private let userDefaultsStorage: UserDefaultsStoring
     private let themeManager: ThemeManaging
-    private let profileImageStorage: ProfileImageStoring
 
     init(
         dataManager: DataManaging,
@@ -27,21 +25,15 @@ final class LogoutUseCase: LogoutUseCasing {
         themeManager: ThemeManaging,
         profileImageStorage: ProfileImageStoring
     ) {
-        self.dataManager = dataManager
         self.reminderScheduler = reminderScheduler
         self.userDefaultsStorage = userDefaultsStorage
         self.themeManager = themeManager
-        self.profileImageStorage = profileImageStorage
     }
 
     func logout() {
         reminderScheduler.cancelAllNotifications()
-
-        dataManager.deleteAll(HabitModel.self)
-        dataManager.deleteAll(HabitHistoryModel.self)
-
-        profileImageStorage.deleteAllProfileImages()
-        userDefaultsStorage.removeAllAppValues()
-        themeManager.resetToDefault()
+        userDefaultsStorage.save(value: false, for: UserDefaultKeys.isLogin)
+        userDefaultsStorage.removeValue(for: UserDefaultKeys.currentAccountID)
+        themeManager.loadStoredTheme()
     }
 }

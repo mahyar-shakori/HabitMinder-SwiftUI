@@ -38,4 +38,5 @@ struct SettingsDestinationDependencies {
     let reminderScheduler: HabitReminderScheduling
     let themeManager: ThemeManaging
     let profileImageStorage: ProfileImageStoring
+    let profileImageUseCase: ProfileImageUseCasing
 }

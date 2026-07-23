@@ -40,7 +40,10 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				"/Localized: Shared/Resources/Localization/Localizable.strings",
+				App/AppStartupErrorView.swift,
+				App/AppStartupModelContainer.swift,
 				App/HabitMinderApp.swift,
+				App/RootView.swift,
 				Core/Data/Network/APIFetching.swift,
 				Core/Data/Network/APIHost.swift,
 				Core/Data/Network/APIService.swift,
@@ -55,6 +58,7 @@
 				Core/Data/Network/Secrets.swift,
 				"Core/Data/Persistence /FilesStorage/ProfileImageStorage.swift",
 				"Core/Data/Persistence /FilesStorage/ProfileImageStoring.swift",
+				"Core/Data/Persistence /SwiftData/AppModelContainer.swift",
 				"Core/Data/Persistence /SwiftData/DataManager.swift",
 				"Core/Data/Persistence /SwiftData/DataManaging.swift",
 				"Core/Data/Persistence /SwiftData/IdentifiableModel.swift",
@@ -66,7 +70,7 @@
 				Core/Navigation/Coordinator/MainCoordinating.swift,
 				Core/Navigation/Coordinator/MainCoordinator.swift,
 				Core/Navigation/Coordinator/NavigationItem.swift,
-				Core/Navigation/Coordinator/RootView.swift,
+				Core/Navigation/Coordinator/RootNavigationView.swift,
 				Core/Navigation/Destination/AppDestinationView.swift,
 				Core/Navigation/Destination/HabitDestinationView.swift,
 				Core/Navigation/Destination/IntroDestinationView.swift,
@@ -123,6 +127,7 @@
 				Features/Settings/Settings/View/SettingsView.swift,
 				Features/Settings/Settings/ViewModel/SettingsViewModel.swift,
 				Features/Settings/Theme/View/ThemeView.swift,
+				Shared/Constants/AppCloudKit.swift,
 				Shared/Constants/AppInfo.swift,
 				Shared/Constants/AppLogger.swift,
 				Shared/Constants/HabitFormConstants.swift,
@@ -163,6 +168,8 @@
 				Shared/Managers/Notification/HabitNotificationAuthorizationStatus.swift,
 				Shared/Managers/Notification/HabitReminderScheduler.swift,
 				Shared/Managers/Notification/HabitReminderScheduling.swift,
+				Shared/Managers/ProfileImage/ProfileImageUseCase.swift,
+				Shared/Managers/ProfileImage/ProfileImageUseCasing.swift,
 				Shared/Managers/Theme/AppAppearanceMode.swift,
 				Shared/Managers/Theme/ThemeManager.swift,
 				Shared/Managers/Theme/ThemeManaging.swift,
@@ -511,6 +518,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = HabitMinder/Shared/Resources/HabitMinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -548,6 +556,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = HabitMinder/Shared/Resources/HabitMinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
