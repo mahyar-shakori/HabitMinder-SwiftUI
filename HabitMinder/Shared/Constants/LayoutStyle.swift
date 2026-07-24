@@ -11,9 +11,6 @@ enum CornerRadius {
     static let small: CGFloat = 8
     static let medium: CGFloat = 12
     static let large: CGFloat = 14
-    static let xLarge: CGFloat = 16
-    static let x2Large: CGFloat = 18
-    static let x3Large: CGFloat = 20
 }
 
 enum Opacity {

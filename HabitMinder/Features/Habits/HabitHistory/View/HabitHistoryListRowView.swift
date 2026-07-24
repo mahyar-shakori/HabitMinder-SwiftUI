@@ -28,8 +28,11 @@ struct HabitHistoryListRowView: View {
             startOverButton
         }
         .padding(Spacing.xLarge)
-        .background(.appWhite)
-        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.large))
+        .liquidGlass(
+            in: .rect(cornerRadius: CornerRadius.medium),
+            interactive: false,
+            fallback: .appWhite
+        )
     }
     
     private var habitSummaryRow: some View {

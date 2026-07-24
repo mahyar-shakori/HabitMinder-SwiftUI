@@ -60,8 +60,11 @@ struct ThemeView: View {
                     }
                 }
             }
-            .background(.appWhite)
-            .clipShape(RoundedRectangle(cornerRadius: CornerRadius.medium))
+            .liquidGlass(
+                in: .rect(cornerRadius: CornerRadius.medium),
+                interactive: false,
+                fallback: .appWhite
+            )
         }
     }
 
@@ -99,8 +102,11 @@ struct ThemeView: View {
 
                 defaultColorRow
             }
-            .background(.appWhite)
-            .clipShape(RoundedRectangle(cornerRadius: CornerRadius.medium))
+            .liquidGlass(
+                in: .rect(cornerRadius: CornerRadius.medium),
+                interactive: false,
+                fallback: .appWhite
+            )
         }
     }
 

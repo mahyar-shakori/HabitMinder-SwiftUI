@@ -83,8 +83,10 @@ struct SettingsActionRow<Accessory: View>: View {
         .padding(.horizontal, Spacing.large)
         .padding(.vertical, Spacing.large)
         .frame(maxWidth: .infinity, minHeight: Size.x5Large + Spacing.xSmall)
-        .background(.appWhite)
-        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.medium))
+        .liquidGlass(
+            in: .rect(cornerRadius: CornerRadius.medium),
+            fallback: .appWhite
+        )
     }
 
     private var titleFont: Font {

@@ -83,8 +83,11 @@ struct ProfileView: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, Spacing.x4Large)
-        .background(.appWhite)
-        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.medium))
+        .liquidGlass(
+            in: .rect(cornerRadius: CornerRadius.medium),
+            interactive: false,
+            fallback: .appWhite
+        )
     }
 
     private var profileDetailsSection: some View {
@@ -128,8 +131,11 @@ struct ProfileView: View {
         .padding(.horizontal, Spacing.large)
         .padding(.vertical, Spacing.large)
         .frame(maxWidth: .infinity, minHeight: Size.x5Large + Spacing.xSmall)
-        .background(.appWhite)
-        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.medium))
+        .liquidGlass(
+            in: .rect(cornerRadius: CornerRadius.medium),
+            interactive: false,
+            fallback: .appWhite
+        )
     }
 
     private var logoutSection: some View {

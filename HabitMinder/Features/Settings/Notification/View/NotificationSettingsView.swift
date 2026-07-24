@@ -102,8 +102,11 @@ struct NotificationSettingsView: View {
                     clipsBackground: false
                 )
             }
-            .background(.appWhite)
-            .clipShape(RoundedRectangle(cornerRadius: CornerRadius.medium))
+            .liquidGlass(
+                in: .rect(cornerRadius: CornerRadius.medium),
+                interactive: false,
+                fallback: .appWhite
+            )
 
             Text(L10n.NotificationPage.journeyCompletionDescription)
                 .sectionDescriptionStyle()

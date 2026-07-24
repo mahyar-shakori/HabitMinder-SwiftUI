@@ -20,7 +20,7 @@ struct HabitListRowView: View {
         content
             .padding(Spacing.x2Large)
             .liquidGlass(
-                in: .rect(cornerRadius: CornerRadius.x3Large),
+                in: .rect(cornerRadius: CornerRadius.medium),
                 interactive: false,
                 fallback: .appWhite
             )

@@ -17,6 +17,14 @@ struct SettingsToggleRow: View {
     @EnvironmentObject private var themeManager: ThemeManager
 
     var body: some View {
+        rowContent
+            .padding(.horizontal, Spacing.large)
+            .padding(.vertical, Spacing.large)
+            .modifier(SettingsToggleRowBackground(clipsBackground: clipsBackground))
+            .opacity(isEnabled ? 1 : Opacity.secondaryTint)
+    }
+
+    private var rowContent: some View {
         HStack(spacing: Spacing.large) {
             SettingsRowIcon(iconName: iconName, isEnabled: isEnabled)
 
@@ -31,10 +39,21 @@ struct SettingsToggleRow: View {
                 .tint(themeManager.appPrimary)
                 .disabled(isEnabled.not)
         }
-        .padding(.horizontal, Spacing.large)
-        .padding(.vertical, Spacing.large)
-        .background(.appWhite)
-        .clipShape(RoundedRectangle(cornerRadius: clipsBackground ? CornerRadius.medium : 0))
-        .opacity(isEnabled ? 1 : Opacity.secondaryTint)
+    }
+}
+
+private struct SettingsToggleRowBackground: ViewModifier {
+    let clipsBackground: Bool
+
+    func body(content: Content) -> some View {
+        if clipsBackground {
+            content
+                .liquidGlass(
+                    in: .rect(cornerRadius: CornerRadius.medium),
+                    fallback: .appWhite
+                )
+        } else {
+            content
+        }
     }
 }

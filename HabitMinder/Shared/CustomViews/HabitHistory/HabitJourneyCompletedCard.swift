@@ -19,8 +19,11 @@ struct HabitJourneyCompletedCard: View {
             statusRow
         }
         .padding(Spacing.xLarge)
-        .background(.appWhite)
-        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.x2Large))
+        .liquidGlass(
+            in: .rect(cornerRadius: CornerRadius.medium),
+            interactive: false,
+            fallback: .appWhite
+        )
     }
 
     private var cardHeader: some View {
@@ -64,7 +67,7 @@ struct HabitJourneyCompletedCard: View {
             .foregroundStyle(themeManager.appPrimary)
             .padding(Spacing.xSmall)
             .background(.appGray)
-            .clipShape(RoundedRectangle(cornerRadius: CornerRadius.small))
+            .clipShape(RoundedRectangle(cornerRadius: CornerRadius.medium))
     }
 
     private var progressView: some View {

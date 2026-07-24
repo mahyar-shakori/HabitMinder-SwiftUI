@@ -191,15 +191,19 @@ struct HabitHistoryView: View {
         }
         .padding(Spacing.x2Large)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(themeManager.appSecondary.opacity(Opacity.subtle))
+        .liquidGlass(
+            tint: themeManager.appSecondary,
+            in: .rect(cornerRadius: CornerRadius.medium),
+            interactive: false,
+            fallback: themeManager.appSecondary.opacity(Opacity.subtle)
+        )
         .overlay {
-            RoundedRectangle(cornerRadius: CornerRadius.xLarge)
+            RoundedRectangle(cornerRadius: CornerRadius.medium)
                 .strokeBorder(
                     themeManager.appPrimary.opacity(Opacity.subtle),
                     style: StrokeStyle(lineWidth: LineWidth.thin, dash: StrokeDash.subtle)
                 )
         }
-        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.xLarge))
     }
 
     private func deleteSwipeButton(for id: UUID) -> some View {

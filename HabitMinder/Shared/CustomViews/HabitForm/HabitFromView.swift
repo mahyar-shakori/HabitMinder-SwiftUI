@@ -87,8 +87,11 @@ struct HabitFormView: View {
             .padding(.horizontal, Spacing.xLarge)
             .padding(.vertical, Spacing.xLarge)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(.appWhite)
-            .clipShape(RoundedRectangle(cornerRadius: CornerRadius.xLarge))
+            .liquidGlass(
+                in: .rect(cornerRadius: CornerRadius.medium),
+                interactive: false,
+                fallback: .appWhite
+            )
         }
     }
 
@@ -236,8 +239,11 @@ struct HabitFormView: View {
         .padding(.horizontal, Spacing.xLarge)
         .padding(.vertical, Spacing.xLarge)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(.appWhite)
-        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.xLarge))
+        .liquidGlass(
+            in: .rect(cornerRadius: CornerRadius.medium),
+            interactive: false,
+            fallback: .appWhite
+        )
     }
 
     private func iconButton(_ icon: String) -> some View {
@@ -296,7 +302,7 @@ struct HabitFormView: View {
         .padding(.horizontal, Spacing.large)
         .padding(.vertical, Spacing.small)
         .background(themeManager.appPrimary.opacity(Opacity.quiet))
-        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.small))
+        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.medium))
     }
 
     private var commitmentDaysBinding: Binding<Int> {
