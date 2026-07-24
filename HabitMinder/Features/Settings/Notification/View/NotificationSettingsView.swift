@@ -8,41 +8,41 @@
 import SwiftUI
 
 struct NotificationSettingsView: View {
-    private var viewModel: NotificationSettingsViewModel
+    private let notificationSettingsViewModel: NotificationSettingsViewModel
 
-    init(viewModel: NotificationSettingsViewModel) {
-        self.viewModel = viewModel
+    init(notificationSettingsViewModel: NotificationSettingsViewModel) {
+        self.notificationSettingsViewModel = notificationSettingsViewModel
     }
 
     private var allowNotificationsBinding: Binding<Bool> {
         Binding {
-            viewModel.allowNotifications
+            notificationSettingsViewModel.allowNotifications
         } set: { isOn in
-            viewModel.setAllowNotifications(isOn)
+            notificationSettingsViewModel.setAllowNotifications(isOn)
         }
     }
 
     private var dailyRemindersBinding: Binding<Bool> {
         Binding {
-            viewModel.dailyRemindersToggleValue
+            notificationSettingsViewModel.dailyRemindersToggleValue
         } set: { isOn in
-            viewModel.setDailyReminders(isOn)
+            notificationSettingsViewModel.setDailyReminders(isOn)
         }
     }
 
     private var journeyCompletionBinding: Binding<Bool> {
         Binding {
-            viewModel.journeyCompletionToggleValue
+            notificationSettingsViewModel.journeyCompletionToggleValue
         } set: { isOn in
-            viewModel.setJourneyCompletionNotifications(isOn)
+            notificationSettingsViewModel.setJourneyCompletionNotifications(isOn)
         }
     }
 
     private var dailyQuotesBinding: Binding<Bool> {
         Binding {
-            viewModel.dailyQuotes
+            notificationSettingsViewModel.dailyQuotes
         } set: { isOn in
-            viewModel.setDailyQuotes(isOn)
+            notificationSettingsViewModel.setDailyQuotes(isOn)
         }
     }
 
@@ -87,7 +87,7 @@ struct NotificationSettingsView: View {
                     iconName: SystemIconName.calendar,
                     title: L10n.NotificationPage.dailyReminders,
                     isOn: dailyRemindersBinding,
-                    isEnabled: viewModel.allowNotifications,
+                    isEnabled: notificationSettingsViewModel.allowNotifications,
                     clipsBackground: false
                 )
 
@@ -98,7 +98,7 @@ struct NotificationSettingsView: View {
                     iconName: SystemIconName.sparkles,
                     title: L10n.NotificationPage.journeyCompletion,
                     isOn: journeyCompletionBinding,
-                    isEnabled: viewModel.allowNotifications,
+                    isEnabled: notificationSettingsViewModel.allowNotifications,
                     clipsBackground: false
                 )
             }
@@ -147,7 +147,7 @@ private extension View {
     )
 
     NavigationStack {
-        NotificationSettingsView(viewModel: viewModel)
+        NotificationSettingsView(notificationSettingsViewModel: viewModel)
             .environmentObject(dependencies.themeManager)
     }
 }

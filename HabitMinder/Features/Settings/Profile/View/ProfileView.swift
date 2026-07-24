@@ -135,7 +135,7 @@ struct ProfileView: View {
     private var logoutSection: some View {
         SettingsActionRow(
             iconName: SystemIconName.arrowRightSquare,
-            title: "Log out",
+            title: L10n.ProfilePage.logout,
             subtitle: logoutSubtitle,
             foregroundColor: .red,
             iconForegroundColor: .red,
@@ -151,19 +151,19 @@ struct ProfileView: View {
     }
 
     private var profileEmailText: String {
-        profileViewModel.userEmail.isEmpty ? "No email saved" : profileViewModel.userEmail
+        profileViewModel.userEmail.isEmpty ? L10n.ProfilePage.noEmailSaved : profileViewModel.userEmail
     }
 
     private var logoutSubtitle: String {
         profileViewModel.isSignedInWithApple
-        ? "Your iCloud data will stay available"
-        : "Local account data is not synced to iCloud"
+        ? L10n.ProfilePage.logoutWithiCloud
+        : L10n.ProfilePage.logoutWithoutiCloud
     }
 
     private var logoutAlertMessage: String {
         profileViewModel.isSignedInWithApple
-        ? "Your habits and account settings stay synced with iCloud and will be available when you log in again."
-        : "This account is local. If you delete the app or switch devices, this account data may be lost."
+        ? L10n.Alert.Logout.logoutMessageiCloud
+        : L10n.Alert.Logout.logoutMessageLocal
     }
 
     private func startEditingUserName() {

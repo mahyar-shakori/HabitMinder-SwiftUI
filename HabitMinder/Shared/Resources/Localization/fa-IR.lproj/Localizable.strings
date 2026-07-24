@@ -7,7 +7,7 @@
 */
 
 /* AppStartupError */
-"appStartupErrorTitle" = "امکان اجرای Rituals وجود ندارد";
+"appStartupErrorTitle" = "امکان اجرای آیین‌ها وجود ندارد";
 "appStartupErrorMessage" = "آماده‌سازی فضای ذخیره‌سازی انجام نشد. لطفاً برنامه را دوباره باز کنید.";
 
 /* Header */
@@ -51,7 +51,7 @@
 "addHabitIntroDescription" = "یک آیین آگاهانه با ریتم مشخص، یادآوری و تعهد ایجاد کنید.";
 "habitNotificationAlertTitle" = "اعلان‌ها خاموش هستند";
 "habitNotificationAlertMessage" = "برای استفاده از یادآوری عادت‌ها، اعلان‌ها را از تنظیمات فعال کنید.";
-"habitInAppNotificationAlertMessage" = "برای اضافه کردن زمان‌های یادآوری، گزینه اجازه اعلان‌ها و یادآوری‌های روزانه را در تنظیمات Rituals فعال کنید.";
+"habitInAppNotificationAlertMessage" = "برای اضافه کردن زمان‌های یادآوری، گزینه اجازه اعلان‌ها و یادآوری‌های روزانه را در تنظیمات آیین‌ها فعال کنید.";
 "habitNotificationSettingsButton" = "تنظیمات";
 "habitIdentitySectionTitle" = "هویت آیین";
 "habitTitlePlaceholder" = "مثلاً نوشتن صبحگاهی";
@@ -101,9 +101,9 @@
 "appTheme" = "تم برنامه";
 "appThemeSubtitle" = "ظاهر برنامه را شخصی‌سازی کنید";
 "rateUs" = "امتیاز دهید";
-"rateUsSubtitle" = "به Rituals در App Store امتیاز دهید";
+"rateUsSubtitle" = "به آیین‌ها در App Store امتیاز دهید";
 "versionTagline" = "طراحی‌شده برای پیشرفت آگاهانه";
-"appVersionFormat" = "نسخه Rituals %@";
+"appVersionFormat" = "نسخه آیین‌ها %@";
 "memberSinceFormat" = "عضو از %@";
 
 /* Profile Screen */
@@ -112,10 +112,14 @@
 "enterNewUserName" = "نام جدید را وارد کنید";
 "changePhoto" = "تغییر عکس";
 "email" = "ایمیل";
+"logout" = "خروج";
+"noEmailSaved" = "هیچ آدرس ایمیلی ذخیره نشده است";
+"logoutSubtitleWithiCloud" = "داده‌های iCloud شما در دسترس باقی می‌مانند";
+"logoutSubtitleWithoutiCloud" = "داده‌های حساب محلی با iCloud همگام‌سازی نمی‌شوند";
 
 /* Theme Screen */
 "defaultColor" = "رنگ پیش‌فرض";
-"appThemeIntroTitle" = "شخصی‌سازی Rituals";
+"appThemeIntroTitle" = "شخصی‌سازی آیین‌ها";
 "appThemeIntroDescription" = "تجربه آیین آگاهانه خود را با رنگ‌ها و ظاهری که با شما هماهنگ است شخصی‌سازی کنید.";
 "appearanceSection" = "ظاهر";
 "appearanceLight" = "روشن";
@@ -124,13 +128,13 @@
 "accentColorSection" = "رنگ";
 "customColor" = "رنگ سفارشی";
 "customColorSubtitle" = "هر رنگی که دوست دارید انتخاب کنید";
-"defaultColorSubtitle" = "بازگشت به رنگ پیش‌فرض Rituals";
+"defaultColorSubtitle" = "بازگشت به رنگ پیش‌فرض آیین‌ها";
 
 /* Notification Screen */
-"notificationSettingsIntroTitle" = "تنظیم Rituals";
+"notificationSettingsIntroTitle" = "تنظیم آیین‌ها";
 "notificationSettingsIntroDescription" = "بدون احساس فشار، با مسیر خود در ارتباط بمانید. لحظه‌هایی را انتخاب کنید که برای شما اهمیت بیشتری دارند.";
 "notificationSettingsAllowNotifications" = "اجازه اعلان‌ها";
-"notificationSettingsAllowDescription" = "فعال کنید تا یادآوری‌ها و به‌روزرسانی‌های Rituals را دریافت کنید.";
+"notificationSettingsAllowDescription" = "فعال کنید تا یادآوری‌ها و به‌روزرسانی‌های آیین‌ها را دریافت کنید.";
 "notificationSettingsRitualReminders" = "یادآوری‌های آیین";
 "notificationSettingsDailyReminders" = "یادآوری‌های روزانه";
 "notificationSettingsMotivation" = "انگیزه";
@@ -176,6 +180,8 @@
 /* Shared - Alert - Logout */
 "logoutAlertTitle" = "خروج؟";
 "logoutButton" = "خروج";
+"logoutMessageiCloud" = "عادت‌ها و تنظیمات حساب شما با iCloud همگام‌سازی می‌شوند و پس از ورود دوباره به حساب، در دسترس خواهند بود.";
+"logoutMessageLocal" = "این یک حساب محلی است. اگر برنامه را حذف کنید یا دستگاه خود را تغییر دهید، ممکن است داده‌های این حساب از دست بروند.";
 
 /* Cell */
 "habitCellDaysLeft" = " روز باقی مانده";

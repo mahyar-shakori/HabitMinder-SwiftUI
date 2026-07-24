@@ -112,6 +112,10 @@
 "enterNewUserName" = "Enter new name";
 "changePhoto" = "Change Photo";
 "email" = "Email";
+"logout" = "Log out";
+"noEmailSaved" = "No email saved";
+"logoutSubtitleWithiCloud:" = "Your iCloud data will stay available";
+"logoutSubtitleWithoutiCloud:" = "Local account data is not synced to iCloud";
 
 /* Theme Screen */
 "defaultColor" = "Default Color";
@@ -176,6 +180,8 @@
 /* Shared - Alert - Logout */
 "logoutAlertTitle" = "Log out?";
 "logoutButton" = "Log out";
+"logoutMessageiCloud" = "Your habits and account settings stay synced with iCloud and will be available when you log in again.";
+"logoutMessageLocal" = "This account is local. If you delete the app or switch devices, this account data may be lost.";
 
 /* Cell */
 "habitCellDaysLeft" = " days left";

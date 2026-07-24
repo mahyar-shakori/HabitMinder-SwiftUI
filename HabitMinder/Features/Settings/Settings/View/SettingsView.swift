@@ -9,7 +9,7 @@ import StoreKit
 import SwiftUI
 
 struct SettingsView: View {
-    private var settingsViewModel: SettingsViewModel
+    private let settingsViewModel: SettingsViewModel
     @Environment(\.requestReview) private var requestReview
     @EnvironmentObject private var themeManager: ThemeManager
 

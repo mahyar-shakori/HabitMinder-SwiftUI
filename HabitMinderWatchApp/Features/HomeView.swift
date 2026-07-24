@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    private var homeViewModel: HomeViewModel
+    private let homeViewModel: HomeViewModel
     
     init(homeViewModel: HomeViewModel) {
         self.homeViewModel = homeViewModel

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EditHabitView: View {
-    private var editHabitViewModel: EditHabitViewModel
+    private let editHabitViewModel: EditHabitViewModel
     @EnvironmentObject private var themeManager: ThemeManager
     @Environment(\.openURL) private var openURL
     @FocusState private var isFocused: Bool

@@ -7,7 +7,7 @@
 */
 
 /* AppStartupError */
-"appStartupErrorTitle" = "No se puede iniciar Rituals";
+"appStartupErrorTitle" = "No se puede iniciar Rituales";
 "appStartupErrorMessage" = "No se pudo preparar el almacenamiento. Reinicia la aplicación.";
 
 /* Header */
@@ -51,7 +51,7 @@
 "addHabitIntroDescription" = "Crea un ritual consciente con un ritmo claro, recordatorio y compromiso.";
 "habitNotificationAlertTitle" = "Las notificaciones están desactivadas";
 "habitNotificationAlertMessage" = "Activa las notificaciones en Ajustes para usar recordatorios de hábitos.";
-"habitInAppNotificationAlertMessage" = "Activa Permitir notificaciones y Recordatorios diarios en los ajustes de Rituals para añadir horarios de recordatorio.";
+"habitInAppNotificationAlertMessage" = "Activa Permitir notificaciones y Recordatorios diarios en los ajustes de Rituales para añadir horarios de recordatorio.";
 "habitNotificationSettingsButton" = "Ajustes";
 "habitIdentitySectionTitle" = "Identidad del ritual";
 "habitTitlePlaceholder" = "Ej. Páginas matutinas";
@@ -101,9 +101,9 @@
 "appTheme" = "Tema de la app";
 "appThemeSubtitle" = "Personaliza la apariencia";
 "rateUs" = "Valóranos";
-"rateUsSubtitle" = "Valora Rituals en el App Store";
+"rateUsSubtitle" = "Valora Rituales en el App Store";
 "versionTagline" = "DISEÑADO PARA UN PROGRESO CONSCIENTE";
-"appVersionFormat" = "Versión de Rituals %@";
+"appVersionFormat" = "Versión de Rituales %@";
 "memberSinceFormat" = "Miembro desde %@";
 
 /* Profile Screen */
@@ -112,10 +112,14 @@
 "enterNewUserName" = "Introduce un nuevo nombre";
 "changePhoto" = "Cambiar foto";
 "email" = "Correo electrónico";
+"logout" = "Cerrar sesión";
+"noEmailSaved" = "No hay ninguna dirección de correo electrónico guardada";
+"logoutSubtitleWithiCloud" = "Tus datos de iCloud seguirán disponibles";
+"logoutSubtitleWithoutiCloud" = "Los datos de la cuenta local no se sincronizan con iCloud";
 
 /* Theme Screen */
 "defaultColor" = "Color predeterminado";
-"appThemeIntroTitle" = "Personaliza Rituals";
+"appThemeIntroTitle" = "Personaliza Rituales";
 "appThemeIntroDescription" = "Personaliza tu experiencia de ritual consciente con colores y apariencia que conecten contigo.";
 "appearanceSection" = "Apariencia";
 "appearanceLight" = "Claro";
@@ -124,13 +128,13 @@
 "accentColorSection" = "Color";
 "customColor" = "Color personalizado";
 "customColorSubtitle" = "Elige cualquier color que quieras";
-"defaultColorSubtitle" = "Volver al color predeterminado de Rituals";
+"defaultColorSubtitle" = "Volver al color predeterminado de Rituales";
 
 /* Notification Screen */
-"notificationSettingsIntroTitle" = "Configura Rituals";
+"notificationSettingsIntroTitle" = "Configura Rituales";
 "notificationSettingsIntroDescription" = "Mantente conectado con tu camino sin sentirte abrumado. Elige los momentos que más importan para ti.";
 "notificationSettingsAllowNotifications" = "Permitir notificaciones";
-"notificationSettingsAllowDescription" = "Actívalo para recibir recordatorios y actualizaciones de Rituals.";
+"notificationSettingsAllowDescription" = "Actívalo para recibir recordatorios y actualizaciones de Rituales.";
 "notificationSettingsRitualReminders" = "Recordatorios de ritual";
 "notificationSettingsDailyReminders" = "Recordatorios diarios";
 "notificationSettingsMotivation" = "Motivación";
@@ -176,6 +180,8 @@
 /* Shared - Alert - Logout */
 "logoutAlertTitle" = "¿Cerrar sesión?";
 "logoutButton" = "Cerrar sesión";
+"logoutMessageiCloud" = "Tus hábitos y la configuración de tu cuenta seguirán sincronizados con iCloud y volverán a estar disponibles cuando inicies sesión de nuevo.";
+"logoutMessageLocal" = "Esta es una cuenta local. Si eliminas la aplicación o cambias de dispositivo, los datos de esta cuenta podrían perderse.";
 
 /* Cell */
 "habitCellDaysLeft" = " días restantes";

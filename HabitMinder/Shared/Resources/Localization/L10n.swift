@@ -162,6 +162,10 @@ enum L10n {
         static let enterNewUserName = localized("enterNewUserName")
         static let changePhoto = localized("changePhoto")
         static let email = localized("email")
+        static let logout = localized("logout")
+        static let noEmailSaved = localized("noEmailSaved")
+        static let logoutWithiCloud = localized("logoutSubtitleWithiCloud")
+        static let logoutWithoutiCloud = localized("logoutSubtitleWithoutiCloud")
     }
     
     enum ThemePage {
@@ -248,6 +252,8 @@ enum L10n {
         enum Logout {
             static let title = localized("logoutAlertTitle")
             static let logoutButton = localized("logoutButton")
+            static let logoutMessageiCloud = localized("logoutMessageiCloud")
+            static let logoutMessageLocal = localized("logoutMessageLocal")
         }
     }
 

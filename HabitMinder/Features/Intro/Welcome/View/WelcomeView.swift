@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    private var welcomeViewModel: WelcomeViewModel
+    private let welcomeViewModel: WelcomeViewModel
     @EnvironmentObject private var themeManager: ThemeManager
     @State private var showAlert = false
     

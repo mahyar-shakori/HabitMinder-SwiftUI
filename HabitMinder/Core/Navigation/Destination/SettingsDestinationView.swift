@@ -54,7 +54,7 @@ struct SettingsDestinationView: View {
                 reminderScheduler: dependencies.reminderScheduler,
                 userDefaultsStorage: dependencies.userDefaultsStorage
             )
-            NotificationSettingsView(viewModel: viewModel)
+            NotificationSettingsView(notificationSettingsViewModel: viewModel)
         case .appTheme:
             ThemeView()
         }

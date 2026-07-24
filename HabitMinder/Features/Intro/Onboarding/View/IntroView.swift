@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct IntroView: View {
-    private var introViewModel: IntroViewModel
+    private let introViewModel: IntroViewModel
     @EnvironmentObject private var themeManager: ThemeManager
     
     init(introViewModel: IntroViewModel) {
