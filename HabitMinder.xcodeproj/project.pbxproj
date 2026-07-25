@@ -32,7 +32,6 @@
 /* Begin PBXFileReference section */
 		3E10AE2E3011297E0051CCB8 /* HabitMinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitMinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E10AE2F3011297E0051CCB8 /* HabitMinder Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HabitMinder Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E358E8A300D71B600D03AA1 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -255,7 +254,6 @@
 		3E89D6ED2D9869F000E8414C = {
 			isa = PBXGroup;
 			children = (
-				3E358E8A300D71B600D03AA1 /* test.swift */,
 				3E626082300D51950001D5C0 /* HabitMinder */,
 				3EA5A51A300FAC2500FF3F20 /* HabitMinderWatchApp */,
 				3E10AE2E3011297E0051CCB8 /* HabitMinder.app */,
