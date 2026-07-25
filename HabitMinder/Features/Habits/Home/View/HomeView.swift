@@ -142,7 +142,7 @@ struct HomeView: View {
         VStack(alignment: .leading, spacing: Spacing.small) {
             Image(systemName: SystemIconName.quoteBubble)
                 .font(.AppFont.rooneySansBold.size(FontSize.small))
-                .foregroundStyle(themeManager.appPrimary)
+                .foregroundStyle(.secondary)
 
             Text(homeViewModel.displayedQuote.quoted())
                 .font(.AppFont.rooneySansRegular.size(FontSize.medium))
@@ -160,7 +160,6 @@ struct HomeView: View {
         .padding(Spacing.x2Large)
         .frame(maxWidth: .infinity, alignment: .leading)
         .liquidGlass(
-            tint: themeManager.appSecondary,
             in: .rect(cornerRadius: CornerRadius.medium),
             interactive: false,
             fallback: themeManager.appSecondary.opacity(Opacity.subtle)

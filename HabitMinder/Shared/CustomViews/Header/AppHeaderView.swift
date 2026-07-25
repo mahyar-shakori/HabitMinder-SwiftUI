@@ -35,11 +35,11 @@ struct AppHeaderView: View {
         HStack(spacing: Spacing.xSmall) {
             Image(systemName: systemImage)
                 .font(.system(size: Spacing.x4Large, weight: .medium))
-                .foregroundStyle(themeManager.appPrimary)
+                .foregroundStyle(.primary)
 
             Text(title)
                 .font(.AppFont.rooneySansBold.size(FontSize.x7Large))
-                .foregroundStyle(themeManager.appPrimary)
+                .foregroundStyle(.primary)
 
             Spacer()
 
@@ -80,7 +80,7 @@ struct AppHeaderView: View {
                 Image(systemName: SystemIconName.profile)
                     .font(.system(size: Size.xLarge))
                     .symbolRenderingMode(.palette)
-                    .foregroundStyle(.appWhite, themeManager.appPrimary.opacity(Opacity.iconBackground))
+                    .foregroundStyle(.appWhite, .secondary)
                     .frame(width: Size.xLarge, height: Size.xLarge)
             }
         }

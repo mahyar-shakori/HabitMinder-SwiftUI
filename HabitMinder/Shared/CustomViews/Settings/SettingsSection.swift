@@ -71,7 +71,7 @@ struct SettingsSection<Content: View>: View {
     private var titleColor: Color {
         switch style {
         case .primary:
-            return themeManager.appPrimary
+            return .primary
         case .grouped:
             return .secondary
         }

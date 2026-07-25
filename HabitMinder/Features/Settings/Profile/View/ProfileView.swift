@@ -70,7 +70,7 @@ struct ProfileView: View {
                 imageData: profileViewModel.profileImageData,
                 imageSize: Size.emptyImage,
                 placeholderPadding: Spacing.x5Large,
-                borderColor: themeManager.appPrimary.opacity(Opacity.subtleBorder),
+                borderColor: .secondary.opacity(Opacity.subtleBorder),
                 editIconSize: FontSize.x5Large,
                 editBadgeSize: Size.x2Large,
                 editBadgeOffset: Spacing.none,
@@ -79,7 +79,7 @@ struct ProfileView: View {
 
             Text(L10n.ProfilePage.changePhoto)
                 .font(.AppFont.rooneySansBold.size(FontSize.x4Large))
-                .foregroundStyle(themeManager.appPrimary)
+                .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, Spacing.x4Large)
@@ -112,7 +112,7 @@ struct ProfileView: View {
             SettingsRowIcon(
                 iconName: SystemIconName.envelope,
                 foregroundColor: .secondary,
-                backgroundColor: .gray.opacity(Opacity.subtle),
+                backgroundColor: .secondary,
                 isEnabled: false
             )
 

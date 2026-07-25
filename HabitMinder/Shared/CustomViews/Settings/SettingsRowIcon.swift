@@ -32,7 +32,7 @@ struct SettingsRowIcon: View {
             return .secondary
         }
 
-        return foregroundColor ?? themeManager.appPrimary
+        return foregroundColor ?? .secondary
     }
 
     private var resolvedBackgroundColor: Color {
@@ -40,6 +40,6 @@ struct SettingsRowIcon: View {
             return .gray.opacity(Opacity.subtle)
         }
 
-        return backgroundColor ?? themeManager.appSecondary.opacity(Opacity.badgeBackground)
+        return backgroundColor ?? .secondary
     }
 }

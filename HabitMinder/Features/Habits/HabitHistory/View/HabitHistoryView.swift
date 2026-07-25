@@ -67,7 +67,6 @@ struct HabitHistoryView: View {
         }
         .padding(Spacing.x2Small)
         .liquidGlass(
-            tint: themeManager.appSecondary,
             in: Capsule(),
             fallback: themeManager.appSecondary.opacity(Opacity.subtleBorder)
         )
@@ -83,10 +82,10 @@ struct HabitHistoryView: View {
         } label: {
             Text(tab.title)
                 .font(.AppFont.rooneySansRegular.size(FontSize.medium))
-                .foregroundStyle(isSelected ? .appWhite : themeManager.appPrimary)
+                .foregroundStyle(.primary)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, Spacing.xSmall + LineWidth.thin)
-                .background(isSelected ? themeManager.appPrimary : .clear)
+                .background(isSelected ? .gray : .clear)
                 .clipShape(Capsule())
                 .contentShape(Capsule())
         }
@@ -181,7 +180,7 @@ struct HabitHistoryView: View {
         VStack(alignment: .leading, spacing: Spacing.small) {
             Label(L10n.HabitHistoryPage.ritualTipLabel, systemImage: SystemIconName.lightbulb)
                 .font(.AppFont.rooneySansBold.size(FontSize.small))
-                .foregroundStyle(themeManager.appPrimary)
+                .foregroundStyle(.secondary)
 
             Text(L10n.HabitHistoryPage.ritualTipText)
                 .font(.AppFont.rooneySansRegular.size(FontSize.medium))
@@ -192,7 +191,6 @@ struct HabitHistoryView: View {
         .padding(Spacing.x2Large)
         .frame(maxWidth: .infinity, alignment: .leading)
         .liquidGlass(
-            tint: themeManager.appSecondary,
             in: .rect(cornerRadius: CornerRadius.medium),
             interactive: false,
             fallback: themeManager.appSecondary.opacity(Opacity.subtle)

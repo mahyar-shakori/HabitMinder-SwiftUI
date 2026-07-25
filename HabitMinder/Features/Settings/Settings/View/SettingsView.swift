@@ -77,7 +77,6 @@ struct SettingsView: View {
                         iconName: SystemIconName.profile,
                         title: L10n.SettingsPage.profile,
                         subtitle: settingsViewModel.userName,
-                        iconBackgroundColor: themeManager.appSecondary.opacity(Opacity.subtle),
                         showsChevron: true,
                         isTitleBold: false,
                         action: settingsViewModel.showProfileSettings
@@ -91,7 +90,6 @@ struct SettingsView: View {
                         iconName: SystemIconName.bell,
                         title: L10n.SettingsPage.notifications,
                         subtitle: L10n.SettingsPage.notificationsSubtitle,
-                        iconBackgroundColor: themeManager.appSecondary.opacity(Opacity.subtle),
                         showsChevron: true,
                         isTitleBold: false,
                         action: settingsViewModel.showNotificationSettings
@@ -101,7 +99,6 @@ struct SettingsView: View {
                         iconName: SystemIconName.paintpalette,
                         title: L10n.SettingsPage.appTheme,
                         subtitle: L10n.SettingsPage.appThemeSubtitle,
-                        iconBackgroundColor: themeManager.appSecondary.opacity(Opacity.subtle),
                         showsChevron: true,
                         isTitleBold: false,
                         action: settingsViewModel.showAppTheme
@@ -115,7 +112,6 @@ struct SettingsView: View {
                         iconName: SystemIconName.star,
                         title: L10n.SettingsPage.rateUs,
                         subtitle: L10n.SettingsPage.rateUsSubtitle,
-                        iconBackgroundColor: themeManager.appSecondary.opacity(Opacity.subtle),
                         isTitleBold: false
                     ) {
                         requestReview()

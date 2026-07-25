@@ -41,17 +41,17 @@ struct HabitHistorySectionHeader: View {
     private var titleText: some View {
         Text(title.uppercased())
             .font(.AppFont.rooneySansBold.size(FontSize.small))
-            .foregroundStyle(themeManager.appPrimary)
+            .foregroundStyle(.primary)
             .tracking(1.2)
     }
 
     private func badge(_ text: String) -> some View {
         Text(text)
             .font(.AppFont.rooneySansBold.size(FontSize.small))
-            .foregroundStyle(themeManager.appPrimary)
+            .foregroundStyle(.appWhite)
             .padding(.horizontal, Spacing.large)
             .padding(.vertical, Spacing.xSmall - LineWidth.thin)
-            .background(themeManager.appSecondary.opacity(Opacity.badgeBackground))
+            .background(themeManager.appSecondary)
             .clipShape(Capsule())
     }
 }

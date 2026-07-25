@@ -105,7 +105,7 @@ struct EditHabitView: View {
             title: L10n.Shared.saveButton,
             isEnabled: editHabitViewModel.isSaveButtonEnabled,
             fillsWidth: false,
-            size: .regular
+            size: .large
         ) {
             isFocused = false
             editHabitViewModel.saveAndDismiss()

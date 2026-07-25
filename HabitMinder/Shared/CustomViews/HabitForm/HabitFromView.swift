@@ -218,7 +218,7 @@ struct HabitFormView: View {
     private func sectionTitle(_ title: String) -> some View {
         Text(title.uppercased())
             .font(.AppFont.rooneySansBold.size(FontSize.small))
-            .foregroundStyle(themeManager.appPrimary)
+            .foregroundStyle(.primary)
             .tracking(1.2)
     }
 
@@ -229,9 +229,9 @@ struct HabitFormView: View {
         HStack(alignment: .center, spacing: Spacing.medium) {
             Image(systemName: systemImage)
                 .font(.system(size: FontSize.x4Large, weight: .medium))
-                .foregroundStyle(themeManager.appPrimary)
+                .foregroundStyle(.secondary)
                 .frame(width: Size.x3Large, height: Size.x3Large)
-                .background(themeManager.appPrimary.opacity(Opacity.quiet))
+                .background(.secondary)
                 .clipShape(Circle())
 
             content()
@@ -254,9 +254,9 @@ struct HabitFormView: View {
         } label: {
             Image(systemName: icon)
                 .font(.system(size: FontSize.x4Large, weight: .medium))
-                .foregroundStyle(isSelected ? .appWhite : themeManager.appPrimary)
+                .foregroundStyle(.secondary)
                 .frame(width: Size.x3Large, height: Size.x3Large)
-                .background(isSelected ? themeManager.appPrimary : themeManager.appPrimary.opacity(Opacity.quiet))
+                .background(isSelected ? themeManager.appPrimary : .secondary)
                 .clipShape(Circle())
         }
         .buttonStyle(.plain)
@@ -270,10 +270,10 @@ struct HabitFormView: View {
         } label: {
             Text(item.title)
                 .font(.AppFont.rooneySansBold.size(FontSize.medium))
-                .foregroundStyle(isSelected ? .appWhite : themeManager.appPrimary)
+                .foregroundStyle(.secondary)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, Spacing.xSmall)
-                .background(isSelected ? themeManager.appPrimary : themeManager.appPrimary.opacity(Opacity.quiet))
+                .background(isSelected ? themeManager.appPrimary : .secondary)
                 .clipShape(Capsule())
         }
         .buttonStyle(.plain)

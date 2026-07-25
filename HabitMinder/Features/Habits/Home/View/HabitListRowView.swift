@@ -80,15 +80,12 @@ struct HabitListRowView: View {
     }
 
     private var habitIcon: some View {
-        ZStack {
-            Circle()
-                .fill(themeManager.appSecondary.opacity(Opacity.iconBackground))
-
-            Image(systemName: item.iconName)
-                .font(.system(size: FontSize.x5Large, weight: .semibold))
-                .foregroundStyle(themeManager.appPrimary)
-        }
-        .frame(width: Size.x3Large, height: Size.x3Large)
+        Image(systemName: item.iconName)
+            .font(.system(size: FontSize.x5Large, weight: .medium))
+            .foregroundStyle(.secondary)
+            .frame(width: Size.x3Large, height: Size.x3Large)
+            .background(.gray.opacity(Opacity.subtleBorder))
+            .clipShape(Circle())
     }
 
     private var streakLabel: some View {

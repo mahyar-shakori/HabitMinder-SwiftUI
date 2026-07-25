@@ -55,10 +55,9 @@ struct ProfilePhotoPickerButton: View {
                     .resizable()
                     .scaledToFit()
                     .symbolRenderingMode(.palette)
-                    .foregroundStyle(.appWhite, themeManager.appPrimary.opacity(Opacity.iconBackground))
+                    .foregroundStyle(.appWhite, .secondary)
                     .padding(placeholderPadding)
                     .liquidGlass(
-                        tint: themeManager.appSecondary,
                         in: Circle(),
                         interactive: false,
                         fallback: themeManager.appSecondary.opacity(Opacity.subtle)

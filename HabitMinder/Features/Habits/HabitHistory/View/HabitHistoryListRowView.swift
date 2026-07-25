@@ -57,25 +57,22 @@ struct HabitHistoryListRowView: View {
     }
 
     private var habitIcon: some View {
-        ZStack {
-            Circle()
-                .fill(themeManager.appSecondary.opacity(Opacity.iconBackground))
-
-            Image(systemName: item.iconName)
-                .font(.system(size: FontSize.x4Large, weight: .medium))
-                .foregroundStyle(themeManager.appPrimary)
-        }
-        .frame(width: Size.x3Large, height: Size.x3Large)
+        Image(systemName: item.iconName)
+            .font(.system(size: FontSize.x5Large, weight: .medium))
+            .foregroundStyle(.secondary)
+            .frame(width: Size.x3Large, height: Size.x3Large)
+            .background(.gray.opacity(Opacity.subtleBorder))
+            .clipShape(Circle())
     }
 
     private var dateBadge: some View {
         Text(item.dateText)
             .font(.AppFont.rooneySansBold.size(FontSize.xSmall))
             .textCase(.uppercase)
-            .foregroundStyle(themeManager.appPrimary)
+            .foregroundStyle(.secondary)
             .padding(.horizontal, Spacing.xSmall + LineWidth.thin)
             .padding(.vertical, Spacing.x2Small + LineWidth.thin)
-            .background(themeManager.appSecondary.opacity(Opacity.iconBackground))
+            .background(.gray.opacity(Opacity.subtleBorder))
             .clipShape(Capsule())
     }
 }
